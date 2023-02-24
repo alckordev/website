@@ -19,6 +19,9 @@
     "@chakra-ui/react": "^2.5.1",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@fontsource/ibm-plex-mono": "^4.5.13",
+    "@fontsource/ibm-plex-sans": "^4.5.13",
+    "@fontsource/poppins": "^4.5.10",
     "framer-motion": "^9.1.6"
   }
 }
