@@ -1,4 +1,4 @@
-import { UI } from "ui";
+import { UI } from "@myth/ui";
 
 export default function Docs() {
   return (

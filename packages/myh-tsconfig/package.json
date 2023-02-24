@@ -1,5 +1,5 @@
 {
-  "name": "tsconfig",
+  "name": "@myth/tsconfig",
   "version": "0.0.0",
   "private": true,
   "files": [

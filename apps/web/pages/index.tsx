@@ -1,4 +1,4 @@
-import { UI, CIcon, icon } from "ui";
+import { UI, CIcon, icon } from "@myth/ui";
 
 export default function Web() {
   return (
