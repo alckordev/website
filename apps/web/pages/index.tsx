@@ -1,10 +1,10 @@
-import { Button } from "ui";
+import { UI } from "ui";
 
 export default function Web() {
   return (
     <div>
-      <h1>Web</h1>
-      <Button />
+      <UI.Heading as="h1">Web</UI.Heading>
+      <UI.Text>Lorem ipsum</UI.Text>
     </div>
   );
 }
