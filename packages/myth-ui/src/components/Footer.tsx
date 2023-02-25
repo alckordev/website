@@ -21,7 +21,7 @@ interface Props {
 export const Footer = ({ networks = [] }: Props) => {
   return (
     <StyledFooter>
-      <Container maxW="container.2xl" py={16}>
+      <Container maxW="container.md" py={16}>
         {networks.length > 0 && (
           <Flex w="100%" justify="center" align="center" pb={8} gap={3}>
             {networks.map((n, idx) => (

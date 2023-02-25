@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex } from "@chakra-ui/react";
+import { Container, Flex } from "@chakra-ui/react";
 
 interface Props {
   children: React.ReactNode;
@@ -7,17 +7,19 @@ interface Props {
 
 export const NavBarContainer = ({ children, ...rest }: Props) => {
   return (
-    <Flex
-      as="nav"
-      align="center"
-      justify="space-between"
-      wrap="wrap"
-      w="100%"
-      mb={8}
-      p={8}
-      {...rest}
-    >
-      {children}
-    </Flex>
+    <Container maxW="container.md">
+      <Flex
+        as="nav"
+        align="center"
+        justify="space-between"
+        wrap="wrap"
+        w="100%"
+        mb={8}
+        py={8}
+        {...rest}
+      >
+        {children}
+      </Flex>
+    </Container>
   );
 };
