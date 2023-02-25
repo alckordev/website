@@ -1,6 +1,7 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { UI, NavBar, Footer } from "@myth/ui";
 import networks from "../data/networks";
+import sections from "../data/sections";
 
 interface Props {
   children: React.ReactNode;
@@ -14,11 +15,25 @@ interface Props {
 export const Layout = ({ children, metadata = {}, type = "post" }: Props) => {
   const isBlogTemplate = type === "post" && metadata.date;
 
-  console.log(isBlogTemplate);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset;
+      setIsScrolled(scrollTop > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <Fragment>
-      <NavBar />
+      <NavBar navs={sections} isScrolled={isScrolled} />
 
       <UI.Container maxW="container.md" pt="8">
         <UI.Flex direction="column">
