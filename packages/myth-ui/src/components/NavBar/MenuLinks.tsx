@@ -3,9 +3,13 @@ import { MenuItem } from "./MenuItem";
 
 interface Props {
   isOpen: boolean;
+  navs: {
+    name: string;
+    url: string;
+  }[];
 }
 
-export const MenuLinks = ({ isOpen }: Props) => {
+export const MenuLinks = ({ isOpen, navs }: Props) => {
   return (
     <Box
       display={{ base: isOpen ? "block" : "none", md: "block" }}
@@ -18,7 +22,12 @@ export const MenuLinks = ({ isOpen }: Props) => {
         direction={["column", "row", "row", "row"]}
         pt={[4, 4, 0, 0]}
       >
-        <MenuItem to="/">Home</MenuItem>
+        {navs.map((n, idx) => (
+          <MenuItem key={idx} to={n.url}>
+            {n.name}
+          </MenuItem>
+        ))}
+        {/* <MenuItem to="/">Home</MenuItem>
         <MenuItem to="/how">How It works </MenuItem>
         <MenuItem to="/faetures">Features </MenuItem>
         <MenuItem to="/pricing">Pricing </MenuItem>
@@ -34,7 +43,7 @@ export const MenuLinks = ({ isOpen }: Props) => {
           >
             Create Account
           </Button>
-        </MenuItem>
+        </MenuItem> */}
       </Stack>
     </Box>
   );

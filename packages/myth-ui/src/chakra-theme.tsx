@@ -8,8 +8,8 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        bg: "grayblue.900",
-        color: "grayblue.100",
+        bg: "gray.800",
+        color: "gray.300",
       },
     },
   },
@@ -29,17 +29,6 @@ const theme = extendTheme({
       900: "#202225",
       500: "#2A2D31",
       100: "#3B3F45",
-    },
-    grayblue: {
-      900: "#17202A",
-      800: "#1C2833",
-      700: "#212F3D",
-      600: "#273746",
-      500: "#2C3E50",
-      400: "#566573",
-      300: "#808B96",
-      200: "#ABB2B9",
-      100: "#D5D8DC",
     },
   },
   fonts: {

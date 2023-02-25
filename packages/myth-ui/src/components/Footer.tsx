@@ -3,9 +3,9 @@ import { Container, Flex, Link } from "@chakra-ui/react";
 import CIcon from "@coreui/icons-react";
 
 const StyledFooter = styled.footer`
-  background-color: var(--chakra-colors-grayblue-900);
-  border-top: 1px solid var(--chakra-colors-grayblue-700);
-  color: var(--chakra-colors-grayblue-300);
+  background-color: var(--chakra-colors-gray-800);
+  border-top: 1px solid var(--chakra-colors-gray-700);
+  color: var(--chakra-colors-gray-300);
   position: relative;
   overflow: visible;
   z-index: 2;
@@ -30,13 +30,12 @@ export const Footer = ({ networks = [] }: Props) => {
                 href={n.url}
                 target="_blank"
                 display="inline-flex"
-                bg="grayblue.500"
+                bg="gray.900"
                 p={2}
-                color="brand.500"
+                color="gray.500"
                 rounded="md"
                 _hover={{
-                  color: "brand.300",
-                  bg: "grayblue.800",
+                  color: "gray.400",
                   textDecoration: "none",
                 }}
               >
