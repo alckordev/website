@@ -8,4 +8,4 @@ export * as UI from "./src/chakra-ui";
 export { CIcon, icon } from "./src/coreui-icon";
 export * as fonts from "./src/fonts";
 
-export { Navbar } from "./src/components/Navbar";
+export { NavBar } from "./src/components/NavBar/NavBar";
