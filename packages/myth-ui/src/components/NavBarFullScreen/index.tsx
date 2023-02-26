@@ -1,117 +1,55 @@
+import { useState } from "react";
 import styled from "@emotion/styled";
-import {
-  Portal,
-  Container,
-  Link,
-  Heading,
-  Flex,
-  Box,
-  Text,
-  Stack,
-  useMediaQuery,
-} from "@chakra-ui/react";
-import CIcon from "@coreui/icons-react";
-import { riMoonFill, riMenuLine } from "../../icons";
+import { Portal, Flex, useMediaQuery } from "@chakra-ui/react";
+import { Logo } from "./Logo";
+import { NavBarContainer } from "./NavBarContainer";
+import { NavBarControl } from "./NavBarControl";
+import { NavBarList } from "./NavBarList";
 
-const StyledNavbar = styled.header`
-  background-color: transparent;
-  backdrop-filter: saturate(100%) blur(0px);
+const StyledNavbar = styled.header<{ isScrolled: boolean }>`
+  background-color: ${(props) =>
+    props.isScrolled ? "rgba(0,0,0, 0.8)" : "transparent"};
+  backdrop-filter: ${(props) =>
+    props.isScrolled ? "saturate(180%) blur(20px)" : "none"};
+  font-family: var(--chakra-fonts-heading);
   position: sticky;
   top: 0;
   left: 0;
   width: 100%;
-  transition: all 50ms;
+  transition: all 50ms ease 0s;
   z-index: var(--chakra-zIndices-overlay);
 `;
 
-export const NavBarFullScreen = () => {
+interface Props {
+  isScrolled: boolean;
+  navs: {
+    name: string;
+    to: string;
+  }[];
+}
+
+export const NavBarFullScreen = ({
+  isScrolled = false,
+  navs,
+  ...rest
+}: Props) => {
   const [isMobile] = useMediaQuery("(max-width: 768px)");
 
-  return (
-    <StyledNavbar>
-      <Container
-        maxW="container.md"
-        display="flex"
-        flexDir="row"
-        alignItems="center"
-        justifyContent="space-between"
-        py={4}
-      >
-        <Link href="/">
-          <Heading size="md">alckordev</Heading>
-        </Link>
-        <Flex gap={8}>
-          {!isMobile && (
-            <Stack
-              as="nav"
-              spacing={10}
-              align="center"
-              justify="center"
-              direction="row"
-              color="gray.500"
-              fontWeight="bold"
-            >
-              <Link href="/" display="block">
-                <Text color="white" lineHeight="1.6" fontSize="16px" py={3}>
-                  Inicio
-                </Text>
-              </Link>
-              <Link href="/" display="block">
-                <Text color="white" lineHeight="1.6" fontSize="16px" py={3}>
-                  Artículos
-                </Text>
-              </Link>
-            </Stack>
-          )}
-          <Flex align="center">
-            <Box
-              display="inline-flex"
-              cursor="pointer"
-              appearance="none"
-              alignItems="center"
-              justifyContent="center"
-              userSelect="none"
-              position="relative"
-              whiteSpace="nowrap"
-              verticalAlign="middle"
-              borderRadius="md"
-              fontWeight="semibold"
-              height={10}
-              minW={10}
-              bg="transparent"
-              color="gray.100"
-              onClick={() => console.log("theme")}
-              // _hover={{ color: "red" }}
-            >
-              <CIcon icon={riMoonFill} size="lg" />
-            </Box>
-            {isMobile && (
-              <Box
-                display="inline-flex"
-                cursor="pointer"
-                appearance="none"
-                alignItems="center"
-                justifyContent="center"
-                userSelect="none"
-                position="relative"
-                whiteSpace="nowrap"
-                verticalAlign="middle"
-                borderRadius="md"
-                fontWeight="semibold"
-                height={10}
-                minW={10}
-                bg="transparent"
-                color="gray.100"
-                onClick={() => console.log("menu")}
-              >
-                <CIcon icon={riMenuLine} size="lg" />
-              </Box>
-            )}
-          </Flex>
-        </Flex>
-      </Container>
+  const [isOpen, setIsOpen] = useState(false);
 
-      {isMobile && <Portal>Soy Mobile</Portal>}
+  const toggle = () => setIsOpen(!isOpen);
+
+  return (
+    <StyledNavbar isScrolled={isScrolled}>
+      <NavBarContainer {...rest}>
+        <Logo />
+        <Flex gap={8}>
+          <NavBarList isMobile={isMobile} navs={navs} />
+          <NavBarControl isMobile={isMobile} toggle={toggle} />
+        </Flex>
+      </NavBarContainer>
+
+      {isMobile && isOpen && <Portal>Soy Mobile</Portal>}
     </StyledNavbar>
   );
 };

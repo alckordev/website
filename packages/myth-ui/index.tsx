@@ -8,6 +8,5 @@ export * as UI from "./src/chakra-ui";
 export { CIcon, icon } from "./src/coreui-icon";
 export * as fonts from "./src/fonts";
 
-export { NavBar } from "./src/components/NavBar/NavBar";
 export { NavBarFullScreen } from "./src/components/NavBarFullScreen";
 export { Footer } from "./src/components/Footer";
