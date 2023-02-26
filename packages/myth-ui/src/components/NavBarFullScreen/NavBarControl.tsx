@@ -19,7 +19,7 @@ const StyledBox = styled.div`
   background-color: transparent;
   color: var(--chakra-colors-gray-100);
   &:hover {
-    background-color: var(--chakra-colors-gray-900);
+    background-color: var(--chakra-colors-blackAlpha-100);
   }
 `;
 

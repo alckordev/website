@@ -1,9 +1,11 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { Portal, Flex, useMediaQuery } from "@chakra-ui/react";
+import { Flex, useMediaQuery } from "@chakra-ui/react";
 import { Logo } from "./Logo";
 import { NavBarContainer } from "./NavBarContainer";
 import { NavBarControl } from "./NavBarControl";
+import { NavBarDrawer } from "./NavBarDrawer";
+import { NavBarDrawerList } from "./NavBarDrawerList";
 import { NavBarList } from "./NavBarList";
 
 const StyledNavbar = styled.header<{ isScrolled: boolean }>`
@@ -11,7 +13,6 @@ const StyledNavbar = styled.header<{ isScrolled: boolean }>`
     props.isScrolled ? "rgba(0,0,0, 0.8)" : "transparent"};
   backdrop-filter: ${(props) =>
     props.isScrolled ? "saturate(180%) blur(20px)" : "none"};
-  font-family: var(--chakra-fonts-heading);
   position: sticky;
   top: 0;
   left: 0;
@@ -49,7 +50,9 @@ export const NavBarFullScreen = ({
         </Flex>
       </NavBarContainer>
 
-      {isMobile && isOpen && <Portal>Soy Mobile</Portal>}
+      <NavBarDrawer isMobile={isMobile} isOpen={isOpen} toggle={toggle}>
+        <NavBarDrawerList navs={navs} />
+      </NavBarDrawer>
     </StyledNavbar>
   );
 };
