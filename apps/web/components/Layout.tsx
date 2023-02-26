@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { UI, NavBar, Footer } from "@myth/ui";
+import { UI, NavBar, NavBarFullScreen, Footer } from "@myth/ui";
 import networks from "../data/networks";
 import sections from "../data/sections";
 
@@ -33,7 +33,7 @@ export const Layout = ({ children, metadata = {}, type = "post" }: Props) => {
 
   return (
     <Fragment>
-      <NavBar navs={sections} isScrolled={isScrolled} />
+      <NavBarFullScreen />
 
       <UI.Container maxW="container.md" pt="8">
         <UI.Flex direction="column">
