@@ -3,9 +3,7 @@ import { Container, Flex, Link } from "@chakra-ui/react";
 import CIcon from "@coreui/icons-react";
 
 const StyledFooter = styled.footer`
-  background-color: var(--chakra-colors-gray-800);
   border-top: 1px solid var(--chakra-colors-gray-700);
-  color: var(--chakra-colors-gray-300);
   position: relative;
   overflow: visible;
   z-index: 2;

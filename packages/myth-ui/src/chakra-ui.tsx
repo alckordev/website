@@ -22,6 +22,7 @@ export {
   ListItem,
   ListIcon,
   Tag,
+  TagLabel,
   Th,
   Tr,
   Td,
@@ -39,4 +40,8 @@ export {
   AccordionPanel,
   AccordionIcon,
   Img,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
 } from "@chakra-ui/react";

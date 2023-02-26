@@ -8,8 +8,6 @@ import {
 } from "@chakra-ui/react";
 
 const StyledDrawerContent = styled(DrawerContent)`
-  --drawer-bg: var(--chakra-colors-gray-900);
-  background-color: var(--drawer-bg);
   background-image: url(/assets/audio-bar.svg);
   background-position: center bottom;
   background-size: 120px;
