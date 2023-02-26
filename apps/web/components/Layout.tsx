@@ -35,30 +35,16 @@ export const Layout = ({ children, metadata = {}, type = "post" }: Props) => {
     <Fragment>
       <NavBarFullScreen isScrolled={isScrolled} navs={sections} />
 
-      <UI.Container maxW="container.md" pt="8">
-        <UI.Flex direction="column">
-          <UI.Box as="article" my={4} width="100%">
-            {isBlogTemplate ? (
-              "Post Title"
-            ) : (
-              <UI.Heading as="h2" my={8} size="xl">
-                {metadata.title}
-              </UI.Heading>
-            )}
-
-            <UI.Box m="0" as="section">
-              {children}
-            </UI.Box>
-
-            {isBlogTemplate && <aside id="comments">Comentarios</aside>}
-          </UI.Box>
-
-          {type === "post" && (
-            <UI.Stack as="aside" spacing="24px" my="4" width="100%">
-              Newsletter
-            </UI.Stack>
-          )}
-        </UI.Flex>
+      <UI.Container maxW="container.md" pt={8} pb={16}>
+        <UI.Box as={isBlogTemplate ? "article" : "section"} my={8}>
+          {children}
+        </UI.Box>
+        {isBlogTemplate && (
+          <UI.Stack as="aside" spacing={10} my={4}>
+            <div id="comments">Comentarios</div>
+            <div id="newsletter">Newsletter</div>
+          </UI.Stack>
+        )}
       </UI.Container>
 
       <Footer networks={networks} />
