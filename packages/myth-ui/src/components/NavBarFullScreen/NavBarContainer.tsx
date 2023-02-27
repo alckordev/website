@@ -7,7 +7,7 @@ interface Props {
 export const NavBarContainer = ({ children, ...rest }: Props) => {
   return (
     <Container
-      maxW="container.md"
+      maxW="container.lg"
       display="flex"
       flexDir="row"
       alignItems="center"

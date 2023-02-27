@@ -23,9 +23,9 @@ export const PostListItem = ({
   ...rest
 }: Props) => {
   return (
-    <UI.Card as={NextLink} w="100%" href={`tag/${slug}`} {...rest}>
+    <UI.Card w="100%" {...rest}>
       <UI.Stack>
-        <UI.CardBody>
+        <UI.CardBody as={NextLink} href={`${slug}`}>
           <UI.Text as="time" fontSize="xs" dateTime={dateTime}>
             {customDate}
           </UI.Text>
@@ -40,8 +40,8 @@ export const PostListItem = ({
               <UI.Tag
                 key={idx}
                 as={NextLink}
-                href={`${tag.slug}`}
-                colorScheme="red"
+                href={`tag/${tag.slug}`}
+                colorScheme="purple"
               >
                 {tag.name}
               </UI.Tag>

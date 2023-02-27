@@ -35,7 +35,7 @@ export const PostMetadata = ({
             key={idx}
             as={NextLink}
             href={`tag/${tag.slug}`}
-            colorScheme="red"
+            colorScheme="purple"
           >
             {tag.name}
           </UI.Tag>
