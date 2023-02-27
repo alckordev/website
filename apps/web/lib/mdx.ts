@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
 import readingTime from "reading-time";
+import remarkGfm from "remark-gfm";
 
 const root = process.cwd();
 
@@ -24,7 +25,10 @@ export const getFileBySlug = async ({
   const { data, content } = matter(mdxSource);
 
   const source = await serialize(content, {
-    mdxOptions: {},
+    mdxOptions: {
+      remarkPlugins: [remarkGfm, require("remark-code-titles")],
+      rehypePlugins: [require("@mapbox/rehype-prism")],
+    },
   });
 
   return {
