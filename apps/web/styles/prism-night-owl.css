@@ -10,7 +10,7 @@
 
 code[class*="language-"],
 pre[class*="language-"] {
-  color: #d6deeb;
+  color: var(--chakra-colors-gray-100);
   font-family: "IBM Plex Mono", Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   text-align: left;
   white-space: pre;
@@ -19,14 +19,7 @@ pre[class*="language-"] {
   word-wrap: normal;
   line-height: 1.5;
   font-size: 0.9em;
-
-  -moz-tab-size: 4;
-  -o-tab-size: 4;
   tab-size: 4;
-
-  -webkit-hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
   hyphens: none;
 }
 
@@ -58,19 +51,19 @@ pre[class*="language-"] {
   padding: 1em;
   margin: 0.5em 0;
   overflow: auto;
-  box-shadow: 0 0 0.5em rgba(52, 52, 52, 0.5);
+  box-shadow: var(--chakra-shadows-lg);
 }
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-  color: white;
-  background: #111416;
-  border-radius: 0.3em;
+  color: var(--chakra-colors-gray-100);
+  background: var(--chakra-colors-gray-900);
+  border-radius: var(--chakra-radii-md);
 }
 
 :not(pre) > code[class*="language-"] {
   padding: 0.1em;
-  border-radius: 0.3em;
+  border-radius: var(--chakra-radii-md);
   white-space: normal;
 }
 

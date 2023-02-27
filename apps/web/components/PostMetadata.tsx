@@ -18,7 +18,13 @@ export const PostMetadata = ({
   readingTime,
 }: Props) => {
   return (
-    <UI.Box mb={8}>
+    <UI.Box
+      pb={6}
+      mb={6}
+      borderBottomWidth="1px"
+      borderBottomStyle="dashed"
+      borderBottomColor="whiteAlpha.100"
+    >
       <UI.HStack spacing={2}>
         {["Nextjs", "Turbo", "Chakra UI"].map((x) => (
           <UI.Tag key={x} colorScheme="red">
@@ -30,7 +36,7 @@ export const PostMetadata = ({
         {title}
       </UI.Heading>
       <UI.VStack spacing={3} align="left" color="whiteAlpha.500">
-        <UI.Flex gap={3} flexWrap="wrap">
+        <UI.Flex gap={3} flexWrap="wrap" color="gray.400">
           <UI.Flex as="time" dateTime={dateTime} gap={1} align="center">
             <CIcon icon={icon.riCalendarLine} />
             <UI.Text fontSize="sm">{customDate}</UI.Text>
