@@ -66,6 +66,7 @@ export default function Home({ allPosts }: any) {
                   customDate={_dateAgo(post.date)}
                   dateTime={post.date}
                   slug={post.slug}
+                  tags={post.tags}
                 />
               ))}
             {page !== maxPage && (

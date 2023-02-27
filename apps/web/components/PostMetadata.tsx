@@ -7,7 +7,10 @@ interface Props {
   dateTime: string;
   slug?: string;
   readingTime: number;
-  tags?: string[];
+  tags?: {
+    name: string;
+    slug: string;
+  }[];
 }
 
 export const PostMetadata = ({
@@ -16,6 +19,7 @@ export const PostMetadata = ({
   dateTime,
   slug,
   readingTime,
+  tags = [],
 }: Props) => {
   return (
     <UI.Box
@@ -26,9 +30,14 @@ export const PostMetadata = ({
       borderBottomColor="whiteAlpha.100"
     >
       <UI.HStack spacing={2}>
-        {["Nextjs", "Turbo", "Chakra UI"].map((x) => (
-          <UI.Tag key={x} colorScheme="red">
-            {x}
+        {tags.map((tag, idx) => (
+          <UI.Tag
+            key={idx}
+            as={NextLink}
+            href={`tag/${tag.slug}`}
+            colorScheme="red"
+          >
+            {tag.name}
           </UI.Tag>
         ))}
       </UI.HStack>

@@ -7,7 +7,10 @@ interface Props {
   customDate: string;
   dateTime: string;
   slug: string;
-  tags?: string[];
+  tags?: {
+    name: string;
+    slug: string;
+  }[];
 }
 
 export const PostListItem = ({
@@ -16,10 +19,11 @@ export const PostListItem = ({
   customDate,
   dateTime,
   slug,
+  tags = [],
   ...rest
 }: Props) => {
   return (
-    <UI.Card as={NextLink} w="100%" href={`${slug}`} {...rest}>
+    <UI.Card as={NextLink} w="100%" href={`tag/${slug}`} {...rest}>
       <UI.Stack>
         <UI.CardBody>
           <UI.Text as="time" fontSize="xs" dateTime={dateTime}>
@@ -32,9 +36,14 @@ export const PostListItem = ({
         </UI.CardBody>
         <UI.CardFooter>
           <UI.HStack spacing={2}>
-            {["Nextjs", "Turbo", "Chakra UI"].map((x) => (
-              <UI.Tag key={x} colorScheme="red">
-                {x}
+            {tags.map((tag, idx) => (
+              <UI.Tag
+                key={idx}
+                as={NextLink}
+                href={`${tag.slug}`}
+                colorScheme="red"
+              >
+                {tag.name}
               </UI.Tag>
             ))}
           </UI.HStack>
