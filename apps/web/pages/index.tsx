@@ -63,7 +63,7 @@ export default function Home({ allPosts }: any) {
                   key={post.slug}
                   title={post.title}
                   summary={post.summary}
-                  formDate={_dateAgo(post.date)}
+                  customDate={_dateAgo(post.date)}
                   dateTime={post.date}
                   slug={post.slug}
                 />

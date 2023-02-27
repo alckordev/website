@@ -1,13 +1,52 @@
 import { UI } from "@myth/ui";
-import { Layout } from "../components";
+import { MDXRemote } from "next-mdx-remote";
+import { Layout, PostMetadata } from "../components";
+import { _date } from "../lib/format-date";
+import { getFileBySlug, getFiles } from "../lib/mdx";
 
-export default function Web() {
+export default function Post({ source, frontmatter }: any) {
   return (
-    <Layout metadata={{ title: "My Web", date: "2023-02-24" }}>
-      <UI.Box>
-        <UI.Heading as="h1">First Post</UI.Heading>
-        <UI.Text marginBottom={2}>Lorem ipsum</UI.Text>
-      </UI.Box>
+    <Layout metadata={frontmatter}>
+      <PostMetadata
+        title={frontmatter.title}
+        slug={frontmatter.slug}
+        customDate={_date(frontmatter.date)}
+        dateTime={frontmatter.date}
+        readingTime={frontmatter.readingTime.minutes}
+        tags={frontmatter.tags}
+      />
+      <MDXRemote {...source} components={{}} />
     </Layout>
   );
+}
+
+export async function getStaticPaths() {
+  const posts = await getFiles({ type: "posts" });
+  const paths = posts.map((post) => ({
+    params: {
+      slug: post.replace(/\.mdx/, ""),
+    },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }: any) {
+  const { source, frontmatter } = await getFileBySlug({
+    type: "posts",
+    slug: params.slug,
+  });
+
+  return {
+    props: {
+      source,
+      frontmatter: {
+        ...frontmatter,
+        slug: params.slug,
+      },
+    },
+  };
 }

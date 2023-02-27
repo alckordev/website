@@ -4,7 +4,7 @@ import { UI } from "@myth/ui";
 interface Props {
   title: string;
   summary: string;
-  formDate: string;
+  customDate: string;
   dateTime: string;
   slug: string;
   tags?: string[];
@@ -13,7 +13,7 @@ interface Props {
 export const PostListItem = ({
   title,
   summary,
-  formDate,
+  customDate,
   dateTime,
   slug,
   ...rest
@@ -23,7 +23,7 @@ export const PostListItem = ({
       <UI.Stack>
         <UI.CardBody>
           <UI.Text as="time" fontSize="xs" dateTime={dateTime}>
-            {formDate}
+            {customDate}
           </UI.Text>
           <UI.Heading size="md" mt={2} mb={4}>
             {title}
@@ -31,7 +31,7 @@ export const PostListItem = ({
           <UI.Text>{summary}</UI.Text>
         </UI.CardBody>
         <UI.CardFooter>
-          <UI.HStack spacing={1}>
+          <UI.HStack spacing={2}>
             {["Nextjs", "Turbo", "Chakra UI"].map((x) => (
               <UI.Tag key={x} colorScheme="red">
                 {x}
