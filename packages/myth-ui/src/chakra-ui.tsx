@@ -5,6 +5,7 @@ export {
   Container,
   Image,
   Stack,
+  Spinner,
   VStack,
   HStack,
   Link,
