@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { UI } from "@myth/ui";
-import { Aside, Layout, PostListItem } from "../components";
+import { AsideLeft, AsideRight, Layout, PostListItem } from "../components";
 import { usePagination } from "../hooks/use-pagination";
 import { getFilesFrontmatter } from "../lib/mdx";
 import { _dateAgo } from "../lib/format-date";
@@ -44,7 +44,15 @@ export default function Home({ allPosts }: any) {
         <UI.Box
           flexGrow={0}
           flexShrink={0}
-          flexBasis={["100%", "100%", "70%", "70%"]}
+          flexBasis={["100%", "100%", "20%", "20%"]}
+          px={4}
+        >
+          <AsideLeft />
+        </UI.Box>
+        <UI.Box
+          flexGrow={0}
+          flexShrink={0}
+          flexBasis={["100%", "100%", "60%", "60%"]}
           px={4}
         >
           <UI.VStack spacing={4} mb={[16, 16, 0, 0]}>
@@ -70,10 +78,10 @@ export default function Home({ allPosts }: any) {
         <UI.Box
           flexGrow={0}
           flexShrink={0}
-          flexBasis={["100%", "100%", "30%", "30%"]}
+          flexBasis={["100%", "100%", "20%", "20%"]}
           px={4}
         >
-          <Aside />
+          <AsideRight />
         </UI.Box>
       </UI.Flex>
     </Layout>

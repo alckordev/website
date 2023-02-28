@@ -35,7 +35,7 @@ export const Layout = ({ children, metadata = {}, type = "post" }: Props) => {
     <Fragment>
       <NavBarFullScreen isScrolled={isScrolled} navs={sections} />
 
-      <UI.Container maxW="container.lg" pt={8} pb={16}>
+      <UI.Container maxW="container.xl" pt={8} pb={16}>
         <UI.Box as={isBlogTemplate ? "article" : "section"} my={8}>
           {children}
         </UI.Box>
