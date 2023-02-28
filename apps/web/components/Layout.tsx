@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { UI, NavBarFullScreen, Footer } from "@myth/ui";
 import { Aside } from "./Aside";
+import { OpenGraph } from "./OpenGraph";
 import networks from "../data/networks";
 import sections from "../data/sections";
 
@@ -8,7 +9,13 @@ interface Props {
   children: React.ReactNode;
   metadata?: {
     title?: string;
+    summary?: string;
     date?: string;
+    slug?: string;
+    tags?: {
+      name: string;
+      slug: string;
+    };
   };
   type?: string;
 }
@@ -34,6 +41,8 @@ export const Layout = ({ children, metadata = {}, type = "post" }: Props) => {
 
   return (
     <Fragment>
+      <OpenGraph metadata={metadata} />
+
       <NavBarFullScreen isScrolled={isScrolled} navs={sections} />
 
       <UI.Container maxW="container.xl" py={16}>

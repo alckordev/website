@@ -35,7 +35,7 @@ export default function Home({ allPosts }: any) {
   }, [next]);
 
   return (
-    <Layout metadata={{ title: "My Web" }}>
+    <Layout>
       <UI.VStack spacing={4} my={[16, 16, 0, 0]}>
         {currentPosts &&
           currentPosts.map((post: any) => (

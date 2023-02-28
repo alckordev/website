@@ -1,0 +1,53 @@
+import Head from "next/head";
+import { formatISO } from "date-fns";
+
+interface Props {
+  metadata: {
+    title?: string;
+    summary?: string;
+    date: string;
+    slug?: string;
+    tags?: {
+      name: string;
+      slug: string;
+    };
+  };
+}
+
+export const OpenGraph = ({ metadata }: Props) => {
+  const SEO = {
+    title: metadata.title ? `${metadata.title} — My Web` : `My Web`,
+    description: metadata.summary || "My description",
+    slug: metadata.slug || "",
+    keywords: [],
+    author: "Francisco Luis",
+    date: metadata.date
+      ? formatISO(new Date(metadata.date))
+      : formatISO(new Date()),
+    copyright: `© ${new Date().getFullYear()} Francisco Luis`,
+  };
+
+  return (
+    <Head>
+      <title>{SEO.title}</title>
+      <link rel="canonical" href={`https://alckor.dev/${SEO.slug}`} />
+      <meta name="robots" content="follow, index" />
+      <meta name="description" content={SEO.description} />
+      <meta name="keywords" content="keyword 1, keyword 2, keyword 3" />
+      <meta name="author" content={SEO.author} />
+      <meta name="copyright" content={SEO.copyright} />
+      <meta property="og:url" content={`https://alckor.dev/${SEO.slug}`} />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="Francisco Luis" />
+      <meta property="og:description" content={SEO.description} />
+      <meta property="og:title" content={SEO.title} />
+      {/* <meta property="og:image" content={SEO.image} /> */}
+      <meta property="article:published_time" content={SEO.date} />
+      {/* <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@alckordev" />
+      <meta name="twitter:title" content={SEO.title} />
+      <meta name="twitter:description" content={SEO.description} />
+      <meta name="twitter:image" content={SEO.image} /> */}
+    </Head>
+  );
+};
