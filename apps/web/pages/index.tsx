@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import { UI } from "@myth/ui";
 import { Aside, Layout, PostListItem } from "../components";
 import { usePagination } from "../hooks/use-pagination";
-import { getAllFilesFrontmatter } from "../lib/mdx";
+import { getFilesFrontmatter } from "../lib/mdx";
 import { _dateAgo } from "../lib/format-date";
 import { orderByDate } from "../lib/order-by-date";
 
@@ -81,7 +81,7 @@ export default function Home({ allPosts }: any) {
 }
 
 export async function getStaticProps() {
-  const unorderedPosts = await getAllFilesFrontmatter({ type: "posts" });
+  const unorderedPosts = await getFilesFrontmatter({ type: "posts" });
   const allPosts = unorderedPosts.sort(orderByDate);
 
   return {

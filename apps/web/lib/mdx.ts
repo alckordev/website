@@ -41,7 +41,7 @@ export const getFileBySlug = async ({
   };
 };
 
-export const getAllFilesFrontmatter = async ({ type }: { type: string }) => {
+export const getFilesFrontmatter = async ({ type }: { type: string }) => {
   const files = fs.readdirSync(path.join(root, "data", type));
 
   return files.reduce((allPosts: any, slug) => {
