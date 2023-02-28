@@ -1,13 +1,11 @@
-import styled from "@emotion/styled";
-import { Container, Flex, Link } from "@chakra-ui/react";
+import {
+  Container,
+  Box,
+  Flex,
+  Link,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import CIcon from "@coreui/icons-react";
-
-const StyledFooter = styled.footer`
-  border-top: 1px solid var(--chakra-colors-gray-700);
-  position: relative;
-  overflow: visible;
-  z-index: 2;
-`;
 
 interface Props {
   networks?: {
@@ -16,10 +14,10 @@ interface Props {
   }[];
 }
 
-export const Footer = ({ networks = [] }: Props) => {
+export const Footer = ({ networks = [], ...rest }: Props) => {
   return (
-    <StyledFooter>
-      <Container maxW="container.lg" py={16}>
+    <Box as="footer" bg={useColorModeValue("gray.100", "gray.900")}>
+      <Container maxW="container.xl" py={16}>
         {networks.length > 0 && (
           <Flex w="100%" justify="center" align="center" pb={8} gap={3}>
             {networks.map((n, idx) => (
@@ -28,14 +26,14 @@ export const Footer = ({ networks = [] }: Props) => {
                 href={n.url}
                 target="_blank"
                 display="inline-flex"
-                bg="gray.900"
+                // bg="gray.900"
                 p={2}
-                color="gray.500"
+                // color="gray.500"
                 rounded="md"
-                _hover={{
-                  color: "gray.400",
-                  textDecoration: "none",
-                }}
+                // _hover={{
+                //   color: "gray.400",
+                //   textDecoration: "none",
+                // }}
               >
                 <CIcon icon={n.icon} />
               </Link>
@@ -55,6 +53,6 @@ export const Footer = ({ networks = [] }: Props) => {
           &copy; {new Date().getFullYear()} alckordev | Full Stack Developer
         </Flex>
       </Container>
-    </StyledFooter>
+    </Box>
   );
 };

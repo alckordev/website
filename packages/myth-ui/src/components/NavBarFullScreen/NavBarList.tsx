@@ -1,4 +1,4 @@
-import { Stack } from "@chakra-ui/react";
+import { HStack } from "@chakra-ui/react";
 import { NavBarItem } from "./NavBarItem";
 
 interface Props {
@@ -13,20 +13,12 @@ export const NavBarList = ({ isMobile = false, navs }: Props) => {
   if (isMobile) return null;
 
   return (
-    <Stack
-      as="nav"
-      spacing={10}
-      align="center"
-      justify="center"
-      direction="row"
-      color="gray.500"
-      fontWeight="bold"
-    >
+    <HStack as="nav" spacing={10} fontWeight="bold" color="gray.400">
       {navs.map((nav, idx) => (
         <NavBarItem key={idx} to={nav.to}>
           {nav.name}
         </NavBarItem>
       ))}
-    </Stack>
+    </HStack>
   );
 };

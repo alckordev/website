@@ -9,10 +9,10 @@ import { NavBarDrawerList } from "./NavBarDrawerList";
 import { NavBarList } from "./NavBarList";
 
 const StyledNavbar = styled.header<{ isScrolled: boolean }>`
-  background-color: ${(props) =>
-    props.isScrolled ? "rgba(0,0,0, 0.8)" : "transparent"};
-  backdrop-filter: ${(props) =>
-    props.isScrolled ? "saturate(180%) blur(20px)" : "none"};
+  background-color: var(--chakra-colors-chakra-body-bg);
+  box-shadow: ${(props) =>
+    props.isScrolled ? "var(--chakra-shadows-sm)" : "none"};
+  font-family: var(--chakra-fonts-heading);
   position: sticky;
   top: 0;
   left: 0;

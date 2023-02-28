@@ -1,43 +1,32 @@
 import styled from "@emotion/styled";
-import { Flex } from "@chakra-ui/react";
+import { Button, Flex, useColorMode } from "@chakra-ui/react";
 import CIcon from "@coreui/icons-react";
-import { riMoonFill, riMenuLine } from "../../icons";
+import { riMenuLine, riMoonFill, riSunFill } from "../../icons";
 
-const StyledBox = styled.div`
-  display: inline-flex;
-  cursor: pointer;
-  appearance: none;
-  align-items: center;
-  justify-content: center;
-  use-selector: none;
-  position: relative;
-  white-space: nowrap;
-  border-radius: var(--chakra-radii-md);
-  font-weight: var(--chakra-fontWeights-semibold);
-  height: var(--chakra-sizes-10);
-  min-width: var(--chakra-sizes-10);
+const StyledBox = styled(Button)`
   background-color: transparent;
-  color: var(--chakra-colors-gray-100);
-  &:hover {
-    background-color: var(--chakra-colors-blackAlpha-100);
-  }
+  padding: 0;
+  // &:hover {
+  //   background-color: var(--chakra-colors-whiteAlpha-200);
+  // }
 `;
 
 interface Props {
   isMobile: boolean;
-  isOpen?: boolean;
   toggle(): void;
 }
 
-export const NavBarControl = ({ isMobile, isOpen, toggle }: Props) => {
+export const NavBarControl = ({ isMobile, toggle }: Props) => {
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <Flex align="center">
-      <StyledBox onClick={() => console.log("theme")}>
-        <CIcon icon={riMoonFill} size="lg" />
+      <StyledBox onClick={toggleColorMode}>
+        <CIcon icon={colorMode === "dark" ? riMoonFill : riSunFill} />
       </StyledBox>
       {isMobile && (
         <StyledBox onClick={toggle}>
-          <CIcon icon={riMenuLine} size="lg" />
+          <CIcon icon={riMenuLine} />
         </StyledBox>
       )}
     </Flex>

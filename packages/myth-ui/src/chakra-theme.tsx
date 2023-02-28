@@ -2,6 +2,7 @@ import {
   ChakraProvider,
   extendTheme,
   createLocalStorageManager,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 const theme = extendTheme({
@@ -32,4 +33,9 @@ const theme = extendTheme({
   },
 });
 
-export { ChakraProvider as ThemeProvider, createLocalStorageManager, theme };
+export {
+  ChakraProvider as ThemeProvider,
+  createLocalStorageManager,
+  theme,
+  useColorModeValue,
+};
