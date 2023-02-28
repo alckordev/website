@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { UI } from "@myth/ui";
-import { AsideLeft, AsideRight, Layout, PostListItem } from "../components";
+import { Layout, PostListItem } from "../components";
 import { usePagination } from "../hooks/use-pagination";
 import { getFilesFrontmatter } from "../lib/mdx";
 import { _dateAgo } from "../lib/format-date";
@@ -36,39 +36,25 @@ export default function Home({ allPosts }: any) {
 
   return (
     <Layout metadata={{ title: "My Web" }}>
-      <UI.Flex
-        direction={["column", "column", "row", "row"]}
-        flexWrap="wrap"
-        mx="-4"
-      >
-        <UI.Box flexBasis={["100%", "100%", "20%", "20%"]} px={4}>
-          <AsideLeft />
-        </UI.Box>
-        <UI.Box flexBasis={["100%", "100%", "60%", "60%"]} px={4}>
-          <UI.VStack spacing={4} my={[16, 16, 0, 0]}>
-            {currentPosts &&
-              currentPosts.map((post: any) => (
-                <PostListItem
-                  key={post.slug}
-                  title={post.title}
-                  summary={post.summary}
-                  customDate={_dateAgo(post.date)}
-                  dateTime={post.date}
-                  slug={post.slug}
-                  tags={post.tags}
-                />
-              ))}
-            {page !== maxPage && (
-              <UI.Flex ref={observerRef} gap={4} align="center">
-                <UI.Spinner size="sm" /> Cargando...
-              </UI.Flex>
-            )}
-          </UI.VStack>
-        </UI.Box>
-        <UI.Box flexBasis={["100%", "100%", "20%", "20%"]} px={4}>
-          <AsideRight />
-        </UI.Box>
-      </UI.Flex>
+      <UI.VStack spacing={4} my={[16, 16, 0, 0]}>
+        {currentPosts &&
+          currentPosts.map((post: any) => (
+            <PostListItem
+              key={post.slug}
+              title={post.title}
+              summary={post.summary}
+              customDate={_dateAgo(post.date)}
+              dateTime={post.date}
+              slug={post.slug}
+              tags={post.tags}
+            />
+          ))}
+        {page !== maxPage && (
+          <UI.Flex ref={observerRef} gap={4} align="center">
+            <UI.Spinner size="sm" /> Cargando...
+          </UI.Flex>
+        )}
+      </UI.VStack>
     </Layout>
   );
 }

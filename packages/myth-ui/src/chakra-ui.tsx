@@ -47,4 +47,5 @@ export {
   CardHeader,
   CardBody,
   CardFooter,
+  Code,
 } from "@chakra-ui/react";

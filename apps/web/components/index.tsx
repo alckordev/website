@@ -1,5 +1,4 @@
-export { AsideLeft } from "./AsideLeft";
-export { AsideRight } from "./AsideRight";
+export { Aside } from "./Aside";
 export { Layout } from "./Layout";
 export { MDXComponent } from "./MDXComponent";
 export { Newsletter } from "./Newsletter";

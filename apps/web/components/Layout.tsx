@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { UI, NavBarFullScreen, Footer } from "@myth/ui";
+import { Aside } from "./Aside";
 import networks from "../data/networks";
 import sections from "../data/sections";
 
@@ -35,16 +36,27 @@ export const Layout = ({ children, metadata = {}, type = "post" }: Props) => {
     <Fragment>
       <NavBarFullScreen isScrolled={isScrolled} navs={sections} />
 
-      <UI.Container maxW="container.xl" pt={8} pb={16}>
-        <UI.Box as={isBlogTemplate ? "article" : "section"} my={8}>
-          {children}
-        </UI.Box>
-        {isBlogTemplate && (
-          <UI.Stack as="aside" spacing={10} my={4}>
-            <div id="comments">Comentarios</div>
-            <div id="newsletter">Newsletter</div>
-          </UI.Stack>
-        )}
+      <UI.Container maxW="container.xl" py={16}>
+        <UI.Flex
+          direction={["column", "column", "row", "row"]}
+          flexWrap="wrap"
+          mx={-8}
+        >
+          <UI.Box flexBasis={["100%", "100%", "65%", "75%"]} px={8}>
+            <UI.Box as={isBlogTemplate ? "article" : "section"} mb={8}>
+              {children}
+            </UI.Box>
+            {isBlogTemplate && (
+              <UI.Stack as="aside" spacing={10} my={4} align="center">
+                <div id="comments">Comentarios</div>
+                <div id="newsletter">Newsletter</div>
+              </UI.Stack>
+            )}
+          </UI.Box>
+          <UI.Box flexBasis={["100%", "100%", "35%", "25%"]} px={8}>
+            <Aside />
+          </UI.Box>
+        </UI.Flex>
       </UI.Container>
 
       <Footer networks={networks} />

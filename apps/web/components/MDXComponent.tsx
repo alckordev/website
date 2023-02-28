@@ -10,4 +10,6 @@ export const MDXComponent = {
   h5: (props: any) => <UI.Heading as="h5" my={2} size="sm" {...props} />,
   h6: (props: any) => <UI.Heading as="h6" my={2} size="sm" {...props} />,
   p: (props: any) => <UI.Text fontSize="md" lineHeight={6} my={8} {...props} />,
+  pre: (props: any) => <UI.Box as="pre" my={8} {...props} />,
+  // code: (props: any) => <UI.Code colorScheme="yellow" {...props} />,
 };
