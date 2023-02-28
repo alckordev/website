@@ -36,7 +36,7 @@ export default function Home({ allPosts }: any) {
 
   return (
     <Layout>
-      <UI.VStack spacing={4} my={[16, 16, 0, 0]}>
+      <UI.VStack spacing={4} mb={[16, 16, 0, 0]}>
         {currentPosts &&
           currentPosts.map((post: any) => (
             <PostListItem

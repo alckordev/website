@@ -5,7 +5,7 @@ interface Props {
   metadata: {
     title?: string;
     summary?: string;
-    date: string;
+    date?: string;
     slug?: string;
     tags?: {
       name: string;
