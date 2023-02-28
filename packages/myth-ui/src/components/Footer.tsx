@@ -50,7 +50,7 @@ export const Footer = ({ networks = [], ...rest }: Props) => {
           fontFamily="heading"
           fontSize="sm"
         >
-          &copy; {new Date().getFullYear()} alckordev | Full Stack Developer
+          © {new Date().getFullYear()} - Francisco Luis
         </Flex>
       </Container>
     </Box>
