@@ -3,13 +3,13 @@ import { UI } from "@myth/ui";
 import tags from "../data/tags";
 import { Newsletter } from "./Newsletter";
 
-export const Aside = () => {
+export const Aside = ({ isBlogTemplate }: { isBlogTemplate: boolean }) => {
   return (
     <UI.VStack
-      divider={<UI.StackDivider borderColor="gray.700" />}
-      spacing={10}
+      // divider={<UI.StackDivider borderColor="gray.700" />}
+      spacing={4}
     >
-      <UI.Card variant="outline">
+      <UI.Card variant={isBlogTemplate ? "elevated" : "outline"}>
         <UI.CardHeader>
           <UI.Flex gap={4} alignItems="center" flexWrap="wrap">
             <UI.Avatar
@@ -29,26 +29,43 @@ export const Aside = () => {
           </UI.Text>
         </UI.CardBody>
       </UI.Card>
-      <UI.Box>
-        <UI.Heading as="h2" fontSize="lg" mb={4}>
-          Tags
-        </UI.Heading>
-        <UI.Flex flexWrap="wrap" gap={2}>
-          {tags.map((tag, idx) => (
-            <UI.Tag
-              key={idx}
-              as={NextLink}
-              href={`tag/${tag.slug}`}
-              colorScheme="purple"
-            >
-              {tag.name}
-            </UI.Tag>
-          ))}
-        </UI.Flex>
-      </UI.Box>
-      <UI.Box>
-        <Newsletter />
-      </UI.Box>
+      <UI.Card variant={isBlogTemplate ? "elevated" : "outline"}>
+        <UI.CardHeader>
+          <UI.Heading as="h2" fontSize="lg">
+            Tags
+          </UI.Heading>
+        </UI.CardHeader>
+        <UI.CardBody>
+          <UI.Flex flexWrap="wrap" gap={2}>
+            {tags.map((tag, idx) => (
+              <UI.Tag
+                key={idx}
+                as={NextLink}
+                href={`tag/${tag.slug}`}
+                colorScheme="purple"
+              >
+                {tag.name}
+              </UI.Tag>
+            ))}
+          </UI.Flex>
+        </UI.CardBody>
+      </UI.Card>
+      <UI.Card variant={isBlogTemplate ? "elevated" : "outline"}>
+        <UI.CardHeader>
+          <UI.Heading as="h2" fontSize="lg">
+            ¡Suscríbete ahora!
+          </UI.Heading>
+        </UI.CardHeader>
+        <UI.CardBody>
+          <UI.Text mb={6}>
+            <UI.Highlight query="¡Libre de Spam!" styles={{ bg: "orange.100" }}>
+              Recibirás artículos sobre programación y novedades en las que vaya
+              trabajando. ¡Libre de Spam!
+            </UI.Highlight>
+          </UI.Text>
+          <Newsletter />
+        </UI.CardBody>
+      </UI.Card>
     </UI.VStack>
   );
 };

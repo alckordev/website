@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const Layout = ({ children, metadata = {}, type = "post" }: Props) => {
-  const isBlogTemplate = type === "post" && metadata.date;
+  const isBlogTemplate = type === "post" && metadata.date ? true : false;
 
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -40,21 +40,20 @@ export const Layout = ({ children, metadata = {}, type = "post" }: Props) => {
         <UI.Flex
           direction={["column", "column", "row", "row"]}
           flexWrap="wrap"
-          mx={-8}
+          mx={-4}
         >
-          <UI.Box flexBasis={["100%", "100%", "65%", "75%"]} px={8}>
-            <UI.Box as={isBlogTemplate ? "article" : "section"} mb={8}>
+          <UI.Box flexBasis={["100%", "100%", "65%", "75%"]} px={4}>
+            <UI.Box as={isBlogTemplate ? "article" : "section"} mb={16}>
               {children}
             </UI.Box>
             {isBlogTemplate && (
-              <UI.Stack as="aside" spacing={10} my={4} align="center">
+              <UI.Stack as="aside" spacing={10} my={16} align="center">
                 <div id="comments">Comentarios</div>
-                <div id="newsletter">Newsletter</div>
               </UI.Stack>
             )}
           </UI.Box>
-          <UI.Box flexBasis={["100%", "100%", "35%", "25%"]} px={8}>
-            <Aside />
+          <UI.Box flexBasis={["100%", "100%", "35%", "25%"]} px={4}>
+            <Aside isBlogTemplate={isBlogTemplate} />
           </UI.Box>
         </UI.Flex>
       </UI.Container>
