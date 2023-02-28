@@ -41,21 +41,11 @@ export default function Home({ allPosts }: any) {
         flexWrap="wrap"
         mx="-4"
       >
-        <UI.Box
-          flexGrow={0}
-          flexShrink={0}
-          flexBasis={["100%", "100%", "20%", "20%"]}
-          px={4}
-        >
+        <UI.Box flexBasis={["100%", "100%", "20%", "20%"]} px={4}>
           <AsideLeft />
         </UI.Box>
-        <UI.Box
-          flexGrow={0}
-          flexShrink={0}
-          flexBasis={["100%", "100%", "60%", "60%"]}
-          px={4}
-        >
-          <UI.VStack spacing={4} mb={[16, 16, 0, 0]}>
+        <UI.Box flexBasis={["100%", "100%", "60%", "60%"]} px={4}>
+          <UI.VStack spacing={4} my={[16, 16, 0, 0]}>
             {currentPosts &&
               currentPosts.map((post: any) => (
                 <PostListItem
@@ -75,12 +65,7 @@ export default function Home({ allPosts }: any) {
             )}
           </UI.VStack>
         </UI.Box>
-        <UI.Box
-          flexGrow={0}
-          flexShrink={0}
-          flexBasis={["100%", "100%", "20%", "20%"]}
-          px={4}
-        >
+        <UI.Box flexBasis={["100%", "100%", "20%", "20%"]} px={4}>
           <AsideRight />
         </UI.Box>
       </UI.Flex>
