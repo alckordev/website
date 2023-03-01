@@ -7,7 +7,7 @@ import { _dateAgo } from "../lib/format-date";
 import { orderByDate } from "../lib/order-by-date";
 
 export default function Home({ allPosts }: any) {
-  const { next, page, currentData, maxPage } = usePagination(allPosts, 10);
+  const { next, page, currentData, maxPage } = usePagination(allPosts, 6);
   const observerRef = useRef<HTMLDivElement>(null);
   const prevY = useRef(0);
   const currentPosts = currentData();
