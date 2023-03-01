@@ -6,7 +6,7 @@ export default function Tags({ allPosts }: any) {
   return (
     <Layout metadata={{ title: "Tags" }}>
       {allPosts.map((post: any) => (
-        <div>
+        <div key={post.slug}>
           <div>{post.title}</div>
         </div>
       ))}

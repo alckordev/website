@@ -66,6 +66,7 @@ export const Layout = ({ children, metadata = {}, type = "post" }: Props) => {
             )}
           </UI.Box>
           <UI.Box
+            display={["", "", "", "flex"]}
             maxW={["100%", "100%", "100%", "25%"]}
             flexBasis={["100%", "100%", "100%", "25%"]}
             px={2}

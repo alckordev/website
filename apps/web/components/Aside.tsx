@@ -14,7 +14,7 @@ export const Aside = ({ isBlogTemplate }: { isBlogTemplate: boolean }) => {
           <UI.Flex gap={4} alignItems="center" flexWrap="wrap">
             <UI.Avatar
               name="Francisco Luis Rios Vega"
-              src="assets/avatar.jpg"
+              src="/assets/avatar.jpg"
             />
             <UI.Box>
               <UI.Heading size="sm">Francisco</UI.Heading>
@@ -50,7 +50,12 @@ export const Aside = ({ isBlogTemplate }: { isBlogTemplate: boolean }) => {
           </UI.Flex>
         </UI.CardBody>
       </UI.Card>
-      <UI.Card minW="100%" variant={isBlogTemplate ? "elevated" : "elevated"}>
+      <UI.Card
+        minW="100%"
+        variant={isBlogTemplate ? "elevated" : "elevated"}
+        pos="sticky"
+        top={24}
+      >
         <UI.CardHeader>
           <UI.Heading as="h2" fontSize="lg">
             ¡Suscríbete ahora!
