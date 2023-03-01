@@ -3,8 +3,8 @@ export {
   ThemeProvider,
   theme,
   createLocalStorageManager,
-  useColorModeValue,
 } from "./src/chakra-theme";
+export { useColorModeValue, useToast } from "./src/chakra-hook";
 export * as UI from "./src/chakra-ui";
 export { CIcon, icon } from "./src/coreui-icon";
 export * as fonts from "./src/fonts";
