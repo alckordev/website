@@ -49,9 +49,13 @@ export const Layout = ({ children, metadata = {}, type = "post" }: Props) => {
         <UI.Flex
           direction={["column", "column", "row", "row"]}
           flexWrap="wrap"
-          mx={-4}
+          mx={-2}
         >
-          <UI.Box flexBasis={["100%", "100%", "65%", "75%"]} px={4}>
+          <UI.Box
+            maxW={["100%", "100%", "100%", "75%"]}
+            flexBasis={["100%", "100%", "100%", "75%"]}
+            px={2}
+          >
             <UI.Box as={isBlogTemplate ? "article" : "section"} mb={16}>
               {children}
             </UI.Box>
@@ -61,7 +65,11 @@ export const Layout = ({ children, metadata = {}, type = "post" }: Props) => {
               </UI.Stack>
             )}
           </UI.Box>
-          <UI.Box flexBasis={["100%", "100%", "35%", "25%"]} px={4}>
+          <UI.Box
+            maxW={["100%", "100%", "100%", "25%"]}
+            flexBasis={["100%", "100%", "100%", "25%"]}
+            px={2}
+          >
             <Aside isBlogTemplate={isBlogTemplate} />
           </UI.Box>
         </UI.Flex>

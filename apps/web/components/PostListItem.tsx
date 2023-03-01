@@ -23,7 +23,7 @@ export const PostListItem = ({
   ...rest
 }: Props) => {
   return (
-    <UI.Card w="100%" {...rest}>
+    <UI.Card w="100%" variant="outline" {...rest}>
       <UI.Stack>
         <UI.CardBody as={NextLink} href={`${slug}`}>
           <UI.Text as="time" fontSize="xs" dateTime={dateTime}>

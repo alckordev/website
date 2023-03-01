@@ -29,7 +29,8 @@ export const OpenGraph = ({ metadata }: Props) => {
 
   return (
     <Head>
-      <title>{SEO.title}</title>
+      <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+      <meta content="width=device-width, initial-scale=1" name="viewport" />
       <link rel="canonical" href={`https://alckor.dev/${SEO.slug}`} />
       <meta name="robots" content="follow, index" />
       <meta name="description" content={SEO.description} />
@@ -48,6 +49,7 @@ export const OpenGraph = ({ metadata }: Props) => {
       <meta name="twitter:title" content={SEO.title} />
       <meta name="twitter:description" content={SEO.description} />
       <meta name="twitter:image" content={SEO.image} /> */}
+      <title>{SEO.title}</title>
     </Head>
   );
 };

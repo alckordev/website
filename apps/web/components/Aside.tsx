@@ -9,7 +9,7 @@ export const Aside = ({ isBlogTemplate }: { isBlogTemplate: boolean }) => {
       // divider={<UI.StackDivider borderColor="gray.700" />}
       spacing={4}
     >
-      <UI.Card variant={isBlogTemplate ? "elevated" : "outline"}>
+      <UI.Card minW="100%" variant={isBlogTemplate ? "elevated" : "elevated"}>
         <UI.CardHeader>
           <UI.Flex gap={4} alignItems="center" flexWrap="wrap">
             <UI.Avatar
@@ -29,7 +29,7 @@ export const Aside = ({ isBlogTemplate }: { isBlogTemplate: boolean }) => {
           </UI.Text>
         </UI.CardBody>
       </UI.Card>
-      <UI.Card variant={isBlogTemplate ? "elevated" : "outline"}>
+      <UI.Card minW="100%" variant={isBlogTemplate ? "elevated" : "elevated"}>
         <UI.CardHeader>
           <UI.Heading as="h2" fontSize="lg">
             Tags
@@ -50,7 +50,7 @@ export const Aside = ({ isBlogTemplate }: { isBlogTemplate: boolean }) => {
           </UI.Flex>
         </UI.CardBody>
       </UI.Card>
-      <UI.Card variant={isBlogTemplate ? "elevated" : "outline"}>
+      <UI.Card minW="100%" variant={isBlogTemplate ? "elevated" : "elevated"}>
         <UI.CardHeader>
           <UI.Heading as="h2" fontSize="lg">
             ¡Suscríbete ahora!
