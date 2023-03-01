@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.80",
     "@mapbox/rehype-prism": "^0.8.0",
     "@myth/ui": "*",
     "date-fns": "^2.29.3",
