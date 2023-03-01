@@ -9,7 +9,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const mailchimp = require("@mailchimp/mailchimp_marketing");
-  const { email_address } = req.body;
+  const { email_address, status } = req.body;
 
   mailchimp.setConfig({
     apiKey: MAILCHIMP_API_KEY,
@@ -17,15 +17,13 @@ export default async function handler(
   });
 
   try {
-    const res = await mailchimp.lists.addListMember(MAILCHIMP_LIST_ID, {
+    const data = await mailchimp.lists.addListMember(MAILCHIMP_LIST_ID, {
       email_address,
-      status: "subscribed",
+      status,
     });
 
-    res.status(200).end(`Done ${res.email_address}`);
-  } catch (err: unknown) {
-    if (err instanceof Error) res.status(500).end(err.message);
-
-    res.status(500).end(err);
+    res.status(200).json({ email_address: data.email_address });
+  } catch (err) {
+    res.status(500).json({ error: "Internal Server Error" });
   }
 }

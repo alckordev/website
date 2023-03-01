@@ -1,18 +1,71 @@
-import { UI } from "@myth/ui";
+import { UI, useToast } from "@myth/ui";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 export const Newsletter = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, touchedFields, isSubmitting },
+  } = useForm({
+    resolver: yupResolver(
+      yup.object().shape({
+        email_address: yup
+          .string()
+          .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i),
+      })
+    ),
+  });
+
+  const toast = useToast({ position: "top" });
+
+  const onSubmit = handleSubmit(async (data) => {
+    const res = await fetch("/api/mailchimp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...data, status: "subscribed" }),
+    });
+
+    if (res.status === 200 || res.status === 400) {
+      toast({
+        description: "¡Genial! Ahora te mantendre informado. 😉",
+        status: "success",
+        isClosable: true,
+      });
+      reset();
+    } else {
+      toast({
+        description: "¡Ups! Algo salió mal. 😭",
+        status: "error",
+        isClosable: true,
+      });
+    }
+  });
+
   return (
-    <UI.Box as="form" onSubmit={() => console.log("submit")}>
-      <UI.FormControl isInvalid={true}>
-        <UI.Input type="email" placeholder="example@gmail.com" />
-        <UI.FormErrorMessage>Jeez! You're not a fan 😱</UI.FormErrorMessage>
+    <UI.Box as="form" onSubmit={onSubmit}>
+      <UI.FormControl
+        isInvalid={errors.email_address && touchedFields.email_address}
+      >
+        <UI.Input
+          type="email"
+          placeholder="example@gmail.com"
+          {...register("email_address")}
+        />
+        {errors.email_address && (
+          <UI.FormErrorMessage>¿Eres un bot? 🤖</UI.FormErrorMessage>
+        )}
       </UI.FormControl>
       <UI.Button
         type="submit"
         w="100%"
         mt={4}
         colorScheme="purple"
-        isLoading={false}
+        isLoading={isSubmitting}
       >
         Suscribirme
       </UI.Button>
