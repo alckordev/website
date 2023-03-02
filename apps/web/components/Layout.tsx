@@ -44,8 +44,6 @@ export const Layout = ({
     };
   }, []);
 
-  console.log("==>", typeof heading);
-
   return (
     <Fragment>
       <OpenGraph metadata={metadata} />
