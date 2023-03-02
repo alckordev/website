@@ -30,7 +30,7 @@ export const PostListItem = ({
             {customDate}
           </UI.Text>
           <UI.Heading size="md" mt={2} mb={4}>
-            <UI.Link as={NextLink} href={`${slug}`}>
+            <UI.Link as={NextLink} href={`/${slug}`}>
               {title}
             </UI.Link>
           </UI.Heading>
