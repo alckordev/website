@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { UI, NavBarFullScreen, Footer } from "@myth/ui";
 import { Aside } from "./Aside";
 import { OpenGraph } from "./OpenGraph";
+import { Disqus } from "./Disqus";
 import networks from "../data/networks";
 import sections from "../data/sections";
 
@@ -71,7 +72,13 @@ export const Layout = ({
             </UI.Box>
             {isBlogTemplate && (
               <UI.Stack as="aside" spacing={10} my={16} align="center">
-                <div id="comments">Comentarios</div>
+                <Disqus
+                  shortname="alckordev"
+                  config={{
+                    apiKey: process.env.NEXT_PUBLIC_DISQUS_API_KEY,
+                    identifier: "conventional-commits-06",
+                  }}
+                />
               </UI.Stack>
             )}
           </UI.Box>
