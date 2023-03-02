@@ -3,10 +3,10 @@ import NextLink from "next/link";
 import { Link, Text } from "@chakra-ui/react";
 
 const StyledLink = styled(Link)`
+  font-weight: var(--chakra-fontWeights-bold);
   padding-top: var(--chakra-space-3);
   padding-bottom: var(--chakra-space-3);
   &:hover {
-    color: var(--chakra-colors-gray-600);
     text-decoration: none;
   }
 `;

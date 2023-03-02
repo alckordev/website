@@ -13,7 +13,7 @@ export const NavBarList = ({ isMobile = false, navs }: Props) => {
   if (isMobile) return null;
 
   return (
-    <HStack as="nav" spacing={10} fontWeight="bold" color="gray.400">
+    <HStack as="nav" spacing={10}>
       {navs.map((nav, idx) => (
         <NavBarItem key={idx} to={nav.to}>
           {nav.name}
