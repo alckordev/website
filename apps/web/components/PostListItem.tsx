@@ -25,12 +25,14 @@ export const PostListItem = ({
   return (
     <UI.Card w="100%" variant="outline" {...rest}>
       <UI.Stack>
-        <UI.CardBody as={NextLink} href={`${slug}`}>
+        <UI.CardBody>
           <UI.Text as="time" fontSize="xs" dateTime={dateTime}>
             {customDate}
           </UI.Text>
           <UI.Heading size="md" mt={2} mb={4}>
-            {title}
+            <UI.Link as={NextLink} href={`${slug}`}>
+              {title}
+            </UI.Link>
           </UI.Heading>
           <UI.Text>{summary}</UI.Text>
         </UI.CardBody>

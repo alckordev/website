@@ -6,6 +6,7 @@ import networks from "../data/networks";
 import sections from "../data/sections";
 
 interface Props {
+  heading?: React.ReactNode | React.ReactElement | string;
   children: React.ReactNode;
   metadata?: {
     title?: string;
@@ -20,7 +21,12 @@ interface Props {
   type?: string;
 }
 
-export const Layout = ({ children, metadata = {}, type = "post" }: Props) => {
+export const Layout = ({
+  heading,
+  children,
+  metadata = {},
+  type = "post",
+}: Props) => {
   const isBlogTemplate = type === "post" && metadata.date ? true : false;
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,11 +39,12 @@ export const Layout = ({ children, metadata = {}, type = "post" }: Props) => {
 
     window.addEventListener("scroll", handleScroll);
 
-    // Cleanup function
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  console.log("==>", typeof heading);
 
   return (
     <Fragment>
@@ -46,6 +53,11 @@ export const Layout = ({ children, metadata = {}, type = "post" }: Props) => {
       <NavBarFullScreen isScrolled={isScrolled} navs={sections} />
 
       <UI.Container maxW="container.xl" py={16}>
+        {heading && (
+          <UI.Heading as="h2" fontSize="2xl" mb={8}>
+            {heading}
+          </UI.Heading>
+        )}
         <UI.Flex
           direction={["column", "column", "row", "row"]}
           flexWrap="wrap"

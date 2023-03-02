@@ -35,10 +35,8 @@ export default function Tags({ allPosts, tag }: any) {
   }, [next]);
 
   return (
-    <Layout metadata={{ title: "Tags" }}>
+    <Layout metadata={{ title: `Tag: ${tag}` }} heading={`Tag: #${tag}`}>
       <UI.VStack spacing={4} mb={[16, 16, 0, 0]}>
-        <UI.Heading as="h1">Tag: {tag}</UI.Heading>
-
         {currentPosts &&
           currentPosts.map((post: any) => (
             <PostListItem

@@ -1,9 +1,11 @@
 const tags = [
-  { name: "Nextjs", slug: "nextjs" },
-  { name: "Php Symfony", slug: "php-symfony" },
-  { name: "Chakra UI", slug: "chakra-ui" },
-  { name: "Javascript", slug: "javascript" },
-  { name: "ASP.Net Core", slug: "asp-net-core" },
+  { name: "#nextjs", slug: "nextjs" },
+  { name: "#symfony", slug: "symfony" },
+  { name: "#chakra", slug: "chakra" },
+  { name: "#javascript", slug: "javascript" },
+  { name: "#aspnetcore", slug: "aspnetcore" },
+  { name: "#ui", slug: "ui" },
+  { name: "#bootstrap", slug: "bootstrap" },
 ];
 
 export default tags;
