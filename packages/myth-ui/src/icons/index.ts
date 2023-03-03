@@ -15,6 +15,8 @@ export { riTimeLine } from "./ri-time-line";
 export { riYoutubeLine } from "./ri-youtube-line";
 
 export { riGithubFill } from "./ri-github-fill";
+export { riMinusFill } from "./ri-minus-full";
 export { riMoonFill } from "./ri-moon-fill";
+export { riPlusFill } from "./ri-plus-fill";
 export { riSunFill } from "./ri-sun-fill";
 export { riYoutubeFill } from "./ri-youtube-fill";
