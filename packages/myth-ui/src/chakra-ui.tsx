@@ -3,6 +3,7 @@ export {
   Flex,
   Spacer,
   Container,
+  Collapse,
   Image,
   Stack,
   StackDivider,
