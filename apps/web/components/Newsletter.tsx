@@ -22,28 +22,33 @@ export const Newsletter = () => {
   const toast = useToast({ position: "top" });
 
   const onSubmit = handleSubmit(async (data) => {
-    const res = await fetch("/api/mailchimp", {
+    const response: any = await fetch("/api/mailchimp", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...data, status: "subscribed" }),
     });
 
+    const res = await response.json();
+
     if (res.status === 200 || res.status === 400) {
       toast({
-        description: "¡Genial! Ahora te mantendre informado. 😉",
+        description:
+          res.status == 200
+            ? "¡Genial! Ahora te mantendre informado. 😉"
+            : "¡Genial! Ya está suscrito con este correo electrónico. 😉",
         status: "success",
         isClosable: true,
       });
       reset();
-    } else {
-      toast({
-        description: "¡Ups! Algo salió mal. 😭",
-        status: "error",
-        isClosable: true,
-      });
+      return;
     }
+
+    toast({
+      description: "¡Ups! Algo salió mal. 😭",
+      status: "error",
+      isClosable: true,
+    });
+    return;
   });
 
   return (

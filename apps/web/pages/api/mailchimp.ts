@@ -22,8 +22,8 @@ export default async function handler(
       status,
     });
 
-    res.status(200).json({ email_address: data.email_address });
+    res.status(200).json({ status: 200, email_address: data.email_address });
   } catch (err) {
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json(err);
   }
 }
