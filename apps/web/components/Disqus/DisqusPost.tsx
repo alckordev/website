@@ -8,8 +8,14 @@ export const DisqusPost = ({ node, ...rest }: any) => {
   const toggle = () => setIsCollased(!isCollased);
 
   return (
-    <UI.VStack w="100%" align="flex-end" role="post" {...rest}>
-      <UI.Card width="100%" role="content">
+    <UI.VStack
+      w="100%"
+      align="flex-end"
+      data-disqus-id={node.id}
+      data-disqus-parent={node.parent}
+      {...rest}
+    >
+      <UI.Card minW="100%">
         <UI.CardHeader>
           <UI.Flex gap={4}>
             <UI.Flex flex={1} gap={4} alignItems="center" flexWrap="wrap">
@@ -57,11 +63,13 @@ export const DisqusPost = ({ node, ...rest }: any) => {
         </UI.Collapse>
       </UI.Card>
       {node.children.length > 0 && (
-        <UI.VStack width="90%" align="flex-end" role="children">
-          {node.children.map((child: any) => (
-            <DisqusPost key={child.id} node={child} />
-          ))}
-        </UI.VStack>
+        <UI.Collapse in={!isCollased} style={{ width: "90%" }}>
+          <UI.VStack>
+            {node.children.map((child: any) => (
+              <DisqusPost key={child.id} node={child} />
+            ))}
+          </UI.VStack>
+        </UI.Collapse>
       )}
     </UI.VStack>
   );
