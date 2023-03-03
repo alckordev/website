@@ -15,14 +15,14 @@ export const DisqusPost = ({ node, ...rest }: any) => {
       data-disqus-parent={node.parent}
       {...rest}
     >
-      <UI.Card minW="100%">
+      <UI.Card minW="100%" size="sm">
         <UI.CardHeader>
           <UI.Flex gap={4}>
             <UI.Flex flex={1} gap={4} alignItems="center" flexWrap="wrap">
               <UI.Avatar name={node.author.name} src={node.author.permalink} />
               <UI.Box>
                 <UI.Heading size="sm">{node.author.name}</UI.Heading>
-                <UI.Text>{_dateAgo(node.createdAt)}</UI.Text>
+                <UI.Text fontSize="xs">{_dateAgo(node.createdAt)}</UI.Text>
               </UI.Box>
             </UI.Flex>
             <UI.IconButton
@@ -56,14 +56,16 @@ export const DisqusPost = ({ node, ...rest }: any) => {
               >
                 {node.dislikes}
               </UI.Button>
-              <UI.Button variant="ghost">Responder</UI.Button>
+              {!node.author.isAnonymous && (
+                <UI.Button variant="ghost">Responder</UI.Button>
+              )}
               <UI.Button variant="ghost">Compartir</UI.Button>
             </UI.ButtonGroup>
           </UI.CardFooter>
         </UI.Collapse>
       </UI.Card>
       {node.children.length > 0 && (
-        <UI.Collapse in={!isCollased} style={{ width: "90%" }}>
+        <UI.Collapse in={!isCollased} style={{ width: "95%" }}>
           <UI.VStack>
             {node.children.map((child: any) => (
               <DisqusPost key={child.id} node={child} />

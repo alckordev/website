@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { UI } from "@myth/ui";
+import { DisqusForm } from "./DisqusForm";
 import { DisqusPostList } from "./DisqusPostList";
 import { DISQUS_API_URL } from "./constants";
 import { sortTreeNodes } from "./utils";
@@ -7,7 +8,7 @@ import { sortTreeNodes } from "./utils";
 interface DisqusProps {
   shortname: string;
   config: {
-    apiKey?: string;
+    apiKey: string;
     identifier: string;
     url?: string;
     title?: string;
@@ -22,13 +23,11 @@ interface DisqusState {
 export class Disqus extends Component<DisqusProps, DisqusState> {
   componentDidMount() {
     console.log("componentDidMount");
-
     this.fetchThread();
   }
 
   shouldComponentUpdate(nextProps: DisqusProps) {
     console.log("shouldComponentUpdate");
-
     return this.props === nextProps;
   }
 
@@ -66,8 +65,12 @@ export class Disqus extends Component<DisqusProps, DisqusState> {
     return (
       <UI.Box role="thread" minW="100%">
         <div>Forum ID: {this.state?.thread}</div>
-        <br />
-
+        <UI.Divider my={4} />
+        <DisqusForm
+          apiKey={this.props.config.apiKey}
+          thread={this.state?.thread}
+        />
+        <UI.Divider my={4} />
         <DisqusPostList posts={this.state?.comments} />
       </UI.Box>
     );

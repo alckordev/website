@@ -47,7 +47,7 @@ export const Newsletter = () => {
   });
 
   return (
-    <UI.Box as="form" onSubmit={onSubmit}>
+    <UI.VStack as="form" onSubmit={onSubmit} spacing={4}>
       <UI.FormControl
         isInvalid={errors.email_address && touchedFields.email_address}
       >
@@ -56,19 +56,18 @@ export const Newsletter = () => {
           placeholder="example@gmail.com"
           {...register("email_address")}
         />
-        {errors.email_address && (
-          <UI.FormErrorMessage>¿Eres un bot? 🤖</UI.FormErrorMessage>
-        )}
+        <UI.FormErrorMessage>
+          {errors.email_address && "¿Eres un bot? 🤖"}
+        </UI.FormErrorMessage>
       </UI.FormControl>
       <UI.Button
         type="submit"
         w="100%"
-        mt={4}
         colorScheme="purple"
         isLoading={isSubmitting}
       >
         Suscribirme
       </UI.Button>
-    </UI.Box>
+    </UI.VStack>
   );
 };

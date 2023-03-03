@@ -82,3 +82,9 @@ export function sortTreeNodes(nodes: TreeNode[]): TreeNode[] {
 
   return sortedNodes;
 }
+
+export function jsonToUrlEncoded(json: any) {
+  return Object.keys(json)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(json[key])}`)
+    .join("&");
+}

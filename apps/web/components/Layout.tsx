@@ -79,7 +79,7 @@ export const Layout = ({
                   <Disqus
                     shortname="alckordev"
                     config={{
-                      apiKey: process.env.NEXT_PUBLIC_DISQUS_API_KEY,
+                      apiKey: process.env.NEXT_PUBLIC_DISQUS_API_KEY || "",
                       identifier: "conventional-commits-06",
                     }}
                   />
