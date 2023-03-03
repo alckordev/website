@@ -67,20 +67,25 @@ export const Layout = ({
             flexBasis={["100%", "100%", "100%", "75%"]}
             px={2}
           >
-            <UI.Box as={isBlogTemplate ? "article" : "section"} mb={16}>
+            <UI.Box
+              as={isBlogTemplate ? "article" : "section"}
+              mb={16}
+              mr={[0, 0, 0, 20]}
+            >
               {children}
+
+              {isBlogTemplate && (
+                <UI.Stack spacing={10} my={16} align="center">
+                  <Disqus
+                    shortname="alckordev"
+                    config={{
+                      apiKey: process.env.NEXT_PUBLIC_DISQUS_API_KEY,
+                      identifier: "conventional-commits-06",
+                    }}
+                  />
+                </UI.Stack>
+              )}
             </UI.Box>
-            {isBlogTemplate && (
-              <UI.Stack as="aside" spacing={10} my={16} align="center">
-                <Disqus
-                  shortname="alckordev"
-                  config={{
-                    apiKey: process.env.NEXT_PUBLIC_DISQUS_API_KEY,
-                    identifier: "conventional-commits-06",
-                  }}
-                />
-              </UI.Stack>
-            )}
           </UI.Box>
           <UI.Box
             display={["", "", "", "flex"]}
