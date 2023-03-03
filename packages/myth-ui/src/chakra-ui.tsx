@@ -35,6 +35,7 @@ export {
   FormControl,
   FormErrorMessage,
   Textarea,
+  ButtonGroup,
   Button,
   IconButton,
   Accordion,
