@@ -58,7 +58,7 @@ export const Disqus = ({ shortname, config, ...rest }: any) => {
 
     if (!postsSnapshot) return;
 
-    setPosts(sortTreeNodes(postsSnapshot));
+    setPosts(sortTreeNodes(postsSnapshot.reverse()));
   };
 
   useEffect(() => {

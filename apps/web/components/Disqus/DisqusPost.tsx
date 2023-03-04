@@ -64,7 +64,7 @@ export const DisqusPost = ({ post, ...rest }: any) => {
           </UI.CardFooter>
         </UI.Collapse>
       </UI.Card>
-      {post.children.length > 0 && (
+      {post.children && post.children.length > 0 && (
         <UI.Collapse in={!isCollased} style={{ width: "95%" }}>
           <UI.VStack>
             {post.children.map((child: any) => (

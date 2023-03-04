@@ -26,7 +26,7 @@ export function sortTreeNodes(nodes: any[]): any[] {
 
   // Create a mapping of id to node
   nodes.forEach((node) => {
-    map.set(node.id, node);
+    map.set(node.key, node);
   });
 
   // Find the root nodes and add them to the roots array
@@ -41,7 +41,7 @@ export function sortTreeNodes(nodes: any[]): any[] {
     const children: any[] = [];
 
     nodes.forEach((childNode) => {
-      if (childNode.parent === parseInt(node.id)) {
+      if (childNode.parent === node.key) {
         children.push(traverse(childNode));
       }
     });
