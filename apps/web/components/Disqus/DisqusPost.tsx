@@ -2,7 +2,7 @@ import { useState } from "react";
 import { UI, CIcon, icon } from "@myth/ui";
 import { _dateAgo } from "../../lib/format-date";
 
-export const DisqusPost = ({ node, ...rest }: any) => {
+export const DisqusPost = ({ post, ...rest }: any) => {
   const [isCollased, setIsCollased] = useState(false);
 
   const toggle = () => setIsCollased(!isCollased);
@@ -11,18 +11,18 @@ export const DisqusPost = ({ node, ...rest }: any) => {
     <UI.VStack
       w="100%"
       align="flex-end"
-      data-disqus-id={node.id}
-      data-disqus-parent={node.parent}
+      data-disqus-id={post.id}
+      data-disqus-parent={post.parent}
       {...rest}
     >
       <UI.Card minW="100%" size="sm">
         <UI.CardHeader>
           <UI.Flex gap={4}>
             <UI.Flex flex={1} gap={4} alignItems="center" flexWrap="wrap">
-              <UI.Avatar name={node.author.name} src={node.author.permalink} />
+              <UI.Avatar name={post.author.name} src={post.author.permalink} />
               <UI.Box>
-                <UI.Heading size="sm">{node.author.name}</UI.Heading>
-                <UI.Text fontSize="xs">{_dateAgo(node.createdAt)}</UI.Text>
+                <UI.Heading size="sm">{post.author.name}</UI.Heading>
+                <UI.Text fontSize="xs">{_dateAgo(post.createdAt)}</UI.Text>
               </UI.Box>
             </UI.Flex>
             <UI.IconButton
@@ -40,7 +40,7 @@ export const DisqusPost = ({ node, ...rest }: any) => {
         </UI.CardHeader>
         <UI.Collapse in={!isCollased}>
           <UI.CardBody>
-            <UI.Box dangerouslySetInnerHTML={{ __html: node.message }} />
+            <UI.Box dangerouslySetInnerHTML={{ __html: post.message }} />
           </UI.CardBody>
           <UI.CardFooter>
             <UI.ButtonGroup size="sm" colorScheme="purple">
@@ -48,15 +48,15 @@ export const DisqusPost = ({ node, ...rest }: any) => {
                 leftIcon={<CIcon icon={icon.riLikeLine} size="sm" />}
                 variant="ghost"
               >
-                {node.likes}
+                {post.likes}
               </UI.Button>
               <UI.Button
                 leftIcon={<CIcon icon={icon.riDislikeLine} size="sm" />}
                 variant="ghost"
               >
-                {node.dislikes}
+                {post.dislikes}
               </UI.Button>
-              {!node.author.isAnonymous && (
+              {!post.author.isAnonymous && (
                 <UI.Button variant="ghost">Responder</UI.Button>
               )}
               <UI.Button variant="ghost">Compartir</UI.Button>
@@ -64,11 +64,11 @@ export const DisqusPost = ({ node, ...rest }: any) => {
           </UI.CardFooter>
         </UI.Collapse>
       </UI.Card>
-      {node.children.length > 0 && (
+      {post.children.length > 0 && (
         <UI.Collapse in={!isCollased} style={{ width: "95%" }}>
           <UI.VStack>
-            {node.children.map((child: any) => (
-              <DisqusPost key={child.id} node={child} />
+            {post.children.map((child: any) => (
+              <DisqusPost key={child.id} post={child} />
             ))}
           </UI.VStack>
         </UI.Collapse>

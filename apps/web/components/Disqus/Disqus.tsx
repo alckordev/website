@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { UI } from "@myth/ui";
 import { DisqusForm } from "./DisqusForm";
+import { DisqusPost } from "./DisqusPost";
 import { ref, query, orderByChild, equalTo, get } from "firebase/database";
 import { database } from "../../lib/firebase";
 import { transform, transformFirstOrDefault, sortTreeNodes } from "./utils";
@@ -13,10 +14,7 @@ export const Disqus = ({ shortname, config, ...rest }: any) => {
 
   const [posts, setPosts] = useState<any[]>([]);
 
-  const onUpdateThread = (thread: string) => {
-    console.log("parent onUpdateThread", thread);
-    setThread(thread);
-  };
+  const onUpdateThread = (thread: string) => setThread(thread);
 
   const onUpdatePosts = (post: any) => {
     setPosts([post, ...posts]);
@@ -80,9 +78,9 @@ export const Disqus = ({ shortname, config, ...rest }: any) => {
         />
         <UI.Divider my={4} />
         <UI.VStack>
-          {/* {posts.map((post: any) => (
-          // <DisqusPost key={node.id} node={node} />
-        ))} */}
+          {posts.map((post: any) => (
+            <DisqusPost key={post.key} post={post} />
+          ))}
         </UI.VStack>
       </Fragment>
     </UI.Box>

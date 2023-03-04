@@ -2,8 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { UI, NavBarFullScreen, Footer } from "@myth/ui";
 import { Aside } from "./Aside";
 import { OpenGraph } from "./OpenGraph";
-// import { Disqus } from "./Disqus";
-// import { PostComments } from "./PostComments";
+import { Disqus } from "./Disqus";
 import networks from "../data/networks";
 import sections from "../data/sections";
 
@@ -77,8 +76,8 @@ export const Layout = ({
 
               {isBlogTemplate && (
                 <UI.Stack spacing={10} my={16} align="center">
-                  {/* {metadata.slug && metadata.title && (
-                    <PostComments
+                  {metadata.slug && metadata.title && (
+                    <Disqus
                       shortname="alckordev"
                       config={{
                         url: `http://localhost:3000/${metadata.slug}`,
@@ -86,15 +85,7 @@ export const Layout = ({
                         title: metadata.title ?? "",
                       }}
                     />
-                  )} */}
-
-                  {/* <Disqus
-                    shortname="alckordev"
-                    config={{
-                      apiKey: process.env.NEXT_PUBLIC_DISQUS_API_KEY || "",
-                      identifier: "conventional-commits-06",
-                    }}
-                  /> */}
+                  )}
                 </UI.Stack>
               )}
             </UI.Box>
