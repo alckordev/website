@@ -1,2 +1,2 @@
 export const orderByDate = (prev: any, current: any) =>
-  new Date(current.date).valueOf() - new Date(prev.date).valueOf();
+  new Date(current.createdAt).valueOf() - new Date(prev.createdAt).valueOf();

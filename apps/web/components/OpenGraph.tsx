@@ -5,7 +5,7 @@ interface Props {
   metadata: {
     title?: string;
     summary?: string;
-    date?: string;
+    createdAt?: string;
     slug?: string;
     tags?: {
       name: string;
@@ -21,8 +21,8 @@ export const OpenGraph = ({ metadata }: Props) => {
     slug: metadata.slug || "",
     keywords: [],
     author: "Francisco Luis",
-    date: metadata.date
-      ? formatISO(new Date(metadata.date))
+    date: metadata.createdAt
+      ? formatISO(new Date(metadata.createdAt))
       : formatISO(new Date()),
     copyright: `© ${new Date().getFullYear()} Francisco Luis`,
   };

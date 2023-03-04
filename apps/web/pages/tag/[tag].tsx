@@ -43,7 +43,7 @@ export default function Tags({ allPosts, tag }: any) {
               key={post.slug}
               title={post.title}
               summary={post.summary}
-              customDate={_dateAgo(post.date)}
+              customDate={_dateAgo(post.createdAt)}
               dateTime={post.date}
               slug={post.slug}
               tags={post.tags}

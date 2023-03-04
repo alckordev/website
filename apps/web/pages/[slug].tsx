@@ -9,8 +9,8 @@ export default function Post({ source, frontmatter }: any) {
       <PostMetadata
         title={frontmatter.title}
         slug={frontmatter.slug}
-        customDate={_date(frontmatter.date)}
-        dateTime={frontmatter.date}
+        customDate={_date(frontmatter.createdAt)}
+        dateTime={frontmatter.createdAt}
         readingTime={frontmatter.readingTime.minutes}
         tags={frontmatter.tags}
       />
