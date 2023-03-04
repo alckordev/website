@@ -74,7 +74,7 @@ export const Layout = ({
             >
               {children}
 
-              {isBlogTemplate && (
+              {/* {isBlogTemplate && (
                 <UI.Stack spacing={10} my={16} align="center">
                   <Disqus
                     shortname="alckordev"
@@ -84,7 +84,7 @@ export const Layout = ({
                     }}
                   />
                 </UI.Stack>
-              )}
+              )} */}
             </UI.Box>
           </UI.Box>
           <UI.Box
