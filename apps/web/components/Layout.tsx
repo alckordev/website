@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { UI, NavBarFullScreen, Footer } from "@myth/ui";
 import { Aside } from "./Aside";
 import { OpenGraph } from "./OpenGraph";
-import { Disqus } from "./Disqus";
+// import { Disqus } from "./Disqus";
 import networks from "../data/networks";
 import sections from "../data/sections";
 
