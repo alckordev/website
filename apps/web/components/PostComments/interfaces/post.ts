@@ -1,8 +1,7 @@
 import Author from "./author";
 
 interface Post {
-  id: number;
-  thread: number;
+  thread: string;
   author: Author;
   message: string;
   likes: number;
@@ -12,7 +11,7 @@ interface Post {
   isApproved: boolean;
   parent: number | null;
   createdAt: string;
-  updatedAt: string;
+  updatedAt: string | null;
 }
 
 export default Post;

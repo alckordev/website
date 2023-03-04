@@ -1,102 +1,86 @@
-import { Fragment, useEffect, useState, useMemo } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { UI } from "@myth/ui";
-import { formatISO } from "date-fns";
-import {
-  ref,
-  query,
-  orderByChild,
-  equalTo,
-  set,
-  get,
-  push,
-} from "firebase/database";
-import { database } from "../../lib/firebase";
 import { CommentForm } from "./CommentForm";
+import { ref, query, orderByChild, equalTo, get } from "firebase/database";
+import { database } from "../../lib/firebase";
+import { transform, transformFirstOrDefault } from "./utils";
 
-interface Config {
-  url: string;
-  identifier: string;
-  title: string;
-}
+const threadRef = ref(database, "threads");
+const postRef = ref(database, "posts");
 
-interface Props {
-  shortname: string;
-  config: Config;
-}
+export const PostComments = ({ shortname, config, ...rest }: any) => {
+  const [thread, setThread] = useState<string>("");
 
-const threadsRef = ref(database, "threads");
+  const [posts, setPosts] = useState<any[]>([]);
 
-export const PostComments = ({ shortname, config, ...rest }: Props) => {
-  const [thread, setThread] = useState();
-
-  const [loading, setLoading] = useState(false);
-
-  const createThread = async () => {
-    const newThreadRef = push(threadsRef);
-
-    await set(newThreadRef, {
-      link: config.url,
-      identifier: config.identifier,
-      title: config.title,
-      likes: 0,
-      dislikes: 0,
-      posts: 0,
-      createdAt: formatISO(new Date()),
-      updatedAt: null,
-    });
-
-    const newThreadSnapshot = await get(newThreadRef);
-
-    return newThreadSnapshot.val();
+  const onUpdateThread = (thread: string) => {
+    console.log("parent onUpdateThread", thread);
+    setThread(thread);
   };
 
-  const fetchThread = async () => {
-    const threadQuery = query(
-      threadsRef,
-      orderByChild("identifier"),
-      equalTo(config.identifier)
-    );
-    const threadSnapshot = await get(threadQuery);
+  const onUpdatePosts = (post: any) => {
+    setPosts([post, ...posts]);
+  };
 
-    if (threadSnapshot.exists()) {
-      return threadSnapshot.val();
+  const findThreadByIdentifier = async (identifier: string) => {
+    const endpoint = query(
+      threadRef,
+      orderByChild("identifier"),
+      equalTo(identifier)
+    );
+    const snapshot = await get(endpoint);
+
+    if (snapshot.exists()) {
+      return transformFirstOrDefault(snapshot.val());
     }
 
-    return createThread();
+    return undefined;
   };
 
-  const memorizedData = useMemo(() => fetchThread(), []);
+  const findPostsByThread = async (thread: string) => {
+    const endpoint = query(postRef, orderByChild("thread"), equalTo(thread));
+
+    const snapshot = await get(endpoint);
+
+    if (snapshot.exists()) {
+      return transform(snapshot.val());
+    }
+
+    return undefined;
+  };
+
+  const loadInstance = async () => {
+    const threadSnapshot = await findThreadByIdentifier(config.identifier);
+
+    if (!threadSnapshot) return;
+
+    setThread(threadSnapshot.key);
+
+    const postsSnapshot = await findPostsByThread(threadSnapshot.key);
+
+    if (!postsSnapshot) return;
+
+    setPosts(postsSnapshot);
+  };
 
   useEffect(() => {
-    async function initialize() {
-      setLoading(true);
-
-      const data = await memorizedData;
-
-      setThread(data);
-      setLoading(false);
-    }
-
-    initialize();
-  }, [memorizedData]);
+    loadInstance();
+  }, [config.identifier]);
 
   return (
-    <UI.Box role="thread" minW="100%">
-      {!loading && thread ? (
-        <Fragment>
-          <UI.Box>Identifier: {config.identifier}</UI.Box>
-          <UI.Divider my={4} />
-          <UI.Box as="pre">{JSON.stringify(thread, null, 2)}</UI.Box>
-          <UI.Divider my={4} />
-          <CommentForm />
-          <UI.Divider my={4} />
-          <div>Post List</div>
-        </Fragment>
-      ) : (
-        <UI.Flex gap={4} align="center" justify="center">
-          <UI.Spinner />
-        </UI.Flex>
-      )}
+    <UI.Box role="thread" minW="100%" {...rest}>
+      <Fragment>
+        <UI.Box>Identifier: {thread}</UI.Box>
+        <UI.Divider my={4} />
+        <CommentForm
+          config={config}
+          thread={thread}
+          onUpdateThread={onUpdateThread}
+          onUpdatePosts={onUpdatePosts}
+        />
+        <UI.Divider my={4} />
+        <UI.Box as="pre">{JSON.stringify(posts, null, 2)}</UI.Box>
+      </Fragment>
     </UI.Box>
   );
 };

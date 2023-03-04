@@ -77,14 +77,17 @@ export const Layout = ({
 
               {isBlogTemplate && (
                 <UI.Stack spacing={10} my={16} align="center">
-                  <PostComments
-                    shortname="alckordev"
-                    config={{
-                      url: `http://localhost:3000/${metadata.slug}`,
-                      identifier: metadata.slug ?? "",
-                      title: metadata.title ?? "",
-                    }}
-                  />
+                  {metadata.slug && metadata.title && (
+                    <PostComments
+                      shortname="alckordev"
+                      config={{
+                        url: `http://localhost:3000/${metadata.slug}`,
+                        identifier: metadata.slug ?? "",
+                        title: metadata.title ?? "",
+                      }}
+                    />
+                  )}
+
                   {/* <Disqus
                     shortname="alckordev"
                     config={{

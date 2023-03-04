@@ -2,8 +2,21 @@ import { UI } from "@myth/ui";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { formatISO } from "date-fns";
+import { ref, set, get, push } from "firebase/database";
+import { database } from "../../lib/firebase";
+import { orderByDate } from "../../lib/order-by-date";
 
-export const CommentForm = ({ ...rest }) => {
+const threadRef = ref(database, "threads");
+const postRef = ref(database, "posts");
+
+export const CommentForm = ({
+  config,
+  thread,
+  onUpdateThread,
+  onUpdatePosts,
+  ...rest
+}: any) => {
   const {
     register,
     handleSubmit,
@@ -21,9 +34,68 @@ export const CommentForm = ({ ...rest }) => {
     ),
   });
 
+  const addThread = async (data: any) => {
+    const newThreadRef = push(threadRef);
+
+    await set(newThreadRef, {
+      link: data.url,
+      identifier: data.identifier,
+      title: data.title,
+      likes: 0,
+      dislikes: 0,
+      posts: 0,
+      createdAt: formatISO(new Date()),
+      updatedAt: null,
+    });
+
+    const threadSnapshot = await get(newThreadRef);
+
+    const threadVal = threadSnapshot.val();
+
+    return { ...threadVal, key: threadSnapshot.key };
+  };
+
+  const addPost = async (data: any) => {
+    const newPostRef = push(postRef);
+
+    await set(newPostRef, {
+      thread: data.thread,
+      author: {
+        name: data.author_name,
+        email: data.author_email,
+        picture: null,
+        isAnonymous: true,
+        createdAt: formatISO(new Date()),
+        updatedAt: null,
+      },
+      message: data.message,
+      likes: 0,
+      dislikes: 0,
+      numReports: 0,
+      isSpam: false,
+      isApproved: true,
+      parent: null,
+      createdAt: formatISO(new Date()),
+      updatedAt: null,
+    });
+
+    const postSnapshot = await get(newPostRef);
+
+    const postVal = postSnapshot.val();
+
+    return { ...postVal, key: postSnapshot.key };
+  };
+
   const onSubmit = handleSubmit(async (values) => {
     try {
-      console.log(values);
+      if (thread == "") {
+        const newThread = await addThread(config);
+        onUpdateThread(newThread.key);
+      }
+
+      const newPost = await addPost({ ...values, thread });
+
+      onUpdatePosts(newPost);
     } catch (err) {
       console.log(err);
     }

@@ -1,11 +1,10 @@
 interface Author {
-  id: number | null;
   name: string;
   email: string;
-  picture: string;
+  picture: string | null;
   isAnonymous: boolean;
   createdAt: string;
-  updatedAt: string;
+  updatedAt: string | null;
 }
 
 export default Author;
