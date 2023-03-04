@@ -9,10 +9,11 @@ export const DisqusPost = ({ post, ...rest }: any) => {
 
   return (
     <UI.VStack
+      id={`comment-${post.key}`}
       w="100%"
       align="flex-end"
-      data-disqus-id={post.id}
-      data-disqus-parent={post.parent}
+      data-key={post.key}
+      data-parent={post.parent}
       {...rest}
     >
       <UI.Card minW="100%" size="sm">
