@@ -13,7 +13,7 @@ interface Props {
   metadata?: {
     title?: string;
     summary?: string;
-    date?: string;
+    createdAt?: string;
     slug?: string;
     tags?: {
       name: string;
@@ -29,7 +29,7 @@ export const Layout = ({
   metadata = {},
   type = "post",
 }: Props) => {
-  const isBlogTemplate = type === "post" && metadata.date ? true : false;
+  const isBlogTemplate = type === "post" && metadata.createdAt ? true : false;
 
   const [isScrolled, setIsScrolled] = useState(false);
 
