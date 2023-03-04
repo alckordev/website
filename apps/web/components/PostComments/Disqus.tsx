@@ -1,14 +1,14 @@
 import { Fragment, useEffect, useState } from "react";
 import { UI } from "@myth/ui";
-import { CommentForm } from "./CommentForm";
+import { DisqusForm } from "./DisqusForm";
 import { ref, query, orderByChild, equalTo, get } from "firebase/database";
 import { database } from "../../lib/firebase";
-import { transform, transformFirstOrDefault } from "./utils";
+import { transform, transformFirstOrDefault, sortTreeNodes } from "./utils";
 
 const threadRef = ref(database, "threads");
 const postRef = ref(database, "posts");
 
-export const PostComments = ({ shortname, config, ...rest }: any) => {
+export const Disqus = ({ shortname, config, ...rest }: any) => {
   const [thread, setThread] = useState<string>("");
 
   const [posts, setPosts] = useState<any[]>([]);
@@ -60,7 +60,7 @@ export const PostComments = ({ shortname, config, ...rest }: any) => {
 
     if (!postsSnapshot) return;
 
-    setPosts(postsSnapshot);
+    setPosts(sortTreeNodes(postsSnapshot));
   };
 
   useEffect(() => {
@@ -72,14 +72,18 @@ export const PostComments = ({ shortname, config, ...rest }: any) => {
       <Fragment>
         <UI.Box>Identifier: {thread}</UI.Box>
         <UI.Divider my={4} />
-        <CommentForm
+        <DisqusForm
           config={config}
           thread={thread}
           onUpdateThread={onUpdateThread}
           onUpdatePosts={onUpdatePosts}
         />
         <UI.Divider my={4} />
-        <UI.Box as="pre">{JSON.stringify(posts, null, 2)}</UI.Box>
+        <UI.VStack>
+          {/* {posts.map((post: any) => (
+          // <DisqusPost key={node.id} node={node} />
+        ))} */}
+        </UI.VStack>
       </Fragment>
     </UI.Box>
   );

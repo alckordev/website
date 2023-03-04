@@ -3,7 +3,7 @@ import { UI, NavBarFullScreen, Footer } from "@myth/ui";
 import { Aside } from "./Aside";
 import { OpenGraph } from "./OpenGraph";
 // import { Disqus } from "./Disqus";
-import { PostComments } from "./PostComments";
+// import { PostComments } from "./PostComments";
 import networks from "../data/networks";
 import sections from "../data/sections";
 
@@ -77,7 +77,7 @@ export const Layout = ({
 
               {isBlogTemplate && (
                 <UI.Stack spacing={10} my={16} align="center">
-                  {metadata.slug && metadata.title && (
+                  {/* {metadata.slug && metadata.title && (
                     <PostComments
                       shortname="alckordev"
                       config={{
@@ -86,7 +86,7 @@ export const Layout = ({
                         title: metadata.title ?? "",
                       }}
                     />
-                  )}
+                  )} */}
 
                   {/* <Disqus
                     shortname="alckordev"

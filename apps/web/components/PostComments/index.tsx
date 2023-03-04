@@ -1,1 +1,1 @@
-export { PostComments } from "./PostComments";
+export { Disqus } from "./Disqus";

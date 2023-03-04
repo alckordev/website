@@ -5,12 +5,11 @@ import * as yup from "yup";
 import { formatISO } from "date-fns";
 import { ref, set, get, push } from "firebase/database";
 import { database } from "../../lib/firebase";
-import { orderByDate } from "../../lib/order-by-date";
 
 const threadRef = ref(database, "threads");
 const postRef = ref(database, "posts");
 
-export const CommentForm = ({
+export const DisqusForm = ({
   config,
   thread,
   onUpdateThread,
