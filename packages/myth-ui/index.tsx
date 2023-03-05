@@ -11,3 +11,4 @@ export { AnimatePresence, motion, useReducedMotion } from "./src/framer-motion";
 
 export { NavBarFullScreen } from "./src/components/NavBarFullScreen";
 export { Footer } from "./src/components/Footer";
+export { SharedButton } from "./src/components/SharedButton";

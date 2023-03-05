@@ -9,9 +9,11 @@ export { riGithubLine } from "./ri-github-line";
 export { riHomeLine } from "./ri-home-line";
 export { riInstagramLine } from "./ri-instagram-line";
 export { riLikeLine } from "./ri-like-line";
+export { riLinkLine } from "./ri-link-line";
 export { riLinkedinLine } from "./ri-linkedin-line";
 export { riMenuLine } from "./ri-menu-line";
 export { riTimeLine } from "./ri-time-line";
+export { riTwitterLine } from "./ri-twitter-line";
 export { riYoutubeLine } from "./ri-youtube-line";
 
 export { riGithubFill } from "./ri-github-fill";
