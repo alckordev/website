@@ -96,7 +96,7 @@ export const Layout = ({
             flexBasis={["100%", "100%", "100%", "25%"]}
             px={2}
           >
-            <Aside isBlogTemplate={isBlogTemplate} />
+            <Aside />
           </UI.Box>
         </UI.Flex>
       </UI.Container>

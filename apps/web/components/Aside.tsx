@@ -1,15 +1,12 @@
 import NextLink from "next/link";
-import { UI } from "@myth/ui";
+import { UI, YouTube } from "@myth/ui";
 import tags from "../data/tags";
 import { Newsletter } from "./Newsletter";
 
-export const Aside = ({ isBlogTemplate }: { isBlogTemplate: boolean }) => {
+export const Aside = () => {
   return (
-    <UI.VStack
-      // divider={<UI.StackDivider borderColor="gray.700" />}
-      spacing={4}
-    >
-      <UI.Card minW="100%" variant={isBlogTemplate ? "elevated" : "elevated"}>
+    <UI.VStack spacing={4}>
+      <UI.Card minW="100%" variant="elevated">
         <UI.CardHeader>
           <UI.Flex gap={4} alignItems="center" flexWrap="wrap">
             <UI.Avatar
@@ -29,7 +26,17 @@ export const Aside = ({ isBlogTemplate }: { isBlogTemplate: boolean }) => {
           </UI.Text>
         </UI.CardBody>
       </UI.Card>
-      <UI.Card minW="100%" variant={isBlogTemplate ? "elevated" : "elevated"}>
+      <UI.Card minW="100%" variant="elevated">
+        <UI.CardHeader>
+          <UI.Heading as="h2" fontSize="lg">
+            Último video
+          </UI.Heading>
+        </UI.CardHeader>
+        <UI.CardBody p={0}>
+          <YouTube />
+        </UI.CardBody>
+      </UI.Card>
+      <UI.Card minW="100%" variant="elevated">
         <UI.CardHeader>
           <UI.Heading as="h2" fontSize="lg">
             Tags
@@ -50,12 +57,7 @@ export const Aside = ({ isBlogTemplate }: { isBlogTemplate: boolean }) => {
           </UI.Flex>
         </UI.CardBody>
       </UI.Card>
-      <UI.Card
-        minW="100%"
-        variant={isBlogTemplate ? "elevated" : "elevated"}
-        pos="sticky"
-        top={24}
-      >
+      <UI.Card minW="100%" variant="elevated" pos="sticky" top={24}>
         <UI.CardHeader>
           <UI.Heading as="h2" fontSize="lg">
             ¡Suscríbete ahora!
