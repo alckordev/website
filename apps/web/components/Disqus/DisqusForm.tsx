@@ -1,4 +1,4 @@
-import { UI } from "@myth/ui";
+import { UI, useToast } from "@myth/ui";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -32,6 +32,8 @@ export const DisqusForm = ({
       })
     ),
   });
+
+  const toast = useToast({ position: "top" });
 
   const addThread = async (data: any) => {
     const newThreadRef = push(threadRef);
@@ -87,16 +89,24 @@ export const DisqusForm = ({
 
   const onSubmit = handleSubmit(async (values) => {
     try {
+      let tmpThread = thread;
+
       if (thread == "") {
         const newThread = await addThread(config);
+        tmpThread = newThread.key;
         onUpdateThread(newThread.key);
       }
 
-      const newPost = await addPost({ ...values, thread });
-
+      const newPost = await addPost({ ...values, thread: tmpThread });
       onUpdatePosts(newPost);
+
+      reset({ message: "" });
     } catch (err) {
-      console.log(err);
+      toast({
+        description: "¡Ups! Algo salió mal. 😭",
+        status: "error",
+        isClosable: true,
+      });
     }
   });
 

@@ -1,5 +1,6 @@
 import NextLink from "next/link";
 import { UI, CIcon, icon } from "@myth/ui";
+import { DisqusCount } from "./Disqus/DisqusCount";
 
 interface Props {
   title?: string;
@@ -52,7 +53,7 @@ export const PostMetadata = ({
           </UI.Flex>
           <UI.Flex gap={1} align="center">
             <CIcon icon={icon.riDiscussLine} />
-            <UI.Text fontSize="sm">2 comentarios</UI.Text>
+            <DisqusCount identifier={slug ?? ""} />
           </UI.Flex>
           <UI.Flex gap={1} align="center">
             <CIcon icon={icon.riTimeLine} />
