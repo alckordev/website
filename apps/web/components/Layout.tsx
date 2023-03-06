@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { UI, NavBarFullScreen, Footer } from "@myth/ui";
+import { UI, useColorModeValue, NavBarFullScreen, Footer } from "@myth/ui";
 import { Aside } from "./Aside";
 import { OpenGraph } from "./OpenGraph";
 import { Disqus } from "./Disqus";
@@ -51,27 +51,24 @@ export const Layout = ({
 
       <NavBarFullScreen isScrolled={isScrolled} navs={sections} />
 
-      <UI.Container maxW="container.xl" py={16}>
-        {heading && (
-          <UI.Heading as="h2" fontSize="2xl" mb={8}>
-            {heading}
-          </UI.Heading>
-        )}
+      <UI.Container maxW="container.xl">
         <UI.Flex
-          direction={["column", "column", "row", "row"]}
-          flexWrap="wrap"
-          mx={-2}
+          direction={["column", "column", "column", "row"]}
+          justify="space-between"
         >
           <UI.Box
-            maxW={["100%", "100%", "100%", "75%"]}
-            flexBasis={["100%", "100%", "100%", "75%"]}
-            px={2}
+            minW={[0, 0, 0, 0, 790]}
+            maxW={["", "", "", "", 790]}
+            display="block"
+            flex="1 1 auto"
+            py={16}
           >
-            <UI.Box
-              as={isBlogTemplate ? "article" : "section"}
-              mb={16}
-              mr={[0, 0, 0, 20]}
-            >
+            {heading && (
+              <UI.Heading as="h2" fontSize="2xl" mb={8}>
+                {heading}
+              </UI.Heading>
+            )}
+            <UI.Box as={isBlogTemplate ? "article" : "section"}>
               {children}
 
               {isBlogTemplate && (
@@ -91,10 +88,15 @@ export const Layout = ({
             </UI.Box>
           </UI.Box>
           <UI.Box
-            display={["", "", "", "flex"]}
-            maxW={["100%", "100%", "100%", "25%"]}
-            flexBasis={["100%", "100%", "100%", "25%"]}
-            px={2}
+            minW={[0, 0, 0, 352, 368]}
+            maxW={[0, 0, 0, 352, 368]}
+            display="block"
+            flex="1 1 auto"
+            minH="100vh"
+            borderLeft="1px solid"
+            borderColor={useColorModeValue("gray.200", "gray.900")}
+            pl="clamp(24px, 24px + 100vw - 1080px, 40px)"
+            py={16}
           >
             <Aside />
           </UI.Box>

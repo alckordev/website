@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { Flex, useMediaQuery } from "@chakra-ui/react";
+import { Box, Flex, useMediaQuery, useColorModeValue } from "@chakra-ui/react";
 import { Logo } from "./Logo";
 import { NavBarContainer } from "./NavBarContainer";
 import { NavBarControl } from "./NavBarControl";
@@ -8,15 +8,14 @@ import { NavBarDrawer } from "./NavBarDrawer";
 import { NavBarDrawerList } from "./NavBarDrawerList";
 import { NavBarList } from "./NavBarList";
 
-const StyledNavbar = styled.header<{ isScrolled: boolean }>`
-  background-color: var(--chakra-colors-chakra-body-bg);
+const StyledNavbar = styled(Box)<{ isScrolled: boolean }>`
+  background: var(--chakra-colors-chakra-body-bg);
   box-shadow: ${(props) =>
     props.isScrolled ? "var(--chakra-shadows-sm)" : "none"};
   font-family: var(--chakra-fonts-heading);
   position: sticky;
   top: 0;
   left: 0;
-  width: 100%;
   transition: all 50ms ease 0s;
   z-index: var(--chakra-zIndices-overlay);
 `;
@@ -41,18 +40,30 @@ export const NavBarFullScreen = ({
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <StyledNavbar isScrolled={isScrolled}>
+    <StyledNavbar
+      as="header"
+      isScrolled={isScrolled}
+      minW="100%"
+      borderBottom="1px solid"
+      borderColor={useColorModeValue("gray.200", "gray.900")}
+    >
       <NavBarContainer {...rest}>
         <Logo />
         <Flex gap={8}>
           <NavBarList isMobile={isMobile} navs={navs} />
-          <NavBarControl isMobile={isMobile} toggle={toggle} />
+          <NavBarControl
+            isMobile={isMobile}
+            hasItems={navs.length > 0}
+            toggle={toggle}
+          />
         </Flex>
       </NavBarContainer>
 
-      <NavBarDrawer isMobile={isMobile} isOpen={isOpen} toggle={toggle}>
-        <NavBarDrawerList navs={navs} />
-      </NavBarDrawer>
+      {navs.length > 0 && (
+        <NavBarDrawer isMobile={isMobile} isOpen={isOpen} toggle={toggle}>
+          <NavBarDrawerList navs={navs} />
+        </NavBarDrawer>
+      )}
     </StyledNavbar>
   );
 };

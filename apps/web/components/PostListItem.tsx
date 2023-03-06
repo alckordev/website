@@ -23,20 +23,18 @@ export const PostListItem = ({
   ...rest
 }: Props) => {
   return (
-    <UI.Card w="100%" variant="outline" {...rest}>
+    <UI.Card w="100%" bg="transparent" boxShadow="none" {...rest}>
       <UI.Stack>
-        <UI.CardBody>
+        <UI.CardBody as={NextLink} href={`/${slug}`} px={0} pt={0}>
           <UI.Text as="time" fontSize="xs" dateTime={dateTime}>
             {customDate}
           </UI.Text>
           <UI.Heading size="md" mt={2} mb={4}>
-            <UI.Link as={NextLink} href={`/${slug}`}>
-              {title}
-            </UI.Link>
+            {title}
           </UI.Heading>
           <UI.Text>{summary}</UI.Text>
         </UI.CardBody>
-        <UI.CardFooter>
+        <UI.CardFooter p={0}>
           <UI.HStack spacing={2}>
             {tags.map((tag, idx) => (
               <UI.Tag

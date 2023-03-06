@@ -10,10 +10,11 @@ const StyledBox = styled(Button)`
 
 interface Props {
   isMobile: boolean;
+  hasItems: boolean;
   toggle(): void;
 }
 
-export const NavBarControl = ({ isMobile, toggle }: Props) => {
+export const NavBarControl = ({ isMobile, hasItems, toggle }: Props) => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
@@ -21,7 +22,7 @@ export const NavBarControl = ({ isMobile, toggle }: Props) => {
       <StyledBox onClick={toggleColorMode}>
         <CIcon icon={colorMode === "dark" ? riMoonFill : riSunFill} />
       </StyledBox>
-      {isMobile && (
+      {isMobile && hasItems && (
         <StyledBox onClick={toggle}>
           <CIcon icon={riMenuLine} />
         </StyledBox>

@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { UI } from "@myth/ui";
+import { UI, useColorModeValue } from "@myth/ui";
 import { Layout, PostListItem } from "../components";
 import { usePagination } from "../hooks/use-pagination";
 import { getFilesFrontmatter } from "../lib/mdx";
@@ -36,7 +36,15 @@ export default function Home({ allPosts }: any) {
 
   return (
     <Layout>
-      <UI.VStack spacing={4} mb={[16, 16, 0, 0]}>
+      <UI.VStack
+        divider={
+          <UI.StackDivider
+            borderColor={useColorModeValue("gray.200", "gray.900")}
+          />
+        }
+        spacing={12}
+        maxW={["100%", "100%", "100%", 790]}
+      >
         {currentPosts &&
           currentPosts.map((post: any) => (
             <PostListItem

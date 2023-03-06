@@ -19,7 +19,7 @@ interface Props {
 
 export const Footer = ({ networks = [], ...rest }: Props) => {
   return (
-    <Box as="footer" bg={useColorModeValue("gray.100", "gray.900")}>
+    <Box as="footer" bg={useColorModeValue("gray.200", "gray.900")} {...rest}>
       <Container maxW="container.xl" py={16}>
         {networks.length > 0 && (
           <ButtonGroup display="flex" justifyContent="center" pb={10}>

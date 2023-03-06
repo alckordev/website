@@ -1,13 +1,20 @@
 import NextLink from "next/link";
-import { UI, YouTubeWidget } from "@myth/ui";
+import { UI, YouTubeWidget, useColorModeValue } from "@myth/ui";
 import tags from "../data/tags";
 import { Newsletter } from "./Newsletter";
 
 export const Aside = () => {
   return (
-    <UI.VStack spacing={4}>
-      <UI.Card minW="100%" variant="elevated">
-        <UI.CardHeader>
+    <UI.VStack
+      divider={
+        <UI.StackDivider
+          borderColor={useColorModeValue("gray.200", "gray.900")}
+        />
+      }
+      spacing={12}
+    >
+      <UI.Card minW="100%" bg="transparent" boxShadow="none">
+        <UI.CardHeader p={0}>
           <UI.Flex gap={4} alignItems="center" flexWrap="wrap">
             <UI.Avatar
               name="Francisco Luis Rios Vega"
@@ -19,30 +26,30 @@ export const Aside = () => {
             </UI.Box>
           </UI.Flex>
         </UI.CardHeader>
-        <UI.CardBody>
+        <UI.CardBody px={0} pb={0}>
           <UI.Text>
             Ingeniero de sistemas de profesión, especializado en el desarrollo
             de proyectos de software con más de 10 años de experiencia.
           </UI.Text>
         </UI.CardBody>
       </UI.Card>
-      <UI.Card minW="100%" variant="elevated">
-        <UI.CardHeader>
+      <UI.Card minW="100%" bg="transparent" boxShadow="none">
+        <UI.CardHeader p={0}>
           <UI.Heading as="h2" fontSize="lg">
             Último video
           </UI.Heading>
         </UI.CardHeader>
-        <UI.CardBody p={0}>
-          <UI.Box as={YouTubeWidget} borderBottomRadius="0.375rem" />
+        <UI.CardBody px={0} pb={0}>
+          <UI.Box as={YouTubeWidget} borderRadius="0.375rem" />
         </UI.CardBody>
       </UI.Card>
-      <UI.Card minW="100%" variant="elevated">
-        <UI.CardHeader>
+      <UI.Card minW="100%" bg="transparent" boxShadow="none" pos="sticky">
+        <UI.CardHeader p={0}>
           <UI.Heading as="h2" fontSize="lg">
             Tags
           </UI.Heading>
         </UI.CardHeader>
-        <UI.CardBody>
+        <UI.CardBody px={0} pb={0}>
           <UI.Flex flexWrap="wrap" gap={2}>
             {tags.map((tag, idx) => (
               <UI.Tag
@@ -57,13 +64,13 @@ export const Aside = () => {
           </UI.Flex>
         </UI.CardBody>
       </UI.Card>
-      <UI.Card minW="100%" variant="elevated" pos="sticky" top={24}>
-        <UI.CardHeader>
+      <UI.Card minW="100%" bg="transparent" boxShadow="none">
+        <UI.CardHeader p={0}>
           <UI.Heading as="h2" fontSize="lg">
             ¡Suscríbete ahora!
           </UI.Heading>
         </UI.CardHeader>
-        <UI.CardBody>
+        <UI.CardBody px={0} pb={0}>
           <UI.Text mb={6}>
             <UI.Highlight query="¡Libre de Spam!" styles={{ bg: "orange.100" }}>
               Recibirás artículos sobre programación y novedades en las que vaya

@@ -1,7 +1,3 @@
-const sections = [
-  { name: "Inicio", to: "/" },
-  { name: "¿Quién soy?", to: "/about" },
-  { name: "Artículos", to: "/blog" },
-];
+const sections: any[] = [];
 
 export default sections;
