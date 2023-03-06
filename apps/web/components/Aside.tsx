@@ -1,5 +1,5 @@
 import NextLink from "next/link";
-import { UI, YouTube } from "@myth/ui";
+import { UI, YouTubeWidget } from "@myth/ui";
 import tags from "../data/tags";
 import { Newsletter } from "./Newsletter";
 
@@ -33,7 +33,7 @@ export const Aside = () => {
           </UI.Heading>
         </UI.CardHeader>
         <UI.CardBody p={0}>
-          <YouTube />
+          <UI.Box as={YouTubeWidget} borderBottomRadius="0.375rem" />
         </UI.CardBody>
       </UI.Card>
       <UI.Card minW="100%" variant="elevated">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import {
   Box,
   ButtonGroup,
@@ -17,9 +17,9 @@ export const SharedButton = React.forwardRef(
     { children, url, ...rest }: { children: React.ReactNode; url: string },
     ref: React.Ref<HTMLDivElement>
   ) => {
-    const [isHovering, setIsHovering] = React.useState(false);
+    const [isHovering, setIsHovering] = useState(false);
 
-    const defaultRef = React.useRef<HTMLDivElement>(null);
+    const defaultRef = useRef<HTMLDivElement>(null);
     const resolvedRef = ref || defaultRef;
 
     const handleCopyToClipboard = () => {

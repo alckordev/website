@@ -10,6 +10,6 @@ export * as fonts from "./src/fonts";
 export { AnimatePresence, motion, useReducedMotion } from "./src/framer-motion";
 
 export { NavBarFullScreen } from "./src/components/NavBarFullScreen";
-export { YouTube } from "./src/components/YouTube";
+export { YouTubeWidget } from "./src/components/YouTube";
 export { Footer } from "./src/components/Footer";
 export { SharedButton } from "./src/components/SharedButton";

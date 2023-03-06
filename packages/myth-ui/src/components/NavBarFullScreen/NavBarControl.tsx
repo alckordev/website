@@ -6,9 +6,6 @@ import { riMenuLine, riMoonFill, riSunFill } from "../../icons";
 const StyledBox = styled(Button)`
   background-color: transparent;
   padding: 0;
-  // &:hover {
-  //   background-color: var(--chakra-colors-whiteAlpha-200);
-  // }
 `;
 
 interface Props {
