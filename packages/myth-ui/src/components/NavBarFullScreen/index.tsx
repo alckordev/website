@@ -8,7 +8,10 @@ import { NavBarDrawer } from "./NavBarDrawer";
 import { NavBarDrawerList } from "./NavBarDrawerList";
 import { NavBarList } from "./NavBarList";
 
-const StyledNavbar = styled(Box)<{ isScrolled: boolean }>`
+const StyledNavbar = styled.header<{
+  isScrolled: boolean;
+  borderColor: string;
+}>`
   background: var(--chakra-colors-chakra-body-bg);
   box-shadow: ${(props) =>
     props.isScrolled ? "var(--chakra-shadows-sm)" : "none"};
@@ -17,6 +20,7 @@ const StyledNavbar = styled(Box)<{ isScrolled: boolean }>`
   top: 0;
   left: 0;
   transition: all 50ms ease 0s;
+  border: 1px solid ${(props) => props.borderColor};
   z-index: var(--chakra-zIndices-overlay);
 `;
 
@@ -35,18 +39,17 @@ export const NavBarFullScreen = ({
 }: Props) => {
   const [isMobile] = useMediaQuery("(max-width: 768px)");
 
+  const borderColor = useColorModeValue(
+    "var(--chakra-colors-gray-200)",
+    "var(--chakra-colors-gray-900)"
+  );
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <StyledNavbar
-      as="header"
-      isScrolled={isScrolled}
-      minW="100%"
-      borderBottom="1px solid"
-      borderColor={useColorModeValue("gray.200", "gray.900")}
-    >
+    <StyledNavbar isScrolled={isScrolled} borderColor={borderColor}>
       <NavBarContainer {...rest}>
         <Logo />
         <Flex gap={8}>

@@ -1,3 +1,8 @@
-import { useColorModeValue, useToast, useDisclosure } from "@chakra-ui/react";
+import {
+  useColorModeValue,
+  useToast,
+  useDisclosure,
+  useMediaQuery,
+} from "@chakra-ui/react";
 
-export { useColorModeValue, useToast, useDisclosure };
+export { useColorModeValue, useToast, useDisclosure, useMediaQuery };

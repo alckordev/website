@@ -1,4 +1,9 @@
-export { useColorModeValue, useToast, useDisclosure } from "./src/chakra-hooks";
+export {
+  useColorModeValue,
+  useToast,
+  useDisclosure,
+  useMediaQuery,
+} from "./src/chakra-hooks";
 export {
   ThemeProvider,
   theme,

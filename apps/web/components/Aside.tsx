@@ -11,7 +11,7 @@ export const Aside = () => {
           borderColor={useColorModeValue("gray.200", "gray.900")}
         />
       }
-      spacing={12}
+      spacing={7}
     >
       <UI.Card minW="100%" bg="transparent" boxShadow="none">
         <UI.CardHeader p={0}>

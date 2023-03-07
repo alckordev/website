@@ -5,6 +5,13 @@ import {
 } from "@chakra-ui/react";
 
 const theme = extendTheme({
+  breakpoints: {
+    sm: "30em",
+    md: "46em",
+    lg: "56em",
+    xl: "80em",
+    "2xl": "96em",
+  },
   colors: {
     brand: {
       900: "#0B5345",
@@ -24,7 +31,7 @@ const theme = extendTheme({
   },
   sizes: {
     container: {
-      "2xl": "1440px",
+      "2xl": "1336px",
     },
   },
   config: {

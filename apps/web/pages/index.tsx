@@ -3,7 +3,7 @@ import { UI, useColorModeValue } from "@myth/ui";
 import { Layout, PostListItem } from "../components";
 import { usePagination } from "../hooks/use-pagination";
 import { getFilesFrontmatter } from "../lib/mdx";
-import { _dateAgo } from "../lib/format-date";
+import { _date } from "../lib/format-date";
 import { orderByDate } from "../lib/order-by-date";
 
 export default function Home({ allPosts }: any) {
@@ -42,7 +42,7 @@ export default function Home({ allPosts }: any) {
             borderColor={useColorModeValue("gray.200", "gray.900")}
           />
         }
-        spacing={12}
+        spacing={4}
         maxW={["100%", "100%", "100%", 790]}
       >
         {currentPosts &&
@@ -51,7 +51,7 @@ export default function Home({ allPosts }: any) {
               key={post.slug}
               title={post.title}
               summary={post.summary}
-              customDate={_dateAgo(post.createdAt)}
+              customDate={_date(post.createdAt)}
               dateTime={post.createdAt}
               slug={post.slug}
               tags={post.tags}
