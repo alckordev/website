@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { UI, useColorModeValue, CIcon, icon } from "@myth/ui";
+import { UI, useColorModeValue, useDisclosure, CIcon, icon } from "@myth/ui";
 import { Disqus, DisqusCount } from "./Disqus";
 
 interface Props {
@@ -8,6 +8,8 @@ interface Props {
 }
 
 export const PostFooter = ({ title, slug }: Props) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <Fragment>
       <UI.Flex pos="sticky" bottom={6} align="center" justify="center">
@@ -35,6 +37,7 @@ export const PostFooter = ({ title, slug }: Props) => {
             leftIcon={<CIcon icon={icon.riChatLine} />}
             size="sm"
             variant="link"
+            onClick={onOpen}
           >
             <DisqusCount identifier={slug ?? ""} onlyNumber />
           </UI.Button>
@@ -46,18 +49,28 @@ export const PostFooter = ({ title, slug }: Props) => {
           />
         </UI.HStack>
       </UI.Flex>
-      <UI.Stack spacing={10} my={16} align="center">
-        {slug && title && (
-          <Disqus
-            shortname="alckordev"
-            config={{
-              url: `http://localhost:3000/${slug}`,
-              identifier: slug ?? "",
-              title: title ?? "",
-            }}
-          />
-        )}
-      </UI.Stack>
+
+      <UI.Drawer onClose={onClose} isOpen={isOpen} size="sm">
+        <UI.DrawerOverlay bg="blackAlpha.600" backdropFilter="blur(5px)" />
+        <UI.DrawerContent>
+          <UI.DrawerCloseButton />
+          <UI.DrawerHeader>title</UI.DrawerHeader>
+          <UI.DrawerBody>
+            <UI.Stack spacing={10} my={16} align="center">
+              {slug && title && (
+                <Disqus
+                  shortname="alckordev"
+                  config={{
+                    url: `http://localhost:3000/${slug}`,
+                    identifier: slug ?? "",
+                    title: title ?? "",
+                  }}
+                />
+              )}
+            </UI.Stack>
+          </UI.DrawerBody>
+        </UI.DrawerContent>
+      </UI.Drawer>
     </Fragment>
   );
 };

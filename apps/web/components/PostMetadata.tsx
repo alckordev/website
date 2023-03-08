@@ -22,13 +22,7 @@ export const PostMetadata = ({
   tags = [],
 }: Props) => {
   return (
-    <UI.Box
-      pb={6}
-      mb={6}
-      borderBottomWidth="1px"
-      borderBottomStyle="solid"
-      borderBottomColor={useColorModeValue("gray.200", "gray.900")}
-    >
+    <UI.Box pb={4} mb={7}>
       <UI.HStack spacing={2}>
         {tags.map((tag, idx) => (
           <UI.Tag
@@ -62,6 +56,18 @@ export const PostMetadata = ({
           </UI.Flex>
         </UI.Flex>
       </UI.VStack>
+
+      <UI.Divider
+        borderColor={useColorModeValue("gray.200", "gray.900")}
+        opacity={1}
+        my={7}
+      />
+
+      <UI.Image
+        src="https://miro.medium.com/v2/resize:fit:720/0*pZbq2mTk_09JYVI9"
+        alt="Caffe Latte"
+        objectFit="cover"
+      />
     </UI.Box>
   );
 };

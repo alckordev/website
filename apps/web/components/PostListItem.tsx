@@ -25,7 +25,7 @@ export const PostListItem = ({
   return (
     <UI.Card
       w="100%"
-      maxW={[null, null, "680px", "680px"]}
+      maxW={[null, null, 680, 680]}
       bg="transparent"
       boxShadow="none"
       {...rest}

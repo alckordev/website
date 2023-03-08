@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UI, CIcon, icon, SharedButton } from "@myth/ui";
+import { UI, CIcon, icon } from "@myth/ui";
 import { _dateAgo } from "../../lib/format-date";
 
 export const DisqusPost = ({ post, ...rest }: any) => {
@@ -60,15 +60,6 @@ export const DisqusPost = ({ post, ...rest }: any) => {
               {!post.author.isAnonymous && (
                 <UI.Button variant="ghost">Responder</UI.Button>
               )}
-              <UI.Button
-                as={SharedButton}
-                variant="ghost"
-                url={`${window.location.href.split("#")[0]}#comment-${
-                  post.key
-                }`}
-              >
-                Compartir
-              </UI.Button>
             </UI.ButtonGroup>
           </UI.CardFooter>
         </UI.Collapse>
