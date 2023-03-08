@@ -42,7 +42,7 @@ export default function Tags({ allPosts, tag }: any) {
             borderColor={useColorModeValue("gray.200", "gray.900")}
           />
         }
-        spacing={12}
+        spacing={7}
         maxW={["100%", "100%", "100%", 790]}
       >
         {currentPosts &&

@@ -42,7 +42,7 @@ export default function Home({ allPosts }: any) {
             borderColor={useColorModeValue("gray.200", "gray.900")}
           />
         }
-        spacing={4}
+        spacing={7}
         maxW={["100%", "100%", "100%", 790]}
       >
         {currentPosts &&
