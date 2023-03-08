@@ -17,9 +17,11 @@ const postRef = ref(database, "posts");
 
 export const DisqusCount = ({
   identifier,
+  onlyNumber = false,
   ...rest
 }: {
   identifier: string;
+  onlyNumber?: boolean;
 }) => {
   const [count, setCount] = useState(0);
 
@@ -65,7 +67,7 @@ export const DisqusCount = ({
 
   return (
     <UI.Text fontSize="sm" {...rest}>
-      {`${count} ${count == 1 ? "comentario" : "comentarios"}`}
+      {count} {!onlyNumber && (count === 1 ? "comentario" : "comentarios")}
     </UI.Text>
   );
 };

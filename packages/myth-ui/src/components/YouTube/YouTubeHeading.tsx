@@ -17,6 +17,7 @@ const StyledHeading = styled(Box)`
 export const YouTubeHeading = ({ children }: any) => {
   return (
     <StyledHeading
+      color="white"
       sx={{
         mask: "linear-gradient(to bottom, #000 calc(100% - 2.5em), transparent)",
         WebkitMaskImage:

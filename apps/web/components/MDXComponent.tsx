@@ -1,7 +1,13 @@
-import { UI } from "@myth/ui";
+import { UI, useColorModeValue } from "@myth/ui";
 
 export const MDXComponent = {
-  a: (props: any) => <UI.Link isExternal color="purple.300" {...props} />,
+  a: (props: any) => (
+    <UI.Link
+      isExternal
+      color={useColorModeValue("purple.700", "purple.300")}
+      {...props}
+    />
+  ),
   hr: UI.Divider,
   h1: (props: any) => <UI.Heading as="h1" my={8} size="lg" {...props} />,
   h2: (props: any) => <UI.Heading as="h2" my={4} size="lg" {...props} />,

@@ -1,6 +1,7 @@
 export { riArticleLine } from "./ri-article-line";
 export { riArrowRightLine } from "./ri-arrow-right-line";
 export { riCalendarLine } from "./ri-calendar-line";
+export { riChatLine } from "./ri-chat-line";
 export { riCloseLine } from "./ri-close-line";
 export { riDiscussLine } from "./ri-discuss-line";
 export { riDislikeLine } from "./ri-dislike-line";
@@ -12,12 +13,14 @@ export { riLikeLine } from "./ri-like-line";
 export { riLinkLine } from "./ri-link-line";
 export { riLinkedinLine } from "./ri-linkedin-line";
 export { riMenuLine } from "./ri-menu-line";
+export { riShareLine } from "./ri-share-line";
 export { riTimeLine } from "./ri-time-line";
 export { riTwitterLine } from "./ri-twitter-line";
 export { riYoutubeLine } from "./ri-youtube-line";
 
 export { riGithubFill } from "./ri-github-fill";
-export { riMinusFill } from "./ri-minus-full";
+export { riLikeFill } from "./ri-like-fill";
+export { riMinusFill } from "./ri-minus-fill";
 export { riMoonFill } from "./ri-moon-fill";
 export { riPlusFill } from "./ri-plus-fill";
 export { riSunFill } from "./ri-sun-fill";

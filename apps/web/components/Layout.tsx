@@ -2,9 +2,9 @@ import React, { Fragment, useState, useEffect } from "react";
 import { UI, useColorModeValue, NavBarFullScreen, Footer } from "@myth/ui";
 import { Aside } from "./Aside";
 import { OpenGraph } from "./OpenGraph";
-import { Disqus } from "./Disqus";
 import networks from "../data/networks";
 import sections from "../data/sections";
+import { PostFooter } from "./PostFooter";
 
 interface Props {
   heading?: React.ReactNode | React.ReactElement | string;
@@ -66,26 +66,22 @@ export const Layout = ({
             px={6}
           >
             {heading && (
-              <UI.Heading as="h2" fontSize="2xl" mb={8}>
-                {heading}
-              </UI.Heading>
+              <Fragment>
+                <UI.Heading as="h2" fontSize="sm" fontWeight="semibold">
+                  {heading}
+                </UI.Heading>
+                <UI.Divider
+                  borderColor={useColorModeValue("gray.200", "gray.900")}
+                  opacity={1}
+                  my={7}
+                />
+              </Fragment>
             )}
             <UI.Box as={isBlogTemplate ? "article" : "section"}>
               {children}
 
               {isBlogTemplate && (
-                <UI.Stack spacing={10} my={16} align="center">
-                  {metadata.slug && metadata.title && (
-                    <Disqus
-                      shortname="alckordev"
-                      config={{
-                        url: `http://localhost:3000/${metadata.slug}`,
-                        identifier: metadata.slug ?? "",
-                        title: metadata.title ?? "",
-                      }}
-                    />
-                  )}
-                </UI.Stack>
+                <PostFooter title={metadata.title} slug={metadata.slug} />
               )}
             </UI.Box>
           </UI.Box>
