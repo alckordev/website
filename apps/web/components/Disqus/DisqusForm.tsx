@@ -12,8 +12,10 @@ const postRef = ref(database, "posts");
 export const DisqusForm = ({
   config,
   thread,
+  parent = null,
   onUpdateThread,
   onUpdatePosts,
+  onCancel,
   placeholder = "Únete a la conversación...",
   ...rest
 }: any) => {
@@ -23,6 +25,11 @@ export const DisqusForm = ({
     reset,
     formState: { errors, touchedFields, isSubmitting },
   } = useForm({
+    defaultValues: {
+      author_name: parent ? "Alckor Dev" : "",
+      author_email: parent ? "alckor@dev.com" : "",
+      message: "",
+    },
     resolver: yupResolver(
       yup.object().shape({
         message: yup.string().min(2).required(),
@@ -59,7 +66,6 @@ export const DisqusForm = ({
 
   const addPost = async (data: any) => {
     const newPostRef = push(postRef);
-
     await set(newPostRef, {
       thread: data.thread,
       author: {
@@ -76,15 +82,12 @@ export const DisqusForm = ({
       numReports: 0,
       isSpam: false,
       isApproved: true,
-      parent: null,
+      parent: data.parent,
       createdAt: formatISO(new Date()),
       updatedAt: null,
     });
-
     const postSnapshot = await get(newPostRef);
-
     const postVal = postSnapshot.val();
-
     return { ...postVal, key: postSnapshot.key };
   };
 
@@ -98,10 +101,12 @@ export const DisqusForm = ({
         onUpdateThread(newThread.key);
       }
 
-      const newPost = await addPost({ ...values, thread: tmpThread });
+      const newPost = await addPost({ ...values, thread: tmpThread, parent });
       onUpdatePosts(newPost);
 
       reset({ message: "" });
+
+      if (parent && typeof onCancel === "function") onCancel();
     } catch (err) {
       toast({
         description: "¡Ups! Algo salió mal. 😭",
@@ -162,7 +167,9 @@ export const DisqusForm = ({
               </UI.FormErrorMessage>
             </UI.FormControl>
             <UI.HStack>
-              <UI.Button>Cancelar</UI.Button>
+              {onCancel && typeof onCancel === "function" && (
+                <UI.Button onClick={onCancel}>Cancelar</UI.Button>
+              )}
               <UI.Button
                 type="submit"
                 colorScheme="purple"

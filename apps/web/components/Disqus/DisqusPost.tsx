@@ -4,9 +4,11 @@ import { _dateAgo } from "../../lib/format-date";
 import { DisqusForm } from "./DisqusForm";
 
 export const DisqusPost = ({ post, ...rest }: any) => {
-  const [isCollased, setIsCollased] = useState(false);
+  // const [isCollased, setIsCollased] = useState(false);
 
-  const toggle = () => setIsCollased(!isCollased);
+  // const toggle = () => setIsCollased(!isCollased);
+
+  const [isReplyPost, setIsReplyPost] = useState(false);
 
   return (
     <UI.VStack
@@ -18,7 +20,6 @@ export const DisqusPost = ({ post, ...rest }: any) => {
       w="100%"
       align="flex-end"
       spacing={4}
-      {...rest}
     >
       <UI.Card minW="100%" size="sm" border={0} boxShadow="none">
         <UI.CardHeader p={0}>
@@ -72,23 +73,46 @@ export const DisqusPost = ({ post, ...rest }: any) => {
               </UI.Button>
             </UI.ButtonGroup>
             {post.author.isAnonymous && (
-              <UI.Button colorScheme="purple" size="sm" variant="link">
+              <UI.Button
+                colorScheme="purple"
+                size="sm"
+                variant="link"
+                onClick={() => setIsReplyPost(!isReplyPost)}
+              >
                 Responder
               </UI.Button>
             )}
           </UI.Stack>
-
-          {post.children && post.children.length > 0 && (
-            <UI.Collapse in={!isCollased} style={{ width: "95%" }}>
-              <UI.VStack>
-                {post.children.map((child: any) => (
-                  <DisqusPost key={child.id} post={child} />
-                ))}
-              </UI.VStack>
-            </UI.Collapse>
-          )}
         </UI.CardFooter>
       </UI.Card>
+
+      {isReplyPost && (
+        <UI.Box
+          style={{
+            width: "95%",
+            borderLeft: "3px solid rgb(230, 230, 230)",
+            paddingLeft: 24,
+          }}
+        >
+          <DisqusForm
+            config={rest.config}
+            thread={rest.thread}
+            parent={post.key}
+            onUpdatePosts={rest.onUpdatePosts}
+            onCancel={() => setIsReplyPost(!isReplyPost)}
+          />
+        </UI.Box>
+      )}
+
+      {post.children && post.children.length > 0 && (
+        // <UI.Collapse in={!isCollased} style={{ width: "95%" }}>
+        <UI.VStack>
+          {post.children.map((child: any) => (
+            <DisqusPost key={child.id} post={child} />
+          ))}
+        </UI.VStack>
+        // </UI.Collapse>
+      )}
     </UI.VStack>
   );
 };
