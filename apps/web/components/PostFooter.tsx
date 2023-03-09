@@ -53,10 +53,12 @@ export const PostFooter = ({ title, slug }: Props) => {
       <UI.Drawer onClose={onClose} isOpen={isOpen} size="sm">
         <UI.DrawerOverlay bg="blackAlpha.600" backdropFilter="blur(5px)" />
         <UI.DrawerContent>
-          <UI.DrawerCloseButton />
-          <UI.DrawerHeader>title</UI.DrawerHeader>
+          <UI.DrawerCloseButton top={4} />
+          <UI.DrawerHeader>
+            Comentarios: <DisqusCount identifier={slug ?? ""} onlyNumber />
+          </UI.DrawerHeader>
           <UI.DrawerBody>
-            <UI.Stack spacing={10} my={16} align="center">
+            <UI.Stack spacing={10} align="center">
               {slug && title && (
                 <Disqus
                   shortname="alckordev"

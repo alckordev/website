@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { UI } from "@myth/ui";
+import { UI, useColorModeValue } from "@myth/ui";
 import { DisqusForm } from "./DisqusForm";
 import { DisqusPost } from "./DisqusPost";
 import { ref, query, orderByChild, equalTo, get } from "firebase/database";
@@ -68,16 +68,23 @@ export const Disqus = ({ shortname, config, ...rest }: any) => {
   return (
     <UI.Box role="thread" minW="100%" {...rest}>
       <Fragment>
-        <UI.Box>Identifier: {thread}</UI.Box>
-        <UI.Divider my={4} />
+        {/* <UI.Box>Identifier: {thread}</UI.Box>
+        <UI.Divider my={4} /> */}
         <DisqusForm
           config={config}
           thread={thread}
           onUpdateThread={onUpdateThread}
           onUpdatePosts={onUpdatePosts}
         />
-        <UI.Divider my={4} />
-        <UI.VStack>
+        <UI.Divider my={8} />
+        <UI.VStack
+          divider={
+            <UI.StackDivider
+              borderColor={useColorModeValue("gray.200", "gray.900")}
+            />
+          }
+          spacing={4}
+        >
           {posts.map((post: any) => (
             <DisqusPost key={post.key} post={post} />
           ))}

@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { UI, CIcon, icon } from "@myth/ui";
+import { UI, useColorModeValue, CIcon, icon } from "@myth/ui";
 import { _dateAgo } from "../../lib/format-date";
+import { DisqusForm } from "./DisqusForm";
 
 export const DisqusPost = ({ post, ...rest }: any) => {
   const [isCollased, setIsCollased] = useState(false);
@@ -9,18 +10,25 @@ export const DisqusPost = ({ post, ...rest }: any) => {
 
   return (
     <UI.VStack
-      id={`comment-${post.key}`}
+      divider={
+        <UI.StackDivider
+          borderColor={useColorModeValue("gray.200", "gray.900")}
+        />
+      }
       w="100%"
       align="flex-end"
-      data-key={post.key}
-      data-parent={post.parent}
+      spacing={4}
       {...rest}
     >
-      <UI.Card minW="100%" size="sm">
-        <UI.CardHeader>
+      <UI.Card minW="100%" size="sm" border={0} boxShadow="none">
+        <UI.CardHeader p={0}>
           <UI.Flex gap={4}>
             <UI.Flex flex={1} gap={4} alignItems="center" flexWrap="wrap">
-              <UI.Avatar name={post.author.name} src={post.author.permalink} />
+              <UI.Avatar
+                name={post.author.name}
+                src={post.author.permalink}
+                size="sm"
+              />
               <UI.Box>
                 <UI.Heading size="sm">{post.author.name}</UI.Heading>
                 <UI.Text fontSize="xs">{_dateAgo(post.createdAt)}</UI.Text>
@@ -28,51 +36,59 @@ export const DisqusPost = ({ post, ...rest }: any) => {
             </UI.Flex>
             <UI.IconButton
               variant="ghost"
-              colorScheme="gray"
-              aria-label="See menu"
-              icon={
-                <CIcon
-                  icon={!isCollased ? icon.riMinusFill : icon.riPlusFill}
-                />
-              }
-              onClick={toggle}
+              colorScheme="red"
+              aria-label="Reportar"
+              icon={<CIcon icon={icon.riAlarmWarningLine} />}
+              size="sm"
+              onClick={() => console.log("report it!")}
             />
           </UI.Flex>
         </UI.CardHeader>
-        <UI.Collapse in={!isCollased}>
-          <UI.CardBody>
-            <UI.Box dangerouslySetInnerHTML={{ __html: post.message }} />
-          </UI.CardBody>
-          <UI.CardFooter>
-            <UI.ButtonGroup size="sm" colorScheme="purple">
+        <UI.CardBody px={0}>
+          <UI.Box dangerouslySetInnerHTML={{ __html: post.message }} />
+        </UI.CardBody>
+        <UI.CardFooter p={0}>
+          <UI.Stack w="100%" direction="row" justify="space-between">
+            <UI.ButtonGroup size="sm" colorScheme="purple" spacing={4}>
               <UI.Button
-                leftIcon={<CIcon icon={icon.riLikeLine} size="sm" />}
-                variant="ghost"
+                leftIcon={<CIcon icon={icon.riLikeLine} />}
+                variant="link"
               >
                 {post.likes}
               </UI.Button>
-              <UI.Button
-                leftIcon={<CIcon icon={icon.riDislikeLine} size="sm" />}
-                variant="ghost"
+              {/* <UI.Button
+                leftIcon={<CIcon icon={icon.riDislikeLine} />}
+                variant="link"
               >
                 {post.dislikes}
+              </UI.Button> */}
+              <UI.Button
+                leftIcon={<CIcon icon={icon.riChatLine} />}
+                colorScheme="purple"
+                size="sm"
+                variant="link"
+              >
+                2 Respuestas
               </UI.Button>
-              {!post.author.isAnonymous && (
-                <UI.Button variant="ghost">Responder</UI.Button>
-              )}
             </UI.ButtonGroup>
-          </UI.CardFooter>
-        </UI.Collapse>
+            {post.author.isAnonymous && (
+              <UI.Button colorScheme="purple" size="sm" variant="link">
+                Responder
+              </UI.Button>
+            )}
+          </UI.Stack>
+
+          {post.children && post.children.length > 0 && (
+            <UI.Collapse in={!isCollased} style={{ width: "95%" }}>
+              <UI.VStack>
+                {post.children.map((child: any) => (
+                  <DisqusPost key={child.id} post={child} />
+                ))}
+              </UI.VStack>
+            </UI.Collapse>
+          )}
+        </UI.CardFooter>
       </UI.Card>
-      {post.children && post.children.length > 0 && (
-        <UI.Collapse in={!isCollased} style={{ width: "95%" }}>
-          <UI.VStack>
-            {post.children.map((child: any) => (
-              <DisqusPost key={child.id} post={child} />
-            ))}
-          </UI.VStack>
-        </UI.Collapse>
-      )}
     </UI.VStack>
   );
 };

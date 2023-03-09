@@ -66,7 +66,7 @@ export const DisqusCount = ({
   }, [identifier]);
 
   return (
-    <UI.Text fontSize="sm" {...rest}>
+    <UI.Text as="span" {...rest}>
       {count} {!onlyNumber && (count === 1 ? "comentario" : "comentarios")}
     </UI.Text>
   );

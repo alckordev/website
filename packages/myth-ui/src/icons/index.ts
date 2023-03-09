@@ -1,3 +1,4 @@
+export { riAlarmWarningLine } from "./ri-alarm-warning-line";
 export { riArticleLine } from "./ri-article-line";
 export { riArrowRightLine } from "./ri-arrow-right-line";
 export { riCalendarLine } from "./ri-calendar-line";

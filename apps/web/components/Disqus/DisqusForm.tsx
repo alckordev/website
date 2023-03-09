@@ -14,6 +14,7 @@ export const DisqusForm = ({
   thread,
   onUpdateThread,
   onUpdatePosts,
+  placeholder = "Únete a la conversación...",
   ...rest
 }: any) => {
   const {
@@ -112,9 +113,9 @@ export const DisqusForm = ({
 
   return (
     <UI.Card variant="outline" size="sm" borderColor="transparent" {...rest}>
-      <UI.CardBody>
+      <UI.CardBody p={0}>
         <UI.HStack spacing={4} align="flex-start">
-          <UI.Avatar />
+          <UI.Avatar size="sm" />
           <UI.VStack
             as="form"
             onSubmit={onSubmit}
@@ -124,7 +125,8 @@ export const DisqusForm = ({
           >
             <UI.FormControl isInvalid={errors.message && touchedFields.message}>
               <UI.Textarea
-                placeholder="Únete a la conversación..."
+                placeholder={placeholder}
+                size="sm"
                 resize="none"
                 {...register("message")}
               />
@@ -136,7 +138,11 @@ export const DisqusForm = ({
             <UI.FormControl
               isInvalid={errors.author_name && touchedFields.author_name}
             >
-              <UI.Input placeholder="Nombre" {...register("author_name")} />
+              <UI.Input
+                placeholder="Nombre"
+                size="sm"
+                {...register("author_name")}
+              />
               <UI.FormErrorMessage>
                 {errors.author_name && "Por favor, escribe tu nombre."}
               </UI.FormErrorMessage>
@@ -147,6 +153,7 @@ export const DisqusForm = ({
               <UI.Input
                 type="email"
                 placeholder="Correo electrónico"
+                size="sm"
                 {...register("author_email")}
               />
               <UI.FormErrorMessage>
@@ -154,13 +161,16 @@ export const DisqusForm = ({
                   "Por favor, escribe tu correo electrónico."}
               </UI.FormErrorMessage>
             </UI.FormControl>
-            <UI.Button
-              type="submit"
-              colorScheme="purple"
-              isLoading={isSubmitting}
-            >
-              Comentar
-            </UI.Button>
+            <UI.HStack>
+              <UI.Button>Cancelar</UI.Button>
+              <UI.Button
+                type="submit"
+                colorScheme="purple"
+                isLoading={isSubmitting}
+              >
+                Comentar
+              </UI.Button>
+            </UI.HStack>
           </UI.VStack>
         </UI.HStack>
       </UI.CardBody>
