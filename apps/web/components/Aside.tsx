@@ -64,7 +64,7 @@ export const Aside = () => {
         <UI.Card minW="100%" bg="transparent" boxShadow="none">
           <UI.CardHeader p={0}>
             <UI.Heading as="h2" fontSize="lg">
-              Tags
+              Temas
             </UI.Heading>
           </UI.CardHeader>
           <UI.CardBody px={0} pb={0}>

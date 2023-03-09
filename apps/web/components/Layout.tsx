@@ -68,7 +68,7 @@ export const Layout = ({
             <UI.Box as={isBlogTemplate ? "article" : "section"}>
               {heading && (
                 <UI.Box w="100%" maxW={[null, null, 680, 680]} mx="auto">
-                  <UI.Heading as="h2" fontSize="sm" fontWeight="semibold">
+                  <UI.Heading as="h2" fontSize="sm">
                     {heading}
                   </UI.Heading>
                   <UI.Divider

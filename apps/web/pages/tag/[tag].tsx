@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { UI, useColorModeValue } from "@myth/ui";
 import { Layout, PostListItem } from "../../components";
 import { usePagination } from "../../hooks/use-pagination";
@@ -35,7 +35,14 @@ export default function Tags({ allPosts, tag }: any) {
   }, [next]);
 
   return (
-    <Layout metadata={{ title: `Tag: ${tag}` }} heading={`Tag: #${tag}`}>
+    <Layout
+      metadata={{ title: `Tema: ${tag}` }}
+      heading={
+        <Fragment>
+          Tema: <UI.Text as="span" fontWeight="normal">{`#${tag}`}</UI.Text>
+        </Fragment>
+      }
+    >
       <UI.VStack
         divider={
           <UI.StackDivider
