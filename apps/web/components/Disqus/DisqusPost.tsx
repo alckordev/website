@@ -46,7 +46,7 @@ export const DisqusPost = ({ post, replyConfig, ...rest }: any) => {
               >
                 {post.likes}
               </UI.Button>
-              {post.children.length > 0 && (
+              {post.children && post.children.length > 0 && (
                 <UI.Button
                   leftIcon={<CIcon icon={icon.riChatLine} />}
                   colorScheme="purple"
@@ -83,6 +83,7 @@ export const DisqusPost = ({ post, replyConfig, ...rest }: any) => {
           }}
         >
           <DisqusForm
+            placeholder={`Respondiendo a ${post.author.name}...`}
             config={replyConfig.config}
             thread={replyConfig.thread}
             parent={post.key}
@@ -114,7 +115,11 @@ export const DisqusPost = ({ post, replyConfig, ...rest }: any) => {
             }}
           >
             {post.children.map((child: any) => (
-              <DisqusPost key={`child-${child.id}`} post={child} />
+              <DisqusPost
+                key={`child-${child.key}`}
+                post={child}
+                replyConfig={replyConfig}
+              />
             ))}
           </UI.VStack>
         </UI.Collapse>

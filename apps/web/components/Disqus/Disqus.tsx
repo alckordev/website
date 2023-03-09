@@ -18,7 +18,19 @@ export const Disqus = ({ shortname, config, ...rest }: any) => {
   const onUpdateThread = (thread: string) => setThread(thread);
 
   const onUpdatePosts = (post: any) => {
-    setPosts([post, ...posts]);
+    if (post.parent) {
+      // esto tiene que ser recursivo para que busque en los hijos de los hijos
+      const tmpPosts = posts;
+      const tmpPost = tmpPosts.find((p) => p.key == post.parent);
+
+      tmpPost.children = [post, ...tmpPost.children];
+
+      tmpPosts.map((p) => (p.key === tmpPost.key ? (p = tmpPost) : p));
+
+      setPosts(tmpPosts);
+    } else {
+      setPosts([post, ...posts]);
+    }
   };
 
   const findThreadByIdentifier = async (identifier: string) => {
