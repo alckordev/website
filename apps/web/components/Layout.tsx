@@ -65,19 +65,20 @@ export const Layout = ({
             py="50px"
             px={6}
           >
-            {heading && (
-              <Fragment>
-                <UI.Heading as="h2" fontSize="sm" fontWeight="semibold">
-                  {heading}
-                </UI.Heading>
-                <UI.Divider
-                  borderColor={useColorModeValue("gray.200", "gray.900")}
-                  opacity={1}
-                  my={7}
-                />
-              </Fragment>
-            )}
             <UI.Box as={isBlogTemplate ? "article" : "section"}>
+              {heading && (
+                <UI.Box w="100%" maxW={[null, null, 680, 680]} mx="auto">
+                  <UI.Heading as="h2" fontSize="sm" fontWeight="semibold">
+                    {heading}
+                  </UI.Heading>
+                  <UI.Divider
+                    borderColor={useColorModeValue("gray.200", "gray.900")}
+                    opacity={1}
+                    my={7}
+                  />
+                </UI.Box>
+              )}
+
               {children}
 
               {isBlogTemplate && (

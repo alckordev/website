@@ -35,7 +35,7 @@ export const PostMetadata = ({
           </UI.Tag>
         ))}
       </UI.HStack>
-      <UI.Heading as="h1" my={6}>
+      <UI.Heading as="h1" my={6} size={["md", "md", "lg", "lg"]}>
         {title}
       </UI.Heading>
       <UI.VStack spacing={3} align="left">
@@ -67,6 +67,7 @@ export const PostMetadata = ({
         src="https://miro.medium.com/v2/resize:fit:720/0*pZbq2mTk_09JYVI9"
         alt="Caffe Latte"
         objectFit="cover"
+        mx="auto"
       />
     </UI.Box>
   );

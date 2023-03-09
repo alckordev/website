@@ -42,7 +42,7 @@ export const PostListItem = ({
                 size={["sm", "sm", "md", "md"]}
                 textOverflow="ellipsis"
                 overflow="hidden"
-                maxH={["40px", "40px", "84px", "84px"]}
+                maxH={["40px", "40px", "60px", "60px"]}
                 pb={[null, null, 2, 2]}
                 sx={{
                   display: "-webkit-box",
