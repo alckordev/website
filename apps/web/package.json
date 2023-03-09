@@ -24,6 +24,8 @@
     "reading-time": "^1.5.0",
     "remark-code-titles": "^0.1.2",
     "remark-gfm": "^3.0.1",
+    "slate": "^0.91.4",
+    "slate-react": "^0.91.10",
     "yup": "^1.0.2"
   },
   "devDependencies": {

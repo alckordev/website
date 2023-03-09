@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { UI, useColorModeValue } from "@myth/ui";
 import { DisqusForm } from "./DisqusForm";
+import { DisqusEditor } from "./DisqusEditor";
 import { DisqusPost } from "./DisqusPost";
 import { ref, query, orderByChild, equalTo, get } from "firebase/database";
 import { database } from "../../lib/firebase";
@@ -68,8 +69,8 @@ export const Disqus = ({ shortname, config, ...rest }: any) => {
   return (
     <UI.Box role="thread" minW="100%" {...rest}>
       <Fragment>
-        {/* <UI.Box>Identifier: {thread}</UI.Box>
-        <UI.Divider my={4} /> */}
+        <DisqusEditor />
+        <UI.Divider my={4} />
         <DisqusForm
           config={config}
           thread={thread}
