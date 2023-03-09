@@ -67,34 +67,34 @@ export const Disqus = ({ shortname, config, ...rest }: any) => {
   }, [config.identifier]);
 
   return (
-    <UI.Box role="thread" minW="100%" {...rest}>
-      <Fragment>
-        {/* <DisqusEditor />
-        <UI.Divider my={4} /> */}
-        <DisqusForm
-          config={config}
-          thread={thread}
-          onUpdateThread={onUpdateThread}
-          onUpdatePosts={onUpdatePosts}
-        />
-        <UI.Divider my={8} />
-        <UI.VStack
-          divider={
-            <UI.StackDivider
-              borderColor={useColorModeValue("gray.200", "gray.900")}
-            />
-          }
-          spacing={4}
-        >
-          {posts.map((post: any) => (
-            <DisqusPost
-              key={post.key}
-              post={post}
-              {...{ config, thread, onUpdatePosts }}
-            />
-          ))}
-        </UI.VStack>
-      </Fragment>
+    <UI.Box minW="100%" mb={4} {...rest}>
+      <DisqusForm
+        config={config}
+        thread={thread}
+        onUpdateThread={onUpdateThread}
+        onUpdatePosts={onUpdatePosts}
+      />
+      <UI.Divider my={8} />
+      <UI.VStack
+        divider={
+          <UI.StackDivider
+            borderColor={useColorModeValue("gray.200", "gray.900")}
+          />
+        }
+        spacing={4}
+      >
+        {posts.map((post: any) => (
+          <DisqusPost
+            key={post.key}
+            post={post}
+            replyConfig={{
+              config,
+              thread,
+              onUpdatePosts,
+            }}
+          />
+        ))}
+      </UI.VStack>
     </UI.Box>
   );
 };

@@ -3,25 +3,14 @@ import { UI, useColorModeValue, CIcon, icon } from "@myth/ui";
 import { _dateAgo } from "../../lib/format-date";
 import { DisqusForm } from "./DisqusForm";
 
-export const DisqusPost = ({ post, ...rest }: any) => {
-  // const [isCollased, setIsCollased] = useState(false);
-
-  // const toggle = () => setIsCollased(!isCollased);
+export const DisqusPost = ({ post, replyConfig, ...rest }: any) => {
+  const [isCollased, setIsCollased] = useState(true);
 
   const [isReplyPost, setIsReplyPost] = useState(false);
 
   return (
-    <UI.VStack
-      divider={
-        <UI.StackDivider
-          borderColor={useColorModeValue("gray.200", "gray.900")}
-        />
-      }
-      w="100%"
-      align="flex-end"
-      spacing={4}
-    >
-      <UI.Card minW="100%" size="sm" border={0} boxShadow="none">
+    <UI.VStack w="100%" spacing={6} {...rest}>
+      <UI.Card w="100%" size="sm" border={0} boxShadow="none">
         <UI.CardHeader p={0}>
           <UI.Flex gap={4}>
             <UI.Flex flex={1} gap={4} alignItems="center" flexWrap="wrap">
@@ -57,20 +46,19 @@ export const DisqusPost = ({ post, ...rest }: any) => {
               >
                 {post.likes}
               </UI.Button>
-              {/* <UI.Button
-                leftIcon={<CIcon icon={icon.riDislikeLine} />}
-                variant="link"
-              >
-                {post.dislikes}
-              </UI.Button> */}
-              <UI.Button
-                leftIcon={<CIcon icon={icon.riChatLine} />}
-                colorScheme="purple"
-                size="sm"
-                variant="link"
-              >
-                2 Respuestas
-              </UI.Button>
+              {post.children.length > 0 && (
+                <UI.Button
+                  leftIcon={<CIcon icon={icon.riChatLine} />}
+                  colorScheme="purple"
+                  size="sm"
+                  variant="link"
+                  onClick={() => setIsCollased(!isCollased)}
+                >
+                  {isCollased
+                    ? `${post.children.length} Respuestas`
+                    : `Ocultar respuestas`}
+                </UI.Button>
+              )}
             </UI.ButtonGroup>
             {post.author.isAnonymous && (
               <UI.Button
@@ -89,29 +77,47 @@ export const DisqusPost = ({ post, ...rest }: any) => {
       {isReplyPost && (
         <UI.Box
           style={{
-            width: "95%",
+            width: "calc(100% - 1rem)",
             borderLeft: "3px solid rgb(230, 230, 230)",
             paddingLeft: 24,
           }}
         >
           <DisqusForm
-            config={rest.config}
-            thread={rest.thread}
+            config={replyConfig.config}
+            thread={replyConfig.thread}
             parent={post.key}
-            onUpdatePosts={rest.onUpdatePosts}
+            onUpdatePosts={replyConfig.onUpdatePosts}
             onCancel={() => setIsReplyPost(!isReplyPost)}
           />
         </UI.Box>
       )}
 
       {post.children && post.children.length > 0 && (
-        // <UI.Collapse in={!isCollased} style={{ width: "95%" }}>
-        <UI.VStack>
-          {post.children.map((child: any) => (
-            <DisqusPost key={child.id} post={child} />
-          ))}
-        </UI.VStack>
-        // </UI.Collapse>
+        <UI.Collapse
+          in={!isCollased}
+          style={{
+            width: "calc(100% - 1rem)",
+            marginLeft: "auto",
+          }}
+        >
+          <UI.VStack
+            divider={
+              <UI.StackDivider
+                borderColor={useColorModeValue("gray.200", "gray.900")}
+              />
+            }
+            w="100%"
+            spacing={4}
+            style={{
+              borderLeft: "3px solid rgb(230, 230, 230)",
+              paddingLeft: 24,
+            }}
+          >
+            {post.children.map((child: any) => (
+              <DisqusPost key={`child-${child.id}`} post={child} />
+            ))}
+          </UI.VStack>
+        </UI.Collapse>
       )}
     </UI.VStack>
   );
