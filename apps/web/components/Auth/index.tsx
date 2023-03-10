@@ -1,4 +1,5 @@
 export { SignIn } from "./SignIn";
-export { SignInWithGoogleButton } from "./SignInWithGoogleButton";
 export { SignInWithFacebookButton } from "./SignInWithFacebookButton";
+export { SignInWithGithubButton } from "./SignInWithGithubButton";
+export { SignInWithGoogleButton } from "./SignInWithGoogleButton";
 export { SignOutButton } from "./SignOutButton";
