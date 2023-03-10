@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { UI, useDisclosure } from "@myth/ui";
 import { SignInWithGoogleButton } from "./SignInWithGoogleButton";
+import { SignInWithFacebookButton } from "./SignInWithFacebookButton";
 
 export const SignIn = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -17,8 +18,9 @@ export const SignIn = () => {
             <UI.Heading as="h2" fontSize="lg">
               Bienvenido de nuevo.
             </UI.Heading>
-            <UI.VStack my={16}>
+            <UI.VStack my={16} spacing={4}>
               <SignInWithGoogleButton />
+              <SignInWithFacebookButton />
             </UI.VStack>
             <UI.Text fontSize="sm">
               Haga clic en "Iniciar sesión" para aceptar los Términos de
