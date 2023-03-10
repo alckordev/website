@@ -3,6 +3,7 @@ import { UI, useDisclosure } from "@myth/ui";
 import { SignInWithFacebookButton } from "./SignInWithFacebookButton";
 import { SignInWithGithubButton } from "./SignInWithGithubButton";
 import { SignInWithGoogleButton } from "./SignInWithGoogleButton";
+import { SignInWithTwitterButton } from "./SignInWithTwitterButton";
 
 export const SignIn = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -11,7 +12,7 @@ export const SignIn = () => {
     <Fragment>
       <UI.Button onClick={onOpen}>Sign in</UI.Button>
 
-      <UI.Modal onClose={onClose} isOpen={isOpen} isCentered>
+      <UI.Modal onClose={onClose} isOpen={isOpen} size="xl" isCentered>
         <UI.ModalOverlay bg="blackAlpha.600" backdropFilter="blur(5px)" />
         <UI.ModalContent>
           <UI.ModalCloseButton />
@@ -21,8 +22,9 @@ export const SignIn = () => {
             </UI.Heading>
             <UI.VStack my={16} spacing={4}>
               <SignInWithGoogleButton />
-              <SignInWithFacebookButton />
+              <SignInWithFacebookButton isDisabled={true} />
               <SignInWithGithubButton />
+              <SignInWithTwitterButton isDisabled={true} />
             </UI.VStack>
             <UI.Text fontSize="sm">
               Haga clic en "Iniciar sesión" para aceptar los Términos de

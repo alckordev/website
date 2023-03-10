@@ -4,7 +4,7 @@ import { UI, CIcon, icon } from "@myth/ui";
 
 // const provider = new FacebookAuthProvider();
 
-export const SignInWithFacebookButton = () => {
+export const SignInWithFacebookButton = ({ ...rest }) => {
   //   const handleSignIn = async () => {
   //     try {
   //       const response = await signInWithPopup(auth, provider);
@@ -20,8 +20,9 @@ export const SignInWithFacebookButton = () => {
       variant="outline"
       rounded="3xl"
       fontWeight="normal"
-      //   onClick={handleSignIn}
-      isDisabled={true}
+      // onClick={handleSignIn}
+      // isDisabled={true}
+      {...rest}
     >
       Iniciar sesión con Facebook
     </UI.Button>

@@ -4,7 +4,7 @@ import { auth } from "../../lib/firebase";
 
 const provider = new GoogleAuthProvider();
 
-export const SignInWithGoogleButton = () => {
+export const SignInWithGoogleButton = ({ ...rest }) => {
   const handleSignIn = async () => {
     try {
       const response = await signInWithPopup(auth, provider);
@@ -21,6 +21,7 @@ export const SignInWithGoogleButton = () => {
       rounded="3xl"
       fontWeight="normal"
       onClick={handleSignIn}
+      {...rest}
     >
       Iniciar sesión con Google
     </UI.Button>
