@@ -3,6 +3,7 @@ import NextLink from "next/link";
 import { UI, YouTubeWidget, useColorModeValue } from "@myth/ui";
 import tags from "../data/tags";
 import { Newsletter } from "./Newsletter";
+import { SignInWithGoogle } from "./SignIn";
 
 export const Aside = () => {
   return (
@@ -33,6 +34,7 @@ export const Aside = () => {
               Ingeniero de sistemas de profesión, especializado en el desarrollo
               de proyectos de software con más de 10 años de experiencia.
             </UI.Text>
+            <SignInWithGoogle />
           </UI.CardBody>
         </UI.Card>
         <UI.Card minW="100%" bg="transparent" boxShadow="none">

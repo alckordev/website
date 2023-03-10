@@ -3,8 +3,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { formatISO } from "date-fns";
+import { getAuth } from "firebase/auth";
 import { ref, set, get, push } from "firebase/database";
 import { database } from "../../lib/firebase";
+
+const auth = getAuth();
 
 const threadRef = ref(database, "threads");
 const postRef = ref(database, "posts");
@@ -19,6 +22,8 @@ export const DisqusForm = ({
   placeholder = "Únete a la conversación...",
   ...rest
 }: any) => {
+  const user = auth.currentUser;
+
   const {
     register,
     handleSubmit,
@@ -116,6 +121,12 @@ export const DisqusForm = ({
     }
   });
 
+  console.log("user", {
+    name: user?.displayName,
+    email: user?.email,
+    picture: user?.photoURL,
+  });
+
   return (
     <UI.Card
       variant="outline"
@@ -126,7 +137,7 @@ export const DisqusForm = ({
     >
       <UI.CardBody p={0}>
         <UI.HStack spacing={4} align="flex-start">
-          <UI.Avatar size="sm" />
+          <UI.Avatar size="sm" src={user?.photoURL || undefined} />
           <UI.VStack
             as="form"
             onSubmit={onSubmit}
