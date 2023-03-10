@@ -8,6 +8,7 @@ export { riDiscussLine } from "./ri-discuss-line";
 export { riDislikeLine } from "./ri-dislike-line";
 export { riFacebookLine } from "./ri-facebook-line";
 export { riGithubLine } from "./ri-github-line";
+export { riGoogleLine } from "./ri-google-line";
 export { riHomeLine } from "./ri-home-line";
 export { riInstagramLine } from "./ri-instagram-line";
 export { riLikeLine } from "./ri-like-line";

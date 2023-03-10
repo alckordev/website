@@ -58,4 +58,10 @@ export {
   CardFooter,
   Code,
   Fade,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
 } from "@chakra-ui/react";
