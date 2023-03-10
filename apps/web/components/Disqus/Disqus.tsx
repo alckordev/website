@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { UI, useColorModeValue } from "@myth/ui";
 import { DisqusForm } from "./DisqusForm";
 // import { DisqusEditor } from "./DisqusEditor";
@@ -12,26 +12,11 @@ const postRef = ref(database, "posts");
 
 export const Disqus = ({ shortname, config, ...rest }: any) => {
   const [thread, setThread] = useState<string>("");
-
   const [posts, setPosts] = useState<any[]>([]);
 
   const onUpdateThread = (thread: string) => setThread(thread);
 
-  const onUpdatePosts = (post: any) => {
-    if (post.parent) {
-      // esto tiene que ser recursivo para que busque en los hijos de los hijos
-      const tmpPosts = posts;
-      const tmpPost = tmpPosts.find((p) => p.key == post.parent);
-
-      tmpPost.children = [post, ...tmpPost.children];
-
-      tmpPosts.map((p) => (p.key === tmpPost.key ? (p = tmpPost) : p));
-
-      setPosts(tmpPosts);
-    } else {
-      setPosts([post, ...posts]);
-    }
-  };
+  const onUpdatePosts = (post: any) => setPosts([post, ...posts]);
 
   const findThreadByIdentifier = async (identifier: string) => {
     const endpoint = query(
@@ -71,7 +56,7 @@ export const Disqus = ({ shortname, config, ...rest }: any) => {
 
     if (!postsSnapshot) return;
 
-    setPosts(sortTreeNodes(postsSnapshot.reverse()));
+    setPosts(postsSnapshot.reverse());
   };
 
   useEffect(() => {
@@ -95,7 +80,7 @@ export const Disqus = ({ shortname, config, ...rest }: any) => {
         }
         spacing={4}
       >
-        {posts.map((post: any) => (
+        {sortTreeNodes(posts).map((post: any) => (
           <DisqusPost
             key={post.key}
             post={post}

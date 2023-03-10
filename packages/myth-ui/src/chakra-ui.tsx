@@ -57,4 +57,5 @@ export {
   CardBody,
   CardFooter,
   Code,
+  Fade,
 } from "@chakra-ui/react";

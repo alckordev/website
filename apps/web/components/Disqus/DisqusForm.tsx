@@ -117,7 +117,13 @@ export const DisqusForm = ({
   });
 
   return (
-    <UI.Card variant="outline" size="sm" borderColor="transparent" {...rest}>
+    <UI.Card
+      variant="outline"
+      size="sm"
+      bg="transparent"
+      borderColor="transparent"
+      {...rest}
+    >
       <UI.CardBody p={0}>
         <UI.HStack spacing={4} align="flex-start">
           <UI.Avatar size="sm" />

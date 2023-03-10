@@ -4,12 +4,14 @@ import { _dateAgo } from "../../lib/format-date";
 import { DisqusForm } from "./DisqusForm";
 
 export const DisqusPost = ({ post, replyConfig, ...rest }: any) => {
-  const [isCollased, setIsCollased] = useState(true);
+  const [isReplyListCollased, setIsReplyListCollased] = useState(false);
+  const [isReplyFormCollased, setIsReplyFormCollased] = useState(false);
 
-  const [isReplyPost, setIsReplyPost] = useState(false);
+  const replyListToggle = () => setIsReplyListCollased(!isReplyListCollased);
+  const replyFormToggle = () => setIsReplyFormCollased(!isReplyFormCollased);
 
   return (
-    <UI.VStack w="100%" spacing={6} {...rest}>
+    <UI.VStack w="100%" spacing={8} {...rest}>
       <UI.Card w="100%" size="sm" border={0} boxShadow="none">
         <UI.CardHeader p={0}>
           <UI.Flex gap={4}>
@@ -52,9 +54,9 @@ export const DisqusPost = ({ post, replyConfig, ...rest }: any) => {
                   colorScheme="purple"
                   size="sm"
                   variant="link"
-                  onClick={() => setIsCollased(!isCollased)}
+                  onClick={replyListToggle}
                 >
-                  {isCollased
+                  {!isReplyListCollased
                     ? `${post.children.length} Respuestas`
                     : `Ocultar respuestas`}
                 </UI.Button>
@@ -65,7 +67,7 @@ export const DisqusPost = ({ post, replyConfig, ...rest }: any) => {
                 colorScheme="purple"
                 size="sm"
                 variant="link"
-                onClick={() => setIsReplyPost(!isReplyPost)}
+                onClick={replyFormToggle}
               >
                 Responder
               </UI.Button>
@@ -74,10 +76,11 @@ export const DisqusPost = ({ post, replyConfig, ...rest }: any) => {
         </UI.CardFooter>
       </UI.Card>
 
-      {isReplyPost && (
+      <UI.Collapse in={isReplyFormCollased} style={{ width: "100%" }}>
         <UI.Box
           style={{
             width: "calc(100% - 1rem)",
+            marginLeft: "auto",
             borderLeft: "3px solid rgb(230, 230, 230)",
             paddingLeft: 24,
           }}
@@ -88,17 +91,18 @@ export const DisqusPost = ({ post, replyConfig, ...rest }: any) => {
             thread={replyConfig.thread}
             parent={post.key}
             onUpdatePosts={replyConfig.onUpdatePosts}
-            onCancel={() => setIsReplyPost(!isReplyPost)}
+            onCancel={replyFormToggle}
           />
         </UI.Box>
-      )}
+      </UI.Collapse>
 
-      {post.children && post.children.length > 0 && (
-        <UI.Collapse
-          in={!isCollased}
+      <UI.Collapse in={isReplyListCollased} style={{ width: "100%" }}>
+        <UI.Box
           style={{
             width: "calc(100% - 1rem)",
             marginLeft: "auto",
+            borderLeft: "3px solid rgb(230, 230, 230)",
+            paddingLeft: 24,
           }}
         >
           <UI.VStack
@@ -108,11 +112,7 @@ export const DisqusPost = ({ post, replyConfig, ...rest }: any) => {
               />
             }
             w="100%"
-            spacing={4}
-            style={{
-              borderLeft: "3px solid rgb(230, 230, 230)",
-              paddingLeft: 24,
-            }}
+            spacing={6}
           >
             {post.children.map((child: any) => (
               <DisqusPost
@@ -122,8 +122,8 @@ export const DisqusPost = ({ post, replyConfig, ...rest }: any) => {
               />
             ))}
           </UI.VStack>
-        </UI.Collapse>
-      )}
+        </UI.Box>
+      </UI.Collapse>
     </UI.VStack>
   );
 };
