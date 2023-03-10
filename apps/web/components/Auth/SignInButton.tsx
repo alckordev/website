@@ -5,12 +5,14 @@ import { SignInWithGithubButton } from "./SignInWithGithubButton";
 import { SignInWithGoogleButton } from "./SignInWithGoogleButton";
 import { SignInWithTwitterButton } from "./SignInWithTwitterButton";
 
-export const SignIn = () => {
+export const SignInButton = ({ ...rest }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Fragment>
-      <UI.Button onClick={onOpen}>Sign in</UI.Button>
+      <UI.Button onClick={onOpen} {...rest}>
+        Sign in
+      </UI.Button>
 
       <UI.Modal onClose={onClose} isOpen={isOpen} size="xl" isCentered>
         <UI.ModalOverlay bg="blackAlpha.600" backdropFilter="blur(5px)" />

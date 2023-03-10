@@ -3,11 +3,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { formatISO } from "date-fns";
-import { getAuth } from "firebase/auth";
 import { ref, set, get, push } from "firebase/database";
-import { database } from "../../lib/firebase";
-
-const auth = getAuth();
+import { database, auth } from "../../lib/firebase";
 
 const threadRef = ref(database, "threads");
 const postRef = ref(database, "posts");

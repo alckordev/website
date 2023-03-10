@@ -1,10 +1,12 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { UI, useColorModeValue, NavBarFullScreen, Footer } from "@myth/ui";
+import { auth } from "../lib/firebase";
 import { Aside } from "./Aside";
 import { OpenGraph } from "./OpenGraph";
 import networks from "../data/networks";
 import sections from "../data/sections";
 import { PostFooter } from "./PostFooter";
+import { SignInButton, SignOutButton } from "./Auth";
 
 interface Props {
   heading?: React.ReactNode | React.ReactElement | string;
@@ -49,7 +51,13 @@ export const Layout = ({
     <Fragment>
       <OpenGraph metadata={metadata} />
 
-      <NavBarFullScreen isScrolled={isScrolled} navs={sections} />
+      <NavBarFullScreen
+        isScrolled={isScrolled}
+        navs={sections}
+        loggedIn={auth.currentUser}
+        signInButton={SignInButton}
+        signOutButton={SignOutButton}
+      />
 
       <UI.Container maxW="container.2xl" px={6}>
         <UI.Flex

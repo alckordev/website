@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { Box, Flex, useMediaQuery, useColorModeValue } from "@chakra-ui/react";
+import { Flex, useMediaQuery, useColorModeValue } from "@chakra-ui/react";
 import { Logo } from "./Logo";
 import { NavBarContainer } from "./NavBarContainer";
 import { NavBarControl } from "./NavBarControl";
@@ -25,6 +25,9 @@ const StyledNavbar = styled.header<{
 `;
 
 interface Props {
+  loggedIn?: any;
+  signInButton?: any;
+  signOutButton?: any;
   isScrolled: boolean;
   navs: {
     name: string;
@@ -33,6 +36,9 @@ interface Props {
 }
 
 export const NavBarFullScreen = ({
+  loggedIn,
+  signInButton,
+  signOutButton,
   isScrolled = false,
   navs,
   ...rest
@@ -55,6 +61,9 @@ export const NavBarFullScreen = ({
         <Flex gap={8}>
           <NavBarList isMobile={isMobile} navs={navs} />
           <NavBarControl
+            loggedIn={loggedIn}
+            signInButton={signInButton}
+            signOutButton={signOutButton}
             isMobile={isMobile}
             hasItems={navs.length > 0}
             toggle={toggle}

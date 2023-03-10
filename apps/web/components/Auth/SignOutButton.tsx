@@ -1,7 +1,7 @@
 import { UI } from "@myth/ui";
 import { auth } from "../../lib/firebase";
 
-export const SignOutButton = () => {
+export const SignOutButton = ({ ...rest }) => {
   const handleSignOut = async () => {
     try {
       await auth.signOut();
@@ -11,5 +11,9 @@ export const SignOutButton = () => {
     }
   };
 
-  return <UI.Button onClick={handleSignOut}>Sign out</UI.Button>;
+  return (
+    <UI.Button onClick={handleSignOut} {...rest}>
+      Sign out
+    </UI.Button>
+  );
 };

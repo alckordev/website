@@ -3,7 +3,7 @@ import NextLink from "next/link";
 import { UI, YouTubeWidget, useColorModeValue } from "@myth/ui";
 import tags from "../data/tags";
 import { Newsletter } from "./Newsletter";
-import { SignIn, SignOutButton } from "./Auth";
+import { SignInButton, SignOutButton } from "./Auth";
 
 export const Aside = () => {
   return (
@@ -35,7 +35,7 @@ export const Aside = () => {
               de proyectos de software con más de 10 años de experiencia.
             </UI.Text>
 
-            <SignIn />
+            <SignInButton />
             <br />
             <SignOutButton />
           </UI.CardBody>

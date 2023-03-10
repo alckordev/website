@@ -1,4 +1,4 @@
-export { SignIn } from "./SignIn";
+export { SignInButton } from "./SignInButton";
 export { SignInWithFacebookButton } from "./SignInWithFacebookButton";
 export { SignInWithGithubButton } from "./SignInWithGithubButton";
 export { SignInWithGoogleButton } from "./SignInWithGoogleButton";
