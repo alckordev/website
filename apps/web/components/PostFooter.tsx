@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { UI, useColorModeValue, useDisclosure, CIcon, icon } from "@myth/ui";
-import { Disqus, DisqusCount } from "./Disqus";
+import { Disqus, DisqusCount, DisqusThreadLikes } from "./Disqus";
 
 interface Props {
   title?: string;
@@ -26,13 +26,7 @@ export const PostFooter = ({ title, slug }: Props) => {
           boxShadow="xl"
           rounded="3xl"
         >
-          <UI.Button
-            leftIcon={<CIcon icon={icon.riLikeLine} />}
-            size="sm"
-            variant="link"
-          >
-            20K
-          </UI.Button>
+          <DisqusThreadLikes identifier={slug ?? ""} />
           <UI.Button
             leftIcon={<CIcon icon={icon.riChatLine} />}
             size="sm"

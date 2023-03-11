@@ -34,6 +34,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: any) {
+  // aqui tambien deberiamos obtener
+  // o crear el thread para los comentarios
+  // para poder tener el thread key disponible
+
   const { source, frontmatter } = await getFileBySlug({
     type: "posts",
     slug: params.slug,
