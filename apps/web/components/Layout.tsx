@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useContext, useState, useEffect } from "react";
 import { UI, useColorModeValue, NavBarFullScreen, Footer } from "@myth/ui";
 import { auth } from "../lib/firebase";
 import { Aside } from "./Aside";
@@ -7,6 +7,7 @@ import networks from "../data/networks";
 import sections from "../data/sections";
 import { PostFooter } from "./PostFooter";
 import { SignInButton, SignOutButton } from "./Auth";
+import { AuthContext } from "../store/AuthProvider";
 
 interface Props {
   heading?: React.ReactNode | React.ReactElement | string;
@@ -32,6 +33,8 @@ export const Layout = ({
 }: Props) => {
   const isBlogTemplate = type === "post" && metadata.createdAt ? true : false;
 
+  const currentUser = useContext(AuthContext);
+
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -54,7 +57,7 @@ export const Layout = ({
       <NavBarFullScreen
         isScrolled={isScrolled}
         navs={sections}
-        loggedIn={auth.currentUser}
+        user={currentUser}
         signInButton={SignInButton}
         signOutButton={SignOutButton}
       />

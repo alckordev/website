@@ -13,7 +13,7 @@ export const SignOutButton = ({ ...rest }) => {
 
   return (
     <UI.Button onClick={handleSignOut} {...rest}>
-      Sign out
+      Cerrar sesión
     </UI.Button>
   );
 };

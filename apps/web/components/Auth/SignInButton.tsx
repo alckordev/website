@@ -11,7 +11,7 @@ export const SignInButton = ({ ...rest }) => {
   return (
     <Fragment>
       <UI.Button onClick={onOpen} {...rest}>
-        Sign in
+        Iniciar sesión
       </UI.Button>
 
       <UI.Modal onClose={onClose} isOpen={isOpen} size="xl" isCentered>
@@ -23,9 +23,9 @@ export const SignInButton = ({ ...rest }) => {
               Bienvenido de nuevo.
             </UI.Heading>
             <UI.VStack my={16} spacing={4}>
-              <SignInWithGoogleButton />
+              <SignInWithGoogleButton callback={onClose} />
               <SignInWithFacebookButton isDisabled={true} />
-              <SignInWithGithubButton />
+              <SignInWithGithubButton callback={onClose} />
               <SignInWithTwitterButton isDisabled={true} />
             </UI.VStack>
             <UI.Text fontSize="sm">
