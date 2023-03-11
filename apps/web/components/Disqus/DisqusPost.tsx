@@ -27,7 +27,22 @@ export const DisqusPost = ({
                 size="sm"
               />
               <UI.Box>
-                <UI.Heading size="sm">{post.author.name}</UI.Heading>
+                <UI.Flex as={UI.Heading} size="sm" align="center" gap={1}>
+                  {post.author.name}
+                  {!post.author.isAnonymous && (
+                    <UI.Tooltip
+                      hasArrow
+                      label="Correo verificado"
+                      placement="top"
+                    >
+                      <UI.Box
+                        as={CIcon}
+                        icon={icon.riCheckCircleFill}
+                        color="blue.500"
+                      />
+                    </UI.Tooltip>
+                  )}
+                </UI.Flex>
                 <UI.Text fontSize="xs">{_dateAgo(post.createdAt)}</UI.Text>
               </UI.Box>
             </UI.Flex>

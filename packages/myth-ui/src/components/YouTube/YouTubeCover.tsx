@@ -7,7 +7,7 @@ export const YouTubeCover = ({ image, ...rest }: any) => {
     <Box
       pos="relative"
       minH={220}
-      backgroundImage="https://i.ytimg.com/vi/m-KkPaN-6XA/hqdefault.jpg"
+      backgroundImage="https://i.ytimg.com/vi/M76SUpBf_3o/sddefault.jpg"
       backgroundRepeat="no-repeat"
       backgroundPosition="center center"
       backgroundSize="cover"
@@ -15,7 +15,7 @@ export const YouTubeCover = ({ image, ...rest }: any) => {
       {...rest}
     >
       <Image
-        src="https://i.ytimg.com/vi/m-KkPaN-6XA/hqdefault.jpg"
+        src="https://i.ytimg.com/vi/M76SUpBf_3o/sddefault.jpg"
         visibility="hidden"
         m="0 auto"
         minH={60}

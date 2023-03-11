@@ -12,7 +12,7 @@ export const YouTubeWidget = ({ video, ...rest }: any) => {
       display="block"
       pos="relative"
       overflow="hidden"
-      href="https://www.youtube.com/watch?v=_WWZkN1VIDc"
+      href="https://www.youtube.com/watch?v=M76SUpBf_3o"
       isExternal
       {...rest}
     >
@@ -35,7 +35,8 @@ export const YouTubeWidget = ({ video, ...rest }: any) => {
         <YouTubeOverlay />
         <YouTubeHeading>
           <Text fontSize={["md", "lg"]} fontWeight="semibold">
-            ASMR Tu novia cuida de ti ❤️ Roleplay | ASMR ESPAÑOL | Ceceinfinite
+            Cómo crear una aplicación web como Instagram | Curso Gratis ReactJS
+            y Firebase #01
           </Text>
         </YouTubeHeading>
       </Box>

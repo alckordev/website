@@ -64,4 +64,5 @@ export {
   ModalOverlay,
   ModalContent,
   ModalCloseButton,
+  Tooltip,
 } from "@chakra-ui/react";
