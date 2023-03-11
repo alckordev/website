@@ -20,6 +20,7 @@ export { riTimeLine } from "./ri-time-line";
 export { riTwitterLine } from "./ri-twitter-line";
 export { riYoutubeLine } from "./ri-youtube-line";
 
+export { riCheckCircleFill } from "./ri-check-circle-fill";
 export { riGithubFill } from "./ri-github-fill";
 export { riLikeFill } from "./ri-like-fill";
 export { riMinusFill } from "./ri-minus-fill";
