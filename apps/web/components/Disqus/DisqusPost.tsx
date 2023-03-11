@@ -110,7 +110,6 @@ export const DisqusPost = ({
           <DisqusForm
             placeholder={`Respondiendo a ${post.author.name}...`}
             user={currentUser}
-            config={replyConfig.config}
             thread={replyConfig.thread}
             parent={post.key}
             onUpdatePosts={replyConfig.onUpdatePosts}

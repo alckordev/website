@@ -2,9 +2,6 @@ import { Fragment, useContext, useEffect, useState } from "react";
 import { UI, CIcon, icon } from "@myth/ui";
 import {
   ref,
-  query,
-  orderByChild,
-  equalTo,
   get,
   set,
   onValue,
@@ -12,47 +9,22 @@ import {
   DataSnapshot,
 } from "firebase/database";
 import { database } from "../../lib/firebase";
-import { transformFirstOrDefault } from "./utils";
 import { AuthContext } from "../../store/AuthProvider";
 import { SignInAllButtons } from "../Auth";
 
-const threadRef = ref(database, "threads");
-
 export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
-  const [thread, setThread] = useState<string>("");
   const [showSignIn, setShowSignIn] = useState(false);
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(0);
 
   const currentUser = useContext(AuthContext);
 
-  const findThreadByIdentifier = async (identifier: string) => {
-    const endpoint = query(
-      threadRef,
-      orderByChild("identifier"),
-      equalTo(identifier)
-    );
-    const snapshot = await get(endpoint);
-
-    if (snapshot.exists()) {
-      return transformFirstOrDefault(snapshot.val());
-    }
-
-    return undefined;
-  };
-
   const loadInstance = async () => {
-    const threadSnapshot = await findThreadByIdentifier(identifier);
-
-    setThread(threadSnapshot.key);
-
-    if (!threadSnapshot) return;
-
     // Check if user liked thread
     if (currentUser) {
       const userLikedThreadRef = ref(
         database,
-        `users/${currentUser?.uid}/likes/${threadSnapshot.key}`
+        `users/${currentUser?.uid}/likes/${identifier}`
       );
 
       onValue(userLikedThreadRef, (snapshot: DataSnapshot) => {
@@ -67,7 +39,7 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
   }, [currentUser, identifier]);
 
   useEffect(() => {
-    const threadRef = ref(database, `threads/${thread}`);
+    const threadRef = ref(database, `threads/${identifier}`);
 
     onValue(threadRef, (snapshot) => {
       if (snapshot.exists()) {
@@ -77,7 +49,7 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
         setLikes(currentLikesCount);
       }
     });
-  }, [thread, liked]);
+  }, [identifier, liked]);
 
   const handleLike = async () => {
     if (!currentUser) {
@@ -89,7 +61,7 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
       // hay que implementar quitar el like
       console.log("Ya diste like a este hilo");
     } else {
-      const threadRef = ref(database, `threads/${thread}`);
+      const threadRef = ref(database, `threads/${identifier}`);
       const threadSnapshot = await get(threadRef);
 
       if (threadSnapshot.exists()) {
@@ -99,7 +71,10 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
         await update(threadRef, { likes: newLikes });
       }
 
-      const userRef = ref(database, `users/${currentUser.uid}/likes/${thread}`);
+      const userRef = ref(
+        database,
+        `users/${currentUser.uid}/likes/${identifier}`
+      );
 
       await set(userRef, true);
 

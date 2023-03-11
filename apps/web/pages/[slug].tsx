@@ -5,10 +5,8 @@ import { getFileBySlug, getFiles } from "../lib/mdx";
 import { getThread } from "../lib/firebase-utils";
 
 export default function Post({ source, thread, frontmatter }: any) {
-  console.log("thread", thread);
-
   return (
-    <Layout metadata={frontmatter}>
+    <Layout metadata={frontmatter} thread={thread}>
       <PostMetadata
         title={frontmatter.title}
         slug={frontmatter.slug}

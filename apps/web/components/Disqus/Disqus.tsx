@@ -5,38 +5,22 @@ import { DisqusForm } from "./DisqusForm";
 import { DisqusPost } from "./DisqusPost";
 import { ref, query, orderByChild, equalTo, get } from "firebase/database";
 import { database } from "../../lib/firebase";
-import { transform, transformFirstOrDefault, sortTreeNodes } from "./utils";
+import { transform, sortTreeNodes } from "./utils";
 import { AuthContext } from "../../store/AuthProvider";
 
-const threadRef = ref(database, "threads");
-const postRef = ref(database, "posts");
-
-export const Disqus = ({ shortname, config, ...rest }: any) => {
+export const Disqus = ({ shortname, identifier, config, ...rest }: any) => {
   const currentUser = useContext(AuthContext);
 
-  const [thread, setThread] = useState<string>("");
+  // const [thread, setThread] = useState<string>("");
   const [posts, setPosts] = useState<any[]>([]);
 
-  const onUpdateThread = (thread: string) => setThread(thread);
+  // const onUpdateThread = (thread: string) => setThread(thread);
 
   const onUpdatePosts = (post: any) => setPosts([post, ...posts]);
 
-  const findThreadByIdentifier = async (identifier: string) => {
-    const endpoint = query(
-      threadRef,
-      orderByChild("identifier"),
-      equalTo(identifier)
-    );
-    const snapshot = await get(endpoint);
-
-    if (snapshot.exists()) {
-      return transformFirstOrDefault(snapshot.val());
-    }
-
-    return undefined;
-  };
-
   const findPostsByThread = async (thread: string) => {
+    const postRef = ref(database, "posts");
+
     const endpoint = query(postRef, orderByChild("thread"), equalTo(thread));
 
     const snapshot = await get(endpoint);
@@ -49,13 +33,7 @@ export const Disqus = ({ shortname, config, ...rest }: any) => {
   };
 
   const loadInstance = async () => {
-    const threadSnapshot = await findThreadByIdentifier(config.identifier);
-
-    if (!threadSnapshot) return;
-
-    setThread(threadSnapshot.key);
-
-    const postsSnapshot = await findPostsByThread(threadSnapshot.key);
+    const postsSnapshot = await findPostsByThread(identifier);
 
     if (!postsSnapshot) return;
 
@@ -64,15 +42,13 @@ export const Disqus = ({ shortname, config, ...rest }: any) => {
 
   useEffect(() => {
     loadInstance();
-  }, [config.identifier]);
+  }, [identifier]);
 
   return (
     <UI.Box minW="100%" mb={4} {...rest}>
       <DisqusForm
         user={currentUser}
-        config={config}
-        thread={thread}
-        onUpdateThread={onUpdateThread}
+        thread={identifier}
         onUpdatePosts={onUpdatePosts}
       />
       <UI.Divider
@@ -94,8 +70,7 @@ export const Disqus = ({ shortname, config, ...rest }: any) => {
             user={currentUser}
             post={post}
             replyConfig={{
-              config,
-              thread,
+              thread: identifier,
               onUpdatePosts,
             }}
           />

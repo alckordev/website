@@ -3,11 +3,12 @@ import { UI, useColorModeValue, useDisclosure, CIcon, icon } from "@myth/ui";
 import { Disqus, DisqusCount, DisqusThreadLikes } from "./Disqus";
 
 interface Props {
+  identifier: string;
   title?: string;
   slug?: string;
 }
 
-export const PostFooter = ({ title, slug }: Props) => {
+export const PostFooter = ({ identifier, title, slug }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -29,14 +30,14 @@ export const PostFooter = ({ title, slug }: Props) => {
           boxShadow="xl"
           rounded="3xl"
         >
-          <DisqusThreadLikes identifier={slug ?? ""} />
+          <DisqusThreadLikes identifier={identifier} />
           <UI.Button
             leftIcon={<CIcon icon={icon.riChatLine} />}
             size="sm"
             variant="link"
             onClick={onOpen}
           >
-            <DisqusCount identifier={slug ?? ""} onlyNumber />
+            <DisqusCount identifier={identifier} onlyNumber />
           </UI.Button>
           <UI.IconButton
             aria-label="Compartir"
@@ -52,13 +53,14 @@ export const PostFooter = ({ title, slug }: Props) => {
         <UI.DrawerContent>
           <UI.DrawerCloseButton top={4} />
           <UI.DrawerHeader>
-            Comentarios: <DisqusCount identifier={slug ?? ""} onlyNumber />
+            Comentarios: <DisqusCount identifier={identifier} onlyNumber />
           </UI.DrawerHeader>
           <UI.DrawerBody>
             <UI.Stack spacing={10} align="center">
               {slug && title && (
                 <Disqus
                   shortname="alckordev"
+                  identifier={identifier}
                   config={{
                     url: `http://localhost:3000/${slug}`,
                     identifier: slug ?? "",

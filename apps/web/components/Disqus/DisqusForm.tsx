@@ -6,15 +6,10 @@ import { formatISO } from "date-fns";
 import { ref, set, get, push } from "firebase/database";
 import { database } from "../../lib/firebase";
 
-const threadRef = ref(database, "threads");
-const postRef = ref(database, "posts");
-
 export const DisqusForm = ({
   user: currentUser,
-  config,
   thread,
   parent = null,
-  onUpdateThread,
   onUpdatePosts,
   onCancel,
   placeholder = "Únete a la conversación...",
@@ -44,31 +39,10 @@ export const DisqusForm = ({
 
   const toast = useToast({ position: "top" });
 
-  const addThread = async (data: any) => {
-    const newThreadRef = push(threadRef);
-
-    await set(newThreadRef, {
-      link: data.url,
-      identifier: data.identifier,
-      title: data.title,
-      likes: 0,
-      dislikes: 0,
-      posts: 0,
-      createdAt: formatISO(new Date()),
-      updatedAt: null,
-    });
-
-    const threadSnapshot = await get(newThreadRef);
-
-    const threadVal = threadSnapshot.val();
-
-    return { ...threadVal, key: threadSnapshot.key };
-  };
-
   const addPost = async (data: any) => {
-    const newPostRef = push(postRef);
+    const postRef = push(ref(database, "posts"));
 
-    await set(newPostRef, {
+    await set(postRef, {
       thread: data.thread,
       author: {
         uid: currentUser ? currentUser.uid : null,
@@ -89,22 +63,18 @@ export const DisqusForm = ({
       createdAt: formatISO(new Date()),
       updatedAt: null,
     });
-    const postSnapshot = await get(newPostRef);
-    const postVal = postSnapshot.val();
-    return { ...postVal, key: postSnapshot.key };
+
+    const snapshot = await get(postRef);
+
+    const post = snapshot.val();
+
+    return { ...post, key: snapshot.key };
   };
 
   const onSubmit = handleSubmit(async (values) => {
     try {
-      let tmpThread = thread;
+      const newPost = await addPost({ ...values, thread, parent });
 
-      if (thread == "") {
-        const newThread = await addThread(config);
-        tmpThread = newThread.key;
-        onUpdateThread(newThread.key);
-      }
-
-      const newPost = await addPost({ ...values, thread: tmpThread, parent });
       onUpdatePosts(newPost);
 
       reset({ message: "" });

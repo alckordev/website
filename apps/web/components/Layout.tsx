@@ -22,6 +22,7 @@ interface Props {
       slug: string;
     };
   };
+  thread?: any;
   type?: string;
 }
 
@@ -29,6 +30,7 @@ export const Layout = ({
   heading,
   children,
   metadata = {},
+  thread = {},
   type = "post",
 }: Props) => {
   const isBlogTemplate = type === "post" && metadata.createdAt ? true : false;
@@ -93,7 +95,11 @@ export const Layout = ({
               {children}
 
               {isBlogTemplate && (
-                <PostFooter title={metadata.title} slug={metadata.slug} />
+                <PostFooter
+                  identifier={thread.key}
+                  title={metadata.title}
+                  slug={metadata.slug}
+                />
               )}
             </UI.Box>
           </UI.Box>

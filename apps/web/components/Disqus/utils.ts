@@ -10,16 +10,6 @@ export function transform(data: any) {
   return newData;
 }
 
-export function transformFirstOrDefault(data: any) {
-  const newData = Object.keys(data).map((key) => {
-    return {
-      ...data[key],
-      key,
-    };
-  });
-  return newData[0];
-}
-
 export function sortTreeNodes(nodes: any[]): any[] {
   const map = new Map<string, any>();
   const roots: any[] = [];

@@ -5,15 +5,10 @@ import {
   query,
   orderByChild,
   equalTo,
-  get,
   onValue,
   DataSnapshot,
 } from "firebase/database";
 import { database } from "../../lib/firebase";
-import { transformFirstOrDefault } from "./utils";
-
-const threadRef = ref(database, "threads");
-const postRef = ref(database, "posts");
 
 export const DisqusCount = ({
   identifier,
@@ -25,39 +20,22 @@ export const DisqusCount = ({
 }) => {
   const [count, setCount] = useState(0);
 
-  const findThreadByIdentifier = async (identifier: string) => {
-    const endpoint = query(
-      threadRef,
-      orderByChild("identifier"),
-      equalTo(identifier)
-    );
-    const snapshot = await get(endpoint);
-
-    if (snapshot.exists()) {
-      return transformFirstOrDefault(snapshot.val());
-    }
-
-    return undefined;
-  };
-
   const loadInstance = async () => {
-    const threadSnapshot = await findThreadByIdentifier(identifier);
+    const postRef = ref(database, "posts");
 
-    if (!threadSnapshot) return;
-
-    const postEndpoint = query(
+    const postsByThread = query(
       postRef,
       orderByChild("thread"),
-      equalTo(threadSnapshot.key)
+      equalTo(identifier)
     );
 
-    const postCountRef = ref(database, `postCounts/${threadSnapshot.key}`);
+    const postCountRef = ref(database, `postCounts/${identifier}`);
 
     const updateCount = (snapshot: DataSnapshot) => {
       setCount(snapshot.size);
     };
 
-    onValue(postEndpoint, updateCount);
+    onValue(postsByThread, updateCount);
     onValue(postCountRef, updateCount);
   };
 
