@@ -4,12 +4,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { formatISO } from "date-fns";
 import { ref, set, get, push } from "firebase/database";
-import { database, auth } from "../../lib/firebase";
+import { database } from "../../lib/firebase";
 
 const threadRef = ref(database, "threads");
 const postRef = ref(database, "posts");
 
 export const DisqusForm = ({
+  user: currentUser,
   config,
   thread,
   parent = null,
@@ -19,8 +20,6 @@ export const DisqusForm = ({
   placeholder = "Únete a la conversación...",
   ...rest
 }: any) => {
-  const user = auth.currentUser;
-
   const {
     register,
     handleSubmit,
@@ -28,8 +27,8 @@ export const DisqusForm = ({
     formState: { errors, touchedFields, isSubmitting },
   } = useForm({
     defaultValues: {
-      author_name: parent ? "Alckor Dev" : "",
-      author_email: parent ? "alckor@dev.com" : "",
+      author_name: currentUser ? currentUser?.displayName : "",
+      author_email: currentUser ? currentUser?.email : "",
       message: "",
     },
     resolver: yupResolver(
@@ -68,13 +67,15 @@ export const DisqusForm = ({
 
   const addPost = async (data: any) => {
     const newPostRef = push(postRef);
+
     await set(newPostRef, {
       thread: data.thread,
       author: {
+        uid: currentUser ? currentUser.uid : null,
         name: data.author_name,
         email: data.author_email,
-        picture: null,
-        isAnonymous: true,
+        picture: currentUser ? currentUser.photoURL : null,
+        isAnonymous: currentUser ? currentUser.isAnonymous : true,
         createdAt: formatISO(new Date()),
         updatedAt: null,
       },
@@ -118,12 +119,6 @@ export const DisqusForm = ({
     }
   });
 
-  console.log("user", {
-    name: user?.displayName,
-    email: user?.email,
-    picture: user?.photoURL,
-  });
-
   return (
     <UI.Card
       variant="outline"
@@ -134,7 +129,7 @@ export const DisqusForm = ({
     >
       <UI.CardBody p={0}>
         <UI.HStack spacing={4} align="flex-start">
-          <UI.Avatar size="sm" src={user?.photoURL || undefined} />
+          <UI.Avatar size="sm" src={currentUser?.photoURL || undefined} />
           <UI.VStack
             as="form"
             onSubmit={onSubmit}
@@ -154,8 +149,10 @@ export const DisqusForm = ({
                   "Los comentarios deben tener al menos 2 caractéres."}
               </UI.FormErrorMessage>
             </UI.FormControl>
+
             <UI.FormControl
               isInvalid={errors.author_name && touchedFields.author_name}
+              style={{ display: currentUser ? "none" : "block" }}
             >
               <UI.Input
                 placeholder="Nombre"
@@ -168,6 +165,7 @@ export const DisqusForm = ({
             </UI.FormControl>
             <UI.FormControl
               isInvalid={errors.author_email && touchedFields.author_email}
+              style={{ display: currentUser ? "none" : "block" }}
             >
               <UI.Input
                 type="email"
@@ -180,6 +178,7 @@ export const DisqusForm = ({
                   "Por favor, escribe tu correo electrónico."}
               </UI.FormErrorMessage>
             </UI.FormControl>
+
             <UI.HStack>
               {onCancel && typeof onCancel === "function" && (
                 <UI.Button onClick={onCancel}>Cancelar</UI.Button>

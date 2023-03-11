@@ -3,7 +3,12 @@ import { UI, useColorModeValue, CIcon, icon } from "@myth/ui";
 import { _dateAgo } from "../../lib/format-date";
 import { DisqusForm } from "./DisqusForm";
 
-export const DisqusPost = ({ post, replyConfig, ...rest }: any) => {
+export const DisqusPost = ({
+  user: currentUser,
+  post,
+  replyConfig,
+  ...rest
+}: any) => {
   const [isReplyListCollased, setIsReplyListCollased] = useState(false);
   const [isReplyFormCollased, setIsReplyFormCollased] = useState(false);
 
@@ -18,7 +23,7 @@ export const DisqusPost = ({ post, replyConfig, ...rest }: any) => {
             <UI.Flex flex={1} gap={4} alignItems="center" flexWrap="wrap">
               <UI.Avatar
                 name={post.author.name}
-                src={post.author.permalink}
+                src={post.author.picture}
                 size="sm"
               />
               <UI.Box>
@@ -62,7 +67,7 @@ export const DisqusPost = ({ post, replyConfig, ...rest }: any) => {
                 </UI.Button>
               )}
             </UI.ButtonGroup>
-            {post.author.isAnonymous && (
+            {currentUser && (
               <UI.Button
                 colorScheme="purple"
                 size="sm"
@@ -87,6 +92,7 @@ export const DisqusPost = ({ post, replyConfig, ...rest }: any) => {
         >
           <DisqusForm
             placeholder={`Respondiendo a ${post.author.name}...`}
+            user={currentUser}
             config={replyConfig.config}
             thread={replyConfig.thread}
             parent={post.key}

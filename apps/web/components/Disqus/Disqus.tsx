@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UI, useColorModeValue } from "@myth/ui";
 import { DisqusForm } from "./DisqusForm";
 // import { DisqusEditor } from "./DisqusEditor";
@@ -6,11 +6,14 @@ import { DisqusPost } from "./DisqusPost";
 import { ref, query, orderByChild, equalTo, get } from "firebase/database";
 import { database } from "../../lib/firebase";
 import { transform, transformFirstOrDefault, sortTreeNodes } from "./utils";
+import { AuthContext } from "../../store/AuthProvider";
 
 const threadRef = ref(database, "threads");
 const postRef = ref(database, "posts");
 
 export const Disqus = ({ shortname, config, ...rest }: any) => {
+  const currentUser = useContext(AuthContext);
+
   const [thread, setThread] = useState<string>("");
   const [posts, setPosts] = useState<any[]>([]);
 
@@ -66,6 +69,7 @@ export const Disqus = ({ shortname, config, ...rest }: any) => {
   return (
     <UI.Box minW="100%" mb={4} {...rest}>
       <DisqusForm
+        user={currentUser}
         config={config}
         thread={thread}
         onUpdateThread={onUpdateThread}
@@ -83,6 +87,7 @@ export const Disqus = ({ shortname, config, ...rest }: any) => {
         {sortTreeNodes(posts).map((post: any) => (
           <DisqusPost
             key={post.key}
+            user={currentUser}
             post={post}
             replyConfig={{
               config,
