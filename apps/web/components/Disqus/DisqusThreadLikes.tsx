@@ -116,7 +116,7 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
         onClick={handleLike}
         _hover={{ textDecor: "none" }}
       >
-        {likes}
+        {likes | 0}
       </UI.Button>
       <SignInAllButtons
         isOpen={showSignIn}

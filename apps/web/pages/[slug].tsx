@@ -2,8 +2,11 @@ import { MDXRemote } from "next-mdx-remote";
 import { Layout, MDXComponent, PostMetadata } from "../components";
 import { _date } from "../lib/format-date";
 import { getFileBySlug, getFiles } from "../lib/mdx";
+import { getThread } from "../lib/firebase-utils";
 
-export default function Post({ source, frontmatter }: any) {
+export default function Post({ source, thread, frontmatter }: any) {
+  console.log("thread", thread);
+
   return (
     <Layout metadata={frontmatter}>
       <PostMetadata
@@ -34,18 +37,21 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: any) {
-  // aqui tambien deberiamos obtener
-  // o crear el thread para los comentarios
-  // para poder tener el thread key disponible
-
-  const { source, frontmatter } = await getFileBySlug({
+  const { source, frontmatter }: any = await getFileBySlug({
     type: "posts",
     slug: params.slug,
+  });
+
+  const thread = await getThread({
+    title: frontmatter.title,
+    identifier: params.slug,
+    url: `http://localhost:3000/${params.slug}`,
   });
 
   return {
     props: {
       source,
+      thread,
       frontmatter: {
         ...frontmatter,
         slug: params.slug,
