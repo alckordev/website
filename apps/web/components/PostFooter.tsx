@@ -16,11 +16,14 @@ export const PostFooter = ({ title, slug }: Props) => {
         <UI.HStack
           divider={
             <UI.StackDivider
-              borderColor={useColorModeValue("gray.200", "gray.900")}
+              borderColor={useColorModeValue(
+                "blackAlpha.200",
+                "whiteAlpha.200"
+              )}
             />
           }
           spacing={4}
-          bg={useColorModeValue("white", "gray.800")}
+          bg={useColorModeValue("white", "black")}
           px={4}
           py={3}
           boxShadow="xl"

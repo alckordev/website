@@ -75,7 +75,11 @@ export const Disqus = ({ shortname, config, ...rest }: any) => {
         onUpdateThread={onUpdateThread}
         onUpdatePosts={onUpdatePosts}
       />
-      <UI.Divider my={8} />
+      <UI.Divider
+        my={8}
+        borderColor={useColorModeValue("gray.200", "gray.900")}
+        opacity={1}
+      />
       <UI.VStack
         divider={
           <UI.StackDivider

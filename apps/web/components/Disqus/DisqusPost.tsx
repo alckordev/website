@@ -98,10 +98,12 @@ export const DisqusPost = ({
 
       <UI.Collapse in={isReplyFormCollased} style={{ width: "100%" }}>
         <UI.Box
+          borderLeftWidth={3}
+          borderLeftStyle="solid"
+          borderLeftColor={useColorModeValue("gray.200", "gray.900")}
           style={{
             width: "calc(100% - 1rem)",
             marginLeft: "auto",
-            borderLeft: "3px solid rgb(230, 230, 230)",
             paddingLeft: 24,
           }}
         >
@@ -119,10 +121,12 @@ export const DisqusPost = ({
 
       <UI.Collapse in={isReplyListCollased} style={{ width: "100%" }}>
         <UI.Box
+          borderLeftWidth={3}
+          borderLeftStyle="solid"
+          borderLeftColor={useColorModeValue("gray.200", "gray.900")}
           style={{
             width: "calc(100% - 1rem)",
             marginLeft: "auto",
-            borderLeft: "3px solid rgb(230, 230, 230)",
             paddingLeft: 24,
           }}
         >
