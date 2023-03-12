@@ -26,6 +26,7 @@ export { riGithubFill } from "./ri-github-fill";
 export { riLikeFill } from "./ri-like-fill";
 export { riMinusFill } from "./ri-minus-fill";
 export { riMoonFill } from "./ri-moon-fill";
+export { riPlayFill } from "./ri-play-fill";
 export { riPlusFill } from "./ri-plus-fill";
 export { riSunFill } from "./ri-sun-fill";
 export { riYoutubeFill } from "./ri-youtube-fill";
