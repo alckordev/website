@@ -1,6 +1,7 @@
 import { ButtonGroup, IconButton, Tooltip, useToast } from "@chakra-ui/react";
 import { motion, Variants } from "framer-motion";
 import copy from "copy-to-clipboard";
+import { fbButton, tw, linkedin, whatsapp } from "vanilla-sharing";
 import CIcon from "@coreui/icons-react";
 import {
   riFacebookLine,
@@ -62,6 +63,7 @@ export const SharedButtonGroup = ({ ...rest }) => {
         icon={<CIcon icon={riFacebookLine} />}
         colorScheme="facebook"
         rounded="full"
+        onClick={() => fbButton({ url: rest.url })}
       />
       <IconButton
         as={motion.button}
@@ -71,6 +73,7 @@ export const SharedButtonGroup = ({ ...rest }) => {
         icon={<CIcon icon={riTwitterLine} />}
         colorScheme="twitter"
         rounded="full"
+        onClick={() => tw({ url: rest.url })}
       />
       <IconButton
         as={motion.button}
@@ -80,6 +83,7 @@ export const SharedButtonGroup = ({ ...rest }) => {
         icon={<CIcon icon={riLinkedinLine} />}
         colorScheme="linkedin"
         rounded="full"
+        onClick={() => linkedin({ url: rest.url })}
       />
       <IconButton
         as={motion.button}
@@ -89,6 +93,7 @@ export const SharedButtonGroup = ({ ...rest }) => {
         icon={<CIcon icon={riWhatsappLine} />}
         colorScheme="whatsapp"
         rounded="full"
+        onClick={() => whatsapp({ url: rest.url })}
       />
       <Tooltip hasArrow label="Haz clic para copiar el enlace">
         <IconButton
@@ -97,8 +102,8 @@ export const SharedButtonGroup = ({ ...rest }) => {
           whileTap={{ scale: 0.95 }}
           aria-label="Copiar enlace"
           icon={<CIcon icon={riLinkLine} />}
-          onClick={handleCopyToClipboard}
           rounded="full"
+          onClick={handleCopyToClipboard}
         />
       </Tooltip>
     </ButtonGroup>

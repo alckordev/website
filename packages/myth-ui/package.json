@@ -24,6 +24,7 @@
     "@fontsource/ibm-plex-sans": "^4.5.13",
     "@fontsource/poppins": "^4.5.10",
     "copy-to-clipboard": "^3.3.3",
-    "framer-motion": "^9.1.6"
+    "framer-motion": "^9.1.6",
+    "vanilla-sharing": "^6.1.1"
   }
 }
