@@ -18,6 +18,7 @@ export { riMenuLine } from "./ri-menu-line";
 export { riShareLine } from "./ri-share-line";
 export { riTimeLine } from "./ri-time-line";
 export { riTwitterLine } from "./ri-twitter-line";
+export { riWhatsappLine } from "./ri-whatsapp-line";
 export { riYoutubeLine } from "./ri-youtube-line";
 
 export { riCheckCircleFill } from "./ri-check-circle-fill";

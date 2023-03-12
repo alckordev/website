@@ -8,13 +8,10 @@ import { database } from "../../lib/firebase";
 import { transform, sortTreeNodes } from "./utils";
 import { AuthContext } from "../../store/AuthProvider";
 
-export const Disqus = ({ shortname, identifier, config, ...rest }: any) => {
+export const Disqus = ({ shortname, identifier, ...rest }: any) => {
   const currentUser = useContext(AuthContext);
 
-  // const [thread, setThread] = useState<string>("");
   const [posts, setPosts] = useState<any[]>([]);
-
-  // const onUpdateThread = (thread: string) => setThread(thread);
 
   const onUpdatePosts = (post: any) => setPosts([post, ...posts]);
 

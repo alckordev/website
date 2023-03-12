@@ -1,14 +1,15 @@
 import React, { Fragment } from "react";
-import { UI, useColorModeValue, useDisclosure, CIcon, icon } from "@myth/ui";
+import {
+  UI,
+  useColorModeValue,
+  useDisclosure,
+  CIcon,
+  icon,
+  SharedButton,
+} from "@myth/ui";
 import { Disqus, DisqusCount, DisqusThreadLikes } from "./Disqus";
 
-interface Props {
-  identifier: string;
-  title?: string;
-  slug?: string;
-}
-
-export const PostFooter = ({ identifier, title, slug }: Props) => {
+export const PostFooter = ({ thread }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -25,26 +26,23 @@ export const PostFooter = ({ identifier, title, slug }: Props) => {
           }
           spacing={4}
           bg={useColorModeValue("white", "black")}
-          px={4}
-          py={3}
+          px={8}
+          py={2}
+          minH={50}
           boxShadow="xl"
           rounded="3xl"
         >
-          <DisqusThreadLikes identifier={identifier} />
+          <DisqusThreadLikes identifier={thread.key} />
           <UI.Button
             leftIcon={<CIcon icon={icon.riChatLine} />}
             size="sm"
             variant="link"
             onClick={onOpen}
+            _hover={{ textDecor: "none" }}
           >
-            <DisqusCount identifier={identifier} onlyNumber />
+            <DisqusCount identifier={thread.key} onlyNumber />
           </UI.Button>
-          <UI.IconButton
-            aria-label="Compartir"
-            icon={<CIcon icon={icon.riShareLine} />}
-            size="sm"
-            variant="link"
-          />
+          <SharedButton url={thread.link} />
         </UI.HStack>
       </UI.Flex>
 
@@ -53,21 +51,11 @@ export const PostFooter = ({ identifier, title, slug }: Props) => {
         <UI.DrawerContent>
           <UI.DrawerCloseButton top={4} />
           <UI.DrawerHeader>
-            Comentarios: <DisqusCount identifier={identifier} onlyNumber />
+            Comentarios: <DisqusCount identifier={thread.key} onlyNumber />
           </UI.DrawerHeader>
           <UI.DrawerBody>
             <UI.Stack spacing={10} align="center">
-              {slug && title && (
-                <Disqus
-                  shortname="alckordev"
-                  identifier={identifier}
-                  config={{
-                    url: `http://localhost:3000/${slug}`,
-                    identifier: slug ?? "",
-                    title: title ?? "",
-                  }}
-                />
-              )}
+              <Disqus shortname="alckordev" identifier={thread.key} />
             </UI.Stack>
           </UI.DrawerBody>
         </UI.DrawerContent>

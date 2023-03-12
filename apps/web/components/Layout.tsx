@@ -94,13 +94,7 @@ export const Layout = ({
 
               {children}
 
-              {isBlogTemplate && (
-                <PostFooter
-                  identifier={thread.key}
-                  title={metadata.title}
-                  slug={metadata.slug}
-                />
-              )}
+              {isBlogTemplate && <PostFooter thread={thread} />}
             </UI.Box>
           </UI.Box>
 
