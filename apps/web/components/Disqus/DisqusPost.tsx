@@ -5,8 +5,8 @@ import { DisqusForm } from "./DisqusForm";
 
 export const DisqusPost = ({
   user: currentUser,
+  thread,
   post,
-  replyConfig,
   ...rest
 }: any) => {
   const [isReplyListCollased, setIsReplyListCollased] = useState(false);
@@ -110,9 +110,8 @@ export const DisqusPost = ({
           <DisqusForm
             placeholder={`Respondiendo a ${post.author.name}...`}
             user={currentUser}
-            thread={replyConfig.thread}
+            thread={thread}
             parent={post.key}
-            onUpdatePosts={replyConfig.onUpdatePosts}
             onCancel={replyFormToggle}
           />
         </UI.Box>
@@ -143,7 +142,7 @@ export const DisqusPost = ({
                 key={`child-${child.key}`}
                 user={currentUser}
                 post={child}
-                replyConfig={replyConfig}
+                thread={thread}
               />
             ))}
           </UI.VStack>

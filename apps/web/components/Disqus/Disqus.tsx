@@ -1,24 +1,33 @@
 import { useContext, useEffect, useState } from "react";
 import { UI, useColorModeValue } from "@myth/ui";
 import { DisqusForm } from "./DisqusForm";
-// import { DisqusEditor } from "./DisqusEditor";
 import { DisqusPost } from "./DisqusPost";
-import { ref, query, orderByChild, equalTo, get } from "firebase/database";
+import {
+  ref,
+  query,
+  orderByChild,
+  equalTo,
+  get,
+  onChildAdded,
+  off,
+} from "firebase/database";
 import { database } from "../../lib/firebase";
 import { transform, sortTreeNodes } from "./utils";
 import { AuthContext } from "../../store/AuthProvider";
+
+const postRef = ref(database, "posts");
 
 export const Disqus = ({ shortname, identifier, ...rest }: any) => {
   const currentUser = useContext(AuthContext);
 
   const [posts, setPosts] = useState<any[]>([]);
 
-  const onUpdatePosts = (post: any) => setPosts([post, ...posts]);
-
-  const findPostsByThread = async (thread: string) => {
-    const postRef = ref(database, "posts");
-
-    const endpoint = query(postRef, orderByChild("thread"), equalTo(thread));
+  const getPostsByThread = async () => {
+    const endpoint = query(
+      postRef,
+      orderByChild("thread"),
+      equalTo(identifier)
+    );
 
     const snapshot = await get(endpoint);
 
@@ -30,7 +39,7 @@ export const Disqus = ({ shortname, identifier, ...rest }: any) => {
   };
 
   const loadInstance = async () => {
-    const postsSnapshot = await findPostsByThread(identifier);
+    const postsSnapshot = await getPostsByThread();
 
     if (!postsSnapshot) return;
 
@@ -39,15 +48,37 @@ export const Disqus = ({ shortname, identifier, ...rest }: any) => {
 
   useEffect(() => {
     loadInstance();
+
+    // Watching new posts
+    const endpoint = query(
+      postRef,
+      orderByChild("thread"),
+      equalTo(identifier)
+    );
+
+    onChildAdded(endpoint, (snapshot) => {
+      const newPost = { ...snapshot.val(), key: snapshot.key };
+      const existingPost = posts.find((post) => post.key === newPost.key);
+
+      if (existingPost) return;
+
+      setPosts((prevPosts) => [newPost, ...prevPosts]);
+    });
+
+    return () => {
+      // Stop watching when component is unmounted
+      const endpoint = query(
+        postRef,
+        orderByChild("thread"),
+        equalTo(identifier)
+      );
+      off(endpoint, "child_added");
+    };
   }, [identifier]);
 
   return (
     <UI.Box minW="100%" mb={4} {...rest}>
-      <DisqusForm
-        user={currentUser}
-        thread={identifier}
-        onUpdatePosts={onUpdatePosts}
-      />
+      <DisqusForm user={currentUser} thread={identifier} />
       <UI.Divider
         my={8}
         borderColor={useColorModeValue("gray.200", "gray.900")}
@@ -66,10 +97,7 @@ export const Disqus = ({ shortname, identifier, ...rest }: any) => {
             key={post.key}
             user={currentUser}
             post={post}
-            replyConfig={{
-              thread: identifier,
-              onUpdatePosts,
-            }}
+            thread={identifier}
           />
         ))}
       </UI.VStack>

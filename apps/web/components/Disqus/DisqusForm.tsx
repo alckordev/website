@@ -10,7 +10,6 @@ export const DisqusForm = ({
   user: currentUser,
   thread,
   parent = null,
-  onUpdatePosts,
   onCancel,
   placeholder = "Únete a la conversación...",
   ...rest
@@ -73,9 +72,7 @@ export const DisqusForm = ({
 
   const onSubmit = handleSubmit(async (values) => {
     try {
-      const newPost = await addPost({ ...values, thread, parent });
-
-      onUpdatePosts(newPost);
+      await addPost({ ...values, thread, parent });
 
       reset({ message: "" });
 
