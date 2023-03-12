@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { UI, CIcon, icon } from "@myth/ui";
-import { FacebookAuthProvider, signInWithPopup } from "firebase/auth";
+import { UI, CIcon, icon, useToast } from "@myth/ui";
+import { FacebookAuthProvider, signInWithRedirect } from "firebase/auth";
 import { auth } from "../../lib/firebase";
 
 const provider = new FacebookAuthProvider();
@@ -13,13 +13,19 @@ export const SignInWithFacebookButton = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
+  const toast = useToast({ position: "top" });
+
   const handleSignIn = async () => {
     setIsLoading(true);
     try {
-      await signInWithPopup(auth, provider);
+      await signInWithRedirect(auth, provider);
       if (callback) callback();
     } catch (error) {
-      console.log("signIn", error);
+      toast({
+        description: "¡Ups! Algo salió mal. 😭",
+        status: "error",
+        isClosable: true,
+      });
     }
     setIsLoading(false);
   };

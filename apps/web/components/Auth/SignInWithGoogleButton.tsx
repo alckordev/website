@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { UI, CIcon, icon } from "@myth/ui";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { UI, CIcon, icon, useToast } from "@myth/ui";
+import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import { auth } from "../../lib/firebase";
 
 const provider = new GoogleAuthProvider();
@@ -13,13 +13,19 @@ export const SignInWithGoogleButton = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
 
+  const toast = useToast({ position: "top" });
+
   const handleSignIn = async () => {
     setIsLoading(true);
     try {
-      await signInWithPopup(auth, provider);
+      await signInWithRedirect(auth, provider);
       if (callback) callback();
     } catch (err) {
-      console.log("signIn", err);
+      toast({
+        description: "¡Ups! Algo salió mal. 😭",
+        status: "error",
+        isClosable: true,
+      });
     }
     setIsLoading(false);
   };
