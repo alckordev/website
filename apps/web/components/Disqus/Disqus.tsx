@@ -12,7 +12,7 @@ import {
   off,
 } from "firebase/database";
 import { database } from "../../lib/firebase";
-import { transform, sortTreeNodes } from "./utils";
+import { getWithKey, sortTreeNodes } from "../../lib/firebase-utils";
 import { AuthContext } from "../../store/AuthProvider";
 
 const postRef = ref(database, "posts");
@@ -32,7 +32,7 @@ export const Disqus = ({ shortname, identifier, ...rest }: any) => {
     const snapshot = await get(endpoint);
 
     if (snapshot.exists()) {
-      return transform(snapshot.val());
+      return getWithKey(snapshot.val());
     }
 
     return undefined;
