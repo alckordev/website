@@ -1,18 +1,28 @@
+import { useState } from "react";
 import { UI, CIcon, icon } from "@myth/ui";
-// import { FacebookAuthProvider, signInWithPopup } from "firebase/auth";
-// import { auth } from "../../lib/firebase";
+import { FacebookAuthProvider, signInWithPopup } from "firebase/auth";
+import { auth } from "../../lib/firebase";
 
-// const provider = new FacebookAuthProvider();
+const provider = new FacebookAuthProvider();
 
-export const SignInWithFacebookButton = ({ ...rest }) => {
-  //   const handleSignIn = async () => {
-  //     try {
-  //       const response = await signInWithPopup(auth, provider);
-  //       console.log("signIn", response);
-  //     } catch (error) {
-  //       console.log("signIn", error);
-  //     }
-  //   };
+export const SignInWithFacebookButton = ({
+  callback,
+  ...rest
+}: {
+  callback: () => void;
+}) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSignIn = async () => {
+    setIsLoading(true);
+    try {
+      await signInWithPopup(auth, provider);
+      if (callback) callback();
+    } catch (error) {
+      console.log("signIn", error);
+    }
+    setIsLoading(false);
+  };
 
   return (
     <UI.Button
@@ -20,8 +30,8 @@ export const SignInWithFacebookButton = ({ ...rest }) => {
       variant="outline"
       rounded="3xl"
       fontWeight="normal"
-      // onClick={handleSignIn}
-      // isDisabled={true}
+      onClick={handleSignIn}
+      isLoading={isLoading}
       {...rest}
     >
       Iniciar sesión con Facebook

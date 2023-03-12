@@ -23,14 +23,14 @@ export const SignInAllButtons = ({
           </UI.Heading>
           <UI.VStack my={16} spacing={4}>
             <SignInWithGoogleButton callback={onClose} />
-            <SignInWithFacebookButton isDisabled={true} />
+            <SignInWithFacebookButton callback={onClose} />
             <SignInWithGithubButton callback={onClose} />
             <SignInWithTwitterButton isDisabled={true} />
           </UI.VStack>
           <UI.Text fontSize="sm">
-            Haga clic en "Iniciar sesión" para aceptar los Términos de servicio
-            de Medium y reconocer que la Política de privacidad de Medium se
-            aplica a usted.
+            Al hacer clic en "Iniciar sesión", confirmas que estás de acuerdo
+            con nuestros términos y condiciones, así como con nuestra política
+            de privacidad.
           </UI.Text>
         </UI.ModalBody>
       </UI.ModalContent>
