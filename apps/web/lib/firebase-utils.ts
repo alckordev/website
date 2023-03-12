@@ -10,6 +10,17 @@ import {
 } from "firebase/database";
 import { database } from "./firebase";
 
+export function getWithKey(data: any, isFirstOrDefault?: boolean) {
+  const array = Object.keys(data).map((key) => {
+    return {
+      ...data[key],
+      key,
+    };
+  });
+
+  return isFirstOrDefault ? array[0] : array;
+}
+
 export function firstOrDefault(data: any) {
   const array = Object.keys(data).map((key) => {
     return {

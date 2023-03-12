@@ -1,8 +1,9 @@
 import { Fragment } from "react";
 import NextLink from "next/link";
-import { UI, YouTubeWidget, useColorModeValue } from "@myth/ui";
+import { UI, useColorModeValue } from "@myth/ui";
 import tags from "../data/tags";
 import { Newsletter } from "./Newsletter";
+import { LastedVideos } from "./LastedVideos";
 
 export const Aside = () => {
   return (
@@ -38,11 +39,11 @@ export const Aside = () => {
         <UI.Card minW="100%" bg="transparent" boxShadow="none">
           <UI.CardHeader p={0}>
             <UI.Heading as="h2" fontSize="lg">
-              Último video
+              Últimos videos
             </UI.Heading>
           </UI.CardHeader>
           <UI.CardBody px={0} pb={0}>
-            <UI.Box as={YouTubeWidget} borderRadius="0.375rem" />
+            <LastedVideos />
           </UI.CardBody>
         </UI.Card>
       </UI.VStack>
