@@ -141,6 +141,7 @@ export const DisqusPost = ({
             {post.children.map((child: any) => (
               <DisqusPost
                 key={`child-${child.key}`}
+                user={currentUser}
                 post={child}
                 replyConfig={replyConfig}
               />
