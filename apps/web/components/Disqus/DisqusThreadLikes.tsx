@@ -5,6 +5,7 @@ import {
   get,
   set,
   onValue,
+  remove,
   update,
   DataSnapshot,
 } from "firebase/database";
@@ -57,28 +58,36 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
       return;
     }
 
-    if (liked) {
-      // hay que implementar quitar el like
-      console.log("Ya diste like a este hilo");
-    } else {
-      const threadRef = ref(database, `threads/${identifier}`);
-      const threadSnapshot = await get(threadRef);
+    const threadRef = ref(database, `threads/${identifier}`);
+    const threadSnapshot = await get(threadRef);
 
-      if (threadSnapshot.exists()) {
-        const currentLikes = threadSnapshot.val().likes;
-        const newLikes = currentLikes + 1;
+    if (!threadSnapshot.exists()) {
+      return;
+    }
 
-        await update(threadRef, { likes: newLikes });
-      }
+    const userRef = ref(
+      database,
+      `users/${currentUser.uid}/likes/${identifier}`
+    );
 
-      const userRef = ref(
-        database,
-        `users/${currentUser.uid}/likes/${identifier}`
-      );
+    if (!liked) {
+      const currentLikes = threadSnapshot.val().likes;
+      const newLikes = currentLikes + 1;
+
+      await update(threadRef, { likes: newLikes });
 
       await set(userRef, true);
 
       setLiked(true);
+    } else {
+      const currentLikes = threadSnapshot.val().likes;
+      const newLikes = currentLikes - 1;
+
+      await update(threadRef, { likes: newLikes });
+
+      await remove(userRef);
+
+      setLiked(false);
     }
   };
 
