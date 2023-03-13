@@ -9,6 +9,7 @@ import {
   DataSnapshot,
 } from "firebase/database";
 import { database } from "../../lib/firebase";
+import { displayNumber } from "../../lib/format-number";
 
 export const DisqusCount = ({
   identifier,
@@ -45,7 +46,8 @@ export const DisqusCount = ({
 
   return (
     <UI.Text as="span" {...rest}>
-      {count} {!onlyNumber && (count === 1 ? "comentario" : "comentarios")}
+      {displayNumber(count)}{" "}
+      {!onlyNumber && (count === 1 ? "comentario" : "comentarios")}
     </UI.Text>
   );
 };

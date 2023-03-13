@@ -10,6 +10,7 @@ import {
   DataSnapshot,
 } from "firebase/database";
 import { database } from "../../lib/firebase";
+import { displayNumber } from "../../lib/format-number";
 import { AuthContext } from "../../store/AuthProvider";
 import { SignInAllButtons } from "../Auth";
 
@@ -95,7 +96,7 @@ export const DisqusPostLikes = ({ identifier }: { identifier: string }) => {
         onClick={handleLike}
         _hover={{ textDecor: "none" }}
       >
-        {likes | 0}
+        {displayNumber(likes | 0)}
       </UI.Button>
 
       <SignInAllButtons

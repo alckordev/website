@@ -70,7 +70,7 @@ export const LastedVideos = ({ ...rest }) => {
                   p="3px 7px 3px 7px"
                   rounded="2xl"
                 >
-                  <UI.Box as={CIcon} icon={icon.riPlayFill} />
+                  <UI.Box as={CIcon} icon={icon.riPlayFill} color="white" />
                 </UI.Flex>
               </UI.Box>
               <UI.Box>
