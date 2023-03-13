@@ -72,4 +72,5 @@ export {
   AlertDialogCloseButton,
   AlertDialogBody,
   AlertDialogFooter,
+  Portal,
 } from "@chakra-ui/react";
