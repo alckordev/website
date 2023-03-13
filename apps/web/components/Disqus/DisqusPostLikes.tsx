@@ -13,7 +13,7 @@ import { database } from "../../lib/firebase";
 import { AuthContext } from "../../store/AuthProvider";
 import { SignInAllButtons } from "../Auth";
 
-export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
+export const DisqusPostLikes = ({ identifier }: { identifier: string }) => {
   const [showSignIn, setShowSignIn] = useState(false);
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(0);
@@ -21,14 +21,14 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
   const currentUser = useContext(AuthContext);
 
   const loadInstance = async () => {
-    // Check if user liked thread
+    // Check if user liked post
     if (currentUser) {
-      const userLikedThreadRef = ref(
+      const userLikedPostRef = ref(
         database,
-        `users/${currentUser.uid}/threads/likes/${identifier}`
+        `users/${currentUser.uid}/posts/likes/${identifier}`
       );
 
-      onValue(userLikedThreadRef, (snapshot: DataSnapshot) => {
+      onValue(userLikedPostRef, (snapshot: DataSnapshot) => {
         const liked = snapshot.val();
         setLiked(liked);
       });
@@ -40,12 +40,12 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
   }, [currentUser, identifier]);
 
   useEffect(() => {
-    const threadRef = ref(database, `threads/${identifier}`);
+    const postRef = ref(database, `posts/${identifier}`);
 
-    onValue(threadRef, (snapshot) => {
+    onValue(postRef, (snapshot) => {
       if (snapshot.exists()) {
-        const thread = snapshot.val();
-        const currentLikesCount = thread.likes;
+        const post = snapshot.val();
+        const currentLikesCount = post.likes;
 
         setLikes(currentLikesCount);
       }
@@ -58,35 +58,29 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
       return;
     }
 
-    const threadRef = ref(database, `threads/${identifier}`);
-    const threadSnapshot = await get(threadRef);
+    const postRef = ref(database, `posts/${identifier}`);
+    const postSnapshot = await get(postRef);
 
-    if (!threadSnapshot.exists()) {
+    if (!postSnapshot.exists()) {
       return;
     }
 
-    const userRef = ref(
+    const userLikedPostRef = ref(
       database,
-      `users/${currentUser.uid}/threads/likes/${identifier}`
+      `users/${currentUser.uid}/posts/likes/${identifier}`
     );
 
     if (!liked) {
-      const currentLikes = threadSnapshot.val().likes;
+      const currentLikes = postSnapshot.val().likes;
       const newLikes = currentLikes + 1;
-
-      await update(threadRef, { likes: newLikes });
-
-      await set(userRef, true);
-
+      await update(postRef, { likes: newLikes });
+      await set(userLikedPostRef, true);
       setLiked(true);
     } else {
-      const currentLikes = threadSnapshot.val().likes;
+      const currentLikes = postSnapshot.val().likes;
       const newLikes = currentLikes - 1;
-
-      await update(threadRef, { likes: newLikes });
-
-      await remove(userRef);
-
+      await update(postRef, { likes: newLikes });
+      await remove(userLikedPostRef);
       setLiked(false);
     }
   };
@@ -95,6 +89,7 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
     <Fragment>
       <UI.Button
         leftIcon={<CIcon icon={liked ? icon.riLikeFill : icon.riLikeLine} />}
+        colorScheme="purple"
         size="sm"
         variant="link"
         onClick={handleLike}
@@ -102,6 +97,7 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
       >
         {likes | 0}
       </UI.Button>
+
       <SignInAllButtons
         isOpen={showSignIn}
         onClose={() => setShowSignIn(false)}

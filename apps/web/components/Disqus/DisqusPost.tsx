@@ -2,6 +2,7 @@ import { useState } from "react";
 import { UI, useColorModeValue, CIcon, icon } from "@myth/ui";
 import { _dateAgo } from "../../lib/format-date";
 import { DisqusForm } from "./DisqusForm";
+import { DisqusPostLikes } from "./DisqusPostLikes";
 
 export const DisqusPost = ({
   user: currentUser,
@@ -61,13 +62,8 @@ export const DisqusPost = ({
         </UI.CardBody>
         <UI.CardFooter p={0}>
           <UI.Stack w="100%" direction="row" justify="space-between">
-            <UI.ButtonGroup size="sm" colorScheme="purple" spacing={4}>
-              <UI.Button
-                leftIcon={<CIcon icon={icon.riLikeLine} />}
-                variant="link"
-              >
-                {post.likes}
-              </UI.Button>
+            <UI.ButtonGroup spacing={4}>
+              <DisqusPostLikes identifier={post.key} />
               {post.children && post.children.length > 0 && (
                 <UI.Button
                   leftIcon={<CIcon icon={icon.riChatLine} />}
