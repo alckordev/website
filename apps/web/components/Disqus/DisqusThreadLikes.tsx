@@ -65,7 +65,7 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
       return;
     }
 
-    const userRef = ref(
+    const userLikedThreadRef = ref(
       database,
       `users/${currentUser.uid}/threads/likes/${identifier}`
     );
@@ -73,20 +73,14 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
     if (!liked) {
       const currentLikes = threadSnapshot.val().likes;
       const newLikes = currentLikes + 1;
-
       await update(threadRef, { likes: newLikes });
-
-      await set(userRef, true);
-
+      await set(userLikedThreadRef, true);
       setLiked(true);
     } else {
       const currentLikes = threadSnapshot.val().likes;
       const newLikes = currentLikes - 1;
-
       await update(threadRef, { likes: newLikes });
-
-      await remove(userRef);
-
+      await remove(userLikedThreadRef);
       setLiked(false);
     }
   };
