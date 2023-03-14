@@ -1,12 +1,11 @@
 import React, { Fragment, useContext, useState, useEffect } from "react";
 import { UI, useColorModeValue, NavBarFullScreen, Footer } from "@myth/ui";
-import { auth } from "../lib/firebase";
 import { Aside } from "./Aside";
 import { OpenGraph } from "./OpenGraph";
 import networks from "../data/networks";
 import sections from "../data/sections";
 import { PostFooter } from "./PostFooter";
-import { SignInButton, SignOutButton } from "./Auth";
+import { SignInAllButtons, SignInButton, SignOutButton } from "./Auth";
 import { AuthContext } from "../store/AuthProvider";
 
 interface Props {
@@ -35,7 +34,7 @@ export const Layout = ({
 }: Props) => {
   const isBlogTemplate = type === "post" && metadata.createdAt ? true : false;
 
-  const currentUser = useContext(AuthContext);
+  const { currentUser, isOpenSignIn, onCloseSignIn } = useContext(AuthContext);
 
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -116,6 +115,8 @@ export const Layout = ({
       </UI.Container>
 
       <Footer networks={networks} />
+
+      <SignInAllButtons isOpen={isOpenSignIn} onClose={onCloseSignIn} />
     </Fragment>
   );
 };

@@ -18,7 +18,7 @@ import { AuthContext } from "../../store/AuthProvider";
 const postRef = ref(database, "posts");
 
 export const Disqus = ({ shortname, identifier, ...rest }: any) => {
-  const currentUser = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
 
   const [posts, setPosts] = useState<any[]>([]);
 

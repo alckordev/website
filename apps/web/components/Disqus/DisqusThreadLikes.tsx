@@ -12,14 +12,12 @@ import {
 import { database } from "../../lib/firebase";
 import { displayNumber } from "../../lib/format-number";
 import { AuthContext } from "../../store/AuthProvider";
-import { SignInAllButtons } from "../Auth";
 
 export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
-  const [showSignIn, setShowSignIn] = useState(false);
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(0);
 
-  const currentUser = useContext(AuthContext);
+  const { currentUser, onOpenSignIn } = useContext(AuthContext);
 
   const loadInstance = async () => {
     // Check if user liked thread
@@ -55,7 +53,7 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
 
   const handleLike = async () => {
     if (!currentUser) {
-      setShowSignIn(true);
+      onOpenSignIn();
       return;
     }
 
@@ -87,20 +85,14 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
   };
 
   return (
-    <Fragment>
-      <UI.Button
-        leftIcon={<CIcon icon={liked ? icon.riLikeFill : icon.riLikeLine} />}
-        size="sm"
-        variant="link"
-        onClick={handleLike}
-        _hover={{ textDecor: "none" }}
-      >
-        {displayNumber(likes | 0)}
-      </UI.Button>
-      <SignInAllButtons
-        isOpen={showSignIn}
-        onClose={() => setShowSignIn(false)}
-      />
-    </Fragment>
+    <UI.Button
+      leftIcon={<CIcon icon={liked ? icon.riLikeFill : icon.riLikeLine} />}
+      size="sm"
+      variant="link"
+      onClick={handleLike}
+      _hover={{ textDecor: "none" }}
+    >
+      {displayNumber(likes | 0)}
+    </UI.Button>
   );
 };

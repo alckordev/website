@@ -1,17 +1,13 @@
-import { Fragment } from "react";
-import { UI, useDisclosure } from "@myth/ui";
-import { SignInAllButtons } from "./SignInAllButtons";
+import { useContext } from "react";
+import { UI } from "@myth/ui";
+import { AuthContext } from "../../store/AuthProvider";
 
 export const SignInButton = ({ ...rest }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { onOpenSignIn } = useContext(AuthContext);
 
   return (
-    <Fragment>
-      <UI.Button onClick={onOpen} {...rest}>
-        Iniciar sesión
-      </UI.Button>
-
-      <SignInAllButtons onClose={onClose} isOpen={isOpen} />
-    </Fragment>
+    <UI.Button onClick={onOpenSignIn} {...rest}>
+      Iniciar sesión
+    </UI.Button>
   );
 };

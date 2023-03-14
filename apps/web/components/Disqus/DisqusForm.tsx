@@ -47,6 +47,7 @@ export const DisqusForm = ({
         uid: currentUser ? currentUser.uid : null,
         name: data.author_name,
         email: data.author_email,
+        emailVerified: currentUser ? currentUser.emailVerified : false,
         picture: currentUser ? currentUser.photoURL : null,
         isAnonymous: currentUser ? currentUser.isAnonymous : true,
         createdAt: formatISO(new Date()),
