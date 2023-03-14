@@ -18,7 +18,7 @@ import { AuthContext } from "../../store/AuthProvider";
 const postRef = ref(database, "posts");
 
 export const Disqus = ({ shortname, identifier, ...rest }: any) => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, onOpenSignIn } = useContext(AuthContext);
 
   const [posts, setPosts] = useState<any[]>([]);
 
@@ -78,7 +78,11 @@ export const Disqus = ({ shortname, identifier, ...rest }: any) => {
 
   return (
     <UI.Box minW="100%" mb={4} {...rest}>
-      <DisqusForm user={currentUser} thread={identifier} />
+      <DisqusForm
+        user={currentUser}
+        thread={identifier}
+        onOpenSignIn={onOpenSignIn}
+      />
       <UI.Divider
         my={8}
         borderColor={useColorModeValue("gray.200", "gray.900")}
@@ -98,6 +102,7 @@ export const Disqus = ({ shortname, identifier, ...rest }: any) => {
             user={currentUser}
             post={post}
             thread={identifier}
+            onOpenSignIn={onOpenSignIn}
           />
         ))}
       </UI.VStack>

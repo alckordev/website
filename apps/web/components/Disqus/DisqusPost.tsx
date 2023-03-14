@@ -6,6 +6,7 @@ import { DisqusPostLikes } from "./DisqusPostLikes";
 
 export const DisqusPost = ({
   user: currentUser,
+  onOpenSignIn,
   thread,
   post,
   ...rest
@@ -109,6 +110,7 @@ export const DisqusPost = ({
             thread={thread}
             parent={post.key}
             onCancel={replyFormToggle}
+            onOpenSignIn={onOpenSignIn}
           />
         </UI.Box>
       </UI.Collapse>

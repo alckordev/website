@@ -11,6 +11,7 @@ export const DisqusForm = ({
   thread,
   parent = null,
   onCancel,
+  onOpenSignIn,
   placeholder = "Únete a la conversación...",
   ...rest
 }: any) => {
@@ -20,18 +21,9 @@ export const DisqusForm = ({
     reset,
     formState: { errors, touchedFields, isSubmitting },
   } = useForm({
-    defaultValues: {
-      author_name: currentUser ? currentUser?.displayName : "",
-      author_email: currentUser ? currentUser?.email : "",
-      message: "",
-    },
     resolver: yupResolver(
       yup.object().shape({
         message: yup.string().min(2).required(),
-        author_name: yup.string().required(),
-        author_email: yup
-          .string()
-          .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i),
       })
     ),
   });
@@ -44,14 +36,12 @@ export const DisqusForm = ({
     await set(postRef, {
       thread: data.thread,
       author: {
-        uid: currentUser ? currentUser.uid : null,
-        name: data.author_name,
-        email: data.author_email,
-        emailVerified: currentUser ? currentUser.emailVerified : false,
-        picture: currentUser ? currentUser.photoURL : null,
-        isAnonymous: currentUser ? currentUser.isAnonymous : true,
-        createdAt: formatISO(new Date()),
-        updatedAt: null,
+        uid: currentUser.uid,
+        name: currentUser.displayName,
+        email: currentUser.email,
+        emailVerified: currentUser.emailVerified,
+        picture: currentUser.photoURL,
+        isAnonymous: currentUser.isAnonymous,
       },
       message: data.message,
       likes: 0,
@@ -72,6 +62,11 @@ export const DisqusForm = ({
   };
 
   const onSubmit = handleSubmit(async (values) => {
+    if (!currentUser) {
+      onOpenSignIn();
+      return;
+    }
+
     try {
       await addPost({ ...values, thread, parent });
 
@@ -115,35 +110,6 @@ export const DisqusForm = ({
               <UI.FormErrorMessage>
                 {errors.message &&
                   "Los comentarios deben tener al menos 2 caractéres."}
-              </UI.FormErrorMessage>
-            </UI.FormControl>
-
-            <UI.FormControl
-              isInvalid={errors.author_name && touchedFields.author_name}
-              style={{ display: currentUser ? "none" : "block" }}
-            >
-              <UI.Input
-                placeholder="Nombre"
-                size="sm"
-                {...register("author_name")}
-              />
-              <UI.FormErrorMessage>
-                {errors.author_name && "Por favor, escribe tu nombre."}
-              </UI.FormErrorMessage>
-            </UI.FormControl>
-            <UI.FormControl
-              isInvalid={errors.author_email && touchedFields.author_email}
-              style={{ display: currentUser ? "none" : "block" }}
-            >
-              <UI.Input
-                type="email"
-                placeholder="Correo electrónico"
-                size="sm"
-                {...register("author_email")}
-              />
-              <UI.FormErrorMessage>
-                {errors.author_email &&
-                  "Por favor, escribe tu correo electrónico."}
               </UI.FormErrorMessage>
             </UI.FormControl>
 
