@@ -30,6 +30,7 @@ export {
   Tbody,
   UnorderedList,
   OrderedList,
+  List,
   ListItem,
   ListIcon,
   Tag,
