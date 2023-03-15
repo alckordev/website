@@ -1,3 +1,7 @@
+export { riBold } from "./ri-bold";
+export { riItalic } from "./ri-italic";
+export { riUnderline } from "./ri-underline";
+
 export { riAlarmWarningLine } from "./ri-alarm-warning-line";
 export { riArticleLine } from "./ri-article-line";
 export { riArrowRightLine } from "./ri-arrow-right-line";
