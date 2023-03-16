@@ -1,13 +1,12 @@
 import React, { useCallback, useState } from "react";
-import { UI, icon, useToast } from "@myth/ui";
+import { UI, icon, useToast, useColorModeValue } from "@myth/ui";
 import isHotkey from "is-hotkey";
 import { Editable, withReact, Slate, ReactEditor } from "slate-react";
-import { createEditor, BaseEditor } from "slate";
+import { createEditor, BaseEditor, Transforms, Editor } from "slate";
 import { MarkButton, toggleMark } from "./MarkButton";
 import { Leaf } from "./Leaf";
 import { CustomElement, CustomText } from "./types";
 import { HOTKEYS } from "./constants";
-
 import { useController, useForm } from "react-hook-form";
 import { serialize } from "./serialize";
 import { formatISO } from "date-fns";
@@ -43,9 +42,8 @@ const SlateEditor = ({
 
   const {
     control,
-    formState: { errors, isSubmitting },
     handleSubmit,
-    reset,
+    formState: { errors, isSubmitting },
   } = useForm();
 
   const {
@@ -108,7 +106,7 @@ const SlateEditor = ({
 
   const onSubmit = handleSubmit(async ({ message }) => {
     if (!currentUser) {
-      onOpenSignIn();
+      onOpenSignIn(); // Open signin methods
       return;
     }
 
@@ -119,16 +117,7 @@ const SlateEditor = ({
 
       await addPost({ message: html, thread, parent });
 
-      // reset({
-      //   message: [
-      //     {
-      //       type: "paragraph",
-      //       children: [{ text: "" }],
-      //     },
-      //   ],
-      // });
-
-      if (parent && typeof onCancel === "function") onCancel();
+      onReset(); // Reset editor
     } catch (err) {
       console.log("err", err);
       toast({
@@ -139,10 +128,26 @@ const SlateEditor = ({
     }
   });
 
-  console.log("parent", parent);
+  const onReset = () => {
+    if (parent && typeof onCancel === "function") onCancel();
+
+    Transforms.delete(editor, {
+      at: {
+        anchor: Editor.start(editor, []),
+        focus: Editor.end(editor, []),
+      },
+    });
+  };
 
   return (
-    <UI.Box as="form" onSubmit={onSubmit} boxShadow="md" p={4}>
+    <UI.Box
+      as="form"
+      onSubmit={onSubmit}
+      bg={useColorModeValue("white", "blackAlpha.500")}
+      rounded="lg"
+      boxShadow="md"
+      p={4}
+    >
       <Slate editor={editor} value={value} onChange={onChange}>
         {!parent && (
           <UI.HStack spacing={4}>
@@ -184,7 +189,7 @@ const SlateEditor = ({
           </UI.ButtonGroup>
           <UI.ButtonGroup size="sm">
             {onCancel && typeof onCancel === "function" && (
-              <UI.Button variant="ghost" rounded="3xl" onClick={onCancel}>
+              <UI.Button variant="ghost" rounded="3xl" onClick={onReset}>
                 Cancelar
               </UI.Button>
             )}
