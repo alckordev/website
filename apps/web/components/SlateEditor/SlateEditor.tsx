@@ -139,17 +139,21 @@ const SlateEditor = ({
     }
   });
 
+  console.log("parent", parent);
+
   return (
     <UI.Box as="form" onSubmit={onSubmit} boxShadow="md" p={4}>
       <Slate editor={editor} value={value} onChange={onChange}>
-        <UI.HStack spacing={4}>
-          <UI.Avatar
-            name={currentUser?.displayName}
-            src={currentUser?.photoURL}
-            size="sm"
-          />
-          <UI.Text>{currentUser?.displayName}</UI.Text>
-        </UI.HStack>
+        {!parent && (
+          <UI.HStack spacing={4}>
+            <UI.Avatar
+              name={currentUser?.displayName}
+              src={currentUser?.photoURL}
+              size="sm"
+            />
+            <UI.Text>{currentUser?.displayName}</UI.Text>
+          </UI.HStack>
+        )}
 
         <UI.Box minH={100}>
           <UI.Box py={4}>

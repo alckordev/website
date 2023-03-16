@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { UI, useColorModeValue, CIcon, icon } from "@myth/ui";
 import { _dateAgo } from "../../lib/format-date";
-import { DisqusForm } from "./DisqusForm";
 import { DisqusPostLikes } from "./DisqusPostLikes";
+import { SlateEditor } from "../SlateEditor";
 
 export const DisqusPost = ({
   user: currentUser,
@@ -102,9 +102,12 @@ export const DisqusPost = ({
             width: "calc(100% - 1rem)",
             marginLeft: "auto",
             paddingLeft: 24,
+            paddingRight: 6,
           }}
+          px={24}
+          py={4}
         >
-          <DisqusForm
+          <SlateEditor
             placeholder={`Respondiendo a ${post.author.name}...`}
             user={currentUser}
             thread={thread}

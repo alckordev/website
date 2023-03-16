@@ -46,8 +46,9 @@ export const PostFooter = ({ thread }: any) => {
         </UI.HStack>
       </UI.Flex>
 
-      <UI.Drawer onClose={onClose} isOpen={isOpen} size="sm">
-        <UI.DrawerOverlay bg="blackAlpha.600" backdropFilter="blur(5px)" />
+      <UI.Drawer onClose={onClose} isOpen={isOpen} size="md">
+        <UI.DrawerOverlay bg="blackAlpha.600" />
+        {/* <UI.DrawerOverlay bg="blackAlpha.600" backdropFilter="blur(5px)" /> */}
         <UI.DrawerContent>
           <UI.DrawerCloseButton top={4} />
           <UI.DrawerHeader>
