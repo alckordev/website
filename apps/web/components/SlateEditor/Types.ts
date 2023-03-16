@@ -1,4 +1,9 @@
-type CustomElement = { type: "paragraph"; children: CustomText[] };
+type CustomElement = {
+  type: "heading" | "paragraph" | "link";
+  level?: number;
+  url?: string;
+  children: CustomText[];
+};
 
 type CustomText = {
   text: string;
