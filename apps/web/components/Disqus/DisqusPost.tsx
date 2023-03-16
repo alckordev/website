@@ -28,8 +28,8 @@ export const DisqusPost = ({
                 src={post.author.picture}
                 size="sm"
               />
-              <UI.Box>
-                <UI.Flex as={UI.Heading} size="sm" align="center" gap={1}>
+              <UI.Box lineHeight={1.25}>
+                <UI.Flex as={UI.Text} align="center" gap={1}>
                   {post.author.name}
                   {!post.author.isAnonymous && (
                     <UI.Tooltip

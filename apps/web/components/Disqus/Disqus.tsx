@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UI, useColorModeValue } from "@myth/ui";
-import { DisqusForm } from "./DisqusForm";
 import { DisqusPost } from "./DisqusPost";
+import { SlateEditor } from "../SlateEditor";
 import {
   ref,
   query,
@@ -14,7 +14,6 @@ import {
 import { database } from "../../lib/firebase";
 import { getWithKey, sortTreeNodes } from "../../lib/firebase-utils";
 import { AuthContext } from "../../store/AuthProvider";
-import { DisqusEditor } from "./DisqusEditor";
 
 const postRef = ref(database, "posts");
 
@@ -79,12 +78,11 @@ export const Disqus = ({ shortname, identifier, ...rest }: any) => {
 
   return (
     <UI.Box minW="100%" mb={4} {...rest}>
-      {/* <DisqusForm
+      <SlateEditor
         user={currentUser}
         thread={identifier}
         onOpenSignIn={onOpenSignIn}
-      /> */}
-      <DisqusEditor />
+      />
       <UI.Divider
         my={8}
         borderColor={useColorModeValue("gray.200", "gray.900")}
