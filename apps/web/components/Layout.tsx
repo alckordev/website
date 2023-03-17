@@ -7,6 +7,7 @@ import sections from "../data/sections";
 import { PostFooter } from "./PostFooter";
 import { SignInAllButtons, SignInButton, SignOutButton } from "./Auth";
 import { AuthContext } from "../store/AuthProvider";
+import { RelatedPosts } from "./RelatedPosts";
 
 interface Props {
   heading?: React.ReactNode | React.ReactElement | string;
@@ -20,6 +21,7 @@ interface Props {
       name: string;
       slug: string;
     };
+    relateds?: any[];
   };
   thread?: any;
   type?: string;
@@ -94,6 +96,10 @@ export const Layout = ({
               {children}
 
               {isBlogTemplate && <PostFooter thread={thread} />}
+
+              {isBlogTemplate && (
+                <RelatedPosts relateds={metadata.relateds || []} />
+              )}
             </UI.Box>
           </UI.Box>
 

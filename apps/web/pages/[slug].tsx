@@ -1,7 +1,8 @@
 import { MDXRemote } from "next-mdx-remote";
 import { Layout, MDXComponent, PostMetadata } from "../components";
 import { _date } from "../lib/format-date";
-import { getFileBySlug, getFiles } from "../lib/mdx";
+import { getFileBySlug, getFiles, getFilesFrontmatter } from "../lib/mdx";
+import { orderByDate } from "../lib/order-by-date";
 import { getThread } from "../lib/firebase-utils";
 
 export default function Post({ source, thread, frontmatter }: any) {
@@ -40,6 +41,16 @@ export async function getStaticProps({ params }: any) {
     slug: params.slug,
   });
 
+  let relateds: any[] = [];
+
+  if (frontmatter.relateds && frontmatter.relateds.length) {
+    const slugs = frontmatter.relateds;
+    const allPosts = await getFilesFrontmatter({ type: "posts" });
+
+    relateds = allPosts.filter((post: any) => slugs.includes(post.slug));
+    relateds = relateds.sort(orderByDate);
+  }
+
   const thread = await getThread({
     title: frontmatter.title,
     identifier: params.slug,
@@ -53,6 +64,7 @@ export async function getStaticProps({ params }: any) {
       frontmatter: {
         ...frontmatter,
         slug: params.slug,
+        relateds,
       },
     },
   };

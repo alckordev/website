@@ -143,7 +143,7 @@ const SlateEditor = ({
     <UI.Box
       as="form"
       onSubmit={onSubmit}
-      bg={useColorModeValue("white", "blackAlpha.500")}
+      bg={useColorModeValue("white", "blackAlpha.300")}
       rounded="lg"
       boxShadow="md"
       p={4}

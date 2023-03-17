@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import NextLink from "next/link";
 import { UI } from "@myth/ui";
 
@@ -22,6 +23,23 @@ export const PostListItem = ({
   tags = [],
   ...rest
 }: Props) => {
+  const [lineClamp, setLineClamp] = useState<number>(2);
+
+  const headingRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    const currentRef = headingRef.current;
+    const currentHeight = currentRef?.getBoundingClientRect().height;
+
+    if (currentHeight) {
+      if (currentHeight < 60) {
+        setLineClamp(3);
+      } else {
+        setLineClamp(2);
+      }
+    }
+  }, []);
+
   return (
     <UI.Card
       w="100%"
@@ -32,10 +50,16 @@ export const PostListItem = ({
     >
       <UI.Stack>
         <UI.CardBody as={NextLink} href={`/${slug}`} px={0} pt={0}>
-          <UI.Text as="time" fontSize="xs" dateTime={dateTime}>
+          <UI.Text
+            as="time"
+            display="block"
+            fontSize="xs"
+            mb={2}
+            dateTime={dateTime}
+          >
             {customDate}
           </UI.Text>
-          <UI.Flex align="center">
+          <UI.Flex align={[null, null, "center", "center"]}>
             <UI.Box flex="1 1 auto">
               <UI.Heading
                 lineHeight={["20px", "20px", "28px", "28px"]}
@@ -49,6 +73,7 @@ export const PostListItem = ({
                   WebkitLineClamp: 2,
                   WebkitBoxOrient: "vertical",
                 }}
+                ref={headingRef}
               >
                 {title}
               </UI.Heading>
@@ -58,7 +83,7 @@ export const PostListItem = ({
                   overflow="hidden"
                   sx={{
                     display: "-webkit-box",
-                    WebkitLineClamp: 2,
+                    WebkitLineClamp: lineClamp,
                     WebkitBoxOrient: "vertical",
                   }}
                 >

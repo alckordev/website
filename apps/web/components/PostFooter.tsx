@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import {
   UI,
   useColorModeValue,
@@ -14,7 +14,7 @@ export const PostFooter = ({ thread }: any) => {
 
   return (
     <Fragment>
-      <UI.Flex pos="sticky" bottom={6} align="center" justify="center">
+      <UI.Flex pos="sticky" bottom={6} my={16} align="center" justify="center">
         <UI.HStack
           divider={
             <UI.StackDivider
