@@ -9,10 +9,10 @@ export const RelatedPosts = ({ relateds }: { relateds: any[] }) => {
     <UI.VStack
       divider={
         <UI.StackDivider
-          borderColor={useColorModeValue("gray.200", "gray.800")}
+          borderColor={useColorModeValue("gray.200", "gray.928")}
         />
       }
-      bg={useColorModeValue("gray.100", "gray.700")}
+      bg={useColorModeValue("gray.100", "gray.900")}
       spacing={7}
       p="24px"
     >

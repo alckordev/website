@@ -85,13 +85,13 @@ export const Disqus = ({ shortname, identifier, ...rest }: any) => {
       />
       <UI.Divider
         my={8}
-        borderColor={useColorModeValue("gray.200", "gray.958")}
+        borderColor={useColorModeValue("gray.200", "gray.928")}
         opacity={1}
       />
       <UI.VStack
         divider={
           <UI.StackDivider
-            borderColor={useColorModeValue("gray.200", "gray.958")}
+            borderColor={useColorModeValue("gray.200", "gray.928")}
           />
         }
         spacing={4}
