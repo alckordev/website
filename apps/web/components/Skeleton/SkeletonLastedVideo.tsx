@@ -7,8 +7,8 @@ export const SkeletonLastedVideo = ({ ...rest }) => {
         <UI.Skeleton w={100} h={70} />
       </UI.Box>
       <UI.Box minW="calc(100% - 100px - 1rem)">
-        <UI.SkeletonText noOfLines={1} mb={2} skeletonHeight={2} width={100} />
-        <UI.SkeletonText noOfLines={2} spacing={2} skeletonHeight={2} />
+        <UI.SkeletonText noOfLines={1} mb={2} width={100} />
+        <UI.SkeletonText noOfLines={2} spacing={2} />
       </UI.Box>
     </UI.Flex>
   );

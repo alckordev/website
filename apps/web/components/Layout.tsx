@@ -80,6 +80,8 @@ export const Layout = ({
             px={6}
           >
             <UI.Box as={isBlogTemplate ? "article" : "section"}>
+              {/*  */}
+
               {heading && (
                 <UI.Box w="100%" maxW={[null, null, 680, 680]} mx="auto">
                   <UI.Heading as="h2" fontSize="sm">
