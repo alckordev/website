@@ -17,6 +17,9 @@ import { SkeletonPost } from "../components/Skeleton";
 export default function Post({ source, thread, frontmatter, relateds }: any) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  const dividerBorderColor = useColorModeValue("gray.200", "gray.928");
+  const bgColor = useColorModeValue("gray.100", "gray.900");
+
   useEffect(() => setIsLoading(false), [source]);
 
   return (
@@ -37,28 +40,26 @@ export default function Post({ source, thread, frontmatter, relateds }: any) {
 
           <PostFooter thread={thread} />
 
-          <UI.VStack
-            divider={
-              <UI.StackDivider
-                borderColor={useColorModeValue("gray.200", "gray.928")}
-              />
-            }
-            bg={useColorModeValue("gray.100", "gray.900")}
-            spacing={7}
-            p="24px"
-          >
-            {relateds.map((post: any) => (
-              <PostListItem
-                key={post.slug}
-                title={post.title}
-                summary={post.summary}
-                customDate={_date(post.createdAt)}
-                dateTime={post.createdAt}
-                slug={post.slug}
-                tags={post.tags}
-              />
-            ))}
-          </UI.VStack>
+          {relateds.length > 0 && (
+            <UI.VStack
+              divider={<UI.StackDivider borderColor={dividerBorderColor} />}
+              bg={bgColor}
+              spacing={7}
+              p="24px"
+            >
+              {relateds.map((post: any) => (
+                <PostListItem
+                  key={post.slug}
+                  title={post.title}
+                  summary={post.summary}
+                  customDate={_date(post.createdAt)}
+                  dateTime={post.createdAt}
+                  slug={post.slug}
+                  tags={post.tags}
+                />
+              ))}
+            </UI.VStack>
+          )}
         </Fragment>
       )}
     </Layout>

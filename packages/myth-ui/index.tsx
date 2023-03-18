@@ -13,6 +13,7 @@ export * as UI from "./src/chakra-ui";
 export { CIcon, icon } from "./src/coreui-icon";
 export * as fonts from "./src/fonts";
 export { AnimatePresence, motion, useReducedMotion } from "./src/framer-motion";
+export type { Variants } from "./src/framer-motion";
 
 export { NavBarFullScreen } from "./src/components/NavBarFullScreen";
 export { YouTubeWidget } from "./src/components/YouTube";

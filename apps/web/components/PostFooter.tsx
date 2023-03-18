@@ -26,9 +26,8 @@ export const PostFooter = ({ thread }: any) => {
           }
           spacing={4}
           bg={useColorModeValue("white", "gray.958")}
-          px={8}
-          py={2}
-          minH={50}
+          px={7}
+          py={3}
           boxShadow="xl"
           rounded="3xl"
         >
@@ -45,6 +44,7 @@ export const PostFooter = ({ thread }: any) => {
           <SharedButton url={thread.link} />
         </UI.HStack>
       </UI.Flex>
+
       <UI.Divider
         my={8}
         borderColor={useColorModeValue("gray.200", "gray.958")}
@@ -52,7 +52,7 @@ export const PostFooter = ({ thread }: any) => {
       />
 
       <UI.Box pt="24px" pb="36px" mx="24px" mb="24px">
-        <UI.Heading as="h2" size="md" fontWeight="medium">
+        <UI.Heading as="h2" size={["sm", "sm", "md", "md"]} fontWeight="medium">
           ¿Te gustó lo que leíste?
         </UI.Heading>
         <UI.Flex

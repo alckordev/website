@@ -36,7 +36,7 @@ const theme = extendTheme({
       500: "#9aa0a6",
       400: "#bdc1c6",
       300: "#dadce0",
-      200: "#f1f3f4",
+      200: "#e8eaed",
       100: "#f1f3f4",
       50: "#f8f9fa",
     },
