@@ -1,14 +1,18 @@
-import { useRef, useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { UI, useColorModeValue } from "@myth/ui";
 import { Layout, PostListItem } from "../components";
 import { usePagination } from "../hooks/use-pagination";
 import { getFilesFrontmatter } from "../lib/mdx";
 import { _date } from "../lib/format-date";
 import { orderByDate } from "../lib/order-by-date";
+import { SkeletonPostListItem } from "../components/Skeleton";
 
 export default function Home({ allPosts }: any) {
   const { next, page, currentData, maxPage } = usePagination(allPosts, 6);
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const observerRef = useRef<HTMLDivElement>(null);
+
   const prevY = useRef(0);
   const currentPosts = currentData();
 
@@ -34,6 +38,8 @@ export default function Home({ allPosts }: any) {
     };
   }, [next]);
 
+  useEffect(() => setIsLoading(false), [currentPosts]);
+
   return (
     <Layout>
       <UI.VStack
@@ -45,18 +51,22 @@ export default function Home({ allPosts }: any) {
         spacing={7}
         maxW={["100%", "100%", "100%", 790]}
       >
-        {currentPosts &&
-          currentPosts.map((post: any) => (
-            <PostListItem
-              key={post.slug}
-              title={post.title}
-              summary={post.summary}
-              customDate={_date(post.createdAt)}
-              dateTime={post.createdAt}
-              slug={post.slug}
-              tags={post.tags}
-            />
-          ))}
+        {isLoading
+          ? Array(4)
+              .fill(null)
+              .map((_, i) => <SkeletonPostListItem key={i} />)
+          : currentPosts.map((post: any) => (
+              <PostListItem
+                key={post.slug}
+                title={post.title}
+                summary={post.summary}
+                customDate={_date(post.createdAt)}
+                dateTime={post.createdAt}
+                slug={post.slug}
+                tags={post.tags}
+              />
+            ))}
+
         {page !== maxPage && (
           <UI.Flex ref={observerRef} gap={4} align="center">
             <UI.Spinner size="sm" /> Cargando...
