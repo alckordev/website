@@ -1,22 +1,66 @@
+import { Fragment, useEffect, useState } from "react";
 import { MDXRemote } from "next-mdx-remote";
-import { Layout, MDXComponent, PostMetadata } from "../components";
+import { UI, useColorModeValue } from "@myth/ui";
+import {
+  Layout,
+  MDXComponent,
+  PostFooter,
+  PostMetadata,
+  PostListItem,
+} from "../components";
 import { _date } from "../lib/format-date";
 import { getFileBySlug, getFiles, getFilesFrontmatter } from "../lib/mdx";
 import { orderByDate } from "../lib/order-by-date";
 import { getThread } from "../lib/firebase-utils";
+import { SkeletonPost } from "../components/Skeleton";
 
-export default function Post({ source, thread, frontmatter }: any) {
+export default function Post({ source, thread, frontmatter, relateds }: any) {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => setIsLoading(false), [source]);
+
   return (
-    <Layout metadata={frontmatter} thread={thread}>
-      <PostMetadata
-        title={frontmatter.title}
-        slug={frontmatter.slug}
-        customDate={_date(frontmatter.createdAt)}
-        dateTime={frontmatter.createdAt}
-        readingTime={frontmatter.readingTime.minutes}
-        tags={frontmatter.tags}
-      />
-      <MDXRemote {...source} components={MDXComponent} />
+    <Layout metadata={frontmatter}>
+      {isLoading ? (
+        <SkeletonPost />
+      ) : (
+        <Fragment>
+          <PostMetadata
+            title={frontmatter.title}
+            slug={frontmatter.slug}
+            customDate={_date(frontmatter.createdAt)}
+            dateTime={frontmatter.createdAt}
+            readingTime={frontmatter.readingTime.minutes}
+            tags={frontmatter.tags}
+          />
+          <MDXRemote {...source} components={MDXComponent} />
+
+          <PostFooter thread={thread} />
+
+          <UI.VStack
+            divider={
+              <UI.StackDivider
+                borderColor={useColorModeValue("gray.200", "gray.928")}
+              />
+            }
+            bg={useColorModeValue("gray.100", "gray.900")}
+            spacing={7}
+            p="24px"
+          >
+            {relateds.map((post: any) => (
+              <PostListItem
+                key={post.slug}
+                title={post.title}
+                summary={post.summary}
+                customDate={_date(post.createdAt)}
+                dateTime={post.createdAt}
+                slug={post.slug}
+                tags={post.tags}
+              />
+            ))}
+          </UI.VStack>
+        </Fragment>
+      )}
     </Layout>
   );
 }
@@ -64,8 +108,8 @@ export async function getStaticProps({ params }: any) {
       frontmatter: {
         ...frontmatter,
         slug: params.slug,
-        relateds,
       },
+      relateds,
     },
   };
 }

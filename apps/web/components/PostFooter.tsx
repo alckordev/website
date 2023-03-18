@@ -25,7 +25,7 @@ export const PostFooter = ({ thread }: any) => {
             />
           }
           spacing={4}
-          bg={useColorModeValue("white", "black")}
+          bg={useColorModeValue("white", "gray.958")}
           px={8}
           py={2}
           minH={50}

@@ -4,13 +4,10 @@ import { Aside } from "./Aside";
 import { OpenGraph } from "./OpenGraph";
 import networks from "../data/networks";
 import sections from "../data/sections";
-import { PostFooter } from "./PostFooter";
 import { SignInAllButtons, SignInButton, SignOutButton } from "./Auth";
 import { AuthContext } from "../store/AuthProvider";
-import { RelatedPosts } from "./RelatedPosts";
 
 interface Props {
-  heading?: React.ReactNode | React.ReactElement | string;
   children: React.ReactNode;
   metadata?: {
     title?: string;
@@ -21,19 +18,11 @@ interface Props {
       name: string;
       slug: string;
     };
-    relateds?: any[];
   };
-  thread?: any;
   type?: string;
 }
 
-export const Layout = ({
-  heading,
-  children,
-  metadata = {},
-  thread = {},
-  type = "post",
-}: Props) => {
+export const Layout = ({ children, metadata = {}, type = "post" }: Props) => {
   const isBlogTemplate = type === "post" && metadata.createdAt ? true : false;
 
   const { currentUser, isOpenSignIn, onCloseSignIn } = useContext(AuthContext);
@@ -80,28 +69,7 @@ export const Layout = ({
             px={6}
           >
             <UI.Box as={isBlogTemplate ? "article" : "section"}>
-              {/*  */}
-
-              {heading && (
-                <UI.Box w="100%" maxW={[null, null, 680, 680]} mx="auto">
-                  <UI.Heading as="h2" fontSize="sm">
-                    {heading}
-                  </UI.Heading>
-                  <UI.Divider
-                    borderColor={useColorModeValue("gray.200", "gray.958")}
-                    opacity={1}
-                    my={7}
-                  />
-                </UI.Box>
-              )}
-
               {children}
-
-              {isBlogTemplate && <PostFooter thread={thread} />}
-
-              {isBlogTemplate && (
-                <RelatedPosts relateds={metadata.relateds || []} />
-              )}
             </UI.Box>
           </UI.Box>
 

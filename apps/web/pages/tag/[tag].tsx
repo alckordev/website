@@ -1,14 +1,18 @@
-import { Fragment, useEffect, useRef } from "react";
+import { Fragment, useEffect, useState, useRef } from "react";
 import { UI, useColorModeValue } from "@myth/ui";
 import { Layout, PostListItem } from "../../components";
 import { usePagination } from "../../hooks/use-pagination";
 import { getFilesFrontmatter } from "../../lib/mdx";
-import { _dateAgo } from "../../lib/format-date";
+import { _date } from "../../lib/format-date";
 import { orderByDate } from "../../lib/order-by-date";
+import { SkeletonPostListItem } from "../../components/Skeleton";
 
 export default function Tags({ allPosts, tag }: any) {
   const { next, page, currentData, maxPage } = usePagination(allPosts, 6);
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const observerRef = useRef<HTMLDivElement>(null);
+
   const prevY = useRef(0);
   const currentPosts = currentData();
 
@@ -34,15 +38,21 @@ export default function Tags({ allPosts, tag }: any) {
     };
   }, [next]);
 
+  useEffect(() => setIsLoading(false), [currentPosts]);
+
   return (
-    <Layout
-      metadata={{ title: `Tema: ${tag}` }}
-      heading={
-        <Fragment>
+    <Layout metadata={{ title: `Tema: ${tag}` }}>
+      <UI.Box maxW={["100%", "100%", "100%", 790]}>
+        <UI.Heading as="h2" fontSize="sm">
           Tema: <UI.Text as="span" fontWeight="normal">{`#${tag}`}</UI.Text>
-        </Fragment>
-      }
-    >
+        </UI.Heading>
+        <UI.Divider
+          borderColor={useColorModeValue("gray.200", "gray.958")}
+          opacity={1}
+          my={7}
+        />
+      </UI.Box>
+
       <UI.VStack
         divider={
           <UI.StackDivider
@@ -52,18 +62,22 @@ export default function Tags({ allPosts, tag }: any) {
         spacing={7}
         maxW={["100%", "100%", "100%", 790]}
       >
-        {currentPosts &&
-          currentPosts.map((post: any) => (
-            <PostListItem
-              key={post.slug}
-              title={post.title}
-              summary={post.summary}
-              customDate={_dateAgo(post.createdAt)}
-              dateTime={post.date}
-              slug={post.slug}
-              tags={post.tags}
-            />
-          ))}
+        {isLoading
+          ? Array(4)
+              .fill(null)
+              .map((_, i) => <SkeletonPostListItem key={i} />)
+          : currentPosts.map((post: any) => (
+              <PostListItem
+                key={post.slug}
+                title={post.title}
+                summary={post.summary}
+                customDate={_date(post.createdAt)}
+                dateTime={post.createdAt}
+                slug={post.slug}
+                tags={post.tags}
+              />
+            ))}
+
         {page !== maxPage && (
           <UI.Flex ref={observerRef} gap={4} align="center">
             <UI.Spinner size="sm" /> Cargando...
