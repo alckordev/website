@@ -46,7 +46,7 @@ export default function Tags({ allPosts, tag }: any) {
       <UI.VStack
         divider={
           <UI.StackDivider
-            borderColor={useColorModeValue("gray.200", "gray.900")}
+            borderColor={useColorModeValue("gray.200", "gray.958")}
           />
         }
         spacing={7}

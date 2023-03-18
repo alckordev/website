@@ -58,7 +58,7 @@ export const PostMetadata = ({
       </UI.VStack>
 
       <UI.Divider
-        borderColor={useColorModeValue("gray.200", "gray.900")}
+        borderColor={useColorModeValue("gray.200", "gray.958")}
         opacity={1}
         my={7}
       />

@@ -97,7 +97,7 @@ export const DisqusPost = ({
         <UI.Box
           borderLeftWidth={3}
           borderLeftStyle="solid"
-          borderLeftColor={useColorModeValue("gray.200", "gray.900")}
+          borderLeftColor={useColorModeValue("gray.200", "gray.958")}
           style={{
             width: "calc(100% - 1rem)",
             marginLeft: "auto",
@@ -122,7 +122,7 @@ export const DisqusPost = ({
         <UI.Box
           borderLeftWidth={3}
           borderLeftStyle="solid"
-          borderLeftColor={useColorModeValue("gray.200", "gray.900")}
+          borderLeftColor={useColorModeValue("gray.200", "gray.958")}
           style={{
             width: "calc(100% - 1rem)",
             marginLeft: "auto",
@@ -132,7 +132,7 @@ export const DisqusPost = ({
           <UI.VStack
             divider={
               <UI.StackDivider
-                borderColor={useColorModeValue("gray.200", "gray.900")}
+                borderColor={useColorModeValue("gray.200", "gray.958")}
               />
             }
             w="100%"

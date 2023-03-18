@@ -47,7 +47,7 @@ export const PostFooter = ({ thread }: any) => {
       </UI.Flex>
       <UI.Divider
         my={8}
-        borderColor={useColorModeValue("gray.200", "gray.900")}
+        borderColor={useColorModeValue("gray.200", "gray.958")}
         opacity={1}
       />
 

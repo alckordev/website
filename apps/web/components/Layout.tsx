@@ -88,7 +88,7 @@ export const Layout = ({
                     {heading}
                   </UI.Heading>
                   <UI.Divider
-                    borderColor={useColorModeValue("gray.200", "gray.900")}
+                    borderColor={useColorModeValue("gray.200", "gray.958")}
                     opacity={1}
                     my={7}
                   />
@@ -112,7 +112,7 @@ export const Layout = ({
             flex="1 1 auto"
             minH="100vh"
             borderLeft="1px solid"
-            borderColor={useColorModeValue("gray.200", "gray.900")}
+            borderColor={useColorModeValue("gray.200", "gray.958")}
             pl={[null, null, 6, "clamp(24px, 24px + 100vw - 1080px, 40px)"]}
             pr={[null, null, null, 6]}
             py="50px"

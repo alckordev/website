@@ -11,7 +11,7 @@ export const Aside = () => {
       <UI.VStack
         divider={
           <UI.StackDivider
-            borderColor={useColorModeValue("gray.200", "gray.900")}
+            borderColor={useColorModeValue("gray.200", "gray.958")}
           />
         }
         spacing={7}
@@ -48,14 +48,14 @@ export const Aside = () => {
         </UI.Card>
       </UI.VStack>
       <UI.Divider
-        borderColor={useColorModeValue("gray.200", "gray.900")}
+        borderColor={useColorModeValue("gray.200", "gray.958")}
         opacity={1}
         my={7}
       />
       <UI.VStack
         divider={
           <UI.StackDivider
-            borderColor={useColorModeValue("gray.200", "gray.900")}
+            borderColor={useColorModeValue("gray.200", "gray.958")}
           />
         }
         spacing={7}

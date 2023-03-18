@@ -64,7 +64,7 @@ export const NavBarFullScreen = ({
       isScrolled={isScrolled}
       borderColor={useColorModeValue(
         "var(--chakra-colors-gray-200)",
-        "var(--chakra-colors-gray-900)"
+        "var(--chakra-colors-gray-958)"
       )}
     >
       <NavBarContainer {...rest}>
