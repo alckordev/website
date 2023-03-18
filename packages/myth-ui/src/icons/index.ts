@@ -8,6 +8,7 @@ export { riArrowRightLine } from "./ri-arrow-right-line";
 export { riCalendarLine } from "./ri-calendar-line";
 export { riChatLine } from "./ri-chat-line";
 export { riCloseLine } from "./ri-close-line";
+export { riCupLine } from "./ri-cup-line";
 export { riDiscussLine } from "./ri-discuss-line";
 export { riDislikeLine } from "./ri-dislike-line";
 export { riFacebookLine } from "./ri-facebook-line";

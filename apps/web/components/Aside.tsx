@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import NextLink from "next/link";
-import { UI, useColorModeValue } from "@myth/ui";
+import { UI, CIcon, icon, useColorModeValue } from "@myth/ui";
 import tags from "../data/tags";
 import { Newsletter } from "./Newsletter";
 import { LastedVideos } from "./LastedVideos";

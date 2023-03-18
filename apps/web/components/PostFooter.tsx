@@ -45,6 +45,43 @@ export const PostFooter = ({ thread }: any) => {
           <SharedButton url={thread.link} />
         </UI.HStack>
       </UI.Flex>
+      <UI.Divider
+        my={8}
+        borderColor={useColorModeValue("gray.200", "gray.900")}
+        opacity={1}
+      />
+
+      <UI.Box pt="24px" pb="36px" mx="24px" mb="24px">
+        <UI.Heading as="h2" size="md" fontWeight="medium">
+          ¿Te gustó lo que leíste?
+        </UI.Heading>
+        <UI.Flex
+          pt={3}
+          justify="space-between"
+          align="center"
+          direction={["column", "column", "row", "row"]}
+        >
+          <UI.Box maxW={["100%", "100%", 425, 425]} pr={[0, 0, 4, 4]}>
+            <UI.Text fontSize="sm">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+              id massa in elit eleifend luctus.
+            </UI.Text>
+          </UI.Box>
+          <UI.Box pt={[4, 4, 0, 0]}>
+            <UI.Button
+              as={UI.Link}
+              leftIcon={<CIcon icon={icon.riCupLine} />}
+              href="https://paypal.me/alckor127"
+              isExternal
+              colorScheme="teal"
+              rounded="3xl"
+              _hover={{ textDecor: "none" }}
+            >
+              Invitame un café
+            </UI.Button>
+          </UI.Box>
+        </UI.Flex>
+      </UI.Box>
 
       <UI.Drawer onClose={onClose} isOpen={isOpen} size="md">
         <UI.DrawerOverlay bg="blackAlpha.600" />

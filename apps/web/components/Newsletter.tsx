@@ -67,8 +67,9 @@ export const Newsletter = () => {
       </UI.FormControl>
       <UI.Button
         type="submit"
-        w="100%"
+        // w="100%"
         colorScheme="purple"
+        rounded="3xl"
         isLoading={isSubmitting}
       >
         Suscribirme

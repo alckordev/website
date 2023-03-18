@@ -31,7 +31,7 @@ const SlateEditor = ({
 }: {
   user: any;
   thread: string;
-  parent: string | null;
+  parent?: string | null;
   placeholder?: string;
   onCancel?: () => void;
   onOpenSignIn: () => void;
