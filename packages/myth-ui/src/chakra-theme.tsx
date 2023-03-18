@@ -13,16 +13,21 @@ const theme = extendTheme({
     "2xl": "96em",
   },
   colors: {
-    brand: {
-      900: "#0B5345",
-      800: "#0E6655",
-      700: "#117A65",
-      600: "#138D75",
-      500: "#16A085",
-      400: "#45B39D",
-      300: "#73C6B6",
-      200: "#A2D9CE",
-      100: "#D0ECE7",
+    gray: {
+      958: "#0e1013",
+      928: "#17181b",
+      900: "#202124",
+      868: "#282a2d",
+      846: "#2e3134",
+      800: "#3c4043",
+      700: "#5f6368",
+      600: "#80868b",
+      500: "#9aa0a6",
+      400: "#bdc1c6",
+      300: "#dadce0",
+      200: "#f1f3f4",
+      100: "#f1f3f4",
+      50: "#f8f9fa",
     },
   },
   fonts: {
@@ -34,9 +39,18 @@ const theme = extendTheme({
       "2xl": "1336px",
     },
   },
+  semanticTokens: {
+    colors: {
+      "chakra-body-bg": {
+        _dark: "gray.928",
+      },
+    },
+  },
   config: {
     initialColorMode: "dark",
   },
 });
+
+// console.log("===>", theme);
 
 export { ChakraProvider as ThemeProvider, createLocalStorageManager, theme };
