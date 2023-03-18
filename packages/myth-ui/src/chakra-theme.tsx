@@ -3,6 +3,17 @@ import {
   extendTheme,
   createLocalStorageManager,
 } from "@chakra-ui/react";
+import { StyleConfig } from "@chakra-ui/theme-tools";
+
+const components: Record<string, StyleConfig> = {
+  Drawer: {
+    baseStyle: ({ colorMode }) => ({
+      dialog: {
+        bg: colorMode === "dark" ? "gray.900" : "white",
+      },
+    }),
+  },
+};
 
 const theme = extendTheme({
   breakpoints: {
@@ -49,8 +60,7 @@ const theme = extendTheme({
   config: {
     initialColorMode: "dark",
   },
+  components,
 });
-
-// console.log("===>", theme);
 
 export { ChakraProvider as ThemeProvider, createLocalStorageManager, theme };
