@@ -63,8 +63,9 @@ export const PostFooter = ({ thread }: any) => {
         >
           <UI.Box maxW={["100%", "100%", 425, 425]} pr={[0, 0, 4, 4]}>
             <UI.Text fontSize="sm">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-              id massa in elit eleifend luctus.
+              Si te gustó mi contenido, considera apoyarme con una donación
+              opcional. Tu contribución me ayuda a seguir creando contenido de
+              calidad. ¡Gracias por tu apoyo!
             </UI.Text>
           </UI.Box>
           <UI.Box pt={[4, 4, 0, 0]}>
