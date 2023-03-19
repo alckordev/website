@@ -100,13 +100,23 @@ export const PostListItem = ({
             </UI.Box>
             <UI.Box
               ml={[6, 6, "50px", "50px"]}
-              minW={["80px", "80px", "160px", "160px"]}
+              minW={["100px", "100px", "160px", "160px"]}
+              overflow="hidden"
             >
               <UI.Image
+                as={motion.img}
+                variants={{
+                  normal: {
+                    scale: 1,
+                  },
+                  hover: {
+                    scale: 1.25,
+                  },
+                }}
                 src="https://miro.medium.com/v2/resize:fit:720/0*pZbq2mTk_09JYVI9"
                 alt="Caffe Latte"
-                w={["80px", "80px", "160px", "160px"]}
-                h={["56px", "56px", "112px", "112px"]}
+                w={["100px", "100px", "160px", "160px"]}
+                h={["70px", "70px", "112px", "112px"]}
                 objectFit="cover"
               />
             </UI.Box>
