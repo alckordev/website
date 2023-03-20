@@ -30,7 +30,7 @@ export default function Post({ source, thread, frontmatter, relateds }: any) {
         <Fragment>
           <PostMetadata
             title={frontmatter.title}
-            slug={frontmatter.slug}
+            coverImage={frontmatter.coverImage}
             customDate={_date(frontmatter.createdAt)}
             dateTime={frontmatter.createdAt}
             readingTime={frontmatter.readingTime.minutes}

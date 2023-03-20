@@ -3,9 +3,9 @@ import { UI, CIcon, icon, useColorModeValue } from "@myth/ui";
 
 interface Props {
   title?: string;
+  coverImage?: string;
   customDate: string;
   dateTime: string;
-  slug?: string;
   readingTime: number;
   tags?: {
     name: string;
@@ -15,9 +15,9 @@ interface Props {
 
 export const PostMetadata = ({
   title,
+  coverImage,
   customDate,
   dateTime,
-  slug,
   readingTime,
   tags = [],
 }: Props) => {
@@ -63,12 +63,7 @@ export const PostMetadata = ({
         my={7}
       />
 
-      <UI.Image
-        src="https://miro.medium.com/v2/resize:fit:720/0*pZbq2mTk_09JYVI9"
-        alt="Caffe Latte"
-        objectFit="cover"
-        mx="auto"
-      />
+      <UI.Image src={coverImage} alt={title} objectFit="cover" mx="auto" />
     </UI.Box>
   );
 };

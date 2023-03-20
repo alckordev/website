@@ -1,6 +1,7 @@
 ---
 title: "Cómo crear un sistema de comentarios en Next.js con Firebase Realtime Database"
 summary: "Lorem ipsum."
+coverImage: "/assets/images/nextjs-realtime-comments/cover-image.jpg"
 createdAt: "2023-03-19 14:38:00"
 tags:
   - name: "#firebase"
@@ -34,7 +35,7 @@ Las reglas deberían quedar de la siguiente manera:
 }
 ```
 
-## 1 Configurar el SDK de Firebase
+## #1 Configurar el SDK de Firebase
 
 Instalaremos el paquete de Firebase en nuestra aplicación
 
@@ -67,7 +68,7 @@ const database = getDatabase(app);
 export { database };
 ```
 
-## 2 Almacenamiento y obtención de un hilo
+## #2 Almacenamiento y obtención de un hilo
 
 Creamos un archivo `lib/firebase-utils.ts` y agregaremos algunas funciones como estas:
 
@@ -173,7 +174,7 @@ export async function getStaticProps({ params }: any) {
 
 Como podemos observar en la función `getStaticProps`, estamos obteniendo el hilo almacenado en la base de datos como un objeto que se encuentra disponible en los `props`.
 
-## 3 Almacenamiento y obtención de comentarios
+## #3 Almacenamiento y obtención de comentarios
 
 Nos dirigimos al archivo `lib/firebase-utils.ts` y agregamos la siguiente función:
 

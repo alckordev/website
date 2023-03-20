@@ -19,6 +19,7 @@ const variants: Variants = {
 export const PostListItem = ({
   title,
   summary,
+  coverImage,
   customDate,
   dateTime,
   slug,
@@ -113,8 +114,8 @@ export const PostListItem = ({
                     scale: 1.25,
                   },
                 }}
-                src="https://miro.medium.com/v2/resize:fit:720/0*pZbq2mTk_09JYVI9"
-                alt="Caffe Latte"
+                src={coverImage}
+                alt={title}
                 w={["100px", "100px", "160px", "160px"]}
                 h={["70px", "70px", "112px", "112px"]}
                 objectFit="cover"

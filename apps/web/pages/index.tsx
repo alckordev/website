@@ -60,6 +60,7 @@ export default function Home({ allPosts }: any) {
                 key={post.slug}
                 title={post.title}
                 summary={post.summary}
+                coverImage={post.coverImage}
                 customDate={_date(post.createdAt)}
                 dateTime={post.createdAt}
                 slug={post.slug}
