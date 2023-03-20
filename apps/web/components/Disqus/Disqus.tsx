@@ -67,11 +67,6 @@ export const Disqus = ({ shortname, identifier, ...rest }: any) => {
 
     return () => {
       // Stop watching when component is unmounted
-      const endpoint = query(
-        postRef,
-        orderByChild("thread"),
-        equalTo(identifier)
-      );
       off(endpoint, "child_added");
     };
   }, [identifier]);
