@@ -10,7 +10,7 @@ import { HOTKEYS } from "./constants";
 import { useController, useForm } from "react-hook-form";
 import { serialize } from "./serialize";
 import { formatISO } from "date-fns";
-import { ref, set, get, push } from "firebase/database";
+import * as fbdb from "firebase/database";
 import { database } from "../../lib/firebase";
 
 declare module "slate" {
@@ -74,9 +74,9 @@ const SlateEditor = ({
     thread: string;
     parent: string | null;
   }) => {
-    const postRef = push(ref(database, "posts"));
+    const postRef = fbdb.push(fbdb.ref(database, "posts"));
 
-    await set(postRef, {
+    await fbdb.set(postRef, {
       thread: data.thread,
       author: {
         uid: currentUser.uid,
@@ -97,11 +97,8 @@ const SlateEditor = ({
       updatedAt: null,
     });
 
-    const snapshot = await get(postRef);
-
-    console.log(snapshot.val());
-
-    return { ...snapshot.val(), key: snapshot.key };
+    // const snapshot = await fbdb.get(postRef);
+    // return { ...snapshot.val(), key: snapshot.key };
   };
 
   const onSubmit = handleSubmit(async ({ message }) => {

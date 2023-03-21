@@ -1,14 +1,6 @@
-import { Fragment, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UI, CIcon, icon } from "@myth/ui";
-import {
-  ref,
-  get,
-  set,
-  onValue,
-  remove,
-  update,
-  DataSnapshot,
-} from "firebase/database";
+import * as fbdb from "firebase/database";
 import { database } from "../../lib/firebase";
 import { displayNumber } from "../../lib/format-number";
 import { AuthContext } from "../../store/AuthProvider";
@@ -22,12 +14,12 @@ export const DisqusPostLikes = ({ identifier }: { identifier: string }) => {
   const loadInstance = async () => {
     // Check if user liked post
     if (currentUser) {
-      const userLikedPostRef = ref(
+      const userLikedPostRef = fbdb.ref(
         database,
         `users/${currentUser.uid}/posts/likes/${identifier}`
       );
 
-      onValue(userLikedPostRef, (snapshot: DataSnapshot) => {
+      fbdb.onValue(userLikedPostRef, (snapshot: fbdb.DataSnapshot) => {
         const liked = snapshot.val();
         setLiked(liked);
       });
@@ -39,9 +31,9 @@ export const DisqusPostLikes = ({ identifier }: { identifier: string }) => {
   }, [currentUser, identifier]);
 
   useEffect(() => {
-    const postRef = ref(database, `posts/${identifier}`);
+    const postRef = fbdb.ref(database, `posts/${identifier}`);
 
-    onValue(postRef, (snapshot) => {
+    fbdb.onValue(postRef, (snapshot) => {
       if (snapshot.exists()) {
         const post = snapshot.val();
         const currentLikesCount = post.likes;
@@ -57,14 +49,14 @@ export const DisqusPostLikes = ({ identifier }: { identifier: string }) => {
       return;
     }
 
-    const postRef = ref(database, `posts/${identifier}`);
-    const postSnapshot = await get(postRef);
+    const postRef = fbdb.ref(database, `posts/${identifier}`);
+    const postSnapshot = await fbdb.get(postRef);
 
     if (!postSnapshot.exists()) {
       return;
     }
 
-    const userLikedPostRef = ref(
+    const userLikedPostRef = fbdb.ref(
       database,
       `users/${currentUser.uid}/posts/likes/${identifier}`
     );
@@ -72,14 +64,14 @@ export const DisqusPostLikes = ({ identifier }: { identifier: string }) => {
     if (!liked) {
       const currentLikes = postSnapshot.val().likes;
       const newLikes = currentLikes + 1;
-      await update(postRef, { likes: newLikes });
-      await set(userLikedPostRef, true);
+      await fbdb.update(postRef, { likes: newLikes });
+      await fbdb.set(userLikedPostRef, true);
       setLiked(true);
     } else {
       const currentLikes = postSnapshot.val().likes;
       const newLikes = currentLikes - 1;
-      await update(postRef, { likes: newLikes });
-      await remove(userLikedPostRef);
+      await fbdb.update(postRef, { likes: newLikes });
+      await fbdb.remove(userLikedPostRef);
       setLiked(false);
     }
   };

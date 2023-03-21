@@ -1,13 +1,5 @@
 import { formatISO } from "date-fns";
-import {
-  ref,
-  query,
-  orderByChild,
-  equalTo,
-  set,
-  get,
-  push,
-} from "firebase/database";
+import * as fbdb from "firebase/database";
 import { database } from "./firebase";
 import { orderByDate } from "./order-by-date";
 
@@ -31,9 +23,9 @@ export async function setThread({
   identifier: string;
   url: string;
 }) {
-  const threadRef = push(ref(database, "threads"));
+  const threadRef = fbdb.push(fbdb.ref(database, "threads"));
 
-  await set(threadRef, {
+  await fbdb.set(threadRef, {
     link: url,
     identifier: identifier,
     title: title,
@@ -44,7 +36,7 @@ export async function setThread({
     updatedAt: null,
   });
 
-  const snapshot = await get(threadRef);
+  const snapshot = await fbdb.get(threadRef);
 
   const thread = snapshot.val();
 
@@ -60,15 +52,15 @@ export async function getThread({
   identifier: string;
   url: string;
 }) {
-  const threadRef = ref(database, "threads");
+  const threadRef = fbdb.ref(database, "threads");
 
-  const endpoint = query(
+  const endpoint = fbdb.query(
     threadRef,
-    orderByChild("identifier"),
-    equalTo(identifier)
+    fbdb.orderByChild("identifier"),
+    fbdb.equalTo(identifier)
   );
 
-  const snapshot = await get(endpoint);
+  const snapshot = await fbdb.get(endpoint);
 
   if (snapshot.exists()) {
     return getWithKey(snapshot.val(), { isFirstOrDefault: true });

@@ -2,20 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { UI, useColorModeValue } from "@myth/ui";
 import { DisqusPost } from "./DisqusPost";
 import { SlateEditor } from "../SlateEditor";
-import {
-  ref,
-  query,
-  orderByChild,
-  equalTo,
-  get,
-  onChildAdded,
-  off,
-} from "firebase/database";
+import * as fbdb from "firebase/database";
 import { database } from "../../lib/firebase";
 import { getWithKey, sortTreeNodes } from "../../lib/firebase-utils";
 import { AuthContext } from "../../store/AuthProvider";
 
-const postRef = ref(database, "posts");
+const postRef = fbdb.ref(database, "posts");
 
 export const Disqus = ({ shortname, identifier, ...rest }: any) => {
   const { currentUser, onOpenSignIn } = useContext(AuthContext);
@@ -23,13 +15,13 @@ export const Disqus = ({ shortname, identifier, ...rest }: any) => {
   const [posts, setPosts] = useState<any[]>([]);
 
   const getPostsByThread = async () => {
-    const endpoint = query(
+    const endpoint = fbdb.query(
       postRef,
-      orderByChild("thread"),
-      equalTo(identifier)
+      fbdb.orderByChild("thread"),
+      fbdb.equalTo(identifier)
     );
 
-    const snapshot = await get(endpoint);
+    const snapshot = await fbdb.get(endpoint);
 
     if (snapshot.exists()) {
       return getWithKey(snapshot.val());
@@ -50,13 +42,13 @@ export const Disqus = ({ shortname, identifier, ...rest }: any) => {
     loadInstance();
 
     // Watching new posts
-    const endpoint = query(
+    const endpoint = fbdb.query(
       postRef,
-      orderByChild("thread"),
-      equalTo(identifier)
+      fbdb.orderByChild("thread"),
+      fbdb.equalTo(identifier)
     );
 
-    onChildAdded(endpoint, (snapshot) => {
+    fbdb.onChildAdded(endpoint, (snapshot) => {
       const newPost = { ...snapshot.val(), key: snapshot.key };
       const existingPost = posts.find((post) => post.key === newPost.key);
 
@@ -67,7 +59,7 @@ export const Disqus = ({ shortname, identifier, ...rest }: any) => {
 
     return () => {
       // Stop watching when component is unmounted
-      off(endpoint, "child_added");
+      fbdb.off(endpoint, "child_added");
     };
   }, [identifier]);
 

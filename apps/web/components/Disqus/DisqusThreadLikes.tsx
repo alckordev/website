@@ -1,14 +1,6 @@
-import { Fragment, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UI, CIcon, icon } from "@myth/ui";
-import {
-  ref,
-  get,
-  set,
-  onValue,
-  remove,
-  update,
-  DataSnapshot,
-} from "firebase/database";
+import * as fbdb from "firebase/database";
 import { database } from "../../lib/firebase";
 import { displayNumber } from "../../lib/format-number";
 import { AuthContext } from "../../store/AuthProvider";
@@ -22,12 +14,12 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
   const loadInstance = async () => {
     // Check if user liked thread
     if (currentUser) {
-      const userLikedThreadRef = ref(
+      const userLikedThreadRef = fbdb.ref(
         database,
         `users/${currentUser.uid}/threads/likes/${identifier}`
       );
 
-      onValue(userLikedThreadRef, (snapshot: DataSnapshot) => {
+      fbdb.onValue(userLikedThreadRef, (snapshot: fbdb.DataSnapshot) => {
         const liked = snapshot.val();
         setLiked(liked);
       });
@@ -39,9 +31,9 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
   }, [currentUser, identifier]);
 
   useEffect(() => {
-    const threadRef = ref(database, `threads/${identifier}`);
+    const threadRef = fbdb.ref(database, `threads/${identifier}`);
 
-    onValue(threadRef, (snapshot) => {
+    fbdb.onValue(threadRef, (snapshot) => {
       if (snapshot.exists()) {
         const thread = snapshot.val();
         const currentLikesCount = thread.likes;
@@ -57,14 +49,14 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
       return;
     }
 
-    const threadRef = ref(database, `threads/${identifier}`);
-    const threadSnapshot = await get(threadRef);
+    const threadRef = fbdb.ref(database, `threads/${identifier}`);
+    const threadSnapshot = await fbdb.get(threadRef);
 
     if (!threadSnapshot.exists()) {
       return;
     }
 
-    const userLikedThreadRef = ref(
+    const userLikedThreadRef = fbdb.ref(
       database,
       `users/${currentUser.uid}/threads/likes/${identifier}`
     );
@@ -72,14 +64,14 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
     if (!liked) {
       const currentLikes = threadSnapshot.val().likes;
       const newLikes = currentLikes + 1;
-      await update(threadRef, { likes: newLikes });
-      await set(userLikedThreadRef, true);
+      await fbdb.update(threadRef, { likes: newLikes });
+      await fbdb.set(userLikedThreadRef, true);
       setLiked(true);
     } else {
       const currentLikes = threadSnapshot.val().likes;
       const newLikes = currentLikes - 1;
-      await update(threadRef, { likes: newLikes });
-      await remove(userLikedThreadRef);
+      await fbdb.update(threadRef, { likes: newLikes });
+      await fbdb.remove(userLikedThreadRef);
       setLiked(false);
     }
   };

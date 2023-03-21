@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { formatISO } from "date-fns";
-import { ref, set, get, push } from "firebase/database";
+import * as fbdb from "firebase/database";
 import { database } from "../../lib/firebase";
 
 export const DisqusForm = ({
@@ -31,9 +31,9 @@ export const DisqusForm = ({
   const toast = useToast({ position: "top" });
 
   const addPost = async (data: any) => {
-    const postRef = push(ref(database, "posts"));
+    const postRef = fbdb.push(fbdb.ref(database, "posts"));
 
-    await set(postRef, {
+    await fbdb.set(postRef, {
       thread: data.thread,
       author: {
         uid: currentUser.uid,
@@ -54,7 +54,7 @@ export const DisqusForm = ({
       updatedAt: null,
     });
 
-    const snapshot = await get(postRef);
+    const snapshot = await fbdb.get(postRef);
 
     const post = snapshot.val();
 
