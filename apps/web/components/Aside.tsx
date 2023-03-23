@@ -36,7 +36,7 @@ export const Aside = () => {
             </UI.Text>
           </UI.CardBody>
         </UI.Card>
-        <UI.Card minW="100%" bg="transparent" boxShadow="none">
+        {/* <UI.Card minW="100%" bg="transparent" boxShadow="none">
           <UI.CardHeader p={0}>
             <UI.Heading as="h2" fontSize="lg">
               Últimos videos
@@ -45,7 +45,7 @@ export const Aside = () => {
           <UI.CardBody px={0} pb={0}>
             <LastedVideos />
           </UI.CardBody>
-        </UI.Card>
+        </UI.Card> */}
       </UI.VStack>
       <UI.Divider
         borderColor={useColorModeValue("gray.200", "gray.958")}

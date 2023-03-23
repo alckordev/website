@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { UI, useColorModeValue } from "@myth/ui";
 import { Layout, PostListItem } from "../../components";
 import { usePagination } from "../../hooks/use-pagination";
@@ -6,6 +6,7 @@ import { getFilesFrontmatter } from "../../lib/mdx";
 import { _date } from "../../lib/format-date";
 import { orderByDate } from "../../lib/order-by-date";
 import { SkeletonPostListItem } from "../../components/Skeleton";
+import tags from "../../data/tags";
 
 export default function Tags({ allPosts, tag }: any) {
   const { next, page, currentData, maxPage } = usePagination(allPosts, 6);
@@ -15,6 +16,8 @@ export default function Tags({ allPosts, tag }: any) {
 
   const prevY = useRef(0);
   const currentPosts = currentData();
+
+  const currentTag: any = tags.find((t) => t.slug === tag);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -42,9 +45,12 @@ export default function Tags({ allPosts, tag }: any) {
 
   return (
     <Layout metadata={{ title: `Tema: ${tag}` }}>
-      <UI.Box maxW={["100%", "100%", "100%", 790]}>
-        <UI.Heading as="h2" fontSize="sm">
-          Tema: <UI.Text as="span" fontWeight="normal">{`#${tag}`}</UI.Text>
+      <UI.Box maxW={["100%", "100%", "100%", 680]} mx="auto">
+        <UI.Heading as="h2" fontSize="md">
+          Tema:{" "}
+          <UI.Text as="span" fontWeight="normal">
+            {currentTag.name}
+          </UI.Text>
         </UI.Heading>
         <UI.Divider
           borderColor={useColorModeValue("gray.200", "gray.958")}
