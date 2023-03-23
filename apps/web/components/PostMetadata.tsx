@@ -35,7 +35,7 @@ export const PostMetadata = ({
           </UI.Tag>
         ))}
       </UI.HStack>
-      <UI.Heading as="h1" my={6} size={["md", "md", "lg", "lg"]}>
+      <UI.Heading as="h1" my={6} size={["lg", "lg", "xl", "xl"]}>
         {title}
       </UI.Heading>
       <UI.VStack spacing={3} align="left">

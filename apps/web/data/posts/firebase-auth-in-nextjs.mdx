@@ -12,4 +12,554 @@ relateds:
   - "firebase-realtime-database-in-nextjs"
 ---
 
-Lorem ipsum dolor sit amet, consectet.
+En este artículo, te enseñaré cómo integrar Firebase Auth en una aplicación [Next.js](https://nextjs.org/docs/getting-started)
+y realizar ciertas tareas solo cuando se tenga una sesión activa.
+
+Para esta integración, utilizaremos el proyecto anterior nuestro _"sistema de comentarios"_,
+Si aún no estás familiarizado con él, te invito a leer el artículo anterior [**aquí**](http://localhost:3000/firebase-realtime-database-in-nextjs).
+
+Para comenzar, dirígete a la consola de [Firebase](https://console.firebase.google.com) y habilita el módulo de **Autenticación**.
+Luego, elige **Google** como método de inicio de sesión.
+Después de habilitar el proveedor de **Google**, ve a tu base de datos en tiempo real y actualiza las reglas para que solo los usuarios
+autenticados puedan escribir comentarios, de la siguiente manera:
+
+```json
+{
+  "rules": {
+    "threads": {
+      ".read": true,
+      ".write": true,
+      ".indexOn": ["identifier"]
+    },
+    "comments": {
+      ".read": true,
+      ".write": "auth != null",
+      ".indexOn": ["thread"]
+    }
+  }
+}
+```
+
+## #1 Agregar Auth al SDK de Firebase
+
+Dirígete al archivo `lib/firebase.ts`, de tu proyecto y agrega las siguientes líneas:
+
+```typescript
+// lib/firebase.ts
+
+// ...
+import { getAuth } from "firebase/auth";
+
+// ...
+
+const database = getDatabase(app);
+const auth = getAuth(app);
+
+export { database, auth };
+```
+
+## #2 Crear un Context y un Provider
+
+Para implementar la lógica de autenticación, vamos a envolver nuestra aplicación en un contexto.
+Comencemos creando un nuevo archivo `store/AuthProvider.tsx`:
+
+```typescript
+// store/AuthProvider.ts
+
+import { createContext, useEffect, useState } from "react";
+import { auth } from "@/lib/firebase";
+
+export const AuthContext = createContext<any | null>(null);
+
+export const AuthProvider = (props: any) => {
+  const [user, setUser] = useState<any | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+
+    return unsubscribe;
+  }, []);
+
+  return (
+    <AuthContext.Provider value={user}>{props.children}</AuthContext.Provider>
+  );
+};
+```
+
+En `AuthProvider` hemos definido un estado llamado `user`, el cual pasaremos a
+nuestra jerarquía de componentes a través del `AuthContext`. Además, agregamos un `useEffect`
+para inicializar el observador de la autenticación del usuario en tiempo real,
+lo cual logramos gracias al método `onAuthStateChanged` de Firebase.
+
+## #3 Agregar el proveedor a la aplicación
+
+Para agregar el proveedor que creamos previamente, nos dirigimos al archivo `pages/_app.tsx`
+y envolvemos nuestra aplicación con él:
+
+```typescript
+// pages/_app.ts
+
+import type { AppProps } from "next/app";
+import { ChakraProvider } from "@chakra-ui/react";
+import { AuthProvider } from "@/store/AuthProvider";
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <AuthProvider>
+      <ChakraProvider>
+        <Component {...pageProps} />
+      </ChakraProvider>
+    </AuthProvider>
+  );
+}
+```
+
+En este punto, ya hemos configurado el contexto y proveedor en la aplicación.
+
+## #4 Agregar el control de inicio y cierre de sesión
+
+Para tener el control de inicio y cierre de sesión, vamos a crear dos componentes: `SignInWithGoogle` y `SignOut`.
+
+Comenzamos por crear el archivo `components/SignInWithGoogle.tsx`.
+Este componente se encarga de iniciar nuestra sesión con el proveedor de **Google**.
+
+```typescript
+// components/SignInWithGoogle.tsx
+
+import * as Chakra from "@chakra-ui/react";
+import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+
+export const SignInWithGoogleButton = () => {
+  const toast = Chakra.useToast();
+
+  const handleSignIn = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+
+      await signInWithRedirect(auth, provider);
+    } catch (err) {
+      toast({
+        description: "¡Oops! Something went wrong.",
+        status: "error",
+      });
+    }
+  };
+
+  return <Chakra.Button onClick={handleSignIn}>Iniciar sesión</Chakra.Button>;
+};
+```
+
+Luego, creamos el archivo `components/SignOut.tsx`. Este componente se
+encarga de cerrar nuestra sesión con el proveedor de **Google**.
+
+```typescript
+// components/SignOut.tsx
+
+import * as Chakra from "@chakra-ui/react";
+import { auth } from "@/lib/firebase";
+
+export const SignOut = () => {
+  const toast = Chakra.useToast();
+
+  const handleSignOut = async () => {
+    try {
+      await auth.signOut();
+
+      toast({ description: "¡Goodbye! 👋." });
+    } catch (error) {
+      toast({
+        description: "¡Oops! Something went wrong.",
+        status: "error",
+      });
+    }
+  };
+
+  return <Chakra.Button onClick={handleSignOut}>Cerrar sesión</Chakra.Button>;
+};
+```
+
+Para finalizar, agregamos los controles a nuestra vista. Nos dirigimos al archivo
+`pages/posts/[id].tsx` y agregamos las siguientes líneas:
+
+```typescript
+// pages/posts/[id].tsx
+
+import { useContext } from "react";
+// ...
+import { SignInWithGoogleButton } from "@/components/SignInWithGoogle";
+import { SignOut } from "@/components/SignOut";
+import { AuthContext } from "@/store/AuthProvider";
+
+export default function Post({ post, thread }: any) {
+  const user = useContext(AuthContext);
+
+  return (
+    <Chakra.Container py={16}>
+      <Chakra.Flex gap={4} align="center" justify="space-between">
+        <Chakra.Heading size="md">
+          Welcome {user && user.displayName}
+        </Chakra.Heading>
+        <Chakra.Box>
+          {user ? <SignOut /> : <SignInWithGoogleButton />}
+        </Chakra.Box>
+      </Chakra.Flex>
+      ...
+    </Chakra.Container>
+  );
+}
+
+// ...
+```
+
+Como se puede observar, declaramos la variable `user`, la cual utiliza el contexto que creamos anteriormente y que nos proporciona la información del usuario.
+
+## #5 Crear comentarios
+
+Si intentamos hacer un comentario sin haber iniciado sesión previamente, veremos un mensaje de error.
+Esto se debe a la actualización que realizamos en las reglas de la base de datos,
+donde especificamos que solo los usuarios autenticados tienen permisos de escritura.
+
+Para solucionar esto, vamos a modificar nuestro componente `Editor` de la siguiente manera:
+
+```typescript
+// components/Editor.tsx
+
+import { useContext } from "react";
+// ...
+import { AuthContext } from "@/store/AuthProvider";
+
+export const Editor = ({
+  thread,
+  parent = null,
+  placeholder = "Únete a la conversación...",
+  onCancel,
+}: {
+  thread: string;
+  parent: string | null;
+  placeholder?: string;
+  onCancel?: () => void;
+}) => {
+  const user = useContext(AuthContext);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting, isValid },
+  } = useForm({
+    resolver: yupResolver(
+      yup.object().shape({
+        message: yup.string().min(2).required(),
+      })
+    ),
+  });
+
+  // ...
+
+  const onSubmit = handleSubmit(async (values) => {
+    if (!user) {
+      // Add logic for the case of no user session
+      return;
+    }
+
+    try {
+      const commentRef = fbdb.push(fbdb.ref(database, "comments"));
+
+      await fbdb.set(commentRef, {
+        thread,
+        author: {
+          uid: user.uid,
+          name: user.displayName,
+          email: user.email,
+          picture: user.photoURL,
+        },
+        message: values.message,
+        createdAt: formatISO(new Date()),
+      });
+
+      reset({ message: "" });
+
+      if (onCancel && typeof onCancel === "function") onCancel();
+    } catch (err) {
+      // ...
+    }
+  });
+
+  return (
+    <Chakra.VStack minW="100%" as="form" onSubmit={onSubmit}>
+      <Chakra.FormControl isInvalid={errors.message ? true : false}>
+        <Chakra.Textarea
+          placeholder={placeholder}
+          size="sm"
+          resize="none"
+          {...register("message")}
+        />
+      </Chakra.FormControl>
+      <Chakra.HStack>
+        {onCancel && typeof onCancel === "function" && (
+          <Chakra.Button onClick={onCancel}>Cancelar</Chakra.Button>
+        )}
+        <Chakra.Button
+          type="submit"
+          isLoading={isSubmitting}
+          isDisabled={!isValid}
+        >
+          Comentar
+        </Chakra.Button>
+      </Chakra.HStack>
+    </Chakra.VStack>
+  );
+};
+```
+
+Como se puede observar, volvemos a usar la variable `user` del contexto para verificar si existe una sesión del usuario.
+
+Además, hemos eliminado los campos de texto y sus validaciones donde solicitábamos el
+nombre y el correo electrónico del autor, ya que ahora esos datos los tomaremos de la variable `user`.
+Por último, hemos agregado dos `props` adicionales llamados `parent` y `onCancel`,
+que usaremos en el siguiente punto para poder responder a comentarios.
+
+![Comentario con usuario autenticado](/assets/images/nextjs-realtime-comments/project-comment-1.png)
+
+## #5 Responder comentarios
+
+Para facilitar la respuesta de comentarios, es necesario agregar algunas funciones
+en el archivo `lib/firebase-utils.ts`.
+
+Primero, agregamos la función `orderByDate`, que ordenará los comentarios por fecha de
+creación de forma descendente. Luego, definimos la función `sortTreeNodes`, que
+formateará el arreglo de comentarios para que cada comentario contenga sus respuestas en un nuevo atributo
+`children`, de forma recursiva. Esto es necesario porque la data que llega desde la base de datos no está ordenada.
+
+Aquí está el código correspondiente en TypeScript para estas funciones:
+
+```typescript
+// lib/firebase-utils.ts
+
+// ...
+
+export function orderByDate(prev: any, current: any) {
+  return (
+    new Date(current.createdAt).valueOf() - new Date(prev.createdAt).valueOf()
+  );
+}
+
+export function sortTreeNodes(nodes: any[]): any[] {
+  const map = new Map<string, any>();
+  const roots: any[] = [];
+
+  // Create a mapping of id to node
+  nodes.forEach((node) => {
+    map.set(node.key, node);
+  });
+
+  // Find the root nodes and add them to the roots array
+  nodes.forEach((node) => {
+    if (!node.parent) {
+      roots.push(node);
+    }
+  });
+
+  // Recursively traverse the tree and add child nodes to their parent's children array
+  function traverse(node: any) {
+    const children: any[] = [];
+
+    nodes.forEach((childNode) => {
+      if (childNode.parent === node.key) {
+        children.push(traverse(childNode));
+      }
+    });
+
+    node.children = children;
+
+    return node;
+  }
+
+  // Sort the root nodes and their children recursively
+  roots.forEach((root) => {
+    sortChildren(root);
+  });
+
+  // Sort the children of a node and their children recursively
+  function sortChildren(node: any) {
+    if (node.children) {
+      node.children.sort(orderByDate);
+      node.children.forEach((child: any) => {
+        sortChildren(child);
+      });
+    }
+  }
+
+  // Flatten the tree into a list of nodes
+  const sortedNodes: any[] = [];
+
+  roots.forEach((root) => {
+    sortedNodes.push({ ...root, children: traverse(root).children });
+  });
+
+  return sortedNodes;
+}
+```
+
+Con estas funciones, podremos mostrar los comentarios y sus respuestas ordenados de forma descendente,
+y cada comentario tendrá su propio objeto `children` que contendrá sus respuestas.
+
+Continuando con la implementación de las respuestas a los comentarios, en el archivo
+`components/DiscussionThread.tsx` vamos a dar formato a nuestro `array` de comentarios.
+
+```typescript
+// components/DiscussionThread.tsx
+
+// ...
+
+import {
+  getCommentsByThread,
+  orderByDate,
+  sortTreeNodes,
+} from "@/lib/firebase-utils";
+
+// ...
+
+export const DiscussionThread = ({ identifier }: { identifier: string }) => {
+  // ...
+
+  useEffect(() => {
+    // Get all comments by thread
+    async function loadComments() {
+      // ...
+
+      setComments(data.sort(orderByDate));
+    }
+
+    // ...
+  }, [identifier]);
+
+  return (
+    <Chakra.Box>
+      ...
+      <Chakra.VStack divider={<Chakra.StackDivider />} spacing={6}>
+        {sortTreeNodes(comments).map((comment) => (
+          <Comment key={comment.key} thread={identifier} comment={comment} />
+        ))}
+      </Chakra.VStack>
+    </Chakra.Box>
+  );
+};
+```
+
+En este punto, cada comentario tiene un atributo `children` que puede estar vacío o
+contener respuestas. Para manejar estas respuestas, debemos dirigirnos al
+archivo `components/Comment.tsx` y realizar algunas modificaciones. El código debe quedar
+como se muestra a continuación:
+
+```typescript
+// components/Comment.tsx
+
+import { AuthContext } from "@/store/AuthProvider";
+import * as Chakra from "@chakra-ui/react";
+import { format, parseISO } from "date-fns";
+import { useContext, useState } from "react";
+import { Editor } from "./Editor";
+
+export const Comment = ({ thread, comment, ...rest }: any) => {
+  const user = useContext(AuthContext);
+
+  const [isReplyListCollased, setIsReplyListCollased] = useState(false);
+  const [isReplyFormCollased, setIsReplyFormCollased] = useState(false);
+
+  const replyListToggle = () => setIsReplyListCollased(!isReplyListCollased);
+  const replyFormToggle = () => setIsReplyFormCollased(!isReplyFormCollased);
+
+  return (
+    <Chakra.VStack w="100%" spacing={8}>
+      <Chakra.Box minW="100%" {...rest}>
+        <Chakra.VStack align="flex-start" spacing={4}>
+          <Chakra.Flex gap={4} align="center">
+            <Chakra.Avatar
+              size="sm"
+              name={comment.author.name}
+              src={comment.author.picture}
+            />
+            <Chakra.Box>
+              <Chakra.Heading size="sm">{comment.author.name}</Chakra.Heading>
+              <Chakra.Text>
+                {format(parseISO(comment.createdAt), "d MMMM, yyyy")}
+              </Chakra.Text>
+            </Chakra.Box>
+          </Chakra.Flex>
+          <Chakra.Box>{comment.message}</Chakra.Box>
+
+          <Chakra.HStack w="100%" justify="flex-end">
+            {comment.children && comment.children.length > 0 && (
+              <Chakra.Button size="sm" variant="link" onClick={replyListToggle}>
+                {!isReplyListCollased
+                  ? `${comment.children.length} Respuestas`
+                  : `Ocultar respuestas`}
+              </Chakra.Button>
+            )}
+
+            {user && (
+              <Chakra.Button size="sm" variant="link" onClick={replyFormToggle}>
+                Responder
+              </Chakra.Button>
+            )}
+          </Chakra.HStack>
+        </Chakra.VStack>
+      </Chakra.Box>
+
+      <Chakra.Collapse in={isReplyFormCollased} style={{ width: "100%" }}>
+        <Chakra.Box
+          w="calc(100% - 2rem)"
+          ml="auto"
+          borderLeft="5px solid"
+          borderColor="gray.300"
+          pl={4}
+        >
+          <Editor
+            placeholder={`Respondiendo a ${comment.author.name}...`}
+            thread={thread}
+            parent={comment.key}
+            onCancel={replyFormToggle}
+          />
+        </Chakra.Box>
+      </Chakra.Collapse>
+
+      <Chakra.Collapse in={isReplyListCollased} style={{ width: "100%" }}>
+        <Chakra.VStack
+          divider={<Chakra.StackDivider borderColor="gray.500" />}
+          w="calc(100% - 2rem)"
+          ml="auto"
+          borderLeft="5px solid"
+          borderColor="gray.300"
+          pl={4}
+          spacing={6}
+        >
+          {comment.children.map((child: any) => (
+            <Comment
+              key={`child-${child.key}`}
+              thread={thread}
+              comment={child}
+            />
+          ))}
+        </Chakra.VStack>
+      </Chakra.Collapse>
+    </Chakra.VStack>
+  );
+};
+```
+
+## Resultado final
+
+¡Excelente trabajo! Si has seguido todos los pasos, deberías tener un sistema de comentarios
+completamente funcional en tu aplicación Next.js.
+
+El código completo de este proyecto está disponible en [Github](https://github.com/alckordev/comment-system/releases/tag/v1.5).
+
+![Respuestas de comentarios](/assets/images/nextjs-realtime-comments/project-reply-1.png)
+
+Siéntete libre de personalizarlo y agregar más características a medida que lo necesites.
+También puedes compartir tus mejoras y sugerencias con la comunidad a través de un pull request en el repositorio de Github.
+¡Gracias por leer y espero que hayas aprendido algo nuevo!

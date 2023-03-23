@@ -37,7 +37,7 @@ export const AuthProvider = (props: any) => {
     });
 
     return unsubscribe;
-  });
+  }, []);
 
   return (
     <AuthContext.Provider
