@@ -16,8 +16,10 @@ interface Props {
 
 export const OpenGraph = ({ metadata }: Props) => {
   const SEO = {
-    title: metadata.title ? `${metadata.title} — My Web` : `My Web`,
-    description: metadata.summary || "My description",
+    title: metadata.title
+      ? `${metadata.title} — Francisco Rios`
+      : `Francisco Rios`,
+    description: metadata.summary || "Senior Developer",
     slug: metadata.slug || "",
     keywords: [],
     author: "Francisco Luis",
