@@ -5,7 +5,7 @@ import { Editable, withReact, Slate, ReactEditor } from "slate-react";
 import { createEditor, BaseEditor, Transforms, Editor } from "slate";
 import { MarkButton, toggleMark } from "./MarkButton";
 import { Leaf } from "./Leaf";
-import { CustomElement, CustomText } from "./types";
+import { CustomElement, CustomText } from "./schemas";
 import { HOTKEYS } from "./constants";
 import { useController, useForm } from "react-hook-form";
 import { serialize } from "./serialize";

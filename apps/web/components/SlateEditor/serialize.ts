@@ -1,5 +1,5 @@
 import { Text, Element } from "slate";
-import { CustomElement, CustomText } from "./types";
+import { CustomElement, CustomText } from "./schemas";
 
 export function serialize(node: CustomElement | CustomText): any {
   if (Text.isText(node)) {

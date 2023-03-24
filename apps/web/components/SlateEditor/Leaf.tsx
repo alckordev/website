@@ -1,5 +1,5 @@
 import { HTMLProps, ReactElement } from "react";
-import { CustomText } from "./types";
+import { CustomText } from "./schemas";
 
 export const Leaf = ({
   attributes,
