@@ -100,7 +100,7 @@ export async function getStaticProps({ params }: any) {
   const thread = await getThread({
     title: frontmatter.title,
     identifier: params.slug,
-    url: `http://localhost:3000/${params.slug}`,
+    url: `https://alckor.dev/${params.slug}`,
   });
 
   return {
