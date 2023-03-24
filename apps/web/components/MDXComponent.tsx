@@ -1,14 +1,14 @@
 import Image, { ImageProps } from "next/image";
 import { UI, useColorModeValue } from "@myth/ui";
 
+const CustomLink = (props: any) => {
+  const color = useColorModeValue("purple.700", "purple.300");
+
+  return <UI.Link isExternal color={color} {...props} />;
+};
+
 export const MDXComponent = {
-  a: (props: any) => (
-    <UI.Link
-      isExternal
-      color={useColorModeValue("purple.700", "purple.300")}
-      {...props}
-    />
-  ),
+  a: (props: any) => <CustomLink {...props} />,
   hr: UI.Divider,
   h1: (props: any) => (
     <UI.Heading as="h1" my={8} size={["lg", "lg", "xl", "xl"]} {...props} />

@@ -1,3 +1,4 @@
+import NextLink from "next/link";
 import { UI } from "@myth/ui";
 import { SignInWithFacebookButton } from "./SignInWithFacebookButton";
 import { SignInWithGithubButton } from "./SignInWithGithubButton";
@@ -28,9 +29,16 @@ export const SignInAllButtons = ({
             <SignInWithTwitterButton isDisabled={true} />
           </UI.VStack>
           <UI.Text fontSize="sm">
-            Al hacer clic en "Iniciar sesión", confirmas que estás de acuerdo
-            con nuestros términos y condiciones, así como con nuestra política
-            de privacidad.
+            Al hacer clic en &quot;Iniciar sesión&quot;, confirmas que estás de
+            acuerdo con nuestros{" "}
+            <UI.Link as={NextLink} href="/terms-and-conditions">
+              términos y condiciones
+            </UI.Link>
+            , así como con nuestra{" "}
+            <UI.Link as={NextLink} href="/privacy-policy">
+              política de privacidad
+            </UI.Link>
+            .
           </UI.Text>
         </UI.ModalBody>
       </UI.ModalContent>
