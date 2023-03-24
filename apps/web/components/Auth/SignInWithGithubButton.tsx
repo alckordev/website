@@ -21,6 +21,7 @@ export const SignInWithGithubButton = ({
       await signInWithRedirect(auth, provider);
       if (callback) callback();
     } catch (error) {
+      console.log(`Catch error: ${error}`);
       toast({
         description: "¡Ups! Algo salió mal. 😭",
         status: "error",
