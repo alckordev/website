@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { UI } from "@myth/ui";
 import * as fbdb from "firebase/database";
 import { database } from "../../lib/firebase";
@@ -14,16 +14,16 @@ export const DisqusCount = ({
 }) => {
   const [count, setCount] = useState(0);
 
-  const loadInstance = async () => {
+  const loadInstance = useCallback(async (thread: string) => {
     const postRef = fbdb.ref(database, "posts");
 
     const postsByThread = fbdb.query(
       postRef,
       fbdb.orderByChild("thread"),
-      fbdb.equalTo(identifier)
+      fbdb.equalTo(thread)
     );
 
-    const postCountRef = fbdb.ref(database, `postCounts/${identifier}`);
+    const postCountRef = fbdb.ref(database, `postCounts/${thread}`);
 
     const updateCount = (snapshot: fbdb.DataSnapshot) => {
       setCount(snapshot.size);
@@ -31,10 +31,11 @@ export const DisqusCount = ({
 
     fbdb.onValue(postsByThread, updateCount);
     fbdb.onValue(postCountRef, updateCount);
-  };
+  }, []);
 
   useEffect(() => {
-    loadInstance();
+    // Load instance
+    loadInstance(identifier);
   }, [identifier]);
 
   return (

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { UI, CIcon, icon } from "@myth/ui";
 import * as fbdb from "firebase/database";
 import { database } from "../../lib/firebase";
@@ -11,24 +11,28 @@ export const DisqusThreadLikes = ({ identifier }: { identifier: string }) => {
 
   const { currentUser, onOpenSignIn } = useContext(AuthContext);
 
-  const loadInstance = async () => {
-    // Check if user liked thread
-    if (currentUser) {
-      const userLikedThreadRef = fbdb.ref(
-        database,
-        `users/${currentUser.uid}/threads/likes/${identifier}`
-      );
+  const loadInstance = useCallback(
+    async (thread: string) => {
+      // Check if user liked thread
+      if (currentUser) {
+        const userLikedThreadRef = fbdb.ref(
+          database,
+          `users/${currentUser.uid}/threads/likes/${thread}`
+        );
 
-      fbdb.onValue(userLikedThreadRef, (snapshot: fbdb.DataSnapshot) => {
-        const liked = snapshot.val();
-        setLiked(liked);
-      });
-    }
-  };
+        fbdb.onValue(userLikedThreadRef, (snapshot: fbdb.DataSnapshot) => {
+          const liked = snapshot.val();
+          setLiked(liked);
+        });
+      }
+    },
+    [currentUser]
+  );
 
   useEffect(() => {
-    loadInstance();
-  }, [currentUser, identifier]);
+    // Load instance
+    loadInstance(identifier);
+  }, [identifier]);
 
   useEffect(() => {
     const threadRef = fbdb.ref(database, `threads/${identifier}`);

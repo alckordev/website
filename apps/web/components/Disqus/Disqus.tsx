@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { UI, useColorModeValue } from "@myth/ui";
 import { DisqusPost } from "./DisqusPost";
 import { SlateEditor } from "../SlateEditor";
 import * as fbdb from "firebase/database";
 import { database } from "../../lib/firebase";
 import { getWithKey, sortTreeNodes } from "../../lib/firebase-utils";
+import { orderByDate } from "../../lib/order-by-date";
 import { AuthContext } from "../../store/AuthProvider";
 
 const postRef = fbdb.ref(database, "posts");
@@ -14,32 +15,25 @@ export const Disqus = ({ shortname, identifier, ...rest }: any) => {
 
   const [posts, setPosts] = useState<any[]>([]);
 
-  const getPostsByThread = async () => {
+  const loadInstance = useCallback(async (thread: string) => {
     const endpoint = fbdb.query(
       postRef,
       fbdb.orderByChild("thread"),
-      fbdb.equalTo(identifier)
+      fbdb.equalTo(thread)
     );
 
     const snapshot = await fbdb.get(endpoint);
 
-    if (snapshot.exists()) {
-      return getWithKey(snapshot.val());
-    }
+    if (!snapshot.exists()) return;
 
-    return undefined;
-  };
+    const allPosts = getWithKey(snapshot.val()).sort(orderByDate);
 
-  const loadInstance = async () => {
-    const postsSnapshot = await getPostsByThread();
-
-    if (!postsSnapshot) return;
-
-    setPosts(postsSnapshot.reverse());
-  };
+    setPosts(allPosts);
+  }, []);
 
   useEffect(() => {
-    loadInstance();
+    // Load instance
+    loadInstance(identifier);
 
     // Watching new posts
     const endpoint = fbdb.query(
