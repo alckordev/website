@@ -1,0 +1,144 @@
+---
+title: "Cómo implementar JWT en ASP.NET Core 6"
+summary: "En este..."
+coverImage: "/assets/images/nextjs-realtime-comments/cover-image.jpg"
+createdAt: "2023-03-29 21:35:00"
+tags:
+  - name: "JWT"
+    slug: "jwt"
+  - name: "ASP.NET"
+    slug: "aspnet"
+  - name: "Web API"
+    slug: "webapi"
+relateds:
+---
+
+JWT (JSON Web Token) es una forma segura y eficiente de transmitir información
+entre diferentes sistemas en forma de objetos JSON. En el contexto de las API web,
+JWT se utiliza a menudo como un mecanismo de autenticación y autorización,
+permitiendo a los usuarios autenticarse en una aplicación web y luego autorizar las
+solicitudes de la API en función de su nivel de acceso.
+
+En este articulo aprenderas a implementar JWT en una aplicación Web API utilizando
+ASP.NET Core 6. Para asegurar una Web API usando la autenticación JWT,
+seguiremos estos pasos:
+
+### #1 Cree un proyecto ASP.NET Core Web API en Visual Studio 2022.
+
+1. Inicie el IDE de Visual Studio 2022.
+2. Haga clic en "Crear nuevo proyecto".
+3. En la ventana "Crear nuevo proyecto", seleccione "ASP.NET Core Web API".
+4. Haga clic en Siguiente.
+5. En la ventana "Configura tu nuevo proyecto", especifica el nombre y la ubicación del nuevo proyecto.
+6. Opcionalmente, marque la casilla de verificación "Colocar la solución y el proyecto en el mismo directorio", según sus preferencias.
+7. Haga clic en Siguiente.
+8. En la ventana "Información adicional" que se muestra a continuación, dejamos todo predeterminado asegurandonos que la casila de "Enable Docker" no esté marcada.
+9. Haz clic en Crear.
+
+### #2 Instale el paquete JwtBearer NuGet
+
+Ahora agregue el paquete `Microsoft.AspNetCore.Authentication.JwtBearer` a su proyecto en su versión 6.0.15.
+Para hacer esto, seleccione _Tools > NuGet Package Manager > Manage NuGet Packages for Solutions_. En la
+ventana del Administrator de paquetes NuGet, busque el paquete `Microsoft.AspNetCore.Authentication.JwtBearer` e instálelo.
+
+Tambien puede hacer la instalación desde la consola ejecutando el siguiente comando:
+
+Package Manager
+
+```bash
+NuGet\Install-Package Microsoft.AspNetCore.Authentication.JwtBearer -Version 6.0.15
+```
+
+.NET CLI
+
+```bash
+dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 6.0.15
+```
+
+### #3 Especifique la clave secreta en el archivo appsettings.json
+
+A continuación, cree una sección en el archivo `appsettings.json` para la información del emisor,
+la audiencia y la clave. Esta infirmación se utilizara para crear un **JSON Web Token**.
+
+Agregue la siguiente información en el archivo `appsettings.json`:
+
+```json
+{
+  "Jwt": {
+    "Issuer": "https://alckor.dev/",
+    "Audience": "https://alckor.dev/",
+    "Key": "This is a sample secret key"
+  }
+}
+```
+
+<CustomAlert
+  type="info"
+  variant="left-accent"
+  title="Nota:"
+  message="JWT utiliza una clave secreta para generar y validar los tokens. Es importante mantener esta clave segura y no compartirla con terceros, ya que cualquier persona que tenga acceso a la clave podría generar tokens válidos y acceder a recursos protegidos. Se recomienda almacenar la clave en un lugar seguro, como variables de entorno o en un servicio de almacenamiento de claves. Además, se debe evitar el uso de claves predeterminadas o fáciles de adivinar, ya que esto aumenta el riesgo de que la clave sea comprometida."
+/>
+
+### #3 Especifique la configuración de autenticación en el archivo Program.cs
+
+El método AddAuthenication en el archivo `Program.cs`
+se usa para configurar la autenticación JWT en el momento en que se inicia la aplicación.
+Especifica el esquema de autenticación como `JwtBearer`. Además, la llamada al método
+`AddJwtBearer` ayuda a configurar los parámetros del token.
+
+Los valores de Emisor, Audiencia y Clave se leen del archivo de configuración `appsettings.json`.
+La instancia de `TokenValidationParameters` se utiliza para indicar si la información del emisor,
+la audiencia, la clave y la vida útil debe validarse o no.
+
+Nos dirigimos al archivo `Program.cs` y agregamos la siguiente configuración:
+
+```csharp
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
+// ...
+
+// Configure JWT
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x =>
+{
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+    };
+});
+
+// ...
+```
+
+Para agregar el sericio de autoriación a su apciación, tambien debe incluir el siguiente código:
+
+```csharp
+// ...
+
+builder.Services.AddAuthorization();
+
+// ...
+```
+
+También se debe inclur los siguientes metodos para habilitar la capacidad de autenticación y autorización.
+
+```csharp
+// ...
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+// ...
+```
