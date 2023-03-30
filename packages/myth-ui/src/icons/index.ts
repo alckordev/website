@@ -1,3 +1,5 @@
+export { bxTag } from "./bx-tag";
+
 export { riBold } from "./ri-bold";
 export { riItalic } from "./ri-italic";
 export { riUnderline } from "./ri-underline";
