@@ -12,7 +12,7 @@ export const CustomAlert = ({
   message: string;
 }) => {
   return (
-    <UI.Alert status={type} variant={variant} rounded="md">
+    <UI.Alert status={type} variant={variant} rounded="md" my={8}>
       <UI.Box>
         {title && <UI.AlertTitle>{title}</UI.AlertTitle>}
         <UI.AlertDescription>{message}</UI.AlertDescription>

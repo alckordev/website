@@ -63,6 +63,8 @@ la audiencia y la clave. Esta infirmación se utilizara para crear un **JSON Web
 Agregue la siguiente información en el archivo `appsettings.json`:
 
 ```json
+// appsettings.json
+
 {
   "Jwt": {
     "Issuer": "https://alckor.dev/",
@@ -93,6 +95,8 @@ la audiencia, la clave y la vida útil debe validarse o no.
 Nos dirigimos al archivo `Program.cs` y agregamos la siguiente configuración:
 
 ```csharp
+// Program.cs
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -125,6 +129,7 @@ builder.Services.AddAuthentication(x =>
 Para agregar el sericio de autoriación a su apciación, tambien debe incluir el siguiente código:
 
 ```csharp
+// Program.cs
 // ...
 
 builder.Services.AddAuthorization();
@@ -135,6 +140,7 @@ builder.Services.AddAuthorization();
 También se debe inclur los siguientes metodos para habilitar la capacidad de autenticación y autorización.
 
 ```csharp
+// Program.cs
 // ...
 
 app.UseAuthentication();
@@ -142,3 +148,173 @@ app.UseAuthorization();
 
 // ...
 ```
+
+### #4 Cree un modelo para el usuario en ASP.NET Core 6
+
+Cree una clase `Entities/User.cs` para almacenar las credenciales del inicio de sesión.
+
+```csharp
+// Entities/User.cs
+
+namespace ApiJWT.Entities
+{
+    public class User
+    {
+        public string Username { get; set; } = null!;
+        public string Password { get; set; } = null!;
+    }
+}
+
+```
+
+### #5 Cree los endpoints
+
+Para probar el funcionamiento de nuestra aplicación vamos a crear los siguientes controladores:
+
+**AuthController**, se encargará de crear y retornar el JWT:
+
+```csharp
+// Controllers/AuthController.cs
+
+using ApiJWT.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+
+namespace ApiJWT.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AuthController : ControllerBase
+    {
+        private readonly IConfiguration _config;
+
+        public AuthController(IConfiguration config)
+        {
+            _config = config;
+        }
+
+        [HttpPost]
+        public ActionResult PostAuth(User user)
+        {
+            if (user.Username == "alckordev" && user.Password == "zxcvbnm")
+            {
+                var issuer = _config["Jwt:Issuer"];
+                var audience = _config["Jwt:Audience"];
+                var key = Encoding.UTF8.GetBytes(_config["Jwt:Key"]);
+
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new[]
+                    {
+                        new Claim("Id", Guid.NewGuid().ToString()),
+                        new Claim(JwtRegisteredClaimNames.Sub, user.Username),
+                        new Claim(JwtRegisteredClaimNames.Email, user.Username),
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                    }),
+                    Expires = DateTime.UtcNow.AddMinutes(5),
+                    Issuer = issuer,
+                    Audience = audience,
+                    SigningCredentials = new SigningCredentials(
+                        new SymmetricSecurityKey(key),
+                        SecurityAlgorithms.HmacSha256Signature
+                    )
+                };
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var jwtToken = tokenHandler.CreateToken(tokenDescriptor);
+                var stringToken = tokenHandler.WriteToken(jwtToken);
+
+                return Ok(new
+                {
+                    token = stringToken
+                });
+            }
+
+            return Unauthorized();
+        }
+    }
+}
+```
+
+![Resultado del endpoint de autenticación](/assets/images/jwt-authentication-in-aspnet-core-6/jwt-aspnet-core-4.png)
+_Imagen 1. HTTP POST retorna el token en la respuesta._
+
+Luego, creamos un controlador llamado **PublicController**, con el siguiente contenido:
+
+```csharp
+// Controllers/PublicController.cs
+
+using Microsoft.AspNetCore.Mvc;
+
+namespace ApiJWT.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class PublicController : ControllerBase
+    {
+        [HttpGet("GetWelcomeMessage")]
+        public ActionResult GetWelcomeMessage()
+        {
+            return Ok(new
+            {
+                Title = "Welcome!",
+                message = "I'm a public endpoint."
+            });
+        }
+    }
+}
+```
+
+No hay magia aquí, este es un simple controldor que no necesita de autorización para acceder en el.
+Aquí se pueden presentar algunas endpoints públicos, que no, necesiten de una autenticación previa.
+
+![Resultado del endpoint público](/assets/images/jwt-authentication-in-aspnet-core-6/jwt-aspnet-core-5.png)
+_Imagen 2. HTTP GET retorna el mensaje en la respuesta._
+
+Por último, la verdadera magina empieza aquí, creamos un controlador llamado `PrivateController`,
+con el siguiente contenido:
+
+```csharp
+// Controllers/PrivateController.cs
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+namespace ApiJWT.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    [Authorize]
+    public class PrivateController : ControllerBase
+    {
+        [HttpGet("GetWelcomeMessage")]
+        public ActionResult GetWelcomeMessage()
+        {
+            return Ok(new
+            {
+                Title = "Welcome!",
+                message = "I'm a private endpoint."
+            });
+        }
+    }
+}
+
+```
+
+Como podemos observar la unica diferencia con el controlador público es que, a nuestros controlador
+privado le hemos agregado una etiqueta `[Authorize]`, la cual indica que el recurso controlado
+por el controlador está protegido y solo es accesible para usuarios autenticados y autorizados.
+
+Si no enviamos el token en la cabecera nos retornara un status code 401, como se muestra en la imagen:
+
+![Resultado del endpoint private 401](/assets/images/jwt-authentication-in-aspnet-core-6/jwt-aspnet-core-6.png)
+_Imagen 3. HTTP GET retorna un status code 401 porque la solicitud no está autenticada._
+
+Necesitamos enviar el token en la cabecera para poder acceder al contenido protegido, como se muestra en
+la imagen:
+
+![Resultado del endpoint private 200](/assets/images/jwt-authentication-in-aspnet-core-6/jwt-aspnet-core-7.png)
+_Imagen 4. HTTP GET retorna el mensaje correctamente porque la solicita fue autorizada por el token._

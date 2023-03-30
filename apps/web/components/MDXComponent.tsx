@@ -41,8 +41,8 @@ export const MDXComponent = {
   p: (props: any) => <UI.Text fontSize="md" lineHeight={6} my={8} {...props} />,
   pre: (props: any) => <UI.Box as="pre" my={8} {...props} />,
   image: (props: ImageProps) => <Image {...props} />,
-  ul: (props: any) => <UI.UnorderedList styleType="none" {...props} />,
-  ol: (props: any) => <UI.OrderedList styleType="none" {...props} />,
+  ul: (props: any) => <UI.UnorderedList styleType="none" my={8} {...props} />,
+  ol: (props: any) => <UI.OrderedList styleType="none" my={8} {...props} />,
   li: (props: any) => <CustomListItem {...props} />,
   CustomAlert,
 };
