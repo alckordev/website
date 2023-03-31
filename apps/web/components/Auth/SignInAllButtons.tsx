@@ -31,11 +31,11 @@ export const SignInAllButtons = ({
           <UI.Text fontSize="sm">
             Al hacer clic en &quot;Iniciar sesión&quot;, confirmas que estás de
             acuerdo con nuestros{" "}
-            <UI.Link as={NextLink} href="/terms-and-conditions">
+            <UI.Link as={NextLink} href="/terms-and-conditions" isExternal>
               términos y condiciones
             </UI.Link>
             , así como con nuestra{" "}
-            <UI.Link as={NextLink} href="/privacy-policy">
+            <UI.Link as={NextLink} href="/privacy-policy" isExternal>
               política de privacidad
             </UI.Link>
             .
