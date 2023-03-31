@@ -1,6 +1,6 @@
-import Image, { ImageProps } from "next/image";
 import { UI, CIcon, icon, useColorModeValue } from "@myth/ui";
 import { CustomAlert } from "./CustomAlert";
+import { CustomImage } from "./CustomImage";
 
 const CustomLink = (props: any) => {
   const color = useColorModeValue("purple.700", "purple.300");
@@ -40,9 +40,9 @@ export const MDXComponent = {
   h6: (props: any) => <UI.Heading as="h6" my={2} size="sm" {...props} />,
   p: (props: any) => <UI.Text fontSize="md" lineHeight={6} my={8} {...props} />,
   pre: (props: any) => <UI.Box as="pre" my={8} {...props} />,
-  image: (props: ImageProps) => <Image {...props} />,
   ul: (props: any) => <UI.UnorderedList styleType="none" my={8} {...props} />,
   ol: (props: any) => <UI.OrderedList styleType="none" my={8} {...props} />,
   li: (props: any) => <CustomListItem {...props} />,
   CustomAlert,
+  CustomImage,
 };
