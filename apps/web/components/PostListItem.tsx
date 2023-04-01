@@ -26,29 +26,38 @@ export const PostListItem = ({
   tags = [],
   ...rest
 }: any) => {
-  const [lineClamp, setLineClamp] = useState<number>(2);
+  const [maxLineClamp, setMaxLineClamp] = useState<number>(2);
 
   const headingRef = useRef<HTMLHeadingElement>(null);
 
-  useEffect(() => {
-    const lineClampDynamic = () => {
-      const currentRef = headingRef.current;
-      const currentHeight = currentRef?.getBoundingClientRect().height;
-      if (currentHeight) {
-        if (currentHeight < 60) {
-          setLineClamp(3);
-        } else {
-          setLineClamp(2);
-        }
-      }
-    };
+  const checkLineClamp = () => {
+    if (headingRef && headingRef.current) {
+      const lineHeight = parseInt(
+        window
+          .getComputedStyle(headingRef.current)
+          .getPropertyValue("line-height"),
+        10
+      );
+      const currentHeight = headingRef.current.offsetHeight;
+      const lines = currentHeight / lineHeight;
 
-    window.addEventListener("resize", lineClampDynamic);
+      if (lines < 2) {
+        setMaxLineClamp(3);
+      } else {
+        setMaxLineClamp(2);
+      }
+    }
+  };
+
+  useEffect(() => {
+    checkLineClamp();
+
+    window.addEventListener("resize", checkLineClamp);
 
     return () => {
-      window.removeEventListener("resize", lineClampDynamic);
+      window.removeEventListener("resize", checkLineClamp);
     };
-  }, []);
+  }, [headingRef]);
 
   return (
     <UI.Box
@@ -69,15 +78,20 @@ export const PostListItem = ({
           <UI.Flex align={[null, null, "center", "center"]}>
             <UI.Box flex="1 1 auto">
               <UI.Heading
-                lineHeight={["20px", "20px", "28px", "28px"]}
                 size={["sm", "sm", "md", "md"]}
-                maxH={["40px", "40px", "60px", "60px"]}
+                lineHeight={[
+                  "20px !important",
+                  "20px !important",
+                  "28px !important",
+                  "28px !important",
+                ]}
+                maxH="60px"
                 pb={[null, null, 2, 2]}
                 sx={{
                   display: "-webkit-box",
                   textOverflow: "ellipsis",
                   overflow: "hidden",
-                  WebkitLineClamp: 2,
+                  WebkitLineClamp: [3, 3, 2, 2],
                   WebkitBoxOrient: "vertical",
                 }}
                 ref={headingRef}
@@ -91,7 +105,7 @@ export const PostListItem = ({
                     display: "-webkit-box",
                     textOverflow: "ellipsis",
                     overflow: "hidden",
-                    WebkitLineClamp: lineClamp,
+                    WebkitLineClamp: maxLineClamp,
                     WebkitBoxOrient: "vertical",
                   }}
                 >
@@ -117,7 +131,7 @@ export const PostListItem = ({
                 src={coverImage}
                 alt={title}
                 w={["100px", "100px", "160px", "160px"]}
-                h={["70px", "70px", "112px", "112px"]}
+                h={["60px", "60px", "112px", "112px"]}
                 objectFit="cover"
               />
             </UI.Box>
