@@ -143,7 +143,7 @@ export const PostListItem = ({
               key={idx}
               as={NextLink}
               href={`tag/${tag.slug}`}
-              colorScheme="purple"
+              colorScheme={tag.colorScheme}
               size={["sm", "sm", "md", "md"]}
             >
               {tag.name}

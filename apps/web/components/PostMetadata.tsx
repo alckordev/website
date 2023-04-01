@@ -1,18 +1,6 @@
 import NextLink from "next/link";
 import { UI, CIcon, icon, useColorModeValue } from "@myth/ui";
 
-interface Props {
-  title?: string;
-  coverImage?: string;
-  customDate: string;
-  dateTime: string;
-  readingTime: number;
-  tags?: {
-    name: string;
-    slug: string;
-  }[];
-}
-
 export const PostMetadata = ({
   title,
   coverImage,
@@ -20,16 +8,16 @@ export const PostMetadata = ({
   dateTime,
   readingTime,
   tags = [],
-}: Props) => {
+}: any) => {
   return (
     <UI.Box pb={4} mb={7}>
       <UI.HStack spacing={2}>
-        {tags.map((tag, idx) => (
+        {tags.map((tag: any, idx: number) => (
           <UI.Tag
             key={idx}
             as={NextLink}
             href={`tag/${tag.slug}`}
-            colorScheme="purple"
+            colorScheme={tag.colorScheme}
           >
             {tag.name}
           </UI.Tag>
