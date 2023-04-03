@@ -65,7 +65,7 @@ export const PostListItem = ({
       initial="normal"
       whileHover="hover"
       w="100%"
-      maxW={[null, null, 680, 680]}
+      // maxW={[null, null, 680, 680]}
       {...rest}
     >
       <UI.Stack spacing={6}>
@@ -131,7 +131,7 @@ export const PostListItem = ({
                 src={coverImage}
                 alt={title}
                 w={["100px", "100px", "160px", "160px"]}
-                h={["60px", "60px", "112px", "112px"]}
+                h={["60px", "60px", "108px", "108px"]}
                 objectFit="cover"
               />
             </UI.Box>
@@ -145,6 +145,7 @@ export const PostListItem = ({
               href={`tag/${tag.slug}`}
               colorScheme={tag.colorScheme}
               size={["sm", "sm", "md", "md"]}
+              rounded="3xl"
             >
               {tag.name}
             </UI.Tag>

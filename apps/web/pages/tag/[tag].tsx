@@ -45,12 +45,9 @@ export default function Tags({ allPosts, tag }: any) {
 
   return (
     <Layout metadata={{ title: `Tema: ${tag}` }}>
-      <UI.Box maxW={["100%", "100%", "100%", 680]} mx="auto">
-        <UI.Heading as="h2" fontSize="md">
-          Tema:{" "}
-          <UI.Text as="span" fontWeight="normal">
-            {currentTag.name}
-          </UI.Text>
+      <UI.Box>
+        <UI.Heading as="h2" fontSize="lg">
+          {currentTag.name}
         </UI.Heading>
         <UI.Divider
           borderColor={useColorModeValue("gray.200", "gray.958")}

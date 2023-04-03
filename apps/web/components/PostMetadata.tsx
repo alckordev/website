@@ -18,6 +18,7 @@ export const PostMetadata = ({
             as={NextLink}
             href={`tag/${tag.slug}`}
             colorScheme={tag.colorScheme}
+            rounded="3xl"
           >
             {tag.name}
           </UI.Tag>

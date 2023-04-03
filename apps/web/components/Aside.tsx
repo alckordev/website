@@ -1,9 +1,9 @@
 import { Fragment } from "react";
 import NextLink from "next/link";
-import { UI, CIcon, icon, useColorModeValue } from "@myth/ui";
+import { UI, useColorModeValue } from "@myth/ui";
 import tags from "../data/tags";
 import { Newsletter } from "./Newsletter";
-import { LastedVideos } from "./LastedVideos";
+// import { LastedVideos } from "./LastedVideos";
 
 export const Aside = () => {
   return (
@@ -76,6 +76,8 @@ export const Aside = () => {
                   as={NextLink}
                   href={`tag/${tag.slug}`}
                   colorScheme={tag.colorScheme}
+                  size="lg"
+                  rounded="3xl"
                 >
                   {tag.name}
                 </UI.Tag>

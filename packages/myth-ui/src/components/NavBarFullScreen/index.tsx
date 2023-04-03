@@ -85,17 +85,17 @@ export const NavBarFullScreen = ({
             {user ? (
               <SignOutButton
                 size="sm"
-                rounded={32}
+                rounded="3xl"
                 colorScheme="purple"
-                fontWeight="normal"
+                // fontWeight="normal"
                 variant="ghost"
               />
             ) : (
               <SignInButton
                 size="sm"
-                rounded={32}
+                rounded="3xl"
                 colorScheme="purple"
-                fontWeight="normal"
+                // fontWeight="normal"
               />
             )}
 
