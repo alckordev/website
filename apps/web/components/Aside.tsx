@@ -74,7 +74,7 @@ export const Aside = () => {
                 <UI.Tag
                   key={idx}
                   as={NextLink}
-                  href={`tag/${tag.slug}`}
+                  href={`/tag/${tag.slug}`}
                   colorScheme={tag.colorScheme}
                   size="lg"
                   rounded="3xl"

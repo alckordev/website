@@ -4,7 +4,7 @@ const tags = [
   { name: "JWT", slug: "jwt", colorScheme: "pink" },
   { name: "ASP.NET", slug: "aspnet", colorScheme: "purple" },
   { name: "Web API", slug: "web-api", colorScheme: "gray" },
-  { name: "Notification Push", slug: "notification-push", colorScheme: "blue" },
+  { name: "Push Notification", slug: "push-notification", colorScheme: "blue" },
 ];
 
 export default tags;
