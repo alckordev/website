@@ -1,9 +1,20 @@
-import { Link, Heading } from "@chakra-ui/react";
+import { Link, Heading, Image } from "@chakra-ui/react";
 
 export const Logo = () => {
   return (
-    <Link href="/">
-      <Heading size="md">alckordev</Heading>
-    </Link>
+    <Heading size="md">
+      <Link
+        href="/"
+        display="flex"
+        alignItems="center"
+        gap={2}
+        _hover={{
+          textDecor: "none",
+        }}
+      >
+        <Image src="/assets/iso.png" width="auto" height="30" />
+        alckor
+      </Link>
+    </Heading>
   );
 };

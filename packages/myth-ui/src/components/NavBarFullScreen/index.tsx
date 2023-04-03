@@ -73,7 +73,12 @@ export const NavBarFullScreen = ({
           <NavBarList isMobile={isMobile} navs={navs} />
 
           <ButtonGroup alignItems="center">
-            <Button onClick={toggleColorMode} variant="ghost" p={0}>
+            <Button
+              onClick={toggleColorMode}
+              variant="ghost"
+              p={0}
+              display={["none", "block"]}
+            >
               <CIcon icon={colorMode === "dark" ? riMoonFill : riSunFill} />
             </Button>
 
