@@ -25,8 +25,6 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.2",
     "react-instantsearch-dom": "^6.39.1",
-    "react-instantsearch-hooks": "^6.42.0",
-    "react-instantsearch-hooks-web": "^6.42.1",
     "reading-time": "^1.5.0",
     "remark-code-titles": "^0.1.2",
     "remark-gfm": "^3.0.1",
