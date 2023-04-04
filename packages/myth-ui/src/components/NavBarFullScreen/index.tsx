@@ -1,6 +1,6 @@
-import { useState } from "react";
 import styled from "@emotion/styled";
 import {
+  Box,
   Button,
   ButtonGroup,
   Flex,
@@ -11,10 +11,7 @@ import {
 import CIcon from "@coreui/icons-react";
 import { Logo } from "./Logo";
 import { NavBarContainer } from "./NavBarContainer";
-import { NavBarDrawer } from "./NavBarDrawer";
-import { NavBarDrawerList } from "./NavBarDrawerList";
-import { NavBarList } from "./NavBarList";
-import { riMenuLine, riMoonFill, riSunFill } from "../../icons";
+import { riMoonFill, riSunFill } from "../../icons";
 
 const StyledNavbar = styled.header<{
   isScrolled: boolean;
@@ -37,6 +34,7 @@ interface Props {
   signInButton?: any;
   signOutButton?: any;
   isScrolled: boolean;
+  searchBox?: any;
   navs: {
     name: string;
     to: string;
@@ -48,16 +46,15 @@ export const NavBarFullScreen = ({
   signInButton: SignInButton,
   signOutButton: SignOutButton,
   isScrolled = false,
+  searchBox: SearchBox,
   navs,
   ...rest
 }: Props) => {
-  const [isMobile] = useMediaQuery("(max-width: 768px)");
+  const [isMobile] = useMediaQuery("(max-width: 46em)");
 
   const { colorMode, toggleColorMode } = useColorMode();
 
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggle = () => setIsOpen(!isOpen);
+  console.log("isMobile", isMobile);
 
   return (
     <StyledNavbar
@@ -69,50 +66,35 @@ export const NavBarFullScreen = ({
     >
       <NavBarContainer {...rest}>
         <Logo />
-        <Flex gap={8}>
-          <NavBarList isMobile={isMobile} navs={navs} />
+        <Flex w="100%" align="center" justify="space-between">
+          {SearchBox && !isMobile && <SearchBox />}
 
-          <ButtonGroup alignItems="center">
-            <Button
-              onClick={toggleColorMode}
-              variant="ghost"
-              p={0}
-              display={["none", "block"]}
-            >
-              <CIcon icon={colorMode === "dark" ? riMoonFill : riSunFill} />
-            </Button>
-
-            {user ? (
-              <SignOutButton
+          <Box ml="auto">
+            <ButtonGroup alignItems="center">
+              <Button
                 size="sm"
-                rounded="3xl"
-                colorScheme="purple"
-                // fontWeight="normal"
+                onClick={toggleColorMode}
                 variant="ghost"
-              />
-            ) : (
-              <SignInButton
-                size="sm"
-                rounded="3xl"
-                colorScheme="purple"
-                // fontWeight="normal"
-              />
-            )}
-
-            {isMobile && navs.length > 0 && (
-              <Button onClick={toggle} variant="ghost" p={0}>
-                <CIcon icon={riMenuLine} />
+                p={0}
+                display={["none", "block"]}
+              >
+                <CIcon icon={colorMode === "dark" ? riMoonFill : riSunFill} />
               </Button>
-            )}
-          </ButtonGroup>
+
+              {user ? (
+                <SignOutButton
+                  size="sm"
+                  rounded="3xl"
+                  colorScheme="purple"
+                  variant="ghost"
+                />
+              ) : (
+                <SignInButton size="sm" rounded="3xl" colorScheme="purple" />
+              )}
+            </ButtonGroup>
+          </Box>
         </Flex>
       </NavBarContainer>
-
-      {navs.length > 0 && (
-        <NavBarDrawer isMobile={isMobile} isOpen={isOpen} toggle={toggle}>
-          <NavBarDrawerList navs={navs} />
-        </NavBarDrawer>
-      )}
     </StyledNavbar>
   );
 };

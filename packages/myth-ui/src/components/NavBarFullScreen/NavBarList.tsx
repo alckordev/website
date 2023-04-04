@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const NavBarList = ({ isMobile = false, navs }: Props) => {
-  if (isMobile) return null;
+  if (isMobile || navs.length === 0) return null;
 
   return (
     <HStack as="nav" spacing={10}>

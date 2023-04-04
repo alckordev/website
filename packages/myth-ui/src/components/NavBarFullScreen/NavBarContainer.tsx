@@ -8,10 +8,10 @@ export const NavBarContainer = ({ children, ...rest }: Props) => {
   return (
     <Container
       maxW="container"
+      minH="72px"
       display="flex"
       alignItems="center"
       justifyContent="space-between"
-      py={4}
       {...rest}
     >
       {children}

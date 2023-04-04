@@ -80,4 +80,5 @@ export {
   AlertDialogBody,
   AlertDialogFooter,
   Portal,
+  Kbd,
 } from "@chakra-ui/react";

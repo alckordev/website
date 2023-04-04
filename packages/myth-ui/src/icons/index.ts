@@ -23,6 +23,7 @@ export { riLikeLine } from "./ri-like-line";
 export { riLinkLine } from "./ri-link-line";
 export { riLinkedinLine } from "./ri-linkedin-line";
 export { riMenuLine } from "./ri-menu-line";
+export { riSearchLine } from "./ri-search-line";
 export { riShareLine } from "./ri-share-line";
 export { riTagLine } from "./ri-tag-line";
 export { riTimeLine } from "./ri-time-line";

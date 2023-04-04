@@ -1,20 +1,11 @@
-import { Link, Heading, Image } from "@chakra-ui/react";
+import { Flex, Image, Link } from "@chakra-ui/react";
 
 export const Logo = () => {
   return (
-    <Heading size="md">
-      <Link
-        href="/"
-        display="flex"
-        alignItems="center"
-        gap={2}
-        _hover={{
-          textDecor: "none",
-        }}
-      >
-        <Image src="/assets/iso.png" width="auto" height="30" />
-        alckor
-      </Link>
-    </Heading>
+    <Link href="/" _hover={{ textDecor: "none" }}>
+      <Flex>
+        <Image src="/assets/iso.png" width="30px" height="30px" alt="Logo" />
+      </Flex>
+    </Link>
   );
 };
