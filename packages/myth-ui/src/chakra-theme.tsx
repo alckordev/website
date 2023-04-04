@@ -6,6 +6,11 @@ import {
 import { StyleConfig } from "@chakra-ui/theme-tools";
 
 const components: Record<string, StyleConfig> = {
+  Button: {
+    baseStyle: () => ({
+      fontWeight: "medium",
+    }),
+  },
   Drawer: {
     baseStyle: ({ colorMode }) => ({
       dialog: {
@@ -69,5 +74,7 @@ const theme = extendTheme({
   },
   components,
 });
+
+// console.log("theme", theme);
 
 export { ChakraProvider as ThemeProvider, createLocalStorageManager, theme };
