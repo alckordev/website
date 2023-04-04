@@ -2,6 +2,7 @@ import { connectStateResults } from "react-instantsearch-dom";
 import NextLink from "next/link";
 import { UI, CIcon, icons, useColorMode, useColorModeValue } from "@myth/ui";
 import { Fragment } from "react";
+import { _date } from "../../lib/format-date";
 
 const SearchHits = ({ searchState, searchResults }: any) => {
   // checking if the query length is >= 1
@@ -42,15 +43,20 @@ const SearchHits = ({ searchState, searchResults }: any) => {
                 size="lg"
                 color={color}
               />
-              <UI.Box>
+              <UI.Box lineHeight={1.25}>
                 <UI.Text
                   dangerouslySetInnerHTML={{
                     __html: hit._highlightResult.title.value,
                   }}
                   fontWeight="medium"
                 />
-                <UI.Text fontSize="xs" color={color}>
-                  {hit.publishedAt}
+                <UI.Text
+                  as="time"
+                  fontSize="xs"
+                  color={color}
+                  dateTime={hit.publishedAt}
+                >
+                  {_date(hit.publishedAt)}
                 </UI.Text>
               </UI.Box>
             </UI.Flex>
