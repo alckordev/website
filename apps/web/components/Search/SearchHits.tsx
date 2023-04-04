@@ -25,7 +25,7 @@ const SearchHits = ({ searchState, searchResults }: any) => {
         borderBottomWidth={1}
       >
         {searchResults.hits.map((hit: any) => (
-          <NextLink key={hit.objectID} href={hit.slug}>
+          <NextLink key={hit.objectID} href={`/${hit.slug}`}>
             <UI.Flex
               gap={4}
               align="center"
