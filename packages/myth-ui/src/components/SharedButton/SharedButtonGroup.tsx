@@ -3,13 +3,7 @@ import { motion, Variants } from "framer-motion";
 import copy from "copy-to-clipboard";
 import { fbButton, tw, linkedin, whatsapp } from "vanilla-sharing";
 import CIcon from "@coreui/icons-react";
-import {
-  riFacebookLine,
-  riTwitterLine,
-  riLinkLine,
-  riLinkedinLine,
-  riWhatsappLine,
-} from "../../icons";
+import { icons } from "../../icons";
 
 const variants: Variants = {
   open: {
@@ -60,7 +54,7 @@ export const SharedButtonGroup = ({ ...rest }) => {
         variants={variants}
         whileTap={{ scale: 0.95 }}
         aria-label="Compartir en facebook"
-        icon={<CIcon icon={riFacebookLine} />}
+        icon={<CIcon icon={icons.riFacebookLine} />}
         colorScheme="facebook"
         rounded="full"
         onClick={() => fbButton({ url: rest.url })}
@@ -70,7 +64,7 @@ export const SharedButtonGroup = ({ ...rest }) => {
         variants={variants}
         whileTap={{ scale: 0.95 }}
         aria-label="Compartir en twitter"
-        icon={<CIcon icon={riTwitterLine} />}
+        icon={<CIcon icon={icons.riTwitterLine} />}
         colorScheme="twitter"
         rounded="full"
         onClick={() => tw({ url: rest.url })}
@@ -80,7 +74,7 @@ export const SharedButtonGroup = ({ ...rest }) => {
         variants={variants}
         whileTap={{ scale: 0.95 }}
         aria-label="Compartir en linkedin"
-        icon={<CIcon icon={riLinkedinLine} />}
+        icon={<CIcon icon={icons.riLinkedinLine} />}
         colorScheme="linkedin"
         rounded="full"
         onClick={() => linkedin({ url: rest.url })}
@@ -90,7 +84,7 @@ export const SharedButtonGroup = ({ ...rest }) => {
         variants={variants}
         whileTap={{ scale: 0.95 }}
         aria-label="Compartir en whatsapp"
-        icon={<CIcon icon={riWhatsappLine} />}
+        icon={<CIcon icon={icons.riWhatsappLine} />}
         colorScheme="whatsapp"
         rounded="full"
         onClick={() => whatsapp({ url: rest.url })}
@@ -101,7 +95,7 @@ export const SharedButtonGroup = ({ ...rest }) => {
           variants={variants}
           whileTap={{ scale: 0.95 }}
           aria-label="Copiar enlace"
-          icon={<CIcon icon={riLinkLine} />}
+          icon={<CIcon icon={icons.riLinkLine} />}
           rounded="full"
           onClick={handleCopyToClipboard}
         />

@@ -2,10 +2,10 @@ import React, { useRef } from "react";
 import { Flex, IconButton } from "@chakra-ui/react";
 import { motion, useCycle } from "framer-motion";
 import CIcon from "@coreui/icons-react";
-import { riShareLine } from "../../icons";
+import { icons } from "../../icons";
 import { SharedButtonGroup } from "./SharedButtonGroup";
 
-export const SharedButton = React.forwardRef(
+const SharedButton = React.forwardRef(
   ({ url, ...rest }: { url: string }, ref: React.Ref<HTMLDivElement>) => {
     const [isOpen, toggleOpen] = useCycle(false, true);
 
@@ -22,7 +22,7 @@ export const SharedButton = React.forwardRef(
       >
         <IconButton
           aria-label="Compartir"
-          icon={<CIcon icon={riShareLine} />}
+          icon={<CIcon icon={icons.riShareLine} />}
           size="sm"
           variant="link"
           onClick={() => toggleOpen()}
@@ -34,3 +34,7 @@ export const SharedButton = React.forwardRef(
     );
   }
 );
+
+SharedButton.displayName = "SharedButton";
+
+export { SharedButton };

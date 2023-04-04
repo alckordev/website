@@ -1,6 +1,6 @@
 import { Box, Image } from "@chakra-ui/react";
 import CIcon from "@coreui/icons-react";
-import { riYoutubeFill } from "../../icons";
+import { icons } from "../../icons";
 
 export const YouTubeCover = ({ image, ...rest }: any) => {
   return (
@@ -17,12 +17,12 @@ export const YouTubeCover = ({ image, ...rest }: any) => {
       <Image
         src="https://i.ytimg.com/vi/M76SUpBf_3o/sddefault.jpg"
         visibility="hidden"
-        m="0 auto"
+        mx="auto"
         minH={60}
       />
       <Box
         as={CIcon}
-        icon={riYoutubeFill}
+        icon={icons.riYoutubeFill}
         pos="absolute"
         w="3rem !important"
         h="3rem !important"

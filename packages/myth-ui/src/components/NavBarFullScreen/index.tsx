@@ -11,7 +11,7 @@ import {
 import CIcon from "@coreui/icons-react";
 import { Logo } from "./Logo";
 import { NavBarContainer } from "./NavBarContainer";
-import { riMoonFill, riSunFill } from "../../icons";
+import { icons } from "../../icons";
 
 const StyledNavbar = styled.header<{
   isScrolled: boolean;
@@ -54,8 +54,6 @@ export const NavBarFullScreen = ({
 
   const { colorMode, toggleColorMode } = useColorMode();
 
-  console.log("isMobile", isMobile);
-
   return (
     <StyledNavbar
       isScrolled={isScrolled}
@@ -78,7 +76,11 @@ export const NavBarFullScreen = ({
                 p={0}
                 display={["none", "block"]}
               >
-                <CIcon icon={colorMode === "dark" ? riMoonFill : riSunFill} />
+                <CIcon
+                  icon={
+                    colorMode === "dark" ? icons.riMoonFill : icons.riSunFill
+                  }
+                />
               </Button>
 
               {user ? (

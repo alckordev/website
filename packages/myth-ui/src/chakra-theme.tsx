@@ -9,7 +9,14 @@ const components: Record<string, StyleConfig> = {
   Drawer: {
     baseStyle: ({ colorMode }) => ({
       dialog: {
-        bg: colorMode === "dark" ? "gray.900" : "white",
+        bg: colorMode === "dark" ? "gray.928" : "white",
+      },
+    }),
+  },
+  Modal: {
+    baseStyle: ({ colorMode }) => ({
+      dialog: {
+        bg: colorMode === "dark" ? "gray.928" : "white",
       },
     }),
   },
