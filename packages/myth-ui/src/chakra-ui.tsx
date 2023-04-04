@@ -64,6 +64,7 @@ export {
   Fade,
   Modal,
   ModalBody,
+  ModalFooter,
   ModalHeader,
   ModalOverlay,
   ModalContent,

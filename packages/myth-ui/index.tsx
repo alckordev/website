@@ -1,4 +1,5 @@
 export {
+  useColorMode,
   useColorModeValue,
   useToast,
   useDisclosure,
