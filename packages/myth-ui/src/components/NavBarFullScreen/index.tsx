@@ -74,7 +74,7 @@ export const NavBarFullScreen = ({
                 onClick={toggleColorMode}
                 variant="ghost"
                 p={0}
-                display={["none", "block"]}
+                display={["none", "inline-flex"]}
               >
                 <CIcon
                   icon={
