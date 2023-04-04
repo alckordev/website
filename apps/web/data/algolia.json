@@ -1,93 +1,26 @@
 [
   {
-    "category": "Artículo",
-    "icon": "riArticleLine",
-    "name": "Cómo integrar Firebase Auth en una aplicación Next.js",
-    "url": "https://alckor.dev/firebase-auth-in-nextjs",
+    "title": "Cómo integrar Firebase Auth en una aplicación Next.js",
+    "slug": "firebase-auth-in-nextjs",
+    "publishedAt": "2023-03-21 23:14:00",
     "views": 0
   },
   {
-    "category": "Artículo",
-    "icon": "riArticleLine",
-    "name": "Cómo integrar Firebase Realtime Database en una aplicación Next.js",
-    "url": "https://alckor.dev/firebase-realtime-database-in-nextjs",
+    "title": "Cómo integrar Firebase Realtime Database en una aplicación Next.js",
+    "slug": "firebase-realtime-database-in-nextjs",
+    "publishedAt": "2023-03-19 14:38:00",
     "views": 0
   },
   {
-    "category": "Artículo",
-    "icon": "riArticleLine",
-    "name": "Cómo implementar JWT en ASP.NET Core 6",
-    "url": "https://alckor.dev/jwt-authentication-in-aspnet-core-6",
+    "title": "Cómo implementar JWT en ASP.NET Core 6",
+    "slug": "jwt-authentication-in-aspnet-core-6",
+    "publishedAt": "2023-03-30 23:40:00",
     "views": 0
   },
   {
-    "category": "Artículo",
-    "icon": "riArticleLine",
-    "name": "Cómo implementar Notificaciones Push en una API con JWT y Firebase Cloud Messaging",
-    "url": "https://alckor.dev/push-notifications-aspnet-core-6",
-    "views": 0
-  },
-  {
-    "category": "Tema",
-    "icon": "riTagLine",
-    "name": "Next.js",
-    "url": "https://alckor.dev/tag/nextjs",
-    "views": 0
-  },
-  {
-    "category": "Tema",
-    "icon": "riTagLine",
-    "name": "Firebase",
-    "url": "https://alckor.dev/tag/firebase",
-    "views": 0
-  },
-  {
-    "category": "Tema",
-    "icon": "riTagLine",
-    "name": "JWT (Json Web Token)",
-    "url": "https://alckor.dev/tag/jwt",
-    "views": 0
-  },
-  {
-    "category": "Tema",
-    "icon": "riTagLine",
-    "name": "ASP.NET",
-    "url": "https://alckor.dev/tag/aspnet",
-    "views": 0
-  },
-  {
-    "category": "Tema",
-    "icon": "riTagLine",
-    "name": "Web API",
-    "url": "https://alckor.dev/tag/web-api",
-    "views": 0
-  },
-  {
-    "category": "Tema",
-    "icon": "riTagLine",
-    "name": "Push Notification",
-    "url": "https://alckor.dev/tag/push-notification",
-    "views": 0
-  },
-  {
-    "category": "Página",
-    "icon": "riBookOpenLine",
-    "name": "Código de conducta",
-    "url": "https://alckor.dev/rules",
-    "views": 0
-  },
-  {
-    "category": "Página",
-    "icon": "riBookOpenLine",
-    "name": "Términos y condiciones del servicio",
-    "url": "https://alckor.dev/terms-and-conditions",
-    "views": 0
-  },
-  {
-    "category": "Página",
-    "icon": "riBookOpenLine",
-    "name": "Políticas de privacidad",
-    "url": "https://alckor.dev/privacy-policy",
+    "title": "Cómo implementar Notificaciones Push en una API con JWT y Firebase Cloud Messaging",
+    "slug": "push-notifications-aspnet-core-6",
+    "publishedAt": "2023-04-01 18:30:00",
     "views": 0
   }
 ]

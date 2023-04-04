@@ -1,10 +1,9 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { UI, CIcon, icons } from "@myth/ui";
-import isHotkey from "is-hotkey";
-import { InstantSearch } from "react-instantsearch-hooks";
+import { InstantSearch } from "react-instantsearch-dom";
 import { algolia } from "../../lib/algolia";
-
-import { SearchBox } from "./SearchBox";
+import SearchBox from "./SearchBox";
+import SearchHits from "./SearchHits";
 
 export const Search = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,36 +12,14 @@ export const Search = () => {
 
   const onClose = () => setIsOpen(false);
 
-  //   useEffect(() => {
-  //     const handleKeyDown = (event: KeyboardEvent) => {
-  //       event.preventDefault();
-
-  //       const isCtrlK = isHotkey("ctrl+k", event);
-
-  //       if (isCtrlK) onOpen();
-
-  //       console.log(event);
-  //     };
-
-  //     document.addEventListener("keydown", handleKeyDown);
-
-  //     return () => {
-  //       document.removeEventListener("keydown", handleKeyDown);
-  //     };
-  //   }, []);
-
   return (
     <Fragment>
-      <UI.Flex
-        as="button"
-        display="flex"
+      <UI.Button
         w="100%"
-        maxW="300px"
-        bg="gray.900"
-        color="gray.500"
+        maxW="360px"
+        colorScheme="gray"
         mx={6}
         p={3}
-        align="center"
         rounded="md"
         boxShadow="base"
         onClick={onOpen}
@@ -57,18 +34,16 @@ export const Search = () => {
             <UI.Kbd>K</UI.Kbd>
           </UI.HStack>
         </UI.HStack>
-      </UI.Flex>
+      </UI.Button>
 
-      <UI.Modal onClose={onClose} isOpen={isOpen} size="xl">
+      <UI.Modal onClose={onClose} isOpen={isOpen} size="3xl">
         <UI.ModalOverlay bg="blackAlpha.600" backdropFilter="blur(5px)" />
-        <UI.ModalContent
-          top="4vh"
-          maxHeight="calc(100% - 7.5rem)"
-          boxShadow="lg"
-          rounded="md"
-        >
+        <UI.ModalContent>
           <InstantSearch searchClient={algolia} indexName="alckordev">
-            <SearchBox />
+            <UI.ModalBody p={0}>
+              <SearchBox />
+              <SearchHits />
+            </UI.ModalBody>
           </InstantSearch>
         </UI.ModalContent>
       </UI.Modal>

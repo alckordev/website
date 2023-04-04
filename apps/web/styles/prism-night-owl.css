@@ -170,3 +170,22 @@ pre[class*="language-"] {
   --badge-bg: rgba(226, 232, 240, 0.16);
   --badge-color: var(--chakra-colors-gray-200);
 }
+
+mark,
+ais-highlight-0000000000 {
+  background-color: var(--mark-bg);
+  color: var(--mark-color);
+  border-radius: 2px;
+  --mark-bg: var(--chakra-colors-purple-100);
+  --mark-color: var(--chakra-colors-purple-800);
+}
+
+.chakra-ui-dark mark:not([data-theme]),
+[data-theme="dark"] mark:not([data-theme]),
+mark[data-theme="dark"],
+.chakra-ui-dark ais-highlight-0000000000:not([data-theme]),
+[data-theme="dark"] ais-highlight-0000000000:not([data-theme]),
+ais-highlight-0000000000[data-theme="dark"] {
+  --mark-bg: rgba(214, 188, 250, 0.16);
+  --mark-color: var(--chakra-colors-purple-200);
+}
