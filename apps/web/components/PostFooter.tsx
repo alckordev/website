@@ -4,7 +4,7 @@ import {
   useColorModeValue,
   useDisclosure,
   CIcon,
-  icon,
+  icons,
   SharedButton,
 } from "@myth/ui";
 import { Disqus, DisqusCount, DisqusThreadLikes } from "./Disqus";
@@ -33,7 +33,7 @@ export const PostFooter = ({ thread }: any) => {
         >
           <DisqusThreadLikes identifier={thread.key} />
           <UI.Button
-            leftIcon={<CIcon icon={icon.riChatLine} />}
+            leftIcon={<CIcon icon={icons.riChatLine} />}
             size="sm"
             variant="link"
             onClick={onOpen}
@@ -71,7 +71,7 @@ export const PostFooter = ({ thread }: any) => {
           <UI.Box pt={[4, 4, 0, 0]}>
             <UI.Button
               as={UI.Link}
-              leftIcon={<CIcon icon={icon.riCupLine} />}
+              leftIcon={<CIcon icon={icons.riCupLine} />}
               href="https://paypal.me/alckor127"
               isExternal
               colorScheme="teal"

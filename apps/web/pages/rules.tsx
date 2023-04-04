@@ -1,4 +1,4 @@
-import { UI, CIcon, icon, useColorModeValue } from "@myth/ui";
+import { UI, CIcon, icons, useColorModeValue } from "@myth/ui";
 import { Layout } from "../components";
 
 export default function Rules() {
@@ -21,7 +21,7 @@ export default function Rules() {
         <UI.ListItem pos="relative">
           <UI.Box
             as={CIcon}
-            icon={icon.bxTag}
+            icon={icons.bxTag}
             pos="absolute"
             top="5px"
             color={color}
@@ -36,7 +36,7 @@ export default function Rules() {
         <UI.ListItem pos="relative">
           <UI.Box
             as={CIcon}
-            icon={icon.bxTag}
+            icon={icons.bxTag}
             pos="absolute"
             top="5px"
             color={color}
@@ -53,7 +53,7 @@ export default function Rules() {
         <UI.ListItem pos="relative">
           <UI.Box
             as={CIcon}
-            icon={icon.bxTag}
+            icon={icons.bxTag}
             pos="absolute"
             top="5px"
             color={color}
@@ -69,7 +69,7 @@ export default function Rules() {
         <UI.ListItem pos="relative">
           <UI.Box
             as={CIcon}
-            icon={icon.bxTag}
+            icon={icons.bxTag}
             pos="absolute"
             top="5px"
             color={color}
@@ -84,7 +84,7 @@ export default function Rules() {
         <UI.ListItem pos="relative">
           <UI.Box
             as={CIcon}
-            icon={icon.bxTag}
+            icon={icons.bxTag}
             pos="absolute"
             top="5px"
             color={color}
@@ -99,7 +99,7 @@ export default function Rules() {
         <UI.ListItem pos="relative">
           <UI.Box
             as={CIcon}
-            icon={icon.bxTag}
+            icon={icons.bxTag}
             pos="absolute"
             top="5px"
             color={color}
@@ -115,7 +115,7 @@ export default function Rules() {
         <UI.ListItem pos="relative">
           <UI.Box
             as={CIcon}
-            icon={icon.bxTag}
+            icon={icons.bxTag}
             pos="absolute"
             top="5px"
             color={color}

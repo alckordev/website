@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { UI, CIcon, icon, motion } from "@myth/ui";
+import { UI, CIcon, icons, motion } from "@myth/ui";
 import { ref, get } from "firebase/database";
 import { database } from "../lib/firebase";
 import { getWithKey } from "../lib/firebase-utils";
@@ -74,7 +74,7 @@ export const LastedVideos = ({ ...rest }) => {
                     p="3px 7px 3px 7px"
                     rounded="2xl"
                   >
-                    <UI.Box as={CIcon} icon={icon.riPlayFill} color="white" />
+                    <UI.Box as={CIcon} icon={icons.riPlayFill} color="white" />
                   </UI.Flex>
                 </UI.Box>
                 <UI.Box>

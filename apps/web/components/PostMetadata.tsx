@@ -1,5 +1,5 @@
 import NextLink from "next/link";
-import { UI, CIcon, icon, useColorModeValue } from "@myth/ui";
+import { UI, CIcon, icons, useColorModeValue } from "@myth/ui";
 
 export const PostMetadata = ({
   title,
@@ -34,11 +34,11 @@ export const PostMetadata = ({
           color={useColorModeValue("blackAlpha.700", "whiteAlpha.700")}
         >
           <UI.Flex as="time" dateTime={dateTime} gap={1} align="center">
-            <CIcon icon={icon.riCalendarLine} />
+            <CIcon icon={icons.riCalendarLine} />
             <UI.Text fontSize="sm">{customDate}</UI.Text>
           </UI.Flex>
           <UI.Flex gap={1} align="center">
-            <CIcon icon={icon.riTimeLine} />
+            <CIcon icon={icons.riTimeLine} />
             <UI.Text fontSize="sm">
               {Math.round(readingTime)} minutos de lectura
             </UI.Text>

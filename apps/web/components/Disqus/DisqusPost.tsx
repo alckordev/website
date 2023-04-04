@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UI, useColorModeValue, CIcon, icon } from "@myth/ui";
+import { UI, useColorModeValue, CIcon, icons } from "@myth/ui";
 import { _dateAgo } from "../../lib/format-date";
 import { DisqusPostLikes } from "./DisqusPostLikes";
 import { SlateEditor } from "../SlateEditor";
@@ -40,7 +40,7 @@ export const DisqusPost = ({
                   >
                     <UI.Box
                       as={CIcon}
-                      icon={icon.riCheckCircleFill}
+                      icon={icons.riCheckCircleFill}
                       color="blue.500"
                     />
                   </UI.Tooltip>
@@ -53,7 +53,7 @@ export const DisqusPost = ({
             variant="ghost"
             colorScheme="red"
             aria-label="Reportar"
-            icon={<CIcon icon={icon.riAlarmWarningLine} />}
+            icon={<CIcon icon={icons.riAlarmWarningLine} />}
             size="sm"
             onClick={() => console.log("report it!")}
           />
@@ -66,7 +66,7 @@ export const DisqusPost = ({
             <DisqusPostLikes identifier={post.key} />
             {post.children && post.children.length > 0 && (
               <UI.Button
-                leftIcon={<CIcon icon={icon.riChatLine} />}
+                leftIcon={<CIcon icon={icons.riChatLine} />}
                 colorScheme="purple"
                 size="sm"
                 variant="link"

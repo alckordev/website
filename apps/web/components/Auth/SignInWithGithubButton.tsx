@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UI, CIcon, icon, useToast } from "@myth/ui";
+import { UI, CIcon, icons, useToast } from "@myth/ui";
 import { GithubAuthProvider, signInWithRedirect } from "firebase/auth";
 import { auth } from "../../lib/firebase";
 
@@ -33,7 +33,7 @@ export const SignInWithGithubButton = ({
 
   return (
     <UI.Button
-      leftIcon={<CIcon icon={icon.riGithubLine} size="lg" />}
+      leftIcon={<CIcon icon={icons.riGithubLine} size="lg" />}
       variant="outline"
       rounded="3xl"
       fontWeight="normal"

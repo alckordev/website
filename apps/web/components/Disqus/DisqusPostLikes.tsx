@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from "react";
-import { UI, CIcon, icon } from "@myth/ui";
+import { UI, CIcon, icons } from "@myth/ui";
 import * as fbdb from "firebase/database";
 import { database } from "../../lib/firebase";
 import { displayNumber } from "../../lib/format-number";
@@ -82,7 +82,7 @@ export const DisqusPostLikes = ({ identifier }: { identifier: string }) => {
 
   return (
     <UI.Button
-      leftIcon={<CIcon icon={liked ? icon.riLikeFill : icon.riLikeLine} />}
+      leftIcon={<CIcon icon={liked ? icons.riLikeFill : icons.riLikeLine} />}
       colorScheme="purple"
       size="sm"
       variant="link"

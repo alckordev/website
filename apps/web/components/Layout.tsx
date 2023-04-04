@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useState, useEffect } from "react";
 import { UI, useColorModeValue, NavBarFullScreen, Footer } from "@myth/ui";
 import { Aside } from "./Aside";
 import { OpenGraph } from "./OpenGraph";
+import { Search } from "./Search";
 import networks from "../data/networks";
 import sections from "../data/sections";
 import { SignInAllButtons, SignInButton, SignOutButton } from "./Auth";
@@ -48,6 +49,7 @@ export const Layout = ({ children, metadata = {}, type = "post" }: Props) => {
 
       <NavBarFullScreen
         isScrolled={isScrolled}
+        searchBox={Search}
         navs={sections}
         user={currentUser}
         signInButton={SignInButton}

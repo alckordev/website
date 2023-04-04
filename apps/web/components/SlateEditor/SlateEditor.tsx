@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { UI, icon, useToast, useColorModeValue } from "@myth/ui";
+import { UI, icons, useToast, useColorModeValue } from "@myth/ui";
 import isHotkey from "is-hotkey";
 import { Editable, withReact, Slate, ReactEditor } from "slate-react";
 import { createEditor, BaseEditor, Transforms, Editor } from "slate";
@@ -180,9 +180,9 @@ const SlateEditor = ({
         </UI.Box>
         <UI.HStack justify="space-between">
           <UI.ButtonGroup size="sm">
-            <MarkButton format="bold" icon={icon.riBold} />
-            <MarkButton format="italic" icon={icon.riItalic} />
-            <MarkButton format="underline" icon={icon.riUnderline} />
+            <MarkButton format="bold" icon={icons.riBold} />
+            <MarkButton format="italic" icon={icons.riItalic} />
+            <MarkButton format="underline" icon={icons.riUnderline} />
           </UI.ButtonGroup>
           <UI.ButtonGroup size="sm">
             {onCancel && typeof onCancel === "function" && (

@@ -1,4 +1,4 @@
-import { UI, CIcon, icon, useColorModeValue } from "@myth/ui";
+import { UI, CIcon, icons, useColorModeValue } from "@myth/ui";
 import { CustomAlert } from "./CustomAlert";
 import { CustomImage } from "./CustomImage";
 
@@ -15,7 +15,7 @@ const CustomListItem = (props: any) => {
     <UI.ListItem pos="relative">
       <UI.Box
         as={CIcon}
-        icon={icon.bxTag}
+        icon={icons.bxTag}
         pos="absolute"
         top="5px"
         color={color}

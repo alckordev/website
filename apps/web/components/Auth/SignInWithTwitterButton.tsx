@@ -1,4 +1,4 @@
-import { UI, CIcon, icon } from "@myth/ui";
+import { UI, CIcon, icons } from "@myth/ui";
 // import { TwitterAuthProvider, signInWithPopup } from "firebase/auth";
 // import { auth } from "../../lib/firebase";
 
@@ -16,7 +16,7 @@ export const SignInWithTwitterButton = ({ ...rest }) => {
 
   return (
     <UI.Button
-      leftIcon={<CIcon icon={icon.riTwitterLine} size="lg" />}
+      leftIcon={<CIcon icon={icons.riTwitterLine} size="lg" />}
       variant="outline"
       rounded="3xl"
       fontWeight="normal"
