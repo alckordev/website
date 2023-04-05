@@ -59,6 +59,7 @@ export const Newsletter = () => {
         <UI.Input
           type="email"
           placeholder="example@gmail.com"
+          autoComplete="off"
           {...register("email_address")}
         />
         <UI.FormErrorMessage>

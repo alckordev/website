@@ -93,13 +93,8 @@ export const Aside = () => {
           </UI.CardHeader>
           <UI.CardBody px={0} pb={0}>
             <UI.Text mb={6}>
-              <UI.Highlight
-                query="¡Libre de Spam!"
-                styles={{ bg: "orange.100" }}
-              >
-                Recibirás artículos sobre programación y novedades en las que
-                vaya trabajando. ¡Libre de Spam!
-              </UI.Highlight>
+              Recibirás artículos sobre programación y novedades en las que vaya
+              trabajando. ¡Libre de Spam!
             </UI.Text>
             <Newsletter />
           </UI.CardBody>

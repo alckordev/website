@@ -8,6 +8,7 @@ import { StyleConfig } from "@chakra-ui/theme-tools";
 const components: Record<string, StyleConfig> = {
   Button: {
     baseStyle: () => ({
+      fontFamily: "Poppins",
       fontWeight: "medium",
     }),
   },
