@@ -22,18 +22,17 @@ const SearchHits = ({ searchState, searchResults }: any) => {
         borderBottomWidth={1}
       >
         {searchResults.hits.map((hit: any) => (
-          <UI.Link key={hit.objectID} href={`/${hit.slug}`}>
-            <UI.Flex
-              gap={4}
-              align="center"
-              px={4}
-              py={2}
-              rounded="md"
-              _hover={{
-                backgroundColor,
-                textDecor: "none",
-              }}
-            >
+          <UI.Link
+            key={hit.objectID}
+            href={`/${hit.slug}`}
+            display="block"
+            rounded="md"
+            _hover={{
+              backgroundColor,
+              textDecor: "none",
+            }}
+          >
+            <UI.Flex gap={4} align="center" px={4} py={2}>
               <UI.Box
                 as={CIcon}
                 icon={icons.riArticleLine}

@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import isHotkey from "is-hotkey";
 import { UI, CIcon, icons } from "@myth/ui";
 import { InstantSearch } from "react-instantsearch-dom";
-import { algolia } from "../../lib/algolia";
+import { algolia } from "../../lib/algolia-lite";
 import SearchBox from "./SearchBox";
 import SearchHits from "./SearchHits";
 
