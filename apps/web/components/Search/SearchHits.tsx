@@ -67,16 +67,7 @@ const SearchHits = ({ searchState, searchResults }: any) => {
         <UI.Text as="span" fontSize="sm">
           Search by
         </UI.Text>
-        <UI.Image
-          src={
-            colorMode === "dark"
-              ? "assets/agolia-dark.png"
-              : "assets/agolia-light.png"
-          }
-          width="auto"
-          height="20px"
-          alt="Agolia"
-        />
+        <CIcon icon={icons.agolia} height={20} />
       </UI.Flex>
     </Fragment>
   ) : null;

@@ -1,4 +1,5 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
+import isHotkey from "is-hotkey";
 import { UI, CIcon, icons } from "@myth/ui";
 import { InstantSearch } from "react-instantsearch-dom";
 import { algolia } from "../../lib/algolia";
@@ -12,17 +13,36 @@ export const Search = () => {
 
   const onClose = () => setIsOpen(false);
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const isCtrlK = isHotkey("ctrl+k", event);
+
+      if (isCtrlK) {
+        event.preventDefault();
+        onOpen();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   return (
     <Fragment>
       <UI.Button
         w="100%"
         maxW="360px"
+        h="44px"
         colorScheme="gray"
         mx={6}
         p={3}
         rounded="md"
         boxShadow="base"
         onClick={onOpen}
+        size="sm"
       >
         <UI.Box as={CIcon} icon={icons.riSearchLine} />
         <UI.HStack ml={3} align="center" w="100%">

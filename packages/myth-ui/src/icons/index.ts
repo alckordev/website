@@ -1,3 +1,5 @@
+import { agolia } from "./brands/agolia";
+
 import { bxTag } from "./bx-tag";
 
 import { riBold } from "./ri-bold";
@@ -42,9 +44,8 @@ import { riSunFill } from "./ri-sun-fill";
 import { riYoutubeFill } from "./ri-youtube-fill";
 
 export const icons = Object.assign(
-  {
-    bxTag,
-  },
+  { agolia },
+  { bxTag },
   { riBold, riItalic, riUnderline },
   {
     riAlarmWarningLine,
