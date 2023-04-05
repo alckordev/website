@@ -1,6 +1,5 @@
 import { connectStateResults } from "react-instantsearch-dom";
-import NextLink from "next/link";
-import { UI, CIcon, icons, useColorMode, useColorModeValue } from "@myth/ui";
+import { UI, CIcon, icons, useColorModeValue } from "@myth/ui";
 import { Fragment } from "react";
 import { _date } from "../../lib/format-date";
 
@@ -8,8 +7,6 @@ const SearchHits = ({ searchState, searchResults }: any) => {
   // checking if the query length is >= 1
   // (since 1 is the minimum Algolia query length)
   const validQuery = searchState.query?.length >= 1;
-
-  const { colorMode } = useColorMode();
 
   const backgroundColor = useColorModeValue("gray.300", "gray.900");
   const color = useColorModeValue("blackAlpha.500", "whiteAlpha.500");
@@ -25,7 +22,7 @@ const SearchHits = ({ searchState, searchResults }: any) => {
         borderBottomWidth={1}
       >
         {searchResults.hits.map((hit: any) => (
-          <NextLink key={hit.objectID} href={`/${hit.slug}`}>
+          <UI.Link key={hit.objectID} href={`/${hit.slug}`}>
             <UI.Flex
               gap={4}
               align="center"
@@ -60,7 +57,7 @@ const SearchHits = ({ searchState, searchResults }: any) => {
                 </UI.Text>
               </UI.Box>
             </UI.Flex>
-          </NextLink>
+          </UI.Link>
         ))}
       </UI.Box>
       <UI.Flex gap={2} opacity={0.5} p={4} justify="end">
