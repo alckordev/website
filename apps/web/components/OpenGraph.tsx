@@ -17,8 +17,8 @@ interface Props {
 export const OpenGraph = ({ metadata }: Props) => {
   const SEO = {
     title: metadata.title
-      ? `${metadata.title} — Francisco Rios`
-      : `Francisco Rios`,
+      ? `${metadata.title} — Francisco Luis`
+      : `Francisco Luis — Senior Developer`,
     description: metadata.summary || "Senior Developer",
     slug: metadata.slug || "",
     keywords: [],
@@ -46,11 +46,11 @@ export const OpenGraph = ({ metadata }: Props) => {
       <meta property="og:title" content={SEO.title} />
       {/* <meta property="og:image" content={SEO.image} /> */}
       <meta property="article:published_time" content={SEO.date} />
-      {/* <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@alckordev" />
       <meta name="twitter:title" content={SEO.title} />
       <meta name="twitter:description" content={SEO.description} />
-      <meta name="twitter:image" content={SEO.image} /> */}
+      {/* <meta name="twitter:image" content={SEO.image} /> */}
       <title>{SEO.title}</title>
     </Head>
   );

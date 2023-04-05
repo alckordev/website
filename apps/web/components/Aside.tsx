@@ -6,14 +6,12 @@ import { Newsletter } from "./Newsletter";
 // import { LastedVideos } from "./LastedVideos";
 
 export const Aside = () => {
+  const borderColor = useColorModeValue("gray.200", "gray.958");
+
   return (
     <Fragment>
       <UI.VStack
-        divider={
-          <UI.StackDivider
-            borderColor={useColorModeValue("gray.200", "gray.958")}
-          />
-        }
+        divider={<UI.StackDivider borderColor={borderColor} />}
         spacing={7}
       >
         <UI.Card minW="100%" bg="transparent" boxShadow="none">
@@ -24,8 +22,10 @@ export const Aside = () => {
                 src="/assets/avatar.jpg"
               />
               <UI.Box>
-                <UI.Heading size="sm">Francisco</UI.Heading>
-                <UI.Text>Fullstack Developer</UI.Text>
+                <UI.Heading size="sm">Francisco Luis</UI.Heading>
+                <UI.Text fontSize="sm" opacity={0.5}>
+                  Senior Developer
+                </UI.Text>
               </UI.Box>
             </UI.Flex>
           </UI.CardHeader>
@@ -47,17 +47,9 @@ export const Aside = () => {
           </UI.CardBody>
         </UI.Card> */}
       </UI.VStack>
-      <UI.Divider
-        borderColor={useColorModeValue("gray.200", "gray.958")}
-        opacity={1}
-        my={7}
-      />
+      <UI.Divider borderColor={borderColor} opacity={1} my={7} />
       <UI.VStack
-        divider={
-          <UI.StackDivider
-            borderColor={useColorModeValue("gray.200", "gray.958")}
-          />
-        }
+        divider={<UI.StackDivider borderColor={borderColor} />}
         spacing={7}
         pos="sticky"
         top="122px"
