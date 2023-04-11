@@ -21,7 +21,9 @@ export const OpenGraph = ({ metadata }: Props) => {
       : `Francisco Luis — Senior Developer`,
     description: metadata.summary || "Senior Developer",
     slug: metadata.slug || "",
-    image: `https://alckor.dev/api/og?title=${metadata.title}`,
+    image: metadata.title
+      ? `https://alckor.dev/api/og?title=${metadata.title}`
+      : `https://alckor.dev/api/og`,
     keywords: "Programación, Fullstack, ASP.NET, React, PHP, Firebase",
     author: "Francisco Luis",
     date: metadata.createdAt
