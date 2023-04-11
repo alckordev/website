@@ -21,7 +21,8 @@ export const OpenGraph = ({ metadata }: Props) => {
       : `Francisco Luis — Senior Developer`,
     description: metadata.summary || "Senior Developer",
     slug: metadata.slug || "",
-    keywords: [],
+    image: `https://alckor.dev/api/og?title=${metadata.title}`,
+    keywords: "Programación, Fullstack, ASP.NET, React, PHP, Firebase",
     author: "Francisco Luis",
     date: metadata.createdAt
       ? formatISO(new Date(metadata.createdAt))
@@ -36,7 +37,7 @@ export const OpenGraph = ({ metadata }: Props) => {
       <link rel="canonical" href={`https://alckor.dev/${SEO.slug}`} />
       <meta name="robots" content="follow, index" />
       <meta name="description" content={SEO.description} />
-      <meta name="keywords" content="keyword 1, keyword 2, keyword 3" />
+      <meta name="keywords" content={SEO.keywords} />
       <meta name="author" content={SEO.author} />
       <meta name="copyright" content={SEO.copyright} />
       <meta property="og:url" content={`https://alckor.dev/${SEO.slug}`} />
@@ -44,13 +45,13 @@ export const OpenGraph = ({ metadata }: Props) => {
       <meta property="og:site_name" content="Francisco Luis" />
       <meta property="og:description" content={SEO.description} />
       <meta property="og:title" content={SEO.title} />
-      {/* <meta property="og:image" content={SEO.image} /> */}
+      <meta property="og:image" content={SEO.image} />
       <meta property="article:published_time" content={SEO.date} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@alckordev" />
       <meta name="twitter:title" content={SEO.title} />
       <meta name="twitter:description" content={SEO.description} />
-      {/* <meta name="twitter:image" content={SEO.image} /> */}
+      <meta name="twitter:image" content={SEO.image} />
       <title>{SEO.title}</title>
     </Head>
   );
