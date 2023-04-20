@@ -3,7 +3,7 @@ import { UI, CIcon, icons } from "@myth/ui";
 import * as fbdb from "firebase/database";
 import { database } from "../../lib/firebase";
 import { displayNumber } from "../../lib/format-number";
-import { AuthContext } from "../../store/AuthProvider";
+import { AuthContext } from "../../store/AuthContextProvider";
 
 export const DisqusPostLikes = ({ identifier }: { identifier: string }) => {
   const [liked, setLiked] = useState(false);

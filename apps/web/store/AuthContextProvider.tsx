@@ -23,7 +23,7 @@ export const AuthContext = createContext<{
   onCloseSignIn: () => {},
 });
 
-export const AuthProvider = (props: any) => {
+export const AuthContextProvider = (props: any) => {
   const [user, setUser] = useState<any | null>(null);
   const [isOpenSignIn, setIsOpenSignIn] = useState(false);
 

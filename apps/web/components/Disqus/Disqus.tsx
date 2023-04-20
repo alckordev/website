@@ -6,7 +6,7 @@ import * as fbdb from "firebase/database";
 import { database } from "../../lib/firebase";
 import { getWithKey, sortTreeNodes } from "../../lib/firebase-utils";
 import { orderByDate } from "../../lib/order-by-date";
-import { AuthContext } from "../../store/AuthProvider";
+import { AuthContext } from "../../store/AuthContextProvider";
 
 const postRef = fbdb.ref(database, "posts");
 
