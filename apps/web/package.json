@@ -13,6 +13,7 @@
     "@mailchimp/mailchimp_marketing": "^3.0.80",
     "@mapbox/rehype-prism": "^0.8.0",
     "@myth/ui": "*",
+    "@vercel/analytics": "^1.0.0",
     "@vercel/og": "^0.5.1",
     "algoliasearch": "^4.16.0",
     "date-fns": "^2.29.3",

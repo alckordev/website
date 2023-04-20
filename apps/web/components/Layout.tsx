@@ -6,7 +6,7 @@ import { Search } from "./Search";
 import networks from "../data/networks";
 import sections from "../data/sections";
 import { SignInAllButtons, SignInButton, SignOutButton } from "./Auth";
-import { AuthContext } from "../store/AuthProvider";
+import { AuthContext } from "../store/AuthContextProvider";
 
 interface Props {
   children: React.ReactNode;
