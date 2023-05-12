@@ -8,6 +8,7 @@ const tags = [
   { name: "Web App", slug: "web-app", colorScheme: "gray" },
   { name: "Symfony", slug: "symfony", colorScheme: "gray" },
   { name: "Webpack", slug: "webpack", colorScheme: "blue" },
+  { name: "Cron Job", slug: "cronjob", colorScheme: "orange" },
 ];
 
 export default tags;
