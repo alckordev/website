@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../lib/firebase";
+import { Loading } from "../components/Loading";
 
 interface User {
   accessToken: string;
@@ -26,6 +27,7 @@ export const AuthContext = createContext<{
 export const AuthContextProvider = (props: any) => {
   const [user, setUser] = useState<any | null>(null);
   const [isOpenSignIn, setIsOpenSignIn] = useState(false);
+  const [isLoading, setLoading] = useState(true);
 
   const onOpenSignIn = () => setIsOpenSignIn(true);
 
@@ -34,10 +36,13 @@ export const AuthContextProvider = (props: any) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user);
+      setLoading(false);
     });
 
     return unsubscribe;
   }, []);
+
+  if (isLoading) return <Loading />;
 
   return (
     <AuthContext.Provider

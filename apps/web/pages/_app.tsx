@@ -8,11 +8,11 @@ import "../styles/prism-night-owl.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <AuthContextProvider>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <AuthContextProvider>
         <Component {...pageProps} />
         <Analytics />
-      </ThemeProvider>
-    </AuthContextProvider>
+      </AuthContextProvider>
+    </ThemeProvider>
   );
 }
