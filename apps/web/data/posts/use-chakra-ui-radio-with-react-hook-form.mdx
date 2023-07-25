@@ -1,0 +1,74 @@
+---
+title: "Cómo usar el componente Radio de Chakra UI con React Hook Form"
+summary: "La construcción de formularios es un desafío fundamental en el desarrollo de aplicaciones web. No solo debemos pensar en el manejo de datos, sino también en las validaciones..."
+coverImage: "/assets/images/use-chakra-ui-radio-with-react-hook-form/cover-image.webp"
+createdAt: "2023-07-24 20:00:00"
+tags:
+  - name: "Chakra UI"
+    slug: "chakra-ui"
+    colorScheme: "green"
+relateds:
+---
+
+La construcción de formularios es un desafío fundamental en el desarrollo de aplicaciones web.
+No solo debemos pensar en el manejo de datos, sino también en las validaciones y demás funcionalidades. Sin embargo,
+con _React Hook Form_, este proceso se vuelve más sencillo.
+
+En este artículo, exploraremos cómo manipular el componente Radio de Chakra UI
+mediante React Hook Form. Aunque nos centraremos en este componente específico,
+es importante mencionar que los principios generales aplicados aquí son válidos para la mayoría de los componentes personalizados.
+
+Empecemos instalando las dependencias necesarias:
+
+```bash
+npm i @chakra-ui/react react-hook-form
+```
+
+Para administrar nuestros componentes personalizados,
+utilizaremos el componente `Controller` de `react-hook-form`.
+
+A continuación, proporciono un ejemplo de cómo implementar esto:
+
+```typescript
+import { Box, Button, Stack, Radio, RadioGroup } from "@chakra-ui/react";
+import { Controller, useForm } from "react-hook-form";
+
+export const Address = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm();
+
+  const onSubmit = handleSubmit((data) => {
+    console.log(data);
+  });
+
+  return (
+    <Box as="form" onSubmit={onSubmit}>
+      <Controller
+        name="gender"
+        control={control}
+        render={({ field: { value, onChange } }) => (
+          <RadioGroup value={value} onChange={onChange}>
+            <Stack>
+              <Radio value="Male">Male</Radio>
+              <Radio value="Female">Female</Radio>
+              <Radio value="Other">Other</Radio>
+            </Stack>
+          </RadioGroup>
+        )}
+      />
+      <Button type="submit" isLoading={isSubmitting}>
+        Save
+      </Button>
+    </Box>
+  );
+};
+```
+
+Espero que este artículo haya sido útil para aprender cómo usar el
+componente Radio de _Chakra UI_ con _React Hook Form_.
+Si tienes alguna pregunta o inquietud, no dudes en comentarla.
+
+¡Gracias por leer! Nos vemos en el próximo artículo.

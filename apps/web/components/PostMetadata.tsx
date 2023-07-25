@@ -52,7 +52,13 @@ export const PostMetadata = ({
         my={7}
       />
 
-      <UI.Image src={coverImage} alt={title} objectFit="cover" mx="auto" />
+      <UI.Image
+        src={coverImage}
+        alt={title}
+        fallback={<UI.Skeleton />}
+        objectFit="cover"
+        mx="auto"
+      />
     </UI.Box>
   );
 };

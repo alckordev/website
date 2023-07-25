@@ -9,6 +9,7 @@ const tags = [
   { name: "Symfony", slug: "symfony", colorScheme: "gray" },
   { name: "Webpack", slug: "webpack", colorScheme: "blue" },
   { name: "Cron Job", slug: "cronjob", colorScheme: "orange" },
+  { name: "Chakra UI", slug: "chakra-ui", colorScheme: "green" },
 ];
 
 export default tags;
