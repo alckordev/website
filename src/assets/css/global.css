@@ -1,0 +1,17 @@
+body {
+  position: relative;
+  background-color: var(--mantine-color-brand-dark-7);
+  color: var(--mantine-color-brand-gray-3);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100dvh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--mantine-color-white);
+}
