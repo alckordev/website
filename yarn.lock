@@ -398,6 +398,11 @@
   resolved "https://registry.yarnpkg.com/@remixicon/react/-/react-4.6.0.tgz#c25276338b4d7acd29075c5b26a20f19feecac04"
   integrity sha512-bY56maEgT5IYUSRotqy9h03IAKJC85vlKtWFg2FKzfs8JPrkdBAYSa9dxoUSKFwGzup8Ux6vjShs9Aec3jvr2w==
 
+"@ridemountainpig/svgl-react@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/@ridemountainpig/svgl-react/-/svgl-react-1.0.9.tgz#32c2193d122f54f78e27a0c14bbad424851d4065"
+  integrity sha512-mfPJ0BhuG8PfYamnMUbzFQtHYzF0BcJQiUL5WrJ9X+lhBj0rsON/jTZU4PuLkFG1xKZbNNTz2KyDvSOFY260fw==
+
 "@rtsao/scc@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@rtsao/scc/-/scc-1.1.0.tgz#927dd2fae9bc3361403ac2c7a00c32ddce9ad7e8"

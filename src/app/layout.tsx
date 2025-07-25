@@ -22,7 +22,7 @@ export default function RootLayout({
       <body>
         <Provider>
           <Header />
-          <Box>{children}</Box>
+          <Box component="main">{children}</Box>
           <Footer />
         </Provider>
       </body>

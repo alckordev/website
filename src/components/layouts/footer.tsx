@@ -19,7 +19,6 @@ export const Footer = () => {
   return (
     <Box
       component="footer"
-      c="white"
       style={{ borderTop: "1px solid var(--mantine-color-brand-dark-6)" }}
     >
       <Container size="xl">
@@ -39,7 +38,7 @@ export const Footer = () => {
               rel="noopener"
               display="inline-flex"
             >
-              <ThemeIcon variant="transparent" color="white">
+              <ThemeIcon variant="transparent" color="brand-gray.3">
                 <RiGithubFill size={18} />
               </ThemeIcon>
             </Anchor>
@@ -50,7 +49,7 @@ export const Footer = () => {
               rel="noopener"
               display="inline-flex"
             >
-              <ThemeIcon variant="transparent" color="white">
+              <ThemeIcon variant="transparent" color="brand-gray.3">
                 <RiTwitterXFill size={18} />
               </ThemeIcon>
             </Anchor>
@@ -61,7 +60,7 @@ export const Footer = () => {
               rel="noopener"
               display="inline-flex"
             >
-              <ThemeIcon variant="transparent" color="white">
+              <ThemeIcon variant="transparent" color="brand-gray.3">
                 <RiTiktokFill size={18} />
               </ThemeIcon>
             </Anchor>
@@ -72,7 +71,7 @@ export const Footer = () => {
               rel="noopener"
               display="inline-flex"
             >
-              <ThemeIcon variant="transparent" color="white">
+              <ThemeIcon variant="transparent" color="brand-gray.3">
                 <RiDiscordFill size={18} />
               </ThemeIcon>
             </Anchor>

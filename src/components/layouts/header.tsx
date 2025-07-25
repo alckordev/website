@@ -11,10 +11,20 @@ export const Header = () => {
         <Flex mih="70px" justify="space-between" align="center">
           <div>here</div>
           <Flex gap={32} align="center">
-            <Anchor component={Link} href="/" c="white" underline="never">
+            <Anchor
+              component={Link}
+              href="/"
+              c="brand-gray.3"
+              underline="never"
+            >
               Home
             </Anchor>
-            <Anchor component={Link} href="/blog" c="white" underline="never">
+            <Anchor
+              component={Link}
+              href="/blog"
+              c="brand-gray.3"
+              underline="never"
+            >
               Blog
             </Anchor>
             <Button
