@@ -19,7 +19,7 @@ export const Footer = () => {
   return (
     <Box
       component="footer"
-      style={{ borderTop: "1px solid var(--mantine-color-brand-dark-6)" }}
+      style={{ borderTop: "1px solid var(--mantine-accent-surface)" }}
     >
       <Container size="xl">
         <Flex
@@ -38,40 +38,49 @@ export const Footer = () => {
               rel="noopener"
               display="inline-flex"
             >
-              <ThemeIcon variant="transparent" color="brand-gray.3">
+              <ThemeIcon variant="transparent" color="white">
                 <RiGithubFill size={18} />
               </ThemeIcon>
             </Anchor>
-            <Divider orientation="vertical" />
+            <Divider
+              orientation="vertical"
+              color="var(--mantine-accent-surface)"
+            />
             <Anchor
               aria-label="TwitterX"
               href="https://discord.com/invite/yVyTtCRueq"
               rel="noopener"
               display="inline-flex"
             >
-              <ThemeIcon variant="transparent" color="brand-gray.3">
+              <ThemeIcon variant="transparent" color="white">
                 <RiTwitterXFill size={18} />
               </ThemeIcon>
             </Anchor>
-            <Divider orientation="vertical" />
+            <Divider
+              orientation="vertical"
+              color="var(--mantine-accent-surface)"
+            />
             <Anchor
               aria-label="Tiktok"
               href="https://discord.com/invite/yVyTtCRueq"
               rel="noopener"
               display="inline-flex"
             >
-              <ThemeIcon variant="transparent" color="brand-gray.3">
+              <ThemeIcon variant="transparent" color="white">
                 <RiTiktokFill size={18} />
               </ThemeIcon>
             </Anchor>
-            <Divider orientation="vertical" />
+            <Divider
+              orientation="vertical"
+              color="var(--mantine-accent-surface)"
+            />
             <Anchor
               aria-label="Discord"
               href="https://discord.com/invite/yVyTtCRueq"
               rel="noopener"
               display="inline-flex"
             >
-              <ThemeIcon variant="transparent" color="brand-gray.3">
+              <ThemeIcon variant="transparent" color="white">
                 <RiDiscordFill size={18} />
               </ThemeIcon>
             </Anchor>

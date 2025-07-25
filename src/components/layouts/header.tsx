@@ -5,35 +5,18 @@ export const Header = () => {
   return (
     <Box
       component="header"
-      style={{ borderBottom: "1px solid var(--mantine-color-brand-dark-6)" }}
+      style={{ borderBottom: "1px solid var(--mantine-accent-surface)" }}
     >
       <Container size="xl">
         <Flex mih="70px" justify="space-between" align="center">
-          <div>here</div>
+          <Anchor component={Link} href="/" c="white" underline="never">
+            Logo
+          </Anchor>
           <Flex gap={32} align="center">
-            <Anchor
-              component={Link}
-              href="/"
-              c="brand-gray.3"
-              underline="never"
-            >
-              Home
-            </Anchor>
-            <Anchor
-              component={Link}
-              href="/blog"
-              c="brand-gray.3"
-              underline="never"
-            >
+            <Anchor component={Link} href="/blog" c="white" underline="never">
               Blog
             </Anchor>
-            <Button
-              variant="gradient"
-              gradient={{ from: "blue", to: "cyan", deg: 90 }}
-              radius="xl"
-            >
-              Sign in
-            </Button>
+            <Button radius="xl">Sign in</Button>
           </Flex>
         </Flex>
       </Container>

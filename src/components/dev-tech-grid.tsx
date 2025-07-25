@@ -22,7 +22,7 @@ import {
   NextjsUrl,
   Nodejs,
   NodejsUrl,
-  PhpLight,
+  PhpDark,
   PhpUrl,
   PostgreSQL,
   PostgreSQLUrl,
@@ -49,7 +49,7 @@ export const DevTechGrid = () => {
         {techs.map((tech) => (
           <Grid.Col key={tech.url} span="content">
             <Tooltip label={tech.label}>
-              <ThemeIcon variant="white" size="xl" p={2}>
+              <ThemeIcon color="brand-dark.6" size="xl" p={4}>
                 {tech.component}
               </ThemeIcon>
             </Tooltip>
@@ -124,7 +124,7 @@ const techs: Tech[] = [
   },
   {
     label: "Php",
-    component: <PhpLight />,
+    component: <PhpDark />,
     url: PhpUrl,
   },
   {
