@@ -2,7 +2,7 @@ import { Aside } from "@/components/layouts";
 import { Box, Flex } from "@mantine/core";
 
 export const metadata = {
-  title: "My Mantine app",
+  title: "Blog — Alckor DEV — Software developer",
   description: "I have followed setup instructions carefully",
 };
 

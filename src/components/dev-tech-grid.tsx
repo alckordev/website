@@ -22,6 +22,8 @@ import {
   NextjsUrl,
   Nodejs,
   NodejsUrl,
+  PandaCSS,
+  PandaCSSUrl,
   PhpDark,
   PhpUrl,
   PostgreSQL,
@@ -141,6 +143,11 @@ const techs: Tech[] = [
     label: "ChakraUI",
     component: <ChakraUI />,
     url: ChakraUIUrl,
+  },
+  {
+    label: "Panda CSS",
+    component: <PandaCSS />,
+    url: PandaCSSUrl,
   },
   {
     label: "Nodejs",

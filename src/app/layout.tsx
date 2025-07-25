@@ -10,7 +10,7 @@ import { Provider } from "@/components/provider";
 import { Footer, Header } from "@/components/layouts";
 
 export const metadata = {
-  title: "My Mantine app",
+  title: "Alckor DEV — Software developer",
   description: "I have followed setup instructions carefully",
 };
 
@@ -26,14 +26,6 @@ export default function RootLayout({
       </head>
       <body>
         <Provider>
-          <Box
-            bg="linear-gradient(to bottom, var(--mantine-accent-surface), transparent)"
-            pos="absolute"
-            left={0}
-            right={0}
-            h={480}
-            style={{ zIndex: -1 }}
-          />
           <Header />
           <Box component="main">
             <Container size="xl" h="100%">

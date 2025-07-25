@@ -1,10 +1,11 @@
 body {
   position: relative;
-  background-color: #020617;
+  background-color: var(--mantine-accent-background);
   display: grid;
   grid-template-rows: auto 1fr auto;
   min-height: 100dvh;
 
+  --mantine-accent-background: #020617;
   --mantine-accent-contrast: #fff;
   --mantine-accent-surface: #162a2f80;
   --mantine-accent-indicator: #09f;

@@ -50,24 +50,29 @@ export const BlogPostPreview = () => {
                 alt=""
                 width={180}
                 height={118}
+                radius="md"
               />
             </AspectRatio>
           </Box>
         </Flex>
         <Group gap="xs">
           <Button
-            leftSection={<RiHeartFill size={16} />}
+            leftSection={
+              <RiHeartFill color="var(--mantine-color-red-7)" size={20} />
+            }
             variant="transparent"
             size="compact-sm"
+            c="var(--mantine-color-text)"
           >
-            1
+            193
           </Button>
           <Button
-            leftSection={<RiChat1Fill size={16} />}
+            leftSection={<RiChat1Fill size={20} />}
             variant="transparent"
             size="compact-sm"
+            c="var(--mantine-color-text)"
           >
-            1
+            10
           </Button>
         </Group>
       </Stack>

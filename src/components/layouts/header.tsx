@@ -5,7 +5,13 @@ export const Header = () => {
   return (
     <Box
       component="header"
-      style={{ borderBottom: "1px solid var(--mantine-accent-surface)" }}
+      bg="var(--mantine-accent-background)"
+      pos="sticky"
+      top={0}
+      style={{
+        borderBottom: "1px solid var(--mantine-accent-surface)",
+        zIndex: 100,
+      }}
     >
       <Container size="xl">
         <Flex mih="70px" justify="space-between" align="center">
