@@ -19,10 +19,6 @@ export const getByDirectory = (dir: string = "") => {
       if (fs.statSync(absolutePath).isDirectory()) {
         readDirectory(absolutePath);
       } else if (absolutePath.endsWith(".mdx")) {
-        console.log(
-          typeof absolutePath.replace(root + path.sep, ""),
-          absolutePath.replace(root + path.sep, "")
-        );
         paths.push(absolutePath.replace(root + path.sep, ""));
       }
     });
@@ -33,14 +29,21 @@ export const getByDirectory = (dir: string = "") => {
   return paths;
 };
 
-export const getFrontMatter = () => {
-  const files = getByDirectory();
+export const getFrontMatter = async (dir: string = "") => {
+  const files = getByDirectory(dir);
 
   return files.map((file) => {
+    console.log("1", file);
+
     const absolutePath = path.join(root, file);
+
+    console.log("2", absolutePath);
+
     const mdx = fs.readFileSync(absolutePath, "utf-8");
     const { data } = matter(mdx);
     const slug = file.replace(/\\/g, "/").replace(/\.mdx$/, "");
+
+    console.log("3", data);
 
     return {
       ...data,

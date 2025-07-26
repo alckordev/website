@@ -1,13 +1,23 @@
 "use client";
 
-import { createTheme } from "@mantine/core";
+import { createTheme, Loader } from "@mantine/core";
 import { Fira_Code, Montserrat, Roboto } from "next/font/google";
+import { RingLoader } from "./components";
 
 const heading = Montserrat({ subsets: ["latin"] });
 const text = Roboto({ subsets: ["latin"] });
 const code = Fira_Code({ subsets: ["latin"] });
 
 export const theme = createTheme({
+  components: {
+    Loader: Loader.extend({
+      defaultProps: {
+        loaders: { ...Loader.defaultLoaders, ring: RingLoader },
+        type: "ring",
+      },
+    }),
+  },
+
   colors: {
     accent: [
       "#e1f8ff",

@@ -15,8 +15,9 @@ import {
 import { RiChat1Fill, RiHeartFill } from "@remixicon/react";
 import NextImage from "next/image";
 import { Link } from "@/i18n/navigation";
+import { PostMatter } from "@/type";
 
-export const BlogPostPreview = () => {
+export const BlogPostPreview = ({ item }: { item: PostMatter }) => {
   return (
     <Box data-href="/blog/lorem-ipsum" style={{ cursor: "pointer" }}>
       <Stack gap="xs">
@@ -26,17 +27,16 @@ export const BlogPostPreview = () => {
         <Flex>
           <Anchor
             component={Link}
-            href="/blog/lorem-ipsum"
+            href={`/blog/${item.slug}`}
             underline="never"
             flex={1}
           >
             <Title order={3} textWrap="balance" lineClamp={2}>
-              You’re using ChatGPT wrong. Here’s how to prompt like a pro
+              {item.title}
             </Title>
             <Box my={4}>
               <Text c="var(--mantine-color-text)" lineClamp={2}>
-                20 Science-Based Principles and Strategies for Building
-                Fluency — From a Linguist, Language Teacher, and Polyglot
+                {item.summary}
               </Text>
             </Box>
           </Anchor>

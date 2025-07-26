@@ -1,10 +1,14 @@
 import React from "react";
-import { BlogPostPreview } from "@/components/blog-post-preview";
 import { Divider, Stack, Title } from "@mantine/core";
+import { PageProps, PostMatter } from "@/type";
+import { getFrontMatter } from "@/lib";
+import { BlogPostList } from "@/components/blog-post-list";
 
-const posts = Array.from({ length: 10 });
+export default async function Blog(props: PageProps) {
+  const { locale } = await props.params;
 
-export default function Blog() {
+  const data: PostMatter[] = await getFrontMatter(locale);
+
   return (
     <React.Fragment>
       <Title order={4} mb="lg">
@@ -12,14 +16,7 @@ export default function Blog() {
       </Title>
       <Stack gap="xl">
         <Divider color="var(--mantine-accent-surface)" />
-        {posts.map((_, idx) => (
-          <React.Fragment key={idx}>
-            <BlogPostPreview />
-            {idx + 1 !== posts.length && (
-              <Divider color="var(--mantine-accent-surface)" />
-            )}
-          </React.Fragment>
-        ))}
+        <BlogPostList data={data} />
       </Stack>
     </React.Fragment>
   );
