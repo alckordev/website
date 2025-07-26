@@ -1,5 +1,7 @@
+"use client";
+
 import { Anchor, Box, Button, Container, Flex } from "@mantine/core";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 export const Header = () => {
   return (

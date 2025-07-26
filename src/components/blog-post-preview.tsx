@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Anchor,
   AspectRatio,
@@ -12,7 +14,7 @@ import {
 } from "@mantine/core";
 import { RiChat1Fill, RiHeartFill } from "@remixicon/react";
 import NextImage from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 export const BlogPostPreview = () => {
   return (
@@ -25,8 +27,8 @@ export const BlogPostPreview = () => {
           <Anchor
             component={Link}
             href="/blog/lorem-ipsum"
-            flex={1}
             underline="never"
+            flex={1}
           >
             <Title order={3} textWrap="balance" lineClamp={2}>
               You’re using ChatGPT wrong. Here’s how to prompt like a pro

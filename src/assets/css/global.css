@@ -20,3 +20,8 @@ h5,
 h6 {
   color: var(--mantine-color-white);
 }
+
+/* a {
+  color: var(--mantine-color-white);
+  text-decoration: none;
+} */

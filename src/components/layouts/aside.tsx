@@ -16,9 +16,9 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { zod4Resolver } from "mantine-form-zod-resolver";
-import Link from "next/link";
 import z from "zod/v4";
 import NextImage from "next/image";
+import { Link } from "@/i18n/navigation";
 
 export const Aside = () => {
   const form = useForm({
@@ -114,7 +114,11 @@ export const Aside = () => {
                 label={
                   <React.Fragment>
                     I accept{" "}
-                    <Anchor href="https://mantine.dev" target="_blank" inherit>
+                    <Anchor
+                      component={Link}
+                      href="https://mantine.dev"
+                      target="_blank"
+                    >
                       terms and conditions
                     </Anchor>
                   </React.Fragment>

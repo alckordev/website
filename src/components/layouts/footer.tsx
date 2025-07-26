@@ -37,6 +37,7 @@ export const Footer = () => {
               href="https://discord.com/invite/yVyTtCRueq"
               rel="noopener"
               display="inline-flex"
+              target="_blank"
             >
               <ThemeIcon variant="transparent" color="white">
                 <RiGithubFill size={18} />
@@ -51,6 +52,7 @@ export const Footer = () => {
               href="https://discord.com/invite/yVyTtCRueq"
               rel="noopener"
               display="inline-flex"
+              target="_blank"
             >
               <ThemeIcon variant="transparent" color="white">
                 <RiTwitterXFill size={18} />
@@ -65,6 +67,7 @@ export const Footer = () => {
               href="https://discord.com/invite/yVyTtCRueq"
               rel="noopener"
               display="inline-flex"
+              target="_blank"
             >
               <ThemeIcon variant="transparent" color="white">
                 <RiTiktokFill size={18} />
@@ -79,6 +82,7 @@ export const Footer = () => {
               href="https://discord.com/invite/yVyTtCRueq"
               rel="noopener"
               display="inline-flex"
+              target="_blank"
             >
               <ThemeIcon variant="transparent" color="white">
                 <RiDiscordFill size={18} />
