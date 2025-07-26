@@ -39,7 +39,7 @@ export default function Home() {
         <AspectRatio ratio={530 / 727} maw={530} mx="auto">
           <Image
             component={NextImage}
-            src="https://wordpress.validthemes.net/ambrox/wp-content/uploads/2023/01/1.png"
+            src="https://placehold.co/530x727"
             alt=""
             width={530}
             height={727}

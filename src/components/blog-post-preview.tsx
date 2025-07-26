@@ -46,7 +46,7 @@ export const BlogPostPreview = () => {
             <AspectRatio ratio={180 / 118} maw={180} mx="auto">
               <Image
                 component={NextImage}
-                src="https://wordpress.validthemes.net/ambrox/wp-content/uploads/2023/01/5-1.jpg"
+                src="https://placehold.co/180x118"
                 alt=""
                 width={180}
                 height={118}

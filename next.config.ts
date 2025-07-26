@@ -9,13 +9,6 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "wordpress.validthemes.net",
-        port: "",
-        pathname: "/ambrox/**",
-        search: "",
-      },
-      {
-        protocol: "https",
         hostname: "placehold.co",
         port: "",
         pathname: "/**",
