@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
 import fs from "fs";
 import matter from "gray-matter";
-import { serialize } from "next-mdx-remote/serialize";
+// import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
 import readingTime from "reading-time";
-import remarkGfm from "remark-gfm";
+// import remarkGfm from "remark-gfm";
 
 const root = path.join(process.cwd(), "data");
 
@@ -33,17 +32,11 @@ export const getFrontMatter = async (dir: string = "") => {
   const files = getByDirectory(dir);
 
   return files.map((file) => {
-    console.log("1", file);
-
     const absolutePath = path.join(root, file);
-
-    console.log("2", absolutePath);
 
     const mdx = fs.readFileSync(absolutePath, "utf-8");
     const { data } = matter(mdx);
-    const slug = file.replace(/\\/g, "/").replace(/\.mdx$/, "");
-
-    console.log("3", data);
+    const slug = path.basename(file, ".mdx");
 
     return {
       ...data,
@@ -57,15 +50,16 @@ export const getBySlug = async (slug: string) => {
   const mdx = fs.readFileSync(absolutePath, "utf-8");
   const { data, content } = matter(mdx);
 
-  const source = await serialize(content, {
-    mdxOptions: {
-      remarkPlugins: [remarkGfm, require("remark-code-titles")],
-      rehypePlugins: [require("@mapbox/rehype-prism")],
-    },
-  });
+  // const source = await serialize(content, {
+  //   mdxOptions: {
+  //     remarkPlugins: [remarkGfm, require("remark-code-titles")],
+  //     rehypePlugins: [require("@mapbox/rehype-prism")],
+  //   },
+  // });
 
   return {
-    source,
+    content,
+    // source,
     matter: {
       ...data,
       slug,

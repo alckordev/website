@@ -1,5 +1,5 @@
 export type PageProps = {
-  params: Promise<{ locale: string }>;
+  params: Promise<{ locale: string; slug?: string }>;
 };
 
 export type PostMatter = {

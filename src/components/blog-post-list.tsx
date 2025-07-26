@@ -1,10 +1,10 @@
 "use client";
 
-import usePaging from "@/hooks/use-paging";
 import React from "react";
 import { BlogPostPreview } from "./blog-post-preview";
 import { Center, Divider, Loader } from "@mantine/core";
 import { PostMatter } from "@/type";
+import usePaging from "@/hooks/use-paging";
 import useObserver from "@/hooks/use-observer";
 
 export const BlogPostList = ({ data }: { data: PostMatter[] }) => {
@@ -22,7 +22,6 @@ export const BlogPostList = ({ data }: { data: PostMatter[] }) => {
           )}
         </React.Fragment>
       ))}
-
       {page !== maxPages && (
         <Center ref={observer}>
           <Loader size={50} />
