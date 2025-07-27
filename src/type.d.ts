@@ -9,13 +9,8 @@ export type Frontmatter = {
 };
 
 export type Scope = {
-  reading: {
-    text: string;
-    minutes: number;
-    time: number;
-    words: number;
-  };
-  props?: Record<string, unknown>;
+  reading: number;
+  [key: string]: unknown;
 };
 
 export type PostInfo = Frontmatter & { slug: string };

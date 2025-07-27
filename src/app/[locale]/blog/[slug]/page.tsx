@@ -1,11 +1,12 @@
 import { Suspense } from "react";
-import { getPostSource } from "@/lib";
+import { getPostSource } from "@/lib/server";
 import { Frontmatter, PageProps, Scope } from "@/type";
 import { evaluate, EvaluateOptions } from "next-mdx-remote-client/rsc";
 import { components } from "@/components/mdx";
-import { Stack, Text, Title } from "@mantine/core";
+import { Divider, Stack } from "@mantine/core";
 import { notFound } from "next/navigation";
 import readingTime from "reading-time";
+import { BlogPostHeader } from "@/components/blog-post-header";
 
 export default async function Article(props: PageProps) {
   const { locale, slug } = await props.params;
@@ -17,7 +18,8 @@ export default async function Article(props: PageProps) {
   const options: EvaluateOptions<Scope> = {
     parseFrontmatter: true,
     scope: {
-      reading: readingTime(source),
+      reading: readingTime(source).minutes,
+      test: "testing",
     },
   };
 
@@ -29,10 +31,11 @@ export default async function Article(props: PageProps) {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Title>{frontmatter.title}</Title>
-      <Text>{frontmatter.publishedAt}</Text>
-      <pre>{JSON.stringify(scope, null, 2)}</pre>
-      <Stack gap="xl">{content}</Stack>
+      <BlogPostHeader scope={{ ...frontmatter, ...scope }} locale={locale} />
+      <Stack gap="xl" maw="calc(100vw - 48px)" w="100%">
+        {content}
+      </Stack>
+      <Divider my="xl" />
     </Suspense>
   );
 }

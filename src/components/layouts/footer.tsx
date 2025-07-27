@@ -43,10 +43,7 @@ export const Footer = () => {
                 <RiGithubFill size={18} />
               </ThemeIcon>
             </Anchor>
-            <Divider
-              orientation="vertical"
-              color="var(--mantine-accent-surface)"
-            />
+            <Divider orientation="vertical" />
             <Anchor
               aria-label="TwitterX"
               href="https://discord.com/invite/yVyTtCRueq"
@@ -58,10 +55,7 @@ export const Footer = () => {
                 <RiTwitterXFill size={18} />
               </ThemeIcon>
             </Anchor>
-            <Divider
-              orientation="vertical"
-              color="var(--mantine-accent-surface)"
-            />
+            <Divider orientation="vertical" />
             <Anchor
               aria-label="Tiktok"
               href="https://discord.com/invite/yVyTtCRueq"
@@ -73,10 +67,7 @@ export const Footer = () => {
                 <RiTiktokFill size={18} />
               </ThemeIcon>
             </Anchor>
-            <Divider
-              orientation="vertical"
-              color="var(--mantine-accent-surface)"
-            />
+            <Divider orientation="vertical" />
             <Anchor
               aria-label="Discord"
               href="https://discord.com/invite/yVyTtCRueq"

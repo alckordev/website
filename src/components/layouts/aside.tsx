@@ -75,7 +75,7 @@ export const Aside = () => {
           </Anchor>
         </Card>
       </Stack>
-      <Divider color="var(--mantine-accent-surface)" />
+      <Divider />
       <Stack gap="xl" pos="sticky" top={120}>
         <Card bg="transparent" p={0}>
           <Title order={4} mb="lg">
@@ -95,7 +95,7 @@ export const Aside = () => {
             ))}
           </Flex>
         </Card>
-        <Divider color="var(--mantine-accent-surface)" />
+        <Divider />
         <Card bg="transparent" p={0}>
           <Title order={4} mb="lg">
             Subscribe now!

@@ -12,9 +12,10 @@ import { Footer, Header } from "@/components/layouts";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
-export const metadata = {
-  title: "Alckor DEV — Software developer",
+export const metadata: Metadata = {
+  title: "ADev — Software developer",
   description: "I have followed setup instructions carefully",
 };
 
@@ -31,7 +32,7 @@ export default async function RootLayout({
   if (!hasLocale(routing.locales, locale)) notFound();
 
   return (
-    <html lang="en" {...mantineHtmlProps}>
+    <html lang={locale} {...mantineHtmlProps}>
       <head>
         <ColorSchemeScript defaultColorScheme="dark" />
       </head>

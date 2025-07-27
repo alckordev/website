@@ -12,7 +12,7 @@ export const Header = () => {
       top={0}
       style={{
         borderBottom: "1px solid var(--mantine-accent-surface)",
-        zIndex: 100,
+        zIndex: 101,
       }}
     >
       <Container size="xl">

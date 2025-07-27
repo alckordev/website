@@ -1,17 +1,21 @@
-/* @import url(https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css); */
-
 body {
+  /* background-image: url(../images/bg.jpg);
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover; */
   position: relative;
   background-color: var(--mantine-accent-background);
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  min-height: 100dvh;
+  overflow-x: hidden;
 
   --mantine-accent-background: #020617;
   --mantine-accent-contrast: #fff;
   --mantine-accent-surface: #162a2f80;
   --mantine-accent-indicator: #09f;
   --mantine-accent-track: #09f;
+
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100dvh;
 }
 
 h1,

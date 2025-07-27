@@ -2,7 +2,6 @@ import fs from "fs";
 import path from "path";
 import { getFrontmatter } from "next-mdx-remote-client/utils";
 import { Frontmatter, PostInfo } from "@/type";
-// import readingTime from "reading-time";
 
 const DATA_DIR = path.join(process.cwd(), "data");
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { createTheme, Loader } from "@mantine/core";
+import { createTheme, Divider, Loader } from "@mantine/core";
 import { Fira_Code, Montserrat, Roboto } from "next/font/google";
 import { RingLoader } from "./components";
 
@@ -14,6 +14,11 @@ export const theme = createTheme({
       defaultProps: {
         loaders: { ...Loader.defaultLoaders, ring: RingLoader },
         type: "ring",
+      },
+    }),
+    Divider: Divider.extend({
+      defaultProps: {
+        color: "var(--mantine-accent-surface)",
       },
     }),
   },

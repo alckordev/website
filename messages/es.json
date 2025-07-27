@@ -1,6 +1,4 @@
 {
-  "home": {
-    "title": "Hello world es!"
-  },
-  "title": "Lorem ipsum es"
+  "title": "Lorem ipsum es",
+  "reading_time": "{count, plural, one {# minuto de lectura} other {# minutos de lectura}}"
 }

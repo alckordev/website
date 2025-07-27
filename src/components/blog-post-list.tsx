@@ -7,7 +7,13 @@ import { PostInfo } from "@/type";
 import usePaging from "@/hooks/use-paging";
 import useObserver from "@/hooks/use-observer";
 
-export const BlogPostList = ({ data }: { data: PostInfo[] }) => {
+export const BlogPostList = ({
+  data,
+  locale,
+}: {
+  data: PostInfo[];
+  locale: string;
+}) => {
   const { getData, goToNext, page, maxPages } = usePaging(data, 5);
 
   const observer = useObserver(goToNext, { threshold: 1 });
@@ -16,7 +22,7 @@ export const BlogPostList = ({ data }: { data: PostInfo[] }) => {
     <React.Fragment>
       {getData().map((item, idx) => (
         <React.Fragment key={item.slug}>
-          <BlogPostPreview item={item} />
+          <BlogPostPreview item={item} locale={locale} />
           {idx + 1 !== getData().length && (
             <Divider color="var(--mantine-accent-surface)" />
           )}

@@ -51,7 +51,7 @@ export const DevTechGrid = () => {
         {techs.map((tech) => (
           <Grid.Col key={tech.url} span="content">
             <Tooltip label={tech.label}>
-              <ThemeIcon color="brand-dark.6" size="xl" p={4}>
+              <ThemeIcon variant="transparent" size="xl" p={4}>
                 {tech.component}
               </ThemeIcon>
             </Tooltip>

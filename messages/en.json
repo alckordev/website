@@ -1,6 +1,4 @@
 {
-  "home": {
-    "title": "Hello world en!"
-  },
-  "title": "Lorem ipsum en"
+  "title": "Lorem ipsum en",
+  "reading_time": "{count, plural, one {# min read} other {# mins read}}"
 }

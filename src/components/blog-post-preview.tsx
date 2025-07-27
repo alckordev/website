@@ -16,12 +16,19 @@ import { RiChat1Fill, RiHeartFill } from "@remixicon/react";
 import NextImage from "next/image";
 import { Link } from "@/i18n/navigation";
 import { PostInfo } from "@/type";
+import { formatRelativeDate } from "@/lib/client";
 
-export const BlogPostPreview = ({ item }: { item: PostInfo }) => {
+export const BlogPostPreview = ({
+  item,
+  locale,
+}: {
+  item: PostInfo;
+  locale: string;
+}) => {
   return (
     <Stack gap="xs">
-      <Text component="time" dateTime="2025-07-25" size="sm">
-        25 july, 2025
+      <Text component="time" dateTime={item.publishedAt} size="sm">
+        {formatRelativeDate(item.publishedAt, locale)}
       </Text>
       <Flex>
         <Anchor
