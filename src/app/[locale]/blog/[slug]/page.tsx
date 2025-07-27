@@ -1,13 +1,21 @@
-import { Suspense } from "react";
+import React from "react";
 import { getPostSource } from "@/lib/server";
 import { Frontmatter, Params, Scope } from "@/type";
 import { evaluate, EvaluateOptions } from "next-mdx-remote-client/rsc";
 import { components } from "@/components/mdx";
-import { Divider, Stack } from "@mantine/core";
+import { Box, Divider, Flex, Stack } from "@mantine/core";
 import { notFound } from "next/navigation";
 import readingTime from "reading-time";
 import { BlogPostHeader } from "@/components/blog-post-header";
 import remarkFlexibleToc from "remark-flexible-toc";
+import { Content, Footer, Header, TocAside } from "@/components/layouts";
+
+export async function generateMetadata() {
+  return {
+    title: "Lorem ipsum... — Alckor DEV — Software developer",
+    description: "I have followed setup instructions carefully",
+  };
+}
 
 export default async function Article({ params }: { params: Params }) {
   const { locale, slug } = await params;
@@ -34,13 +42,36 @@ export default async function Article({ params }: { params: Params }) {
   });
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      {/* <pre>{JSON.stringify(scope.toc, null, 2)}</pre> */}
-      <BlogPostHeader scope={{ ...frontmatter, ...scope }} locale={locale} />
-      <Stack gap="xl" maw="calc(100vw - 48px)" w="100%">
-        {content}
-      </Stack>
-      <Divider my="xl" />
-    </Suspense>
+    <React.Fragment>
+      <Header />
+      <Content>
+        <Flex
+          direction={{ base: "column", lg: "row" }}
+          justify="space-evenly"
+          mx="-md"
+          mih="100%"
+        >
+          <Box
+            flex="1 1 auto"
+            maw={{ sm: 728, md: 790 }}
+            mx="auto"
+            py={50}
+            ps="md"
+            pe={{ base: "md", lg: "xl" }}
+          >
+            <BlogPostHeader
+              scope={{ ...frontmatter, ...scope }}
+              locale={locale}
+            />
+            <Stack gap="xl" maw="calc(100vw - 48px)" w="100%">
+              {content}
+            </Stack>
+            <Divider my="xl" />
+          </Box>
+          <TocAside />
+        </Flex>
+      </Content>
+      <Footer />
+    </React.Fragment>
   );
 }

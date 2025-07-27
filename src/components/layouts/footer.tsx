@@ -19,6 +19,7 @@ export const Footer = () => {
   return (
     <Box
       component="footer"
+      role="footer"
       bg="var(--mantine-accent-backdrop)"
       style={{
         boxShadow: "inset 0 1px 0 0 var(--mantine-accent-surface)",

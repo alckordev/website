@@ -1,14 +1,9 @@
 import "@mantine/core/styles.css";
 import "@mantine/code-highlight/styles.css";
 import "@/assets/css/global.css";
-import {
-  Box,
-  ColorSchemeScript,
-  Container,
-  mantineHtmlProps,
-} from "@mantine/core";
+import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
 import { Provider } from "@/components/provider";
-import { Footer, Header } from "@/components/layouts";
+import { HighlightProvider } from "@/components/highlight-provider";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
@@ -36,13 +31,7 @@ export default async function RootLayout({
       <body>
         <NextIntlClientProvider>
           <Provider>
-            <Header />
-            <Box component="main">
-              <Container size="xl" h="100%">
-                {children}
-              </Container>
-            </Box>
-            <Footer />
+            <HighlightProvider>{children}</HighlightProvider>
           </Provider>
         </NextIntlClientProvider>
       </body>
