@@ -1,18 +1,21 @@
-// import "@mantine/code-highlight";
-
 export type PageProps = {
   params: Promise<{ locale: string; slug?: string }>;
 };
 
-export type PostMatter = {
-  title?: string;
-  summary?: string;
-  publishedAt?: string;
-  slug: string;
+export type Frontmatter = {
+  title: string;
+  summary: string;
+  publishedAt: string;
 };
 
-// declare module "@mantine/code-highlight" {
-//   interface CreateShikiAdapterOptions {
-//     forceColorScheme?: "dark" | "light" | "andromeeda";
-//   }
-// }
+export type Scope = {
+  reading: {
+    text: string;
+    minutes: number;
+    time: number;
+    words: number;
+  };
+  props?: Record<string, unknown>;
+};
+
+export type PostInfo = Frontmatter & { slug: string };

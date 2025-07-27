@@ -15,9 +15,9 @@ import {
 import { RiChat1Fill, RiHeartFill } from "@remixicon/react";
 import NextImage from "next/image";
 import { Link } from "@/i18n/navigation";
-import { PostMatter } from "@/type";
+import { PostInfo } from "@/type";
 
-export const BlogPostPreview = ({ item }: { item: PostMatter }) => {
+export const BlogPostPreview = ({ item }: { item: PostInfo }) => {
   return (
     <Stack gap="xs">
       <Text component="time" dateTime="2025-07-25" size="sm">

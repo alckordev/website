@@ -1,59 +1,56 @@
 import fs from "fs";
-import matter from "gray-matter";
 import path from "path";
-import readingTime from "reading-time";
+import { getFrontmatter } from "next-mdx-remote-client/utils";
+import { Frontmatter, PostInfo } from "@/type";
+// import readingTime from "reading-time";
 
-const root = path.join(process.cwd(), "data");
+const DATA_DIR = path.join(process.cwd(), "data");
 
-export const getByDirectory = (dir: string = "") => {
-  const dirPath = path.join(root, dir);
-  const paths: string[] = [];
+/* ──────────────────────────────── helpers ──────────────────────────────── */
 
-  function readDirectory(dir: string) {
-    fs.readdirSync(dir).forEach((file) => {
-      const absolutePath = path.join(dir, file);
+/** Return the absolute path for a given slug (.mdx) */
+const mdxPath = (slug: string) => path.join(DATA_DIR, `${slug}.mdx`);
 
-      if (fs.statSync(absolutePath).isDirectory()) {
-        readDirectory(absolutePath);
-      } else if (absolutePath.endsWith(".mdx")) {
-        paths.push(absolutePath.replace(root + path.sep, ""));
-      }
-    });
-  }
-
-  readDirectory(dirPath);
-
-  return paths;
+/** Read an .mdx file; return undefined if it does not exist */
+const readMdx = (slug: string): string | undefined => {
+  const filePath = mdxPath(slug);
+  return fs.existsSync(filePath)
+    ? fs.readFileSync(filePath, "utf8")
+    : undefined;
 };
 
-export const getFrontMatter = async (dir: string = "") => {
-  const files = getByDirectory(dir);
+/** Type‑guard to filter out undefined values */
+const isPostInfo = (value: PostInfo | undefined): value is PostInfo =>
+  value !== undefined;
 
-  return files.map((file) => {
-    const absolutePath = path.join(root, file);
+/* ────────────────────────────── public API ─────────────────────────────── */
 
-    const mdx = fs.readFileSync(absolutePath, "utf-8");
-    const { data } = matter(mdx);
-    const slug = path.basename(file, ".mdx");
+/** Get raw markdown source for a single slug (async) */
+export const getPostSource = async (
+  slug: string
+): Promise<string | undefined> => readMdx(slug);
 
-    return {
-      ...data,
-      slug,
-    };
-  });
-};
+/** Get front‑matter for one post */
+export const getPostInfo = (slug: string): PostInfo | undefined => {
+  const source = readMdx(slug);
+  if (!source) return;
 
-export const getBySlug = async (slug: string) => {
-  const absolutePath = path.join(root, `${slug}.mdx`);
-  const mdx = fs.readFileSync(absolutePath, "utf-8");
-  const { data, content } = matter(mdx);
-
+  const { frontmatter } = getFrontmatter<Frontmatter>(source);
   return {
-    content,
-    matter: {
-      ...data,
-      slug,
-      reading: readingTime(content),
-    },
+    ...frontmatter,
+    slug: path.basename(slug, ".mdx"),
   };
+};
+
+/** List all slugs inside a directory (e.g. "es" or "en") */
+export const listSlugs = (dir = ""): string[] =>
+  fs
+    .readdirSync(path.join(DATA_DIR, dir))
+    .filter((f) => f.endsWith(".mdx"))
+    .map((f) => path.posix.join(dir, path.basename(f, ".mdx")));
+
+/** Get front‑matter for every post under `dir` */
+export const getPostsInfo = async (dir = ""): Promise<PostInfo[]> => {
+  const slugs = listSlugs(dir);
+  return slugs.map(getPostInfo).filter(isPostInfo); // -> guaranteed PostInfo[]
 };

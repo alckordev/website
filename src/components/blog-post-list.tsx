@@ -3,11 +3,11 @@
 import React from "react";
 import { BlogPostPreview } from "./blog-post-preview";
 import { Center, Divider, Loader } from "@mantine/core";
-import { PostMatter } from "@/type";
+import { PostInfo } from "@/type";
 import usePaging from "@/hooks/use-paging";
 import useObserver from "@/hooks/use-observer";
 
-export const BlogPostList = ({ data }: { data: PostMatter[] }) => {
+export const BlogPostList = ({ data }: { data: PostInfo[] }) => {
   const { getData, goToNext, page, maxPages } = usePaging(data, 5);
 
   const observer = useObserver(goToNext, { threshold: 1 });
