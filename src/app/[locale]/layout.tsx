@@ -13,6 +13,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import { LayoutWithParamsProps } from "@/type";
 
 export const metadata: Metadata = {
   title: "ADev — Software developer",
@@ -22,11 +23,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
   params,
-}: {
-  children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}) {
-  // Ensure that the incoming `locale` is valid
+}: LayoutWithParamsProps) {
   const { locale } = await params;
 
   if (!hasLocale(routing.locales, locale)) notFound();

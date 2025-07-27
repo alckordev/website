@@ -19,7 +19,10 @@ export const Footer = () => {
   return (
     <Box
       component="footer"
-      style={{ borderTop: "1px solid var(--mantine-accent-surface)" }}
+      bg="var(--mantine-accent-backdrop)"
+      style={{
+        boxShadow: "inset 0 1px 0 0 var(--mantine-accent-surface)",
+      }}
     >
       <Container size="xl">
         <Flex

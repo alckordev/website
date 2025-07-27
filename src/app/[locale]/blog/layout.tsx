@@ -1,4 +1,4 @@
-import { Aside } from "@/components/layouts";
+import { LayoutWithParamsProps } from "@/type";
 import { Box, Flex } from "@mantine/core";
 
 export const metadata = {
@@ -6,11 +6,14 @@ export const metadata = {
   description: "I have followed setup instructions carefully",
 };
 
-export default function RootLayout({
+export default async function BlogLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+  sidebar,
+  params,
+}: LayoutWithParamsProps) {
+  console.log("BlogLayout", await params);
+  console.log("BlogLayout.sidebar", sidebar);
+
   return (
     <Flex
       direction={{ base: "column", lg: "row" }}
@@ -28,7 +31,7 @@ export default function RootLayout({
       >
         {children}
       </Box>
-      <Aside />
+      {/* {sidebar} */}
     </Flex>
   );
 }

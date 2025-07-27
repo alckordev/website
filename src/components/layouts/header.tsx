@@ -7,11 +7,13 @@ export const Header = () => {
   return (
     <Box
       component="header"
-      bg="var(--mantine-accent-background)"
+      bg="var(--mantine-accent-backdrop)"
       pos="sticky"
       top={0}
       style={{
-        borderBottom: "1px solid var(--mantine-accent-surface)",
+        // borderBottom: "1px solid var(--mantine-accent-surface)",
+        backdropFilter: "saturate(100%) blur(5px)",
+        boxShadow: "inset 0 -1px 0 0 var(--mantine-accent-surface)",
         zIndex: 101,
       }}
     >

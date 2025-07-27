@@ -1,11 +1,12 @@
 import React from "react";
 import { Divider, Stack, Title } from "@mantine/core";
-import { PageProps, PostInfo } from "@/type";
+import { PostInfo } from "@/type";
 import { BlogPostList } from "@/components/blog-post-list";
 import { getPostsInfo } from "@/lib/server";
+import { getLocale } from "next-intl/server";
 
-export default async function Blog(props: PageProps) {
-  const { locale } = await props.params;
+export default async function Blog() {
+  const locale = await getLocale();
 
   const data: PostInfo[] = await getPostsInfo(locale);
 

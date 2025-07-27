@@ -1,5 +1,12 @@
-export type PageProps = {
-  params: Promise<{ locale: string; slug?: string }>;
+export type Params = Promise<{ locale: string; slug?: string }>;
+
+export type LayoutProps = {
+  children: React.ReactNode;
+  sidebar?: React.ReactNode;
+};
+
+export type LayoutWithParamsProps = LayoutProps & {
+  params: Params;
 };
 
 export type Frontmatter = {

@@ -1,15 +1,16 @@
 import { Suspense } from "react";
 import { getPostSource } from "@/lib/server";
-import { Frontmatter, PageProps, Scope } from "@/type";
+import { Frontmatter, Params, Scope } from "@/type";
 import { evaluate, EvaluateOptions } from "next-mdx-remote-client/rsc";
 import { components } from "@/components/mdx";
 import { Divider, Stack } from "@mantine/core";
 import { notFound } from "next/navigation";
 import readingTime from "reading-time";
 import { BlogPostHeader } from "@/components/blog-post-header";
+import remarkFlexibleToc from "remark-flexible-toc";
 
-export default async function Article(props: PageProps) {
-  const { locale, slug } = await props.params;
+export default async function Article({ params }: { params: Params }) {
+  const { locale, slug } = await params;
 
   const source = await getPostSource(`${locale}/${slug}`);
 
@@ -19,8 +20,11 @@ export default async function Article(props: PageProps) {
     parseFrontmatter: true,
     scope: {
       reading: readingTime(source).minutes,
-      test: "testing",
     },
+    mdxOptions: {
+      remarkPlugins: [remarkFlexibleToc],
+    },
+    vfileDataIntoScope: "toc",
   };
 
   const { content, frontmatter, scope } = await evaluate<Frontmatter, Scope>({
@@ -31,6 +35,7 @@ export default async function Article(props: PageProps) {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
+      {/* <pre>{JSON.stringify(scope.toc, null, 2)}</pre> */}
       <BlogPostHeader scope={{ ...frontmatter, ...scope }} locale={locale} />
       <Stack gap="xl" maw="calc(100vw - 48px)" w="100%">
         {content}

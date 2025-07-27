@@ -11,6 +11,7 @@ import {
   Flex,
   Image,
   Stack,
+  // TableOfContents,
   TextInput,
   Title,
 } from "@mantine/core";
@@ -19,8 +20,11 @@ import { zod4Resolver } from "mantine-form-zod-resolver";
 import z from "zod/v4";
 import NextImage from "next/image";
 import { Link } from "@/i18n/navigation";
+// import { useParams } from "next/navigation";
 
 export const Aside = () => {
+  // const { slug } = useParams<{ slug?: string }>();
+
   const form = useForm({
     initialValues: {
       email: "",
@@ -74,6 +78,35 @@ export const Aside = () => {
             </AspectRatio>
           </Anchor>
         </Card>
+        {/* 
+        {slug && (
+          <Card
+            bg="transparent"
+            radius="md"
+            withBorder
+            style={{ borderColor: "var(--mantine-accent-surface)" }}
+          >
+            <Title order={4} mb="lg">
+              Table of contents
+            </Title>
+            <TableOfContents
+              variant="light"
+              color="accent"
+              radius="sm"
+              getControlProps={({ data }) => ({
+                onClick: () =>
+                  data.getNode().scrollIntoView({ behavior: "smooth" }),
+                children: data.value,
+              })}
+              // getControlProps={({ active, data }) => ({
+              //   component: "a",
+              //   href: `#${data.id}`,
+              //   style: { color: active ? "blue" : "gray" },
+              //   children: data.value,
+              // })}
+            />
+          </Card>
+        )} */}
       </Stack>
       <Divider />
       <Stack gap="xl" pos="sticky" top={120}>

@@ -1996,6 +1996,11 @@ get-tsconfig@^4.10.0:
   dependencies:
     resolve-pkg-maps "^1.0.0"
 
+github-slugger@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/github-slugger/-/github-slugger-2.0.0.tgz#52cf2f9279a21eb6c59dd385b410f0c0adda8f1a"
+  integrity sha512-IaOQ9puYtjrkq7Y0Ygl9KDZnrf/aiUJYUpVf89y8kyaxbRG7Y1SrX/jaumrv81vc61+kiMempujsM3Yw7w5qcw==
+
 glob-parent@^5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-5.1.2.tgz#869832c58034fe68a4093c17dc15e8340d8401c4"
@@ -3569,6 +3574,16 @@ rehype-recma@^1.0.0:
     "@types/estree" "^1.0.0"
     "@types/hast" "^3.0.0"
     hast-util-to-estree "^3.0.0"
+
+remark-flexible-toc@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/remark-flexible-toc/-/remark-flexible-toc-1.2.0.tgz#5d9c66ebd6af0a77090c20d60780394fdc86b4e6"
+  integrity sha512-EqUIcYL5GRLzzrdXnwaGdvFqSxbQ9l08d+QQE6Jw4vCuKwADMzM0t9qXb32p0G28X57lZryBAgSPDBnEDePcOg==
+  dependencies:
+    "@types/mdast" "^4.0.4"
+    github-slugger "^2.0.0"
+    mdast-util-to-string "^4.0.0"
+    unist-util-visit "^5.0.0"
 
 remark-mdx-remove-esm@^1.2.0:
   version "1.2.0"
