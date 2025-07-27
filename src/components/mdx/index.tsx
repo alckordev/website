@@ -5,10 +5,6 @@ import {
   AnchorProps,
   Blockquote,
   BlockquoteProps,
-  Box,
-  BoxProps,
-  Code,
-  CodeProps,
   Divider,
   DividerProps,
   Highlight,
@@ -25,9 +21,11 @@ import {
   Title,
   TitleProps,
 } from "@mantine/core";
+import { MDXComponents } from "next-mdx-remote-client/rsc";
+import { CodeBlock } from "./code-block";
 // import NextImage, { ImageProps } from "next/image";
 
-export const MDXComponents = {
+export const components: MDXComponents = {
   a: (props: AnchorProps) => <Anchor {...props} />,
   hr: (props: DividerProps) => <Divider {...props} />,
   p: (props: TextProps) => <Text {...props} />,
@@ -37,8 +35,8 @@ export const MDXComponents = {
   h4: (props: TitleProps) => <Title order={4} {...props} />,
   h5: (props: TitleProps) => <Title order={5} {...props} />,
   h6: (props: TitleProps) => <Title order={6} {...props} />,
-  pre: (props: BoxProps) => <Box component="pre" {...props} />,
-  code: (props: CodeProps) => <Code {...props} />,
+  pre: (props) => <div {...props} />,
+  code: CodeBlock,
   blockquote: (props: BlockquoteProps) => <Blockquote {...props} />,
   highlight: (props: HighlightProps) => <Highlight {...props} />,
   mark: (props: MarkProps) => <Mark {...props} />,

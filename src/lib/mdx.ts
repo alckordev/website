@@ -1,9 +1,7 @@
 import fs from "fs";
 import matter from "gray-matter";
-// import { serialize } from "next-mdx-remote/serialize";
 import path from "path";
 import readingTime from "reading-time";
-// import remarkGfm from "remark-gfm";
 
 const root = path.join(process.cwd(), "data");
 
@@ -50,16 +48,8 @@ export const getBySlug = async (slug: string) => {
   const mdx = fs.readFileSync(absolutePath, "utf-8");
   const { data, content } = matter(mdx);
 
-  // const source = await serialize(content, {
-  //   mdxOptions: {
-  //     remarkPlugins: [remarkGfm, require("remark-code-titles")],
-  //     rehypePlugins: [require("@mapbox/rehype-prism")],
-  //   },
-  // });
-
   return {
     content,
-    // source,
     matter: {
       ...data,
       slug,

@@ -1,3 +1,5 @@
+/* @import url(https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css); */
+
 body {
   position: relative;
   background-color: var(--mantine-accent-background);
@@ -20,8 +22,3 @@ h5,
 h6 {
   color: var(--mantine-color-white);
 }
-
-/* a {
-  color: var(--mantine-color-white);
-  text-decoration: none;
-} */
