@@ -23,9 +23,7 @@ export const BlogPostList = ({
       {getData().map((item, idx) => (
         <React.Fragment key={item.slug}>
           <BlogPostPreview item={item} locale={locale} />
-          {idx + 1 !== getData().length && (
-            <Divider color="var(--mantine-accent-surface)" />
-          )}
+          {idx + 1 !== getData().length && <Divider />}
         </React.Fragment>
       ))}
       {page !== maxPages && (

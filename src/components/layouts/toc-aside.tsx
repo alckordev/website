@@ -3,8 +3,10 @@
 import { Card, Divider, Stack, TableOfContents, Title } from "@mantine/core";
 import { TopicList } from "../topic-list";
 import { Newsletter } from "../newsletter";
+import { Toc } from "@/type";
+import React from "react";
 
-export const TocAside = () => {
+export const TocAside = ({ toc }: { toc?: Toc }) => {
   return (
     <Stack
       component="aside"
@@ -23,33 +25,32 @@ export const TocAside = () => {
       }}
     >
       <Stack gap="xl" pos="sticky" top={120}>
-        <Card
-          bg="transparent"
-          radius="md"
-          withBorder
-          style={{ borderColor: "var(--mantine-accent-surface)" }}
-        >
-          <Title order={4} mb="lg">
-            Table of contents
-          </Title>
-          <TableOfContents
-            variant="light"
-            color="accent"
-            radius="sm"
-            getControlProps={({ data }) => ({
-              onClick: () =>
-                data.getNode().scrollIntoView({ behavior: "smooth" }),
-              children: data.value,
-            })}
-            // getControlProps={({ active, data }) => ({
-            //   component: "a",
-            //   href: `#${data.id}`,
-            //   style: { color: active ? "blue" : "gray" },
-            //   children: data.value,
-            // })}
-          />
-        </Card>
-        <Divider />
+        {toc && (
+          <React.Fragment>
+            <Card bg="transparent" p={0}>
+              <Title order={4} mb="lg">
+                Table of contents
+              </Title>
+              <TableOfContents
+                variant="light"
+                color="accent"
+                radius="sm"
+                scrollSpyOptions={{
+                  selector: "#mdx :is(h1, h2, h3, h4, h5, h6)",
+                }}
+                getControlProps={({ data }) => ({
+                  onClick: () => {
+                    data
+                      .getNode()
+                      .scrollIntoView({ behavior: "smooth", block: "start" });
+                  },
+                  children: data.value,
+                })}
+              />
+            </Card>
+            <Divider />
+          </React.Fragment>
+        )}
         <TopicList />
         <Divider />
         <Newsletter />

@@ -9,6 +9,7 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { LayoutWithParamsProps } from "@/type";
+import { Content, Footer, Header } from "@/components/layouts";
 
 export const metadata: Metadata = {
   title: "ADev — Software developer",
@@ -31,7 +32,11 @@ export default async function RootLayout({
       <body>
         <NextIntlClientProvider>
           <Provider>
-            <HighlightProvider>{children}</HighlightProvider>
+            <HighlightProvider>
+              <Header />
+              <Content>{children}</Content>
+              <Footer />
+            </HighlightProvider>
           </Provider>
         </NextIntlClientProvider>
       </body>

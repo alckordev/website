@@ -17,7 +17,16 @@ export type Frontmatter = {
 
 export type Scope = {
   reading: number;
+  toc?: Toc;
   [key: string]: unknown;
 };
 
 export type PostInfo = Frontmatter & { slug: string };
+
+export type Toc = {
+  value: string;
+  href: string;
+  depth: number;
+  numbering: number[];
+  parent: string;
+}[];

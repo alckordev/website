@@ -28,4 +28,26 @@ h4,
 h5,
 h6 {
   color: var(--mantine-color-white);
+  scroll-margin-top: 108px;
+}
+
+header {
+  grid-area: header;
+}
+
+main {
+  grid-area: main;
+}
+
+footer {
+  grid-area: footer;
+}
+
+.mantine-Skeleton-root {
+  &::before {
+    display: none;
+  }
+  &::after {
+    background-color: var(--mantine-color-accent-light);
+  }
 }
