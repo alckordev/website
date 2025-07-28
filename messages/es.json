@@ -12,5 +12,8 @@
   "subscribe": "Suscríbete",
   "table_of_contents": "Tabla de contenido",
   "search": "Buscar",
-  "nothing_found": "No se encontró nada"
+  "nothing_found": "No se encontró nada",
+  "buy_me_a_coffee": "Cómprame un café",
+  "buy_me_a_coffee_description": "Si lo deseas, puedes apoyarme con una donación voluntaria. Tu aporte me permite dedicar más tiempo a investigar, escribir y mejorar la calidad del contenido que publico. ¡Muchísimas gracias por considerar impulsar este proyecto!",
+  "buy_me_a_coffee_title": "¿Te gustó lo que leíste?"
 }

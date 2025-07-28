@@ -40,11 +40,31 @@ export const BlogPostPreview = ({
           <Title order={3} textWrap="balance" lineClamp={2}>
             {item.title}
           </Title>
-          <Box my={4}>
-            <Text c="var(--mantine-color-text)" lineClamp={2}>
+          <Box m="4 0 16">
+            <Text c="dark.0" lineClamp={2}>
               {item.summary}
             </Text>
           </Box>
+          <Group gap="xs">
+            <Button
+              leftSection={
+                <RiHeartFill color="var(--mantine-color-red-7)" size={20} />
+              }
+              variant="transparent"
+              size="compact-sm"
+              c="dark.0"
+            >
+              193
+            </Button>
+            <Button
+              leftSection={<RiChat1Fill size={20} />}
+              variant="transparent"
+              size="compact-sm"
+              c="dark.0"
+            >
+              10
+            </Button>
+          </Group>
         </Anchor>
         <Box display={{ base: "none", md: "block" }} flex="0 0 180px" ms="50px">
           <AspectRatio ratio={180 / 118} maw={180} mx="auto">
@@ -59,26 +79,6 @@ export const BlogPostPreview = ({
           </AspectRatio>
         </Box>
       </Flex>
-      <Group gap="xs">
-        <Button
-          leftSection={
-            <RiHeartFill color="var(--mantine-color-red-7)" size={20} />
-          }
-          variant="transparent"
-          size="compact-sm"
-          c="var(--mantine-color-text)"
-        >
-          193
-        </Button>
-        <Button
-          leftSection={<RiChat1Fill size={20} />}
-          variant="transparent"
-          size="compact-sm"
-          c="var(--mantine-color-text)"
-        >
-          10
-        </Button>
-      </Group>
     </Stack>
   );
 };

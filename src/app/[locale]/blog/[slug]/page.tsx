@@ -9,6 +9,8 @@ import readingTime from "reading-time";
 import { BlogPostHeader } from "@/components/blog-post-header";
 import remarkFlexibleToc from "remark-flexible-toc";
 import { TocAside } from "@/components/layouts";
+import { BuyMeACoffee } from "@/components/buy-me-a-coffee";
+import { BlogPostFooter } from "@/components/blog-post-footer";
 
 // function sleep(ms: number) {
 //   return new Promise((r) => setTimeout(r, ms));
@@ -55,6 +57,7 @@ export default async function Page({ params }: { params: Params }) {
       mih="100%"
     >
       <Box
+        component="article"
         flex="1 1 auto"
         maw={{ sm: 728, md: 790 }}
         mx="auto"
@@ -63,10 +66,14 @@ export default async function Page({ params }: { params: Params }) {
         pe={{ base: "md", lg: "xl" }}
       >
         <BlogPostHeader scope={{ ...frontmatter, ...scope }} locale={locale} />
-        <Stack id="mdx" gap="xl" maw="calc(100vw - 48px)" w="100%">
+        <Stack id="mdx" gap="xl" mb={48} maw="calc(100vw - 48px)" w="100%">
           {content}
         </Stack>
+
+        <BlogPostFooter />
+
         <Divider my="xl" />
+        <BuyMeACoffee />
       </Box>
       <TocAside toc={scope.toc} />
     </Flex>

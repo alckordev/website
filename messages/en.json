@@ -12,5 +12,8 @@
   "subscribe": "Subscribe",
   "table_of_contents": "Table of contents",
   "search": "Search",
-  "nothing_found": "Nothing found"
+  "nothing_found": "Nothing found",
+  "buy_me_a_coffee": "Buy me a coffee",
+  "buy_me_a_coffee_description": "If you’d like, you can support my work with an optional donation. Your contribution allows me to invest more time in research, writing, and continually improving the quality of what I share. Thank you so much for considering a boost to this project!",
+  "buy_me_a_coffee_title": "Did you like what you read?"
 }
