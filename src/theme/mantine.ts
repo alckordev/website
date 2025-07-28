@@ -6,13 +6,14 @@ import {
   Divider,
   Input,
   Loader,
+  LoadingOverlay,
   ModalCloseButton,
   ModalContent,
   ModalHeader,
   TextInput,
 } from "@mantine/core";
 import { Fira_Code, Montserrat, Roboto } from "next/font/google";
-import { RingLoader } from "./components";
+import { InfinityLoader, RingLoader } from "./components";
 
 const heading = Montserrat({ subsets: ["latin"] });
 const text = Roboto({ subsets: ["latin"] });
@@ -26,7 +27,11 @@ export const theme = createTheme({
   components: {
     Loader: Loader.extend({
       defaultProps: {
-        loaders: { ...Loader.defaultLoaders, ring: RingLoader },
+        loaders: {
+          ...Loader.defaultLoaders,
+          ring: RingLoader,
+          infinity: InfinityLoader,
+        },
         type: "ring",
       },
     }),
@@ -49,6 +54,13 @@ export const theme = createTheme({
     ModalCloseButton: ModalCloseButton.extend({
       defaultProps: {
         variant: "light",
+      },
+    }),
+    LoadingOverlay: LoadingOverlay.extend({
+      styles: {
+        overlay: {
+          "--overlay-bg": "var(--mantine-accent-backdrop)",
+        },
       },
     }),
     Button: Button.extend({

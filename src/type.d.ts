@@ -30,3 +30,17 @@ export type Toc = {
   numbering: number[];
   parent: string;
 }[];
+
+export type User = {
+  aud: string;
+  authTime: number;
+  email?: string;
+  emailVerified?: boolean;
+  exp: number;
+  iat: number;
+  iss: string;
+  name?: string;
+  picture?: string;
+  sub: string;
+  uid: string;
+};

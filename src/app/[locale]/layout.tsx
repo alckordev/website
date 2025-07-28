@@ -12,6 +12,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { LayoutWithParamsProps } from "@/type";
 import { Content, Footer, Header } from "@/components/layouts";
+import { getUser } from "@/lib/server";
 
 export const metadata: Metadata = {
   title: "ADev — Software developer",
@@ -27,7 +28,7 @@ export default async function Layout({
 
   if (!hasLocale(routing.locales, locale)) notFound();
 
-  console.log("@auth", auth);
+  const user = await getUser();
 
   return (
     <html lang={locale} {...mantineHtmlProps}>
@@ -38,7 +39,7 @@ export default async function Layout({
         <NextIntlClientProvider>
           <Provider>
             <HighlightProvider>
-              <Header />
+              <Header user={user} />
               <Content>
                 {auth}
                 {children}

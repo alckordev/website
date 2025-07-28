@@ -1,13 +1,38 @@
 "use client";
 
-import { Anchor, Box, Button, Container, Flex } from "@mantine/core";
-import { Link } from "@/i18n/navigation";
+import {
+  ActionIcon,
+  Anchor,
+  Avatar,
+  Box,
+  Button,
+  Container,
+  em,
+  Flex,
+  Menu,
+} from "@mantine/core";
+import { Link, useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { RiTerminalFill } from "@remixicon/react";
+import { RiShutDownLine, RiTerminalFill, RiUserLine } from "@remixicon/react";
 import { SpotlightBox } from "./spotlight-box";
+import { User } from "@/type";
+import { useMediaQuery } from "@mantine/hooks";
+import { signOut } from "firebase/auth";
+import firebase from "@/lib/client/firebase";
+import { destroySession } from "@/app/actions/auth";
 
-export const Header = () => {
+export const Header = ({ user }: { user: User | null }) => {
   const t = useTranslations();
+
+  const router = useRouter();
+
+  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+
+  const handleLogout = async () => {
+    await signOut(firebase.auth());
+    await destroySession();
+    router.refresh();
+  };
 
   return (
     <Box
@@ -24,7 +49,7 @@ export const Header = () => {
       }}
     >
       <Container size="xl">
-        <Flex mih="70px" justify="space-between">
+        <Flex mih={60} mah={60} justify="space-between">
           <Flex gap={32} align="center">
             <Anchor
               component={Link}
@@ -42,16 +67,45 @@ export const Header = () => {
               <RiTerminalFill color="var(--mantine-primary-color-filled)" />
               alckor.dev
             </Anchor>
-            <SpotlightBox />
+            {!isMobile && <SpotlightBox />}
           </Flex>
-
           <Flex gap={32} align="center">
             <Anchor component={Link} href="/blog" c="white" underline="never">
               {t("blog")}
             </Anchor>
-            <Button component={Link} href="/login">
-              {t("sign_in")}
-            </Button>
+            {!user ? (
+              <Button component={Link} href="/login">
+                {t("sign_in")}
+              </Button>
+            ) : (
+              <Menu position="bottom-end" withArrow>
+                <Menu.Target>
+                  <ActionIcon variant="transparent" c="white" size="compact-md">
+                    <Avatar
+                      name={user.name}
+                      src={user.picture}
+                      alt={user.name}
+                    />
+                  </ActionIcon>
+                </Menu.Target>
+                <Menu.Dropdown>
+                  <Menu.Item
+                    component={Link}
+                    href="/account"
+                    leftSection={<RiUserLine size={16} />}
+                  >
+                    {t("my_account")}
+                  </Menu.Item>
+                  <Menu.Divider />
+                  <Menu.Item
+                    leftSection={<RiShutDownLine size={16} />}
+                    onClick={handleLogout}
+                  >
+                    {t("sign_out")}
+                  </Menu.Item>
+                </Menu.Dropdown>
+              </Menu>
+            )}
           </Flex>
         </Flex>
       </Container>

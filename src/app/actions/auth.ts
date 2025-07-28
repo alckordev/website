@@ -1,4 +1,4 @@
-import "server-only";
+"use server";
 import server from "@/lib/server/firebase";
 import { cookies } from "next/headers";
 
@@ -13,9 +13,7 @@ const COOKIE_OPTS = {
 export async function createSession(idToken: string) {
   const cookieStore = await cookies();
 
-  const decoded = await server.auth().verifyIdToken(idToken);
-
-  console.log(decoded);
+  await server.auth().verifyIdToken(idToken);
 
   const expiresIn = 60 * 60 * 24 * 5 * 1000;
   const sessionCookie = await server.auth().createSessionCookie(idToken, {
@@ -30,5 +28,5 @@ export async function createSession(idToken: string) {
 
 export async function destroySession() {
   const cookieStore = await cookies();
-  cookieStore.set(COOKIE_NAME, "");
+  cookieStore.delete(COOKIE_NAME);
 }

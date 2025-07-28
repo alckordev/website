@@ -1,21 +1,75 @@
+"use client";
+
+import { createSession } from "@/app/actions/auth";
 import { Link } from "@/i18n/navigation";
+import firebase from "@/lib/client/firebase";
 import {
   Anchor,
   Box,
   Button,
+  LoadingOverlay,
   Stack,
   Text,
   ThemeIcon,
   Title,
 } from "@mantine/core";
 import { RiGithubFill, RiGoogleFill, RiTerminalFill } from "@remixicon/react";
+import {
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
+
+const google = new GoogleAuthProvider();
+const github = new GithubAuthProvider();
 
 export const Login = () => {
   const t = useTranslations();
 
+  const [loading, setLoading] = useState(false);
+
+  const handleLoginWithGoogle = async () => {
+    try {
+      setLoading(true);
+
+      const credentials = await signInWithPopup(firebase.auth(), google);
+      const idToken = await credentials.user.getIdToken();
+
+      await createSession(idToken);
+
+      console.log("reload");
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLoginWithGithub = async () => {
+    try {
+      await signInWithPopup(firebase.auth(), github);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
-    <Stack align="center" gap="xl" p="56 16 32">
+    <Stack
+      pos="relative"
+      align="center"
+      gap="xl"
+      p="56 16 32"
+      maw={420}
+      mx="auto"
+    >
+      <LoadingOverlay
+        visible={loading}
+        zIndex={1000}
+        overlayProps={{ blur: 2 }}
+        loaderProps={{ type: "infinity" }}
+      />
       <Box style={{ textAlign: "center" }}>
         <ThemeIcon
           variant="gradient"
@@ -36,6 +90,7 @@ export const Login = () => {
           justify="space-between"
           leftSection={<RiGoogleFill size={20} />}
           rightSection={<Box w={20} />}
+          onClick={handleLoginWithGoogle}
         >
           {t("sign_in_with", { social: "Google" })}
         </Button>
@@ -44,6 +99,7 @@ export const Login = () => {
           justify="space-between"
           leftSection={<RiGithubFill size={20} />}
           rightSection={<Box w={20} />}
+          onClick={handleLoginWithGithub}
         >
           {t("sign_in_with", { social: "Github" })}
         </Button>
