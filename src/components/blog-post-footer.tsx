@@ -10,8 +10,11 @@ import {
   RiShareLine,
   RiTwitterXLine,
 } from "@remixicon/react";
+import { useTranslations } from "next-intl";
 
 export const BlogPostFooter = () => {
+  const t = useTranslations();
+
   return (
     <Flex pos="sticky" bottom={32} my={48} align="center" justify="center">
       <Group
@@ -51,18 +54,18 @@ export const BlogPostFooter = () => {
             </ActionIcon>
           </Menu.Target>
           <Menu.Dropdown>
-            <Menu.Item leftSection={<RiLinksLine size={20} />}>
-              Copy link
+            <Menu.Item leftSection={<RiLinksLine size={16} />}>
+              {t("copy_link")}
             </Menu.Item>
             <Menu.Divider />
-            <Menu.Item leftSection={<RiTwitterXLine size={20} />}>
-              Share on X
+            <Menu.Item leftSection={<RiTwitterXLine size={16} />}>
+              {t("share_on", { social: "X" })}
             </Menu.Item>
-            <Menu.Item leftSection={<RiFacebookLine size={20} />}>
-              Share on Facebook
+            <Menu.Item leftSection={<RiFacebookLine size={16} />}>
+              {t("share_on", { social: "Facebook" })}
             </Menu.Item>
-            <Menu.Item leftSection={<RiLinkedinLine size={20} />}>
-              Share on LinkedIn
+            <Menu.Item leftSection={<RiLinkedinLine size={16} />}>
+              {t("share_on", { social: "LinkedIn" })}
             </Menu.Item>
           </Menu.Dropdown>
         </Menu>

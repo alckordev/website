@@ -15,5 +15,7 @@
   "nothing_found": "Nothing found",
   "buy_me_a_coffee": "Buy me a coffee",
   "buy_me_a_coffee_description": "If you’d like, you can support my work with an optional donation. Your contribution allows me to invest more time in research, writing, and continually improving the quality of what I share. Thank you so much for considering a boost to this project!",
-  "buy_me_a_coffee_title": "Did you like what you read?"
+  "buy_me_a_coffee_title": "Did you like what you read?",
+  "copy_link": "Copy link",
+  "share_on": "Share on {social}"
 }
