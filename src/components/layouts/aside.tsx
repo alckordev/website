@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { Divider, Stack } from "@mantine/core";
 import { Newsletter } from "../newsletter";

@@ -10,5 +10,7 @@
   "subscribe_now": "Subscribe now!",
   "accept_terms": "I accept <link>terms and conditions</link>",
   "subscribe": "Subscribe",
-  "table_of_contents": "Table of contents"
+  "table_of_contents": "Table of contents",
+  "search": "Search",
+  "nothing_found": "Nothing found"
 }

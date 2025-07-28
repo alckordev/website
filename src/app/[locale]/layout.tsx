@@ -1,6 +1,7 @@
 import "@mantine/core/styles.css";
 import "@mantine/code-highlight/styles.css";
 import "@mantine/carousel/styles.css";
+import "@mantine/spotlight/styles.css";
 import "@/assets/css/global.css";
 import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
 import { Provider } from "@/components/provider";

@@ -1,3 +1,5 @@
+"use client";
+
 import { Link } from "@/i18n/navigation";
 import { Button, Card, Flex, Title } from "@mantine/core";
 import { useTranslations } from "next-intl";

@@ -33,7 +33,7 @@ export const Newsletter = () => {
   });
 
   const handleSubscribe = (values: typeof form.values | null) => {
-    console.log(values);
+    alert(JSON.stringify(values, null, 2));
   };
 
   return (
@@ -44,12 +44,13 @@ export const Newsletter = () => {
       <form onSubmit={form.onSubmit(handleSubscribe)}>
         <Stack>
           <TextInput
+            suppressHydrationWarning
             type="email"
             placeholder="your@email.com"
-            radius="xl"
             key={form.key("email")}
             {...form.getInputProps("email")}
           />
+
           <Checkbox
             label={t.rich("accept_terms", {
               link: (chunks) => (
@@ -65,7 +66,7 @@ export const Newsletter = () => {
             key={form.key("terms")}
             {...form.getInputProps("terms", { type: "checkbox" })}
           />
-          <Button type="submit" radius="xl" disabled={!form.isValid()}>
+          <Button type="submit" disabled={!form.isValid()}>
             {t("subscribe")}
           </Button>
         </Stack>

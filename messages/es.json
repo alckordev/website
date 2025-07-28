@@ -10,5 +10,7 @@
   "subscribe_now": "¡Suscríbete ahora!",
   "accept_terms": "Acepto los <link>términos y condiciones</link>",
   "subscribe": "Suscríbete",
-  "table_of_contents": "Tabla de contenido"
+  "table_of_contents": "Tabla de contenido",
+  "search": "Buscar",
+  "nothing_found": "No se encontró nada"
 }

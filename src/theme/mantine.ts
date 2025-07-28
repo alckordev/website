@@ -1,6 +1,13 @@
 "use client";
 
-import { createTheme, Divider, Loader } from "@mantine/core";
+import {
+  Button,
+  createTheme,
+  Divider,
+  Input,
+  Loader,
+  TextInput,
+} from "@mantine/core";
 import { Fira_Code, Montserrat, Roboto } from "next/font/google";
 import { RingLoader } from "./components";
 
@@ -9,6 +16,10 @@ const text = Roboto({ subsets: ["latin"] });
 const code = Fira_Code({ subsets: ["latin"] });
 
 export const theme = createTheme({
+  focusRing: "never",
+
+  defaultRadius: "md",
+
   components: {
     Loader: Loader.extend({
       defaultProps: {
@@ -20,6 +31,15 @@ export const theme = createTheme({
       defaultProps: {
         color: "var(--mantine-accent-surface)",
       },
+    }),
+    Button: Button.extend({
+      defaultProps: {},
+    }),
+    Input: Input.extend({
+      defaultProps: {},
+    }),
+    TextInput: TextInput.extend({
+      defaultProps: {},
     }),
   },
 
