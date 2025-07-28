@@ -1,11 +1,14 @@
 import { Link } from "@/i18n/navigation";
 import { Button, Card, Flex, Title } from "@mantine/core";
+import { useTranslations } from "next-intl";
 
 export const TopicList = () => {
+  const t = useTranslations();
+
   return (
     <Card bg="transparent" p={0}>
       <Title order={4} mb="lg">
-        Recommended topics
+        {t("recommended_topics")}
       </Title>
       <Flex gap="xs" wrap="wrap">
         {topics.map((topic) => (

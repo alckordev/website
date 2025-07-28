@@ -1,4 +1,14 @@
 {
-  "title": "Lorem ipsum en",
-  "reading_time": "{count, plural, one {# min read} other {# mins read}}"
+  "reading_time": "{count, plural, one {# min read} other {# mins read}}",
+  "sign_in": "Sign in",
+  "blog": "Blog",
+  "introduction": "I share full‑stack web‑development insights—architecture, performance and best practices. My current focus is TypeScript, yet you’ll find tips and lessons across many technologies.",
+  "technologies": "Technologies",
+  "latest_posts": "Latest posts",
+  "latest_project": "Latest project",
+  "recommended_topics": "Recommended topics",
+  "subscribe_now": "Subscribe now!",
+  "accept_terms": "I accept <link>terms and conditions</link>",
+  "subscribe": "Subscribe",
+  "table_of_contents": "Table of contents"
 }

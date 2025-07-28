@@ -6,6 +6,7 @@
     "catppuccin",
     "Chakra",
     "daisyui",
+    "embla",
     "Fira",
     "Laravel",
     "mantine",
@@ -19,5 +20,6 @@
     "Tecnologías",
     "Tiktok",
     "Turborepo"
-  ]
+  ],
+  "cSpell.ignorePaths": ["messages/es.json"]
 }

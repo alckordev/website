@@ -9,28 +9,25 @@ import {
   Text,
   Title,
 } from "@mantine/core";
+import { useTranslations } from "next-intl";
 import NextImage from "next/image";
 
 export default function Home() {
+  const t = useTranslations();
+
   return (
     <Flex align="center" h="100%" gap="xl">
       <Stack flex={1} mx="auto" maw="720">
         <Title order={1} fz={{ base: "60px", md: "80px", xl: "100px" }}>
           Francisco
         </Title>
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </Text>
+        <Text>{t("introduction")}</Text>
         <Divider
           my="xs"
-          label="Tecnologías"
+          label={t("technologies")}
           labelPosition="left"
-          color="var(--mantine-accent-surface)"
           style={{
-            "--mantine-color-dimmed": "var(--mantine-color-brand-gray-3)",
+            "--mantine-color-dimmed": "var(--mantine-color-text)",
           }}
         />
         <DevTechGrid />

@@ -10,9 +10,9 @@ import { BlogPostHeader } from "@/components/blog-post-header";
 import remarkFlexibleToc from "remark-flexible-toc";
 import { TocAside } from "@/components/layouts";
 
-function sleep(ms: number) {
-  return new Promise((r) => setTimeout(r, ms));
-}
+// function sleep(ms: number) {
+//   return new Promise((r) => setTimeout(r, ms));
+// }
 
 export async function generateMetadata() {
   return {
@@ -22,7 +22,7 @@ export async function generateMetadata() {
 }
 
 export default async function Article({ params }: { params: Params }) {
-  if (process.env.NODE_ENV === "development") await sleep(10000); // 10 seg
+  // if (process.env.NODE_ENV === "development") await sleep(10000); // 10 seg
 
   const { locale, slug } = await params;
 

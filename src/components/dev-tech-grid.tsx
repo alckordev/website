@@ -1,6 +1,7 @@
 "use client";
 
-import { Box, Grid, ThemeIcon, Tooltip } from "@mantine/core";
+import { AspectRatio, Flex, Tooltip } from "@mantine/core";
+import { Carousel } from "@mantine/carousel";
 import {
   Auth0,
   Auth0Url,
@@ -43,22 +44,35 @@ import {
   Zod,
   ZodUrl,
 } from "@ridemountainpig/svgl-react";
+import { useRef } from "react";
+import Autoplay from "embla-carousel-autoplay";
 
 export const DevTechGrid = () => {
+  const autoplay = useRef(Autoplay({ delay: 5000 }));
+
   return (
-    <Box>
-      <Grid>
-        {techs.map((tech) => (
-          <Grid.Col key={tech.url} span="content">
-            <Tooltip label={tech.label}>
-              <ThemeIcon variant="transparent" size="xl" p={4}>
+    <Carousel
+      withControls={false}
+      slideSize={{ base: "10%", sm: "8%" }}
+      slideGap="md"
+      emblaOptions={{ loop: true, align: "center" }}
+      plugins={[autoplay.current]}
+      onMouseEnter={autoplay.current.stop}
+      onMouseLeave={() => autoplay.current.play()}
+      pos="relative"
+    >
+      {techs.map((tech, idx) => (
+        <Carousel.Slide key={idx}>
+          <Tooltip label={tech.label}>
+            <AspectRatio ratio={1 / 1}>
+              <Flex align="center" justify="center">
                 {tech.component}
-              </ThemeIcon>
-            </Tooltip>
-          </Grid.Col>
-        ))}
-      </Grid>
-    </Box>
+              </Flex>
+            </AspectRatio>
+          </Tooltip>
+        </Carousel.Slide>
+      ))}
+    </Carousel>
   );
 };
 

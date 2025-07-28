@@ -3,10 +3,7 @@ import { Params, PostInfo } from "@/type";
 import { BlogPostList } from "@/components/blog-post-list";
 import { getPostsInfo } from "@/lib/server";
 import { Aside } from "@/components/layouts";
-
-// function sleep(ms: number) {
-//   return new Promise((r) => setTimeout(r, ms));
-// }
+import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata() {
   return {
@@ -16,11 +13,11 @@ export async function generateMetadata() {
 }
 
 export default async function Blog({ params }: { params: Params }) {
-  // if (process.env.NODE_ENV === "development") await sleep(10000); // 10 seg
-
   const { locale } = await params;
 
   const data: PostInfo[] = await getPostsInfo(locale);
+
+  const t = await getTranslations();
 
   return (
     <Flex
@@ -45,7 +42,7 @@ export default async function Blog({ params }: { params: Params }) {
             boxShadow: "inset 0 -1px 0 0 var(--mantine-accent-surface)",
           }}
         >
-          Latest posts
+          {t("latest_posts")}
         </Title>
         <Stack gap="xl">
           {data && <BlogPostList data={data} locale={locale} />}

@@ -2,8 +2,11 @@
 
 import { Anchor, Box, Button, Container, Flex } from "@mantine/core";
 import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 export const Header = () => {
+  const t = useTranslations();
+
   return (
     <Box
       component="header"
@@ -25,9 +28,9 @@ export const Header = () => {
           </Anchor>
           <Flex gap={32} align="center">
             <Anchor component={Link} href="/blog" c="white" underline="never">
-              Blog
+              {t("blog")}
             </Anchor>
-            <Button radius="xl">Sign in</Button>
+            <Button radius="xl">{t("sign_in")}</Button>
           </Flex>
         </Flex>
       </Container>

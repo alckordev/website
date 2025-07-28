@@ -1,5 +1,6 @@
 import "@mantine/core/styles.css";
 import "@mantine/code-highlight/styles.css";
+import "@mantine/carousel/styles.css";
 import "@/assets/css/global.css";
 import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
 import { Provider } from "@/components/provider";
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
+  auth,
   params,
 }: LayoutWithParamsProps) {
   const { locale } = await params;
@@ -36,6 +38,7 @@ export default async function RootLayout({
               <Header />
               <Content>{children}</Content>
               <Footer />
+              {auth}
             </HighlightProvider>
           </Provider>
         </NextIntlClientProvider>

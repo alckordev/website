@@ -1,3 +1,5 @@
+"use client";
+
 import { Link } from "@/i18n/navigation";
 import {
   Anchor,
@@ -10,10 +12,13 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { zod4Resolver } from "mantine-form-zod-resolver";
+import { useTranslations } from "next-intl";
 import React from "react";
 import z from "zod/v4";
 
 export const Newsletter = () => {
+  const t = useTranslations();
+
   const form = useForm({
     initialValues: {
       email: "",
@@ -34,12 +39,11 @@ export const Newsletter = () => {
   return (
     <Card bg="transparent" p={0}>
       <Title order={4} mb="lg">
-        Subscribe now!
+        {t("subscribe_now")}
       </Title>
       <form onSubmit={form.onSubmit(handleSubscribe)}>
         <Stack>
           <TextInput
-            variant="filled"
             type="email"
             placeholder="your@email.com"
             radius="xl"
@@ -47,23 +51,22 @@ export const Newsletter = () => {
             {...form.getInputProps("email")}
           />
           <Checkbox
-            label={
-              <React.Fragment>
-                I accept{" "}
+            label={t.rich("accept_terms", {
+              link: (chunks) => (
                 <Anchor
                   component={Link}
                   href="https://mantine.dev"
                   target="_blank"
                 >
-                  terms and conditions
+                  {chunks}
                 </Anchor>
-              </React.Fragment>
-            }
+              ),
+            })}
             key={form.key("terms")}
             {...form.getInputProps("terms", { type: "checkbox" })}
           />
           <Button type="submit" radius="xl" disabled={!form.isValid()}>
-            Subscribe
+            {t("subscribe")}
           </Button>
         </Stack>
       </form>

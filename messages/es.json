@@ -1,4 +1,14 @@
 {
-  "title": "Lorem ipsum es",
-  "reading_time": "{count, plural, one {# minuto de lectura} other {# minutos de lectura}}"
+  "reading_time": "{count, plural, one {# minuto de lectura} other {# minutos de lectura}}",
+  "sign_in": "Iniciar sesión",
+  "blog": "Blog",
+  "introduction": "Comparto experiencias de desarrollo web full‑stack: arquitectura, rendimiento y buenas prácticas. Hoy mi foco es TypeScript, pero encontrarás trucos y lecciones sobre varias tecnologías.",
+  "technologies": "Tecnologías",
+  "latest_posts": "Últimas publicaciones",
+  "latest_project": "Último proyecto",
+  "recommended_topics": "Temas recomendados",
+  "subscribe_now": "¡Suscríbete ahora!",
+  "accept_terms": "Acepto los <link>términos y condiciones</link>",
+  "subscribe": "Suscríbete",
+  "table_of_contents": "Tabla de contenido"
 }

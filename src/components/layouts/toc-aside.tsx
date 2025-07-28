@@ -5,8 +5,11 @@ import { TopicList } from "../topic-list";
 import { Newsletter } from "../newsletter";
 import { Toc } from "@/type";
 import React from "react";
+import { useTranslations } from "next-intl";
 
 export const TocAside = ({ toc }: { toc?: Toc }) => {
+  const t = useTranslations();
+
   return (
     <Stack
       component="aside"
@@ -29,7 +32,7 @@ export const TocAside = ({ toc }: { toc?: Toc }) => {
           <React.Fragment>
             <Card bg="transparent" p={0}>
               <Title order={4} mb="lg">
-                Table of contents
+                {t("table_of_contents")}
               </Title>
               <TableOfContents
                 variant="light"
