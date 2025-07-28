@@ -27,6 +27,8 @@ export default async function Layout({
 
   if (!hasLocale(routing.locales, locale)) notFound();
 
+  console.log("@auth", auth);
+
   return (
     <html lang={locale} {...mantineHtmlProps}>
       <head>
@@ -37,9 +39,11 @@ export default async function Layout({
           <Provider>
             <HighlightProvider>
               <Header />
-              <Content>{children}</Content>
+              <Content>
+                {auth}
+                {children}
+              </Content>
               <Footer />
-              {auth}
             </HighlightProvider>
           </Provider>
         </NextIntlClientProvider>

@@ -3,7 +3,6 @@ export type Params = Promise<{ locale: string; slug?: string }>;
 export type LayoutProps = {
   children: React.ReactNode;
   auth: React.ReactNode;
-  sidebar?: React.ReactNode;
 };
 
 export type LayoutWithParamsProps = LayoutProps & {

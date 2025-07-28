@@ -49,7 +49,9 @@ export const Header = () => {
             <Anchor component={Link} href="/blog" c="white" underline="never">
               {t("blog")}
             </Anchor>
-            <Button>{t("sign_in")}</Button>
+            <Button component={Link} href="/login">
+              {t("sign_in")}
+            </Button>
           </Flex>
         </Flex>
       </Container>

@@ -6,6 +6,9 @@ import {
   Divider,
   Input,
   Loader,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
   TextInput,
 } from "@mantine/core";
 import { Fira_Code, Montserrat, Roboto } from "next/font/google";
@@ -30,6 +33,22 @@ export const theme = createTheme({
     Divider: Divider.extend({
       defaultProps: {
         color: "var(--mantine-accent-surface)",
+      },
+    }),
+    ModalContent: ModalContent.extend({
+      defaultProps: {
+        bg: "var(--mantine-accent-background)",
+        bd: "1 solid var(--mantine-accent-surface)",
+      },
+    }),
+    ModalHeader: ModalHeader.extend({
+      defaultProps: {
+        bg: "var(--mantine-accent-background)",
+      },
+    }),
+    ModalCloseButton: ModalCloseButton.extend({
+      defaultProps: {
+        variant: "light",
       },
     }),
     Button: Button.extend({

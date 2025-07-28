@@ -17,5 +17,8 @@
   "buy_me_a_coffee_description": "If you’d like, you can support my work with an optional donation. Your contribution allows me to invest more time in research, writing, and continually improving the quality of what I share. Thank you so much for considering a boost to this project!",
   "buy_me_a_coffee_title": "Did you like what you read?",
   "copy_link": "Copy link",
-  "share_on": "Share on {social}"
+  "share_on": "Share on {social}",
+  "login_notice": "Click “Sign in”, you agree to our <terms>terms and conditions</terms>, as well as our <privacy>privacy policy</privacy>.",
+  "welcome_back": "Welcome back.",
+  "sign_in_with": "Sign in with {social}"
 }
