@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description: "I have followed setup instructions carefully",
 };
 
-export default async function RootLayout({
+export default async function Layout({
   children,
   auth,
   params,

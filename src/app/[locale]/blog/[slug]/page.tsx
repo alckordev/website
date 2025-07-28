@@ -21,7 +21,7 @@ export async function generateMetadata() {
   };
 }
 
-export default async function Article({ params }: { params: Params }) {
+export default async function Page({ params }: { params: Params }) {
   // if (process.env.NODE_ENV === "development") await sleep(10000); // 10 seg
 
   const { locale, slug } = await params;

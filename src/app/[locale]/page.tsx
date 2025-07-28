@@ -12,7 +12,7 @@ import {
 import { useTranslations } from "next-intl";
 import NextImage from "next/image";
 
-export default function Home() {
+export default function Page() {
   const t = useTranslations();
 
   return (

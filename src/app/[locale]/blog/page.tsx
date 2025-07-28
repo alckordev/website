@@ -12,7 +12,7 @@ export async function generateMetadata() {
   };
 }
 
-export default async function Blog({ params }: { params: Params }) {
+export default async function Page({ params }: { params: Params }) {
   const { locale } = await params;
 
   const data: PostInfo[] = await getPostsInfo(locale);
