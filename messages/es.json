@@ -22,5 +22,8 @@
   "welcome_back": "Bienvenido de nuevo.",
   "sign_in_with": "Iniciar sesión con {social}",
   "my_account": "Mi cuenta",
-  "sign_out": "Desconectar"
+  "sign_out": "Desconectar",
+  "terms_and_conditions": "Términos y condiciones",
+  "privacy_policy": "Política de privacidad",
+  "lang_name": "{code, select, es {Español} en {English} other {Desconocido}}"
 }

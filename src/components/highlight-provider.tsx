@@ -4,16 +4,23 @@ import {
   CodeHighlightAdapterProvider,
   createShikiAdapter,
 } from "@mantine/code-highlight";
-import { bundledLanguages } from "shiki";
+import { createHighlighterCore } from "shiki/core";
+import { createJavaScriptRegexEngine } from "shiki/engine/javascript";
 
-async function loadShiki() {
-  const { createHighlighter } = await import("shiki");
-  const shiki = await createHighlighter({
-    langs: Object.keys(bundledLanguages),
-    themes: ["catppuccin-frappe"],
-  });
+const highlighterPromise = createHighlighterCore({
+  langs: [
+    import("@shikijs/langs/typescript"),
+    import("@shikijs/langs/javascript"),
+    import("@shikijs/langs/bash"),
+    import("@shikijs/langs/tsx"),
+    import("@shikijs/langs/csharp"),
+  ],
+  themes: [import("@shikijs/themes/catppuccin-frappe")],
+  engine: createJavaScriptRegexEngine(),
+});
 
-  return shiki;
+function loadShiki() {
+  return highlighterPromise;
 }
 
 const shikiAdapter = createShikiAdapter(loadShiki, {

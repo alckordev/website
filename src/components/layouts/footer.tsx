@@ -1,3 +1,6 @@
+"use client";
+
+import { Link } from "@/i18n/navigation";
 import {
   Anchor,
   Box,
@@ -9,13 +12,17 @@ import {
   ThemeIcon,
 } from "@mantine/core";
 import {
-  RiDiscordFill,
   RiGithubFill,
+  RiLinkedinFill,
   RiTiktokFill,
   RiTwitterXFill,
 } from "@remixicon/react";
+import { useTranslations } from "next-intl";
+import { LanguageSwitcher } from "../language-switcher";
 
 export const Footer = () => {
+  const t = useTranslations();
+
   return (
     <Box
       component="footer"
@@ -34,11 +41,14 @@ export const Footer = () => {
           gap="md"
           py="lg"
         >
-          <Text>© 2025 - alckordev</Text>
+          <Group>
+            <Text>© 2025 - alckor.dev</Text>
+            <LanguageSwitcher />
+          </Group>
           <Group gap="xs">
             <Anchor
               aria-label="Github"
-              href="https://discord.com/invite/yVyTtCRueq"
+              href="https://github.com/alckordev"
               rel="noopener"
               display="inline-flex"
               target="_blank"
@@ -50,7 +60,7 @@ export const Footer = () => {
             <Divider orientation="vertical" />
             <Anchor
               aria-label="TwitterX"
-              href="https://discord.com/invite/yVyTtCRueq"
+              href="https://x.com/alckordev"
               rel="noopener"
               display="inline-flex"
               target="_blank"
@@ -62,7 +72,7 @@ export const Footer = () => {
             <Divider orientation="vertical" />
             <Anchor
               aria-label="Tiktok"
-              href="https://discord.com/invite/yVyTtCRueq"
+              href="https://www.tiktok.com/@alckordev"
               rel="noopener"
               display="inline-flex"
               target="_blank"
@@ -73,15 +83,23 @@ export const Footer = () => {
             </Anchor>
             <Divider orientation="vertical" />
             <Anchor
-              aria-label="Discord"
-              href="https://discord.com/invite/yVyTtCRueq"
+              aria-label="LinkedIn"
+              href="https://www.linkedin.com/in/alckordev"
               rel="noopener"
               display="inline-flex"
               target="_blank"
             >
               <ThemeIcon variant="transparent" color="white">
-                <RiDiscordFill size={18} />
+                <RiLinkedinFill size={18} />
               </ThemeIcon>
+            </Anchor>
+          </Group>
+          <Group>
+            <Anchor component={Link} href="/terms-and-conditions" c="white">
+              {t("terms_and_conditions")}
+            </Anchor>
+            <Anchor component={Link} href="/privacy-policy" c="white">
+              {t("privacy_policy")}
             </Anchor>
           </Group>
         </Flex>
