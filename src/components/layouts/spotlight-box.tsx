@@ -35,10 +35,12 @@ export const SpotlightBox = () => {
         nothingFound={`${t("nothing_found")}...`}
         highlightQuery
         limit={7}
-        scrollable
+        radius="md"
         searchProps={{
           leftSection: <RiSearchLine size={20} />,
           placeholder: `${t("search")}...`,
+          name: "search",
+          size: "md",
         }}
       />
     </React.Fragment>

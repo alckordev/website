@@ -8,7 +8,6 @@ import {
   Box,
   Button,
   Container,
-  em,
   Flex,
   Menu,
   ThemeIcon,
@@ -16,9 +15,7 @@ import {
 import { Link, useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { RiShutDownLine, RiTerminalFill, RiUserLine } from "@remixicon/react";
-import { SpotlightBox } from "./spotlight-box";
 import { User } from "@/type";
-import { useMediaQuery } from "@mantine/hooks";
 import { signOut } from "firebase/auth";
 import firebase from "@/lib/client/firebase";
 import { destroySession } from "@/app/actions/auth";
@@ -27,8 +24,6 @@ export const Header = ({ user }: { user: User | null }) => {
   const t = useTranslations();
 
   const router = useRouter();
-
-  const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
 
   const handleLogout = async () => {
     await signOut(firebase.auth());
@@ -45,8 +40,8 @@ export const Header = ({ user }: { user: User | null }) => {
       style={{
         backdropFilter: "saturate(100%) blur(10px)",
         boxShadow: `inset 0 -1px 0 0 ${alpha(
-          "var(--mantine-color-dark-8)",
-          0.8
+          "var(--mantine-color-dark-7)",
+          0.3
         )}`,
         zIndex: 101,
       }}
@@ -78,7 +73,6 @@ export const Header = ({ user }: { user: User | null }) => {
               </ThemeIcon>
               alckor.dev
             </Anchor>
-            {!isMobile && <SpotlightBox />}
           </Flex>
           <Flex gap={32} align="center">
             <Anchor component={Link} href="/blog" c="white" underline="never">

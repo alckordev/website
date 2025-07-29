@@ -19,6 +19,7 @@ import Button from "./components/button";
 import ActionIcon from "./components/action-icon";
 import TextInput from "./components/text-input";
 import Checkbox from "./components/checkbox";
+import Spotlight from "./components/spotlight";
 
 export default createTheme({
   defaultRadius: "lg",
@@ -37,6 +38,7 @@ export default createTheme({
     ActionIcon,
     TextInput,
     Checkbox,
+    Spotlight,
   },
   colors,
   fontFamily: fonts.body,
