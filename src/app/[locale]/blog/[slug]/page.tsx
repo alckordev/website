@@ -80,7 +80,7 @@ export default async function Page({ params }: { params: Params }) {
         pe={{ base: "md", lg: "xl" }}
       >
         <BlogPostHeader scope={{ ...frontmatter, ...scope }} locale={locale} />
-        <Stack id="mdx" gap="xl" mb={48} maw="calc(100vw - 48px)" w="100%">
+        <Stack id="mdx" gap="lg" mb={48} maw="calc(100vw - 48px)" w="100%">
           {content}
         </Stack>
         <BlogPostFooter />

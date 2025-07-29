@@ -61,14 +61,7 @@ export default async function Page({ params }: { params: Params }) {
         ps="md"
         pe={{ base: "md", lg: "xl" }}
       >
-        <Title
-          order={4}
-          pb="xs"
-          mb="xl"
-          style={{
-            boxShadow: "inset 0 -1px 0 0 var(--mantine-accent-surface)",
-          }}
-        >
+        <Title order={4} pb="xs" mb="md" ms={20}>
           {prettyName}
         </Title>
         <Stack gap="xl">

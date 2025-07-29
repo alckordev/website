@@ -1,7 +1,7 @@
 "use client";
 
 import { Toc } from "@/type";
-import { Card, TableOfContents, Title } from "@mantine/core";
+import { Box, TableOfContents, Title } from "@mantine/core";
 import { useTranslations } from "next-intl";
 
 export const MDXContents = ({ toc }: { toc?: Toc }) => {
@@ -10,16 +10,18 @@ export const MDXContents = ({ toc }: { toc?: Toc }) => {
   if (!toc) return null;
 
   return (
-    <Card bg="transparent" p={0}>
+    <Box>
       <Title order={4} mb="lg">
         {t("table_of_contents")}
       </Title>
       <TableOfContents
-        variant="light"
-        color="accent"
+        variant="none"
         radius="sm"
         scrollSpyOptions={{
           selector: "#mdx :is(h1, h2, h3, h4, h5, h6)",
+        }}
+        __vars={{
+          "--toc-color": "var(--mantine-color-anchor)",
         }}
         getControlProps={({ data }) => ({
           onClick: () => {
@@ -28,8 +30,9 @@ export const MDXContents = ({ toc }: { toc?: Toc }) => {
               .scrollIntoView({ behavior: "smooth", block: "start" });
           },
           children: data.value,
+          px: 0,
         })}
       />
-    </Card>
+    </Box>
   );
 };

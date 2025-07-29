@@ -1,6 +1,14 @@
 "use client";
 
-import { ActionIcon, Button, Divider, Flex, Group, Menu } from "@mantine/core";
+import {
+  ActionIcon,
+  alpha,
+  Button,
+  Divider,
+  Flex,
+  Group,
+  Menu,
+} from "@mantine/core";
 import {
   RiChat1Line,
   RiFacebookLine,
@@ -18,13 +26,13 @@ export const BlogPostFooter = () => {
   return (
     <Flex pos="sticky" bottom={32} my={48} align="center" justify="center">
       <Group
-        bg="var(--mantine-accent-backdrop)"
+        bg={alpha("var(--mantine-color-dark-9)", 0.8)}
         bdrs="md"
         px={28}
         py={12}
         style={(theme) => ({
           boxShadow: theme.shadows.lg,
-          backdropFilter: "saturate(100%) blur(5px)",
+          backdropFilter: "saturate(100%) blur(10px)",
         })}
       >
         <Button

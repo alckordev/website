@@ -74,15 +74,15 @@ export const Login = () => {
         <ThemeIcon
           variant="gradient"
           size="xl"
-          aria-label="Gradient action icon"
+          radius="md"
           gradient={{ from: "white", to: "gray.1", deg: 0 }}
-          c="accent"
+          c="brand-blue"
           mb={20}
         >
           <RiTerminalFill />
         </ThemeIcon>
-        <Text>{t("welcome_back")}</Text>
         <Title order={2}>{t("sign_in")}</Title>
+        <Text>{t("welcome_back")}</Text>
       </Box>
       <Stack w="100%" maw={300}>
         <Button

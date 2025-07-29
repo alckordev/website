@@ -39,7 +39,7 @@ import { ComponentProps } from "react";
 // import NextImage, { ImageProps } from "next/image";
 
 export const components: MDXComponents = {
-  a: (p: AnchorProps) => <Anchor c="accent" {...p} />,
+  a: (p: AnchorProps) => <Anchor {...p} />,
   hr: (p: DividerProps) => <Divider {...p} />,
   p: (p: TextProps) => <Text {...p} />,
   h1: (p: TitleProps) => <Title order={1} {...p} />,

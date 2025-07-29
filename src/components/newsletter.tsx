@@ -3,8 +3,8 @@
 import { Link } from "@/i18n/navigation";
 import {
   Anchor,
+  Box,
   Button,
-  Card,
   Checkbox,
   Stack,
   TextInput,
@@ -37,7 +37,7 @@ export const Newsletter = () => {
   };
 
   return (
-    <Card bg="transparent" p={0}>
+    <Box>
       <Title order={4} mb="lg">
         {t("subscribe_now")}
       </Title>
@@ -71,6 +71,6 @@ export const Newsletter = () => {
           </Button>
         </Stack>
       </form>
-    </Card>
+    </Box>
   );
 };

@@ -1,7 +1,7 @@
 "use client";
 
 import { MantineProvider } from "@mantine/core";
-import { theme } from "@/theme/mantine";
+import theme from "@/theme";
 
 export const Provider = ({ children }: { children: React.ReactNode }) => {
   return (

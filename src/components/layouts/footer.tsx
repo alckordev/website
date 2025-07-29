@@ -1,7 +1,7 @@
 "use client";
 
-import { Link } from "@/i18n/navigation";
 import {
+  ActionIcon,
   Anchor,
   Box,
   Container,
@@ -12,40 +12,37 @@ import {
   ThemeIcon,
 } from "@mantine/core";
 import {
+  RiArrowUpLine,
   RiGithubFill,
   RiLinkedinFill,
   RiTiktokFill,
   RiTwitterXFill,
 } from "@remixicon/react";
-import { useTranslations } from "next-intl";
 import { LanguageSwitcher } from "../language-switcher";
 
 export const Footer = () => {
-  const t = useTranslations();
-
   return (
-    <Box
-      component="footer"
-      role="footer"
-      bg="var(--mantine-accent-backdrop)"
-      style={{
-        boxShadow: "inset 0 1px 0 0 var(--mantine-accent-surface)",
-      }}
-    >
+    <Box component="footer" mih={70}>
+      <Divider
+        label={
+          <ActionIcon
+            size="lg"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            <RiArrowUpLine />
+          </ActionIcon>
+        }
+        labelPosition="center"
+      />
       <Container size="xl">
         <Flex
-          mih="70px"
           justify="space-between"
           align="center"
+          p={{ base: "32 0", md: "16 0 32" }}
           direction={{ base: "column", md: "row" }}
-          gap="md"
-          py="lg"
+          gap={32}
         >
-          <Group>
-            <Text>© 2025 - alckor.dev</Text>
-            <LanguageSwitcher />
-          </Group>
-          <Group gap="xs">
+          <Group gap="xs" justify="center">
             <Anchor
               aria-label="Github"
               href="https://github.com/alckordev"
@@ -94,13 +91,9 @@ export const Footer = () => {
               </ThemeIcon>
             </Anchor>
           </Group>
-          <Group>
-            <Anchor component={Link} href="/terms-and-conditions" c="white">
-              {t("terms_and_conditions")}
-            </Anchor>
-            <Anchor component={Link} href="/privacy-policy" c="white">
-              {t("privacy_policy")}
-            </Anchor>
+          <Group justify="flex-start">
+            <Text>© 2025 - alckor.dev</Text>
+            <LanguageSwitcher />
           </Group>
         </Flex>
       </Container>

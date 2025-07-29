@@ -1,5 +1,5 @@
 import React from "react";
-import { Group, Text, UnstyledButton } from "@mantine/core";
+import { alpha, Button, Group, Text } from "@mantine/core";
 import { Spotlight, SpotlightActionData, spotlight } from "@mantine/spotlight";
 import { RiSearchLine } from "@remixicon/react";
 import { useTranslations } from "next-intl";
@@ -9,16 +9,7 @@ export const SpotlightBox = () => {
 
   return (
     <React.Fragment>
-      <UnstyledButton
-        onClick={spotlight.open}
-        h={34}
-        ps="sm"
-        pe={4}
-        c="placeholder"
-        bg="dark.6"
-        bd="1 solid dark.4"
-        bdrs="md"
-      >
+      <Button variant="light" onClick={spotlight.open}>
         <Group gap="xs">
           <RiSearchLine size={16} />
           <Text pe={80} c="dimmed" fz="sm">
@@ -26,8 +17,8 @@ export const SpotlightBox = () => {
           </Text>
           <Text
             c="dark.0"
-            bd="1 solid dark.7"
-            bg="dark.7"
+            bd="1 solid dark.9"
+            bg={alpha("var(--mantine-color-dark-9)", 0.7)}
             p="4 7"
             bdrs="sm"
             fz={11}
@@ -37,7 +28,7 @@ export const SpotlightBox = () => {
             Ctrl + K
           </Text>
         </Group>
-      </UnstyledButton>
+      </Button>
       <Spotlight
         shortcut={["ctrl + K", "mod + K"]}
         actions={actions}

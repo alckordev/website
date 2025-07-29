@@ -5,10 +5,10 @@ import {
   AspectRatio,
   Box,
   Button,
+  Card,
   Flex,
   Group,
   Image,
-  Stack,
   Text,
   Title,
 } from "@mantine/core";
@@ -26,8 +26,8 @@ export const BlogPostPreview = ({
   locale: string;
 }) => {
   return (
-    <Stack gap="xs">
-      <Text component="time" dateTime={item.publishedAt} size="sm">
+    <Card p={20}>
+      <Text component="time" dateTime={item.publishedAt} size="sm" mb={16}>
         {formatRelativeDate(item.publishedAt, locale)}
       </Text>
       <Flex>
@@ -41,7 +41,7 @@ export const BlogPostPreview = ({
             {item.title}
           </Title>
           <Box m="4 0 16">
-            <Text c="dark.0" lineClamp={2}>
+            <Text c="gray.3" lineClamp={2}>
               {item.summary}
             </Text>
           </Box>
@@ -52,7 +52,7 @@ export const BlogPostPreview = ({
               }
               variant="transparent"
               size="compact-sm"
-              c="dark.0"
+              c="gray.3"
             >
               193
             </Button>
@@ -60,13 +60,13 @@ export const BlogPostPreview = ({
               leftSection={<RiChat1Fill size={20} />}
               variant="transparent"
               size="compact-sm"
-              c="dark.0"
+              c="gray.3"
             >
               10
             </Button>
           </Group>
         </Anchor>
-        <Box display={{ base: "none", md: "block" }} flex="0 0 180px" ms="50px">
+        <Box display={{ base: "none", md: "block" }} flex="0 0 180px" ms={50}>
           <AspectRatio ratio={180 / 118} maw={180} mx="auto">
             <Image
               component={NextImage}
@@ -79,6 +79,6 @@ export const BlogPostPreview = ({
           </AspectRatio>
         </Box>
       </Flex>
-    </Stack>
+    </Card>
   );
 };

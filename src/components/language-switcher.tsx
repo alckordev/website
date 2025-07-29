@@ -3,7 +3,7 @@
 import { Link, usePathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { Button, Menu } from "@mantine/core";
-import { RiGlobalLine } from "@remixicon/react";
+import { RiArrowDropDownLine, RiGlobalLine } from "@remixicon/react";
 import { useLocale, useTranslations } from "next-intl";
 
 export const LanguageSwitcher = () => {
@@ -19,10 +19,10 @@ export const LanguageSwitcher = () => {
     <Menu>
       <Menu.Target>
         <Button
-          variant="default"
+          variant="light"
           size="compact-md"
-          // fz="sm"
           leftSection={<RiGlobalLine size={20} />}
+          rightSection={<RiArrowDropDownLine size={20} />}
         >
           {t("lang_name", { code: locale })}
         </Button>

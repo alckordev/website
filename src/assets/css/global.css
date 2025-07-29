@@ -1,19 +1,18 @@
-:root {
+/* :root {
+  color-scheme: var(--mantine-color-scheme);
+
   --mantine-accent-background: #020617;
   --mantine-accent-backdrop: #020617cc;
-  --mantine-accent-contrast: #fff;
   --mantine-accent-surface: #162a2f80;
-  --mantine-accent-indicator: #09f;
-  --mantine-accent-track: #09f;
-}
+} */
 
 body {
-  /* background-image: url(../images/bg.jpg);
-  background-attachment: fixed;
-  background-position: center center;
-  background-size: cover; */
+  background-image: url(../images/bg.avif);
+  background-position: 0 0;
+  background-repeat: repeat-y;
   position: relative;
-  background-color: var(--mantine-accent-background);
+  background-color: var(--mantine-color-dark-9);
+  color: var(--mantine-color-gray-3);
   overflow-x: hidden;
   scroll-behavior: smooth;
   display: grid;
@@ -28,7 +27,6 @@ h3,
 h4,
 h5,
 h6 {
-  color: var(--mantine-color-white);
   scroll-margin-top: 108px;
 }
 
@@ -53,6 +51,9 @@ footer {
   }
 }
 
-.mantine-List-itemWrapper > .mantine-List-itemLabel > .mantine-List-root {
+ul > li ul > li,
+ul > li ol > li,
+ol > li ul > li,
+ol > li ol > li {
   margin-top: var(--list-spacing, 0);
 }

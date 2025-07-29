@@ -1,4 +1,4 @@
-import { Anchor, AspectRatio, Card, Image, Title } from "@mantine/core";
+import { Anchor, AspectRatio, Box, Image, Title } from "@mantine/core";
 import { useTranslations } from "next-intl";
 import NextImage from "next/image";
 
@@ -6,7 +6,7 @@ export const ProjectList = () => {
   const t = useTranslations();
 
   return (
-    <Card bg="transparent" p={0}>
+    <Box>
       <Title order={4} mb="lg">
         {t("latest_project")}
       </Title>
@@ -22,6 +22,6 @@ export const ProjectList = () => {
           />
         </AspectRatio>
       </Anchor>
-    </Card>
+    </Box>
   );
 };

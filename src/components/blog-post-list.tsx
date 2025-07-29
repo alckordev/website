@@ -2,7 +2,7 @@
 
 import React from "react";
 import { BlogPostPreview } from "./blog-post-preview";
-import { Center, Divider, Loader } from "@mantine/core";
+import { Center, Loader } from "@mantine/core";
 import { PostInfo } from "@/type";
 import usePaging from "@/hooks/use-paging";
 import useObserver from "@/hooks/use-observer";
@@ -22,11 +22,8 @@ export const BlogPostList = ({
 
   return (
     <React.Fragment>
-      {getData().map((item, idx) => (
-        <React.Fragment key={item.slug}>
-          <BlogPostPreview item={item} locale={locale} />
-          {idx + 1 !== getData().length && <Divider />}
-        </React.Fragment>
+      {getData().map((item) => (
+        <BlogPostPreview key={item.slug} item={item} locale={locale} />
       ))}
       {page !== maxPages && (
         <Center ref={observer}>

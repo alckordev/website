@@ -2,6 +2,7 @@
 
 import {
   ActionIcon,
+  alpha,
   Anchor,
   Avatar,
   Box,
@@ -10,6 +11,7 @@ import {
   em,
   Flex,
   Menu,
+  ThemeIcon,
 } from "@mantine/core";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
@@ -37,14 +39,16 @@ export const Header = ({ user }: { user: User | null }) => {
   return (
     <Box
       component="header"
-      role="navigation"
-      bg="var(--mantine-accent-backdrop)"
+      bg={alpha("var(--mantine-color-dark-9)", 0.8)}
       pos="sticky"
       top={0}
       mah={70}
       style={{
-        backdropFilter: "saturate(100%) blur(5px)",
-        boxShadow: "inset 0 -1px 0 0 var(--mantine-accent-surface)",
+        backdropFilter: "saturate(100%) blur(10px)",
+        boxShadow: `inset 0 -1px 0 0 ${alpha(
+          "var(--mantine-color-dark-8)",
+          0.8
+        )}`,
         zIndex: 101,
       }}
     >
@@ -64,7 +68,15 @@ export const Header = ({ user }: { user: User | null }) => {
                 alignItems: "center",
               }}
             >
-              <RiTerminalFill color="var(--mantine-primary-color-filled)" />
+              <ThemeIcon
+                variant="gradient"
+                radius="md"
+                gradient={{ from: "white", to: "gray.1", deg: 0 }}
+                c="brand-blue"
+                me="xs"
+              >
+                <RiTerminalFill />
+              </ThemeIcon>
               alckor.dev
             </Anchor>
             {!isMobile && <SpotlightBox />}
@@ -74,7 +86,7 @@ export const Header = ({ user }: { user: User | null }) => {
               {t("blog")}
             </Anchor>
             {!user ? (
-              <Button component={Link} color="accent" href="/login">
+              <Button component={Link} href="/login">
                 {t("sign_in")}
               </Button>
             ) : (
