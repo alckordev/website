@@ -24,9 +24,7 @@ export const BlogPostHeader = ({
 
   return (
     <Stack gap="xl" mb="xl">
-      <Title order={1} textWrap="balance">
-        {scope.title}
-      </Title>
+      <Title order={1}>{scope.title}</Title>
       <Group>
         <Text
           component="time"

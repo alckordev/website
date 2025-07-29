@@ -41,7 +41,6 @@ const colors = {
     "#4f5e7c",
     "#40516f",
   ] as const,
-  // primary
   "brand-blue": [
     "#e3f3fe",
     "#bbdfff",
@@ -55,7 +54,5 @@ const colors = {
     "#0248ac",
   ] as const,
 };
-
-console.log(colors);
 
 export default colors;

@@ -16,9 +16,11 @@ import Card from "./components/card";
 import Code from "./components/code";
 import CodeHighlight from "./components/code-highlight";
 import Button from "./components/button";
+import ActionIcon from "./components/action-icon";
+import TextInput from "./components/text-input";
+import Checkbox from "./components/checkbox";
 
 export default createTheme({
-  // focusRing: "never",
   defaultRadius: "lg",
   components: {
     Loader,
@@ -32,6 +34,9 @@ export default createTheme({
     Code,
     CodeHighlight,
     Button,
+    ActionIcon,
+    TextInput,
+    Checkbox,
   },
   colors,
   fontFamily: fonts.body,

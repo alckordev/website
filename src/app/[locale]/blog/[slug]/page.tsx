@@ -8,7 +8,6 @@ import { notFound } from "next/navigation";
 import readingTime from "reading-time";
 import { BlogPostHeader } from "@/components/blog-post-header";
 import remarkFlexibleToc from "remark-flexible-toc";
-import { TocAside } from "@/components/layouts";
 import { BuyMeACoffee } from "@/components/buy-me-a-coffee";
 import { BlogPostFooter } from "@/components/blog-post-footer";
 import { routing } from "@/i18n/routing";
@@ -87,7 +86,6 @@ export default async function Page({ params }: { params: Params }) {
         <Divider my="xl" />
         <BuyMeACoffee />
       </Box>
-      <TocAside toc={scope.toc} />
     </Flex>
   );
 }

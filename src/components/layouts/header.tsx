@@ -42,7 +42,6 @@ export const Header = ({ user }: { user: User | null }) => {
       bg={alpha("var(--mantine-color-dark-9)", 0.8)}
       pos="sticky"
       top={0}
-      mah={70}
       style={{
         backdropFilter: "saturate(100%) blur(10px)",
         boxShadow: `inset 0 -1px 0 0 ${alpha(
@@ -53,7 +52,7 @@ export const Header = ({ user }: { user: User | null }) => {
       }}
     >
       <Container size="xl">
-        <Flex mih={60} mah={60} justify="space-between">
+        <Flex mih={70} mah={70} justify="space-between">
           <Flex gap={32} align="center">
             <Anchor
               component={Link}
