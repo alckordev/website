@@ -74,7 +74,7 @@ export const Header = ({ user }: { user: User | null }) => {
               {t("blog")}
             </Anchor>
             {!user ? (
-              <Button component={Link} href="/login">
+              <Button component={Link} color="accent" href="/login">
                 {t("sign_in")}
               </Button>
             ) : (

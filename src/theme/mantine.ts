@@ -88,16 +88,16 @@ export const theme = createTheme({
       "#0069b6",
     ],
     gray: [
-      "#fef2f5",
-      "#eae6e7",
-      "#d6d6d6",
-      "#b2b2b2",
-      "#9a9a9a",
-      "#8b8b8b",
-      "#848484",
-      "#717171",
-      "#676465",
-      "#5e5457",
+      "#fcf9fa",
+      "#f9f3f4",
+      "#e2e8f0",
+      "#cad5e2",
+      "#90a1b9",
+      "#62748e",
+      "#45556c",
+      "#314158",
+      "#1d293d",
+      "#020618",
     ],
   },
 
@@ -110,4 +110,6 @@ export const theme = createTheme({
   },
 
   primaryColor: "accent",
+
+  primaryShade: 9,
 });

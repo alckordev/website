@@ -1,3 +1,12 @@
+:root {
+  --mantine-accent-background: #020617;
+  --mantine-accent-backdrop: #020617cc;
+  --mantine-accent-contrast: #fff;
+  --mantine-accent-surface: #162a2f80;
+  --mantine-accent-indicator: #09f;
+  --mantine-accent-track: #09f;
+}
+
 body {
   /* background-image: url(../images/bg.jpg);
   background-attachment: fixed;
@@ -7,14 +16,6 @@ body {
   background-color: var(--mantine-accent-background);
   overflow-x: hidden;
   scroll-behavior: smooth;
-
-  --mantine-accent-background: #020617;
-  --mantine-accent-backdrop: #020617cc;
-  --mantine-accent-contrast: #fff;
-  --mantine-accent-surface: #162a2f80;
-  --mantine-accent-indicator: #09f;
-  --mantine-accent-track: #09f;
-
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-template-areas: "header" "main" "footer";
