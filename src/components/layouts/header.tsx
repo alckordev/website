@@ -6,7 +6,6 @@ import {
   Anchor,
   Avatar,
   Box,
-  Button,
   Container,
   Flex,
   Menu,
@@ -19,6 +18,7 @@ import { User } from "@/type";
 import { signOut } from "firebase/auth";
 import firebase from "@/lib/client/firebase";
 import { destroySession } from "@/app/actions/auth";
+import { LoginButton } from "../login-button";
 
 export const Header = ({ user }: { user: User | null }) => {
   const t = useTranslations();
@@ -79,9 +79,7 @@ export const Header = ({ user }: { user: User | null }) => {
               {t("blog")}
             </Anchor>
             {!user ? (
-              <Button component={Link} href="/login">
-                {t("sign_in")}
-              </Button>
+              <LoginButton />
             ) : (
               <Menu position="bottom-end" withArrow>
                 <Menu.Target>

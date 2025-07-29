@@ -4,7 +4,7 @@ import { Toc } from "@/type";
 import { Box, TableOfContents, Title } from "@mantine/core";
 import { useTranslations } from "next-intl";
 
-export const MDXContents = ({ toc }: { toc?: Toc }) => {
+export const AnchorsList = ({ toc }: { toc?: Toc }) => {
   const t = useTranslations();
 
   if (!toc) return null;
