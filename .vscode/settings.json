@@ -23,5 +23,5 @@
     "Tiktok",
     "Turborepo"
   ],
-  "cSpell.ignorePaths": ["messages/es.json"]
+  "cSpell.ignorePaths": ["messages/es.json", "data/*/es"]
 }

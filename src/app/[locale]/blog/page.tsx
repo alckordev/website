@@ -15,7 +15,7 @@ export async function generateMetadata() {
 export default async function Page({ params }: { params: Params }) {
   const { locale } = await params;
 
-  const data: PostInfo[] = await getPostsInfo(locale);
+  const data: PostInfo[] = await getPostsInfo(`posts/${locale}`);
 
   const t = await getTranslations();
 

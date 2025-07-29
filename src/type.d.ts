@@ -11,8 +11,9 @@ export type LayoutWithParamsProps = LayoutProps & {
 
 export type Frontmatter = {
   title: string;
-  summary: string;
+  summary?: string;
   publishedAt: string;
+  cover?: string;
 };
 
 export type Scope = {

@@ -58,26 +58,28 @@ export const BlogPostHeader = ({
           {t("reading_time", { count: Math.max(1, Math.round(scope.reading)) })}
         </Text>
       </Group>
-      <AspectRatio
-        pos="relative"
-        ratio={728 / 420}
-        maw={{ sm: 728, md: 790 }}
-        w="100%"
-        h={{ base: 300, sm: 390, md: 420 }}
-      >
-        <Image
-          component={NextImage}
-          src="https://placehold.co/728x420"
-          alt=""
-          radius="md"
-          fill
-          sizes="(max-width: 790px) 100vw, 790px"
-          style={{
-            objectFit: "cover",
-          }}
-          priority
-        />
-      </AspectRatio>
+      {scope.cover && (
+        <AspectRatio
+          pos="relative"
+          ratio={728 / 420}
+          maw={{ sm: 728, md: 790 }}
+          w="100%"
+          h={{ base: 300, sm: 390, md: 420 }}
+        >
+          <Image
+            component={NextImage}
+            src="https://placehold.co/728x420"
+            alt=""
+            radius="md"
+            fill
+            sizes="(max-width: 790px) 100vw, 790px"
+            style={{
+              objectFit: "cover",
+            }}
+            priority
+          />
+        </AspectRatio>
+      )}
     </Stack>
   );
 };

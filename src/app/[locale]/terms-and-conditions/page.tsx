@@ -1,34 +1,23 @@
-import React from "react";
+import { BlogPostHeader } from "@/components/blog-post-header";
+import { components } from "@/components/mdx";
 import { getPostSource } from "@/lib/server";
 import { Frontmatter, Params, Scope } from "@/type";
-import { evaluate, EvaluateOptions } from "next-mdx-remote-client/rsc";
-import { components } from "@/components/mdx";
 import { Box, Divider, Flex, Stack } from "@mantine/core";
+import { evaluate, EvaluateOptions } from "next-mdx-remote-client/rsc";
 import { notFound } from "next/navigation";
 import readingTime from "reading-time";
-import { BlogPostHeader } from "@/components/blog-post-header";
-import remarkFlexibleToc from "remark-flexible-toc";
-import { TocAside } from "@/components/layouts";
-import { BuyMeACoffee } from "@/components/buy-me-a-coffee";
-import { BlogPostFooter } from "@/components/blog-post-footer";
-
-// function sleep(ms: number) {
-//   return new Promise((r) => setTimeout(r, ms));
-// }
 
 export async function generateMetadata() {
   return {
-    title: "Lorem ipsum... — Alckor DEV — Software developer",
+    title: "Terms... — Alckor DEV — Software developer",
     description: "I have followed setup instructions carefully",
   };
 }
 
 export default async function Page({ params }: { params: Params }) {
-  // if (process.env.NODE_ENV === "development") await sleep(10000); // 10 seg
+  const { locale } = await params;
 
-  const { locale, slug } = await params;
-
-  const source = await getPostSource(`posts/${locale}/${slug}`);
+  const source = await getPostSource(`page/${locale}/terms-and-conditions`);
 
   if (!source) notFound();
 
@@ -37,10 +26,6 @@ export default async function Page({ params }: { params: Params }) {
     scope: {
       reading: readingTime(source).minutes,
     },
-    mdxOptions: {
-      remarkPlugins: [remarkFlexibleToc],
-    },
-    vfileDataIntoScope: "toc",
   };
 
   const { content, frontmatter, scope } = await evaluate<Frontmatter, Scope>({
@@ -66,14 +51,11 @@ export default async function Page({ params }: { params: Params }) {
         pe={{ base: "md", lg: "xl" }}
       >
         <BlogPostHeader scope={{ ...frontmatter, ...scope }} locale={locale} />
-        <Stack id="mdx" gap="xl" mb={48} maw="calc(100vw - 48px)" w="100%">
+        <Divider mb="xl" />
+        <Stack gap="xl" mb={48} maw="calc(100vw - 48px)" w="100%">
           {content}
         </Stack>
-        <BlogPostFooter />
-        <Divider my="xl" />
-        <BuyMeACoffee />
       </Box>
-      <TocAside toc={scope.toc} />
     </Flex>
   );
 }

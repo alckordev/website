@@ -51,3 +51,7 @@ footer {
     background-color: var(--mantine-color-accent-light);
   }
 }
+
+.mantine-List-itemWrapper > .mantine-List-itemLabel > .mantine-List-root {
+  margin-top: var(--list-spacing, 0);
+}
