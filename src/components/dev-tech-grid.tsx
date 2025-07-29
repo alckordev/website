@@ -3,6 +3,8 @@
 import { AspectRatio, Flex, Tooltip } from "@mantine/core";
 import { Carousel } from "@mantine/carousel";
 import {
+  ArkUI,
+  ArkUIUrl,
   Auth0,
   Auth0Url,
   ChakraUI,
@@ -182,5 +184,10 @@ const techs: Tech[] = [
     label: "Turborepo",
     component: <Turborepo />,
     url: TurborepoUrl,
+  },
+  {
+    label: "Ark UI",
+    component: <ArkUI />,
+    url: ArkUIUrl,
   },
 ];

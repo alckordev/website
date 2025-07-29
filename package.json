@@ -17,7 +17,7 @@
     "@mantine/hooks": "^8.2.1",
     "@mantine/spotlight": "^8.2.1",
     "@remixicon/react": "^4.6.0",
-    "@ridemountainpig/svgl-react": "^1.0.9",
+    "@ridemountainpig/svgl-react": "^1.0.10",
     "date-fns": "^4.1.0",
     "embla-carousel": "^8.5.2",
     "embla-carousel-autoplay": "^8.5.2",
