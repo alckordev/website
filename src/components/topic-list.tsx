@@ -3,6 +3,8 @@
 import { Link } from "@/i18n/navigation";
 import { Button, Card, Flex, Title } from "@mantine/core";
 import { useTranslations } from "next-intl";
+import slugify from "slugify";
+import topics from "@/assets/data/topics.json";
 
 export const TopicList = () => {
   const t = useTranslations();
@@ -15,73 +17,20 @@ export const TopicList = () => {
       <Flex gap="xs" wrap="wrap">
         {topics.map((topic) => (
           <Button
-            key={topic.slug}
+            key={topic}
             component={Link}
-            href={`/topics/${topic.slug}`}
+            href={`/topics/${slugify(topic, {
+              lower: true,
+              strict: false,
+              trim: true,
+            })}`}
             variant="light"
             radius="xl"
           >
-            {topic.label}
+            {topic}
           </Button>
         ))}
       </Flex>
     </Card>
   );
 };
-
-type Topic = {
-  label: string;
-  slug: string;
-};
-
-const topics: Topic[] = [
-  {
-    label: "Firebase",
-    slug: "firebase",
-  },
-  {
-    label: "Supabase",
-    slug: "supabase",
-  },
-  {
-    label: "Github",
-    slug: "github",
-  },
-  {
-    label: "Next.js",
-    slug: "nextjs",
-  },
-  {
-    label: "Nest JS",
-    slug: "nestjs",
-  },
-  {
-    label: "Chakra UI",
-    slug: "chakra-ui",
-  },
-  {
-    label: "Ark UI",
-    slug: "ark-ui",
-  },
-  {
-    label: "JWT",
-    slug: "jwt",
-  },
-  {
-    label: "API Rest",
-    slug: "api-rest",
-  },
-
-  {
-    label: "ASP.NET",
-    slug: "aspnet",
-  },
-  {
-    label: "React Table",
-    slug: "react-table",
-  },
-  {
-    label: "React Query",
-    slug: "react-query",
-  },
-];
