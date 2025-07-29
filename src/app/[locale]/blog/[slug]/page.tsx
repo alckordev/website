@@ -1,5 +1,5 @@
-import React from "react";
-import { getPostSource } from "@/lib/server";
+import React, { cache } from "react";
+import { getPostsInfo, getPostSource } from "@/lib/server";
 import { Frontmatter, Params, Scope } from "@/type";
 import { evaluate, EvaluateOptions } from "next-mdx-remote-client/rsc";
 import { components } from "@/components/mdx";
@@ -11,10 +11,9 @@ import remarkFlexibleToc from "remark-flexible-toc";
 import { TocAside } from "@/components/layouts";
 import { BuyMeACoffee } from "@/components/buy-me-a-coffee";
 import { BlogPostFooter } from "@/components/blog-post-footer";
+import { routing } from "@/i18n/routing";
 
-// function sleep(ms: number) {
-//   return new Promise((r) => setTimeout(r, ms));
-// }
+const getPostSourceCached = cache(getPostSource);
 
 export async function generateMetadata() {
   return {
@@ -23,12 +22,27 @@ export async function generateMetadata() {
   };
 }
 
-export default async function Page({ params }: { params: Params }) {
-  // if (process.env.NODE_ENV === "development") await sleep(10000); // 10 seg
+export async function generateStaticParams() {
+  const params: { locale: string; slug: string }[] = [];
 
+  for (const locale of routing.locales) {
+    const posts = await getPostsInfo(`posts/${locale}`);
+
+    for (const post of posts) {
+      params.push({
+        locale,
+        slug: post.slug,
+      });
+    }
+  }
+
+  return params;
+}
+
+export default async function Page({ params }: { params: Params }) {
   const { locale, slug } = await params;
 
-  const source = await getPostSource(`posts/${locale}/${slug}`);
+  const source = await getPostSourceCached(`posts/${locale}/${slug}`);
 
   if (!source) notFound();
 

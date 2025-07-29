@@ -14,6 +14,7 @@ export type Frontmatter = {
   summary?: string;
   publishedAt: string;
   cover?: string;
+  topics?: string[];
 };
 
 export type Scope = {

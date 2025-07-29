@@ -18,6 +18,8 @@ export const BlogPostList = ({
 
   const observer = useObserver(goToNext, { threshold: 1 });
 
+  if (getData().length === 0) return <div>No results</div>;
+
   return (
     <React.Fragment>
       {getData().map((item, idx) => (

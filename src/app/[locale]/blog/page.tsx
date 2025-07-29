@@ -1,9 +1,12 @@
 import { Box, Flex, Stack, Title } from "@mantine/core";
-import { Params, PostInfo } from "@/type";
+import { Params } from "@/type";
 import { BlogPostList } from "@/components/blog-post-list";
 import { getPostsInfo } from "@/lib/server";
 import { Aside } from "@/components/layouts";
 import { getTranslations } from "next-intl/server";
+import { cache } from "react";
+
+const getPostsInfoCached = cache(getPostsInfo);
 
 export async function generateMetadata() {
   return {
@@ -15,7 +18,7 @@ export async function generateMetadata() {
 export default async function Page({ params }: { params: Params }) {
   const { locale } = await params;
 
-  const data: PostInfo[] = await getPostsInfo(`posts/${locale}`);
+  const data = await getPostsInfoCached(`posts/${locale}`);
 
   const t = await getTranslations();
 
