@@ -217,10 +217,6 @@ namespace ApiJWT.Controllers
 }
 ```
 
-_img_
-
-En la imagen 1, se puede ver que el endpoint de autenticación devuelve el token en la respuesta.
-
 A continuación, creamos un controlador llamado **PublicController** con el siguiente contenido:
 
 ```csharp
@@ -249,10 +245,6 @@ namespace ApiJWT.Controllers
 
 Este es un controlador simple que no necesita autorización para acceder.
 Aquí se pueden presentar algunos endpoints públicos que no necesitan autenticación previa.
-
-_img_
-
-La imagen 2 muestra que el endpoint público devuelve el mensaje en la respuesta.
 
 Finalmente, creamos un controlador llamado `PrivateController` con el siguiente contenido:
 
@@ -289,12 +281,8 @@ por el controlador está protegido y solo es accesible para usuarios autenticado
 Si intentamos acceder al recurso sin enviar el token en la cabecera,
 recibiremos un status code 401 como se muestra en la imagen:
 
-_img_
-
 Para poder acceder al contenido protegido, necesitamos enviar el token en la cabecera de
 la solicitud como se muestra en la imagen:
-
-_img_
 
 Ahora bien, si necesitamos obtener los datos del usuario autenticado,
 podemos agregar las siguientes modificaciones en nuestro `PrivateController.cs`:
@@ -339,8 +327,6 @@ Esta librería está diseñada para manejar la mayoría de los casos comunes de 
 y tiene una gran cantidad de características de seguridad integradas.
 
 Finalmente, si enviamos la solicitud correctamente, recibiremos una respuesta como se muestra en la imagen:
-
-_img_
 
 ## Conclusión
 

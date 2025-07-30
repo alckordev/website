@@ -1,6 +1,6 @@
 ---
-title: "Integrar Firebase Realtime with Next.js (Page Router)"
-summary: "En este artículo aprenderemos a integrar Firebase Realtime Database en una aplicación para construir un sistema de comentarios en tiempo real, que nos permita almacenar y visualizar los comentarios."
+title: "Integrate Firebase Realtime Database with Next.js (Page Router)"
+summary: "In this article, we'll learn how to integrate Firebase Realtime Database into a Next.js application to build a real-time commenting system that lets us store and display comments."
 publishedAt: "2023-03-19 19:00:00"
 topics:
   - Frontend
@@ -8,17 +8,15 @@ topics:
   - Next.js
 ---
 
-En este artículo aprenderemos a integrar Firebase Realtime Database en una aplicación [Next.js](https://nextjs.org/docs/getting-started)
-para construir un sistema de comentarios en tiempo real, que nos permita almacenar y visualizar los comentarios.
+In this article, we'll learn how to integrate Firebase Realtime Database into a [Next.js](https://nextjs.org/docs/getting-started)
+application to build a real-time commenting system that lets us store and display comments.
 
-Desde la consola de [Firebase](https://console.firebase.google.com) crearemos un nuevo proyecto, agregaremos una aplicación web y crearemos una base de datos realtime.
+First, in the [Firebase Console](https://console.firebase.google.com), create a new project, add a web app, and set up a Realtime Database.
 
-Para poder leer y escribir en nuestra base de datos debemos definir unas reglas desde la consola de [Firebase](https://console.firebase.google.com),
-para este ejemplo, definiremos la arquitectura de la siguiente manera: cada comentario pertenecerá a un hilo,
-y cada hilo será una representación de un post en nuestra aplicación,
-asumiendo que los posts se obtiene desde otra fuente.
+### Define Database Rules
 
-Las reglas deberían quedar de la siguiente manera:
+To read and write from our database, set these security rules in the Firebase console. In this example, each comment belongs to a thread,
+and each thread represents a post in our app (posts come from another source):
 
 ```json
 {
@@ -37,15 +35,15 @@ Las reglas deberían quedar de la siguiente manera:
 }
 ```
 
-## Configurar el SDK de Firebase
+## Configure the Firebase SDK
 
-Instalaremos el paquete de Firebase en nuestra aplicación
+Install the Firebase package:
 
 ```bash
 npm i firebase
 ```
 
-Es probable que ya hayas configurado el SDK de Firebase alguna vez. Creamos un archivo `lib/firebase.ts`, el cual debería verse algo como esto:
+Then create `lib/firebase.ts`:
 
 ```typescript
 // lib/firebase.ts
@@ -70,11 +68,11 @@ const database = getDatabase(app);
 export { database };
 ```
 
-## Almacenamiento y obtención de un hilo
+## Threads: Create & Fetch
 
-Creamos un archivo `lib/firebase-utils.ts` y agregaremos algunas funciones como estas:
+In `lib/firebase-utils.ts`, add helper functions:
 
-```typescript
+```tsx
 // lib/firebase-utils.ts
 
 import * as fbdb from "firebase/database";
@@ -122,9 +120,7 @@ export async function getThread(identifier: string) {
 }
 ```
 
-Nos dirigimos al archivo `pages/posts/[id].tsx`, el cual será responsable de almacenar y obtener el hilo representativo del post.
-
-Cabe mencionar que para la interfaz del proyecto estaré usando [Chakra UI](https://chakra-ui.com/getting-started). Pueden revisar su documentación oficial si es necesario.
+Use these in your page at `pages/posts/[id].tsx`:
 
 ```tsx
 // pages/posts/[id].tsx
@@ -174,13 +170,11 @@ export async function getStaticProps({ params }: any) {
 }
 ```
 
-Como podemos observar en la función `getStaticProps`, estamos obteniendo el hilo almacenado en la base de datos como un objeto que se encuentra disponible en los `props`.
+## Comments: Fetch & Store
 
-## Almacenamiento y obtención de comentarios
+Back in `lib/firebase-utils.ts` add:
 
-Nos dirigimos al archivo `lib/firebase-utils.ts` y agregamos la siguiente función:
-
-```typescript
+```tsx
 // lib/firebase-utils.ts
 
 export async function getCommentsByThread(identifier: string) {
@@ -202,7 +196,7 @@ export async function getCommentsByThread(identifier: string) {
 }
 ```
 
-Ahora vamos a crear los siguientes componentes: `Editor`, `Comment` y `DiscussionThread`.
+Now build three components: _Editor_, _Comment_, and _DiscussionThread_.
 
 ### Editor
 
@@ -377,7 +371,7 @@ export const DiscussionThread = ({ identifier }: { identifier: string }) => {
 };
 ```
 
-Finalmente nos dirigimos al archivo `pages/posts/[id].tsx` y agregamos el siguiente código:
+Finally, include the thread in your post page:
 
 ```tsx
 // pages/posts/[id].tsx
@@ -395,11 +389,10 @@ export default function Post({ post, thread }: any) {
 }
 ```
 
-## Resultado final
+## Final Result
 
-Si has llegado hasta aquí, deberías tener algo como esto en la siguiente ruta: [http://localhost:3000/posts/1](http://localhost:3000/posts/1).
+Visit [http://localhost:3000/posts/1](http://localhost:3000/posts/1) to see it in action.
 
-El código completo de este proyecto está disponible en [Github](https://github.com/alckordev/nextjs-firebase-chat).
+The full source code is on [Github](https://github.com/alckordev/nextjs-firebase-chat).
 
-¡Espero que te haya gustado y te haya sido útil!, Si tienes sugerencias o mejoras que hacer,
-eres libre de realizar un "pull request" para contribuir.
+I hope this was helpful! Feel free to share or contribute with a pull request.
