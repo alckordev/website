@@ -18,7 +18,10 @@ export async function generateMetadata() {
 export default async function Page({ params }: { params: Params }) {
   const { locale } = await params;
 
-  const data = await getPostsInfoCached(`posts/${locale}`);
+  const data = (await getPostsInfoCached(`posts/${locale}`)).toSorted(
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+  );
 
   const t = await getTranslations();
 

@@ -70,7 +70,7 @@ export const BlogPostPreview = ({
           <AspectRatio ratio={180 / 118} maw={180} mx="auto">
             <Image
               component={NextImage}
-              src="https://placehold.co/180x118"
+              src={item.cover || "https://placehold.co/180x118"}
               alt=""
               width={180}
               height={118}

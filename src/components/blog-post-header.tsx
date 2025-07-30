@@ -66,7 +66,7 @@ export const BlogPostHeader = ({
         >
           <Image
             component={NextImage}
-            src="https://placehold.co/728x420"
+            src={scope.cover}
             alt=""
             radius="md"
             fill

@@ -1,7 +1,5 @@
 import {
   Alert,
-  // Alert,
-  // AlertProps,
   Anchor,
   AnchorProps,
   Blockquote,
@@ -10,7 +8,6 @@ import {
   DividerProps,
   Highlight,
   HighlightProps,
-  // Image,
   ListItem,
   ListItemProps,
   ListProps,
@@ -37,7 +34,6 @@ import { MDXComponents } from "next-mdx-remote-client/rsc";
 import { CodeBlock } from "./code-block";
 import { List } from "./list";
 import { ComponentProps } from "react";
-// import NextImage, { ImageProps } from "next/image";
 
 export const components: MDXComponents = {
   a: (p: AnchorProps) => <Anchor {...p} />,
@@ -65,5 +61,4 @@ export const components: MDXComponents = {
   td: (p: TableTdProps) => <TableTd {...p} />,
   // custom components
   Alert,
-  // img: (p: ImageProps) => <Image component={NextImage} {...p} />,
 };
