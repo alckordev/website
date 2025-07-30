@@ -16,7 +16,7 @@ export const LanguageSwitcher = () => {
   const otherLocales = routing.locales.filter((l) => l !== locale);
 
   return (
-    <Menu>
+    <Menu radius="md">
       <Menu.Target>
         <Button
           variant="light"

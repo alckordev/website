@@ -1,6 +1,7 @@
 "use client";
 
 import { MantineProvider } from "@mantine/core";
+import { emotionTransform, MantineEmotionProvider } from "@mantine/emotion";
 import theme from "@/theme";
 
 export const Provider = ({ children }: { children: React.ReactNode }) => {
@@ -8,10 +9,11 @@ export const Provider = ({ children }: { children: React.ReactNode }) => {
     <MantineProvider
       theme={theme}
       defaultColorScheme="dark"
+      stylesTransform={emotionTransform}
       withGlobalClasses
       withStaticClasses
     >
-      {children}
+      <MantineEmotionProvider>{children}</MantineEmotionProvider>
     </MantineProvider>
   );
 };

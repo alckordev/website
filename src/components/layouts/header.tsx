@@ -81,7 +81,7 @@ export const Header = ({ user }: { user: User | null }) => {
             {!user ? (
               <LoginButton />
             ) : (
-              <Menu position="bottom-end" withArrow>
+              <Menu position="bottom-end" radius="md" withArrow>
                 <Menu.Target>
                   <ActionIcon variant="transparent" c="white" size="compact-md">
                     <Avatar

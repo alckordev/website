@@ -65,6 +65,7 @@ export const LoginButton = () => {
         opened={open}
         onClose={() => setOpen(false)}
         centered
+        // fullScreen
         overlayProps={{
           backgroundOpacity: 0.5,
           blur: 5,

@@ -20,6 +20,9 @@ import ActionIcon from "./components/action-icon";
 import TextInput from "./components/text-input";
 import Checkbox from "./components/checkbox";
 import Spotlight from "./components/spotlight";
+import MenuDropdown from "./components/menu/dropdown";
+import MenuDivider from "./components/menu/divider";
+import MenuItem from "./components/menu/item";
 
 export default createTheme({
   defaultRadius: "lg",
@@ -39,6 +42,9 @@ export default createTheme({
     TextInput,
     Checkbox,
     Spotlight,
+    MenuDropdown,
+    MenuDivider,
+    MenuItem,
   },
   colors,
   fontFamily: fonts.body,
