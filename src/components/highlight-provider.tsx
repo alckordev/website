@@ -14,6 +14,8 @@ const highlighterPromise = createHighlighterCore({
     import("@shikijs/langs/bash"),
     import("@shikijs/langs/tsx"),
     import("@shikijs/langs/csharp"),
+    import("@shikijs/langs/twig"),
+    import("@shikijs/langs/php"),
   ],
   themes: [import("@shikijs/themes/catppuccin-frappe")],
   engine: createJavaScriptRegexEngine(),

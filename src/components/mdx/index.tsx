@@ -1,4 +1,5 @@
 import {
+  Alert,
   // Alert,
   // AlertProps,
   Anchor,
@@ -62,6 +63,7 @@ export const components: MDXComponents = {
   tr: (p: TableTrProps) => <TableTr {...p} />,
   th: (p: TableThProps) => <TableTh {...p} />,
   td: (p: TableTdProps) => <TableTd {...p} />,
-  // alert: (p: AlertProps) => <Alert {...p} />,
+  // custom components
+  Alert,
   // img: (p: ImageProps) => <Image component={NextImage} {...p} />,
 };
