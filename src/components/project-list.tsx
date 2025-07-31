@@ -20,7 +20,7 @@ export const ProjectList = async () => {
   return (
     <Box>
       <Title order={4} mb="lg">
-        {t("latest_projects")}
+        {t("my_open_source_projects")}
       </Title>
       <Stack>
         {repos.map((r) => (

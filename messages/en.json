@@ -36,5 +36,6 @@
   "server_error_notice": "An unexpected error occurred.",
   "responses": "Responses",
   "start_reading": "Start reading",
-  "latest_projects": "Latest projects"
+  "latest_projects": "Latest projects",
+  "my_open_source_projects": "My open source projects"
 }

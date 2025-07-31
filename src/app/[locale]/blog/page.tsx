@@ -32,7 +32,7 @@ export default async function Page({ params }: { params: Params }) {
       <Title order={4} ms={20}>
         {t("latest_posts")}
       </Title>
-      <BlogPostList data={data} locale={locale} />;
+      <BlogPostList data={data} locale={locale} />
     </React.Fragment>
   );
 }
