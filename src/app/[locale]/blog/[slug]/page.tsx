@@ -78,13 +78,18 @@ export default async function Page({ params }: { params: Params }) {
         ps="md"
         pe={{ base: "md", lg: "xl" }}
       >
-        <BlogPostHeader scope={{ ...frontmatter, ...scope }} locale={locale} />
-        <Stack id="mdx" gap="lg" mb={48} maw="calc(100vw - 48px)" w="100%">
-          {content}
-        </Stack>
-        <BlogPostFooter />
-        <Divider my="xl" />
-        <BuyMeACoffee />
+        <React.Suspense fallback={<div>Loading inner post...</div>}>
+          <BlogPostHeader
+            scope={{ ...frontmatter, ...scope }}
+            locale={locale}
+          />
+          <Stack id="mdx" gap="lg" mb={48} maw="calc(100vw - 48px)" w="100%">
+            {content}
+          </Stack>
+          <BlogPostFooter />
+          <Divider my="xl" />
+          <BuyMeACoffee />
+        </React.Suspense>
       </Box>
     </Flex>
   );

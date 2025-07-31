@@ -4,6 +4,7 @@ import { routing } from "@/i18n/routing";
 import { getPostsInfo } from "@/lib/server";
 import { Params } from "@/type";
 import { Box, Flex, Stack, Title } from "@mantine/core";
+import React from "react";
 import { cache } from "react";
 import slugify from "slugify";
 
@@ -65,7 +66,9 @@ export default async function Page({ params }: { params: Params }) {
           {prettyName}
         </Title>
         <Stack gap="xl">
-          {filtered && <BlogPostList data={filtered} locale={locale} />}
+          <React.Suspense fallback={<div>Loading topic posts</div>}>
+            <BlogPostList data={filtered} locale={locale} />
+          </React.Suspense>
         </Stack>
       </Box>
       <Aside />

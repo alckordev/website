@@ -36,7 +36,7 @@ export default function Page() {
         <AspectRatio ratio={530 / 727} maw={530} mx="auto">
           <Image
             component={NextImage}
-            src="https://placehold.co/530x727"
+            src="/images/me.png"
             alt=""
             width={530}
             height={727}
@@ -44,6 +44,7 @@ export default function Page() {
             style={{
               WebkitMaskImage: "linear-gradient(#000 50%, #0000)",
             }}
+            fallbackSrc="https://placehold.co/530x727"
           />
         </AspectRatio>
       </Box>

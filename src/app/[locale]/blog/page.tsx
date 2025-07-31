@@ -4,7 +4,7 @@ import { BlogPostList } from "@/components/blog-post-list";
 import { getPostsInfo } from "@/lib/server";
 import { Aside } from "@/components/layouts";
 import { getTranslations } from "next-intl/server";
-import { cache } from "react";
+import React, { cache } from "react";
 
 const getPostsInfoCached = cache(getPostsInfo);
 
@@ -45,7 +45,9 @@ export default async function Page({ params }: { params: Params }) {
           {t("latest_posts")}
         </Title>
         <Stack gap="xl">
-          {data && <BlogPostList data={data} locale={locale} />}
+          <React.Suspense fallback={<div>Loading posts...</div>}>
+            <BlogPostList data={data} locale={locale} />
+          </React.Suspense>
         </Stack>
       </Box>
       <Aside />

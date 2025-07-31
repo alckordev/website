@@ -33,5 +33,6 @@
   "no_dont_delete_it": "No don't delete it",
   "delete_account_notice": "Are you sure you want to delete your account? This action is destructive and irreversible.",
   "server_error": "Server error",
-  "server_error_notice": "An unexpected error occurred."
+  "server_error_notice": "An unexpected error occurred.",
+  "responses": "Responses"
 }

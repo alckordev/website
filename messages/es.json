@@ -33,5 +33,6 @@
   "no_dont_delete_it": "No, no lo elimines",
   "delete_account_notice": "¿Estás seguro de que quieres eliminar tu cuenta? Esta acción es destructiva e irreversible.",
   "server_error": "Error del servidor",
-  "server_error_notice": "Se produjo un error inesperado."
+  "server_error_notice": "Se produjo un error inesperado.",
+  "responses": "Respuestas"
 }
