@@ -25,5 +25,13 @@
   "sign_out": "Sign out",
   "terms_and_conditions": "Terms & conditions",
   "privacy_policy": "Privacy policy",
-  "lang_name": "{code, select, es {Spanish} en {English} other {Unknown}}"
+  "lang_name": "{code, select, es {Spanish} en {English} other {Unknown}}",
+  "display_name": "Display name",
+  "email": "E-mail",
+  "delete_account": "Delete account",
+  "delete_your_account": "Delete your account",
+  "no_dont_delete_it": "No don't delete it",
+  "delete_account_notice": "Are you sure you want to delete your account? This action is destructive and irreversible.",
+  "server_error": "Server error",
+  "server_error_notice": "An unexpected error occurred."
 }

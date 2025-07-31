@@ -2,8 +2,10 @@ import "@mantine/core/styles.css";
 import "@mantine/code-highlight/styles.css";
 import "@mantine/carousel/styles.css";
 import "@mantine/spotlight/styles.css";
+import "@mantine/notifications/styles.css";
 import "@/assets/css/global.css";
 import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
 import { Provider } from "@/components/provider";
 import { HighlightProvider } from "@/components/highlight-provider";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
 
 export default async function Layout({
   children,
-  auth,
+  // auth,
   params,
 }: LayoutWithParamsProps) {
   const { locale } = await params;
@@ -38,10 +40,11 @@ export default async function Layout({
       <body>
         <NextIntlClientProvider>
           <Provider>
+            <Notifications position="top-center" limit={3} />
             <HighlightProvider>
               <Header user={user} />
               <Content>
-                {auth}
+                {/* {auth} */}
                 {children}
               </Content>
               <Footer />

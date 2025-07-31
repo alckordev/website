@@ -85,9 +85,9 @@ export const Header = ({ user }: { user: User | null }) => {
                 <Menu.Target>
                   <ActionIcon variant="transparent" c="white" size="compact-md">
                     <Avatar
-                      name={user.name}
+                      name={user.displayName}
                       src={user.picture}
-                      alt={user.name}
+                      alt={user.displayName}
                     />
                   </ActionIcon>
                 </Menu.Target>

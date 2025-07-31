@@ -66,19 +66,13 @@ export const LoginButton = () => {
         onClose={() => setOpen(false)}
         centered
         // fullScreen
+        pos="relative"
         overlayProps={{
           backgroundOpacity: 0.5,
           blur: 5,
         }}
       >
-        <Stack
-          pos="relative"
-          align="center"
-          gap="xl"
-          p="56 16 32"
-          maw={420}
-          mx="auto"
-        >
+        <Stack align="center" gap="xl" p="56 16 32" maw={420} mx="auto">
           <LoadingOverlay
             visible={loading}
             zIndex={1000}

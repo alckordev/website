@@ -22,8 +22,16 @@
   "welcome_back": "Bienvenido de nuevo.",
   "sign_in_with": "Iniciar sesión con {social}",
   "my_account": "Mi cuenta",
-  "sign_out": "Desconectar",
+  "sign_out": "Cerrar sesión",
   "terms_and_conditions": "Términos y condiciones",
   "privacy_policy": "Política de privacidad",
-  "lang_name": "{code, select, es {Español} en {English} other {Desconocido}}"
+  "lang_name": "{code, select, es {Español} en {English} other {Desconocido}}",
+  "display_name": "Nombre para mostrar",
+  "email": "Correo electrónico",
+  "delete_account": "Eliminar cuenta",
+  "delete_your_account": "Elimina tu cuenta",
+  "no_dont_delete_it": "No, no lo elimines",
+  "delete_account_notice": "¿Estás seguro de que quieres eliminar tu cuenta? Esta acción es destructiva e irreversible.",
+  "server_error": "Error del servidor",
+  "server_error_notice": "Se produjo un error inesperado."
 }

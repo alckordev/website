@@ -2,7 +2,7 @@
 import "server-only";
 import { cookies } from "next/headers";
 import server from "./firebase";
-import { User } from "@/type";
+import { Provider, User } from "@/type";
 
 // export const verifySession = async () => {};
 
@@ -13,19 +13,19 @@ export const getUser = async (): Promise<User | null> => {
     if (!cookie) return null;
 
     const decoded = await server.auth().verifySessionCookie(cookie, true);
+    const record = await server.auth().getUser(decoded.uid);
 
     return {
-      aud: decoded.aud,
-      uid: decoded.uid,
-      sub: decoded.sub,
-      authTime: decoded.auth_time,
+      uid: record.uid,
       email: decoded.email,
       emailVerified: decoded.email_verified,
-      name: decoded.name,
-      picture: decoded.picture,
-      exp: decoded.exp,
-      iat: decoded.iat,
-      iss: decoded.iss,
+      displayName: record.displayName,
+      picture: record.photoURL,
+      providerData: record.providerData.map((p) => ({
+        uid: p.uid,
+        email: p.email,
+        providerId: p.providerId as Provider,
+      })),
     };
   } catch (err) {
     console.error(err);

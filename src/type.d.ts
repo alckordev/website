@@ -33,16 +33,19 @@ export type Toc = {
   parent: string;
 }[];
 
+export type Provider = "google.com" | "github.com";
+
+export type Identity = {
+  uid: string;
+  providerId: Provider;
+  email?: string;
+};
+
 export type User = {
-  aud: string;
-  authTime: number;
+  uid: string;
+  displayName?: string;
   email?: string;
   emailVerified?: boolean;
-  exp: number;
-  iat: number;
-  iss: string;
-  name?: string;
   picture?: string;
-  sub: string;
-  uid: string;
+  providerData: Identity[];
 };

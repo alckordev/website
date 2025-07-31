@@ -67,10 +67,11 @@ export const BlogPostHeader = ({
           <Image
             component={NextImage}
             src={scope.cover}
-            alt=""
+            alt={scope.title}
             radius="md"
             fill
             sizes="(max-width: 790px) 100vw, 790px"
+            fallbackSrc="https://placehold.co/180x118"
             style={{
               objectFit: "cover",
             }}

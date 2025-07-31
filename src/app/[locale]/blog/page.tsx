@@ -35,12 +35,13 @@ export default async function Page({ params }: { params: Params }) {
       <Box
         flex="1 1 auto"
         maw={{ sm: 728, md: 790 }}
+        w="100%"
         mx="auto"
         py={50}
         ps="md"
         pe={{ base: "md", lg: "xl" }}
       >
-        <Title order={4} pb="xs" mb="md" ms={20}>
+        <Title order={4} mb="lg" ms={20}>
           {t("latest_posts")}
         </Title>
         <Stack gap="xl">
