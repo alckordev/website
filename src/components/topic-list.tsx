@@ -1,7 +1,7 @@
 "use client";
 
 import { Link } from "@/i18n/navigation";
-import { Box, Button, Flex, Title } from "@mantine/core";
+import { Badge, Box, Flex, Title } from "@mantine/core";
 import { useTranslations } from "next-intl";
 import slugify from "slugify";
 import topics from "@/assets/data/topics.json";
@@ -16,7 +16,7 @@ export const TopicList = () => {
       </Title>
       <Flex gap="xs" wrap="wrap">
         {topics.map((topic) => (
-          <Button
+          <Badge
             key={topic}
             component={Link}
             href={`/topics/${slugify(topic, {
@@ -25,10 +25,10 @@ export const TopicList = () => {
               trim: true,
             })}`}
             variant="light"
-            radius="xl"
+            size="lg"
           >
             {topic}
-          </Button>
+          </Badge>
         ))}
       </Flex>
     </Box>

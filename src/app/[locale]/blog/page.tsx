@@ -1,10 +1,10 @@
-import { Box, Flex, Stack, Title } from "@mantine/core";
 import { Params } from "@/type";
 import { BlogPostList } from "@/components/blog-post-list";
 import { getPostsInfo } from "@/lib/server";
-import { Aside } from "@/components/layouts";
-import { getTranslations } from "next-intl/server";
 import React, { cache } from "react";
+import { Title } from "@mantine/core";
+import { getTranslations } from "next-intl/server";
+// import { sleep } from "@/utils/sleep";
 
 const getPostsInfoCached = cache(getPostsInfo);
 
@@ -18,39 +18,21 @@ export async function generateMetadata() {
 export default async function Page({ params }: { params: Params }) {
   const { locale } = await params;
 
+  const t = await getTranslations();
+
   const data = (await getPostsInfoCached(`posts/${locale}`)).toSorted(
     (a, b) =>
       new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   );
 
-  const t = await getTranslations();
+  // await sleep(15000);
 
   return (
-    <Flex
-      direction={{ base: "column", lg: "row" }}
-      justify="space-evenly"
-      mx="-md"
-      mih="100%"
-    >
-      <Box
-        flex="1 1 auto"
-        maw={{ sm: 728, md: 790 }}
-        w="100%"
-        mx="auto"
-        py={50}
-        ps="md"
-        pe={{ base: "md", lg: "xl" }}
-      >
-        <Title order={4} mb="lg" ms={20}>
-          {t("latest_posts")}
-        </Title>
-        <Stack gap="xl">
-          <React.Suspense fallback={<div>Loading posts...</div>}>
-            <BlogPostList data={data} locale={locale} />
-          </React.Suspense>
-        </Stack>
-      </Box>
-      <Aside />
-    </Flex>
+    <React.Fragment>
+      <Title order={4} ms={20}>
+        {t("latest_posts")}
+      </Title>
+      <BlogPostList data={data} locale={locale} />;
+    </React.Fragment>
   );
 }

@@ -49,3 +49,16 @@ export type User = {
   picture?: string;
   providerData: Identity[];
 };
+
+export type GitEdge = {
+  node: GitRepository;
+};
+
+export type GitRepository = {
+  name: string;
+  description: string;
+  url: string;
+  stargazerCount: number;
+  forkCount: number;
+  updatedAt: string;
+};

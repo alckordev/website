@@ -12,7 +12,7 @@ export const List = (props: ListProps) => {
       spacing="xs"
       styles={{
         itemWrapper: {
-          "--li-align": "flex-start",
+          alignItems: "flex-start",
         },
       }}
       {...props}

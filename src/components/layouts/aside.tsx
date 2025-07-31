@@ -18,9 +18,6 @@ export const Aside = () => {
       ps={{ base: "md", lg: "xl" }}
       pe="md"
       gap="xl"
-      style={{
-        borderLeft: "1px solid var(--mantine-accent-surface)",
-      }}
     >
       <Stack gap="xl">
         <ProjectList />

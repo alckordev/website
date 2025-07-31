@@ -3,7 +3,7 @@ import { getPostsInfo, getPostSource } from "@/lib/server";
 import { Frontmatter, Params, Scope } from "@/type";
 import { evaluate, EvaluateOptions } from "next-mdx-remote-client/rsc";
 import { components } from "@/components/mdx";
-import { Box, Divider, Flex, Stack } from "@mantine/core";
+import { Divider, Stack } from "@mantine/core";
 import { notFound } from "next/navigation";
 import readingTime from "reading-time";
 import { BlogPostHeader } from "@/components/blog-post-header";
@@ -63,34 +63,14 @@ export default async function Page({ params }: { params: Params }) {
   });
 
   return (
-    <Flex
-      direction={{ base: "column", lg: "row" }}
-      justify="space-evenly"
-      mx="-md"
-      mih="100%"
-    >
-      <Box
-        component="article"
-        flex="1 1 auto"
-        maw={{ sm: 728, md: 790 }}
-        mx="auto"
-        py={50}
-        ps="md"
-        pe={{ base: "md", lg: "xl" }}
-      >
-        <React.Suspense fallback={<div>Loading inner post...</div>}>
-          <BlogPostHeader
-            scope={{ ...frontmatter, ...scope }}
-            locale={locale}
-          />
-          <Stack id="mdx" gap="lg" mb={48} maw="calc(100vw - 48px)" w="100%">
-            {content}
-          </Stack>
-          <BlogPostFooter />
-          <Divider my="xl" />
-          <BuyMeACoffee />
-        </React.Suspense>
-      </Box>
-    </Flex>
+    <Stack gap="lg">
+      <BlogPostHeader scope={{ ...frontmatter, ...scope }} locale={locale} />
+      <Stack id="mdx" gap="lg" mb={48} maw="calc(100vw - 48px)" w="100%">
+        {content}
+      </Stack>
+      <BlogPostFooter />
+      <Divider my="xl" />
+      <BuyMeACoffee />
+    </Stack>
   );
 }

@@ -35,14 +35,14 @@ footer {
   grid-area: footer;
 }
 
-.mantine-Skeleton-root {
+/* .mantine-Skeleton-root {
   &::before {
     display: none;
   }
   &::after {
     background-color: var(--mantine-color-accent-light);
   }
-}
+} */
 
 ul > li ul > li,
 ul > li ol > li,

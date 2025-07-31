@@ -34,5 +34,7 @@
   "delete_account_notice": "Are you sure you want to delete your account? This action is destructive and irreversible.",
   "server_error": "Server error",
   "server_error_notice": "An unexpected error occurred.",
-  "responses": "Responses"
+  "responses": "Responses",
+  "start_reading": "Start reading",
+  "latest_projects": "Latest projects"
 }

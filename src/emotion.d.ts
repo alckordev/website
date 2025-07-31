@@ -7,4 +7,12 @@ declare module "@mantine/core" {
     sx?: EmotionSx;
     styles?: EmotionStyles;
   }
+  export interface BadgeProps {
+    sx?: EmotionSx;
+    styles?: EmotionStyles;
+  }
+  export interface UnstyledButtonProps {
+    sx?: EmotionSx;
+    styles?: EmotionStyles;
+  }
 }

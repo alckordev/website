@@ -1,8 +1,9 @@
-import { DevTechGrid } from "@/components/dev-tech-grid";
+"use client";
+
+import { Link } from "@/i18n/navigation";
 import {
   AspectRatio,
-  Box,
-  Divider,
+  Button,
   Flex,
   Image,
   Stack,
@@ -16,38 +17,53 @@ export default function Page() {
   const t = useTranslations();
 
   return (
-    <Flex align="center" h="100%" gap="xl">
-      <Stack flex={1} mx="auto" maw="720">
-        <Title order={1} fz={{ base: "60px", md: "80px", xl: "100px" }}>
+    <Flex
+      align="center"
+      h="100%"
+      gap="xl"
+      direction={{ base: "row", md: "column" }}
+    >
+      <AspectRatio
+        ratio={367 / 580}
+        maw={367}
+        mx="auto"
+        display={{ base: "none", md: "block" }}
+      >
+        <Image
+          component={NextImage}
+          src="https://placehold.co/367x580"
+          alt=""
+          width={367}
+          height={580}
+          priority
+          style={{
+            WebkitMaskImage: "linear-gradient(#000 50%, #0000)",
+            objectFit: "cover",
+          }}
+          fallbackSrc="https://placehold.co/367x580"
+        />
+      </AspectRatio>
+      <Stack
+        mx="auto"
+        maw={728}
+        align="center"
+        pos={{ base: "static", md: "absolute" }}
+        top={{ base: 0, md: "50%" }}
+        mb={32}
+        style={{ textAlign: "center" }}
+      >
+        <Title
+          order={1}
+          fz={{ base: 32, md: 40, xl: 48 }}
+          style={{ textTransform: "uppercase" }}
+        >
           Francisco
         </Title>
-        <Text>{t("introduction")}</Text>
-        <Divider
-          my="xs"
-          label={t("technologies")}
-          labelPosition="left"
-          style={{
-            "--mantine-color-dimmed": "var(--mantine-color-text)",
-          }}
-        />
-        <DevTechGrid />
+        <Text mb={32}>{t("introduction")}</Text>
+        <Button component={Link} href="/blog">
+          {t("start_reading")}
+        </Button>
       </Stack>
-      <Box ms="xl" display={{ base: "none", lg: "block" }}>
-        <AspectRatio ratio={530 / 727} maw={530} mx="auto">
-          <Image
-            component={NextImage}
-            src="/images/me.png"
-            alt=""
-            width={530}
-            height={727}
-            priority
-            style={{
-              WebkitMaskImage: "linear-gradient(#000 50%, #0000)",
-            }}
-            fallbackSrc="https://placehold.co/530x727"
-          />
-        </AspectRatio>
-      </Box>
     </Flex>
   );
 }

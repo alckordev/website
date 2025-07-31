@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import {
   Anchor,
@@ -32,7 +32,7 @@ export const BlogPostPreview = ({
       <Flex>
         <Anchor
           component={Link}
-          href={`/blog/${item.slug}`}
+          href={`/${item.slug}`}
           underline="never"
           flex={1}
         >
@@ -46,7 +46,7 @@ export const BlogPostPreview = ({
           </Box>
           <Group gap="xs">
             {item.topics?.map((t, idx) => (
-              <Badge key={idx} variant="light" style={{ lineHeight: 1 }}>
+              <Badge key={idx} variant="light">
                 {t}
               </Badge>
             ))}

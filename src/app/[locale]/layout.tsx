@@ -23,7 +23,6 @@ export const metadata: Metadata = {
 
 export default async function Layout({
   children,
-  // auth,
   params,
 }: LayoutWithParamsProps) {
   const { locale } = await params;
@@ -43,10 +42,7 @@ export default async function Layout({
             <Notifications position="top-center" limit={3} />
             <HighlightProvider>
               <Header user={user} />
-              <Content>
-                {/* {auth} */}
-                {children}
-              </Content>
+              <Content>{children}</Content>
               <Footer />
             </HighlightProvider>
           </Provider>

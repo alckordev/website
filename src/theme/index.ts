@@ -23,6 +23,7 @@ import Spotlight from "./components/spotlight";
 import MenuDropdown from "./components/menu/dropdown";
 import MenuDivider from "./components/menu/divider";
 import MenuItem from "./components/menu/item";
+import Badge from "./components/badge";
 
 export default createTheme({
   defaultRadius: "lg",
@@ -45,6 +46,7 @@ export default createTheme({
     MenuDropdown,
     MenuDivider,
     MenuItem,
+    Badge,
   },
   colors,
   fontFamily: fonts.body,
