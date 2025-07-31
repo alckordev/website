@@ -25,7 +25,7 @@
   "sign_out": "Sign out",
   "terms_and_conditions": "Terms & conditions",
   "privacy_policy": "Privacy policy",
-  "lang_name": "{code, select, es {Spanish} en {English} other {Unknown}}",
+  "lang_name": "{code, select, es {Español} en {English} other {Unknown}}",
   "display_name": "Display name",
   "email": "E-mail",
   "delete_account": "Delete account",
