@@ -1,5 +1,3 @@
-"use client";
-
 import { Link } from "@/i18n/navigation";
 import {
   AspectRatio,
@@ -10,11 +8,18 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import NextImage from "next/image";
 
-export default function Page() {
-  const t = useTranslations();
+export async function generateMetadata() {
+  return {
+    title: "Isco — Software developer",
+    description: "I have followed setup instructions carefully",
+  };
+}
+
+export default async function Page() {
+  const t = await getTranslations();
 
   return (
     <Flex align="center" justify="center" h="100%" gap="xl" direction="column">
@@ -29,7 +34,7 @@ export default function Page() {
         <Image
           component={NextImage}
           src="/images/me.webp"
-          alt="Francisco Software Developer"
+          alt="Isco — Software developer"
           priority
           style={{
             WebkitMaskImage: "linear-gradient(#000 50%, #0000)",
@@ -52,12 +57,21 @@ export default function Page() {
           fz={{ base: 32, md: 40, xl: 48 }}
           style={{ textTransform: "uppercase" }}
         >
-          Francisco
+          Franc
+          <Text
+            component="span"
+            c="brand-blue"
+            fz="inherit"
+            ff="inherit"
+            fw="inherit"
+          >
+            isco
+          </Text>
         </Title>
         <Text mb={32}>{t("introduction")}</Text>
-        <Button component={Link} href="/blog">
-          {t("start_reading")}
-        </Button>
+        <Link href="/blog">
+          <Button component="span">{t("start_reading")}</Button>
+        </Link>
       </Stack>
     </Flex>
   );
