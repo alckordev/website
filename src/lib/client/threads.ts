@@ -2,15 +2,11 @@ import * as db from "firebase/database";
 import firebase from "../client/firebase";
 import { Thread } from "@/type";
 
-export const setThread = async ({
-  title,
-  identifier,
-}: Thread): Promise<Thread> => {
+export const setThread = async ({ identifier }: Thread): Promise<Thread> => {
   const ref = db.push(db.ref(firebase.database(), "threads"));
 
   await db.set(ref, {
     identifier: identifier,
-    title: title,
     likes: 0,
     dislikes: 0,
     responses: 0,
@@ -25,10 +21,7 @@ export const setThread = async ({
   return { ...thread, uid: snapshot.key };
 };
 
-export const getThread = async ({
-  title,
-  identifier,
-}: Thread): Promise<Thread> => {
+export const getThread = async ({ identifier }: Thread): Promise<Thread> => {
   const ref = db.ref(firebase.database(), "threads");
 
   const query = db.query(
@@ -44,5 +37,5 @@ export const getThread = async ({
     return Object.keys(values).map((k) => ({ ...values[k], uid: k }))[0];
   }
 
-  return setThread({ title, identifier });
+  return setThread({ identifier });
 };

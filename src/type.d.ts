@@ -65,6 +65,5 @@ export type GitRepository = {
 
 export type Thread = {
   uid?: string;
-  title: string;
   identifier: string;
 };

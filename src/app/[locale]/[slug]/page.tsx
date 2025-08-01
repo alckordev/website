@@ -1,5 +1,5 @@
 import React, { cache } from "react";
-import { getPostsInfo, getPostSource, getUser } from "@/lib/server";
+import { getPostsInfo, getPostSource } from "@/lib/server";
 import { Frontmatter, Params, Scope } from "@/type";
 import { evaluate, EvaluateOptions } from "next-mdx-remote-client/rsc";
 import { components } from "@/components/mdx";
@@ -64,8 +64,7 @@ export default async function Page({ params }: { params: Params }) {
   });
 
   const thread = await getThread({
-    title: frontmatter.title,
-    identifier: slug!,
+    identifier: `${locale}/${slug}`,
   });
 
   return (

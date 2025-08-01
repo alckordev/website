@@ -1,7 +1,7 @@
 import useSyncSession from "@/hooks/use-sync-session";
 import { formatCompactNumber } from "@/lib/client";
 import firebase from "@/lib/client/firebase";
-import { Button, Skeleton, useMantineTheme } from "@mantine/core";
+import { Button, useMantineTheme } from "@mantine/core";
 import { RiHeartFill, RiHeartLine } from "@remixicon/react";
 import * as db from "firebase/database";
 import { useEffect, useState } from "react";
@@ -15,32 +15,13 @@ export const ThreadLikeToggle = ({
 }) => {
   const theme = useMantineTheme();
 
-  const [isPending, setPending] = useState(false);
-  const [likes, setLikes] = useState<number | null>(null);
-  const [liked, setLiked] = useState<boolean | null>(null);
+  const [likes, setLikes] = useState(0);
+  const [liked, setLiked] = useState(false);
 
-  const { user, initializing } = useSyncSession();
-
-  useEffect(() => {
-    const ref = db.ref(firebase.database(), `threads/${thread}`);
-
-    const callback = (snapshot: db.DataSnapshot) => {
-      const val = snapshot.val();
-      if (val && typeof val.likes === "number") {
-        setLikes(val.likes);
-      } else {
-        setLikes(0);
-      }
-    };
-
-    db.onValue(ref, callback);
-
-    return () => db.off(ref, "value", callback);
-  }, [thread]);
+  const { user } = useSyncSession();
 
   // check if current user already liked this thread
   useEffect(() => {
-    if (initializing) return;
     if (!user) {
       setLiked(false);
       return;
@@ -60,33 +41,55 @@ export const ThreadLikeToggle = ({
     return () => {
       db.off(ref, "value", callback);
     };
-  }, [thread, user, initializing]);
+  }, [thread, user]);
+
+  useEffect(() => {
+    const ref = db.ref(firebase.database(), `threads/${thread}`);
+
+    const callback = (snapshot: db.DataSnapshot) => {
+      const val = snapshot.val();
+      if (val && typeof val.likes === "number") {
+        setLikes(val.likes);
+      } else {
+        setLikes(0);
+      }
+    };
+
+    db.onValue(ref, callback);
+
+    return () => db.off(ref, "value", callback);
+  }, [thread]);
 
   const handleToggle = async () => {
-    try {
-      setPending(true);
+    if (!user) {
+      console.log("login");
+      return;
+    }
 
-      const res = await fetch(`/api/threads/${thread}/like`, {
-        method: "POST",
-        credentials: "include",
-      });
+    const threadRef = db.ref(firebase.database(), `threads/${thread}`);
+    const threadSnap = await db.get(threadRef);
 
-      if (!res.ok) throw new Error("Failed");
+    if (!threadSnap.exists()) return;
 
-      const data = await res.json();
+    const userLikeRef = db.ref(
+      firebase.database(),
+      `users/${user.uid}/threads/likes/${thread}`
+    );
 
-      setLiked(data.liked);
-      setLikes(data.likes);
-    } catch (err) {
-      console.error("toggle like failed", err);
-    } finally {
-      setPending(false);
+    if (!liked) {
+      const currentLikes = threadSnap.val().likes;
+      const newLikes = currentLikes + 1;
+      await db.update(threadRef, { likes: newLikes });
+      await db.set(userLikeRef, true);
+      setLiked(true);
+    } else {
+      const currentLikes = threadSnap.val().likes;
+      const newLikes = currentLikes - 1;
+      await db.update(threadRef, { likes: newLikes });
+      await db.remove(userLikeRef);
+      setLiked(false);
     }
   };
-
-  if (likes === null || liked === null || initializing) {
-    return <Skeleton width={80} height={32} radius="sm" animate={true} />;
-  }
 
   return (
     <Button
@@ -102,10 +105,6 @@ export const ThreadLikeToggle = ({
         )
       }
       onClick={handleToggle}
-      loading={isPending}
-      loaderProps={{
-        type: "dots",
-      }}
     >
       {formatCompactNumber(likes, locale)}
     </Button>

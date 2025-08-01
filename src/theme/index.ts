@@ -24,6 +24,9 @@ import MenuDropdown from "./components/menu/dropdown";
 import MenuDivider from "./components/menu/divider";
 import MenuItem from "./components/menu/item";
 import Badge from "./components/badge";
+import DrawerHeader from "./components/drawer/header";
+import DrawerContent from "./components/drawer/content";
+import DrawerCloseButton from "./components/drawer/close-button";
 
 export default createTheme({
   defaultRadius: "lg",
@@ -47,6 +50,9 @@ export default createTheme({
     MenuDivider,
     MenuItem,
     Badge,
+    DrawerHeader,
+    DrawerContent,
+    DrawerCloseButton,
   },
   colors,
   fontFamily: fonts.body,
