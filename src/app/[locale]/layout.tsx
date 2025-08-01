@@ -16,7 +16,7 @@ import { LayoutWithParamsProps } from "@/type";
 import { Content, Footer, Header } from "@/components/layouts";
 
 export const metadata: Metadata = {
-  title: "ADev — Software developer",
+  title: "Isco — Software developer",
   description: "I have followed setup instructions carefully",
 };
 
@@ -32,7 +32,12 @@ export default async function Layout({
     <html lang={locale} {...mantineHtmlProps}>
       <head>
         <ColorSchemeScript defaultColorScheme="dark" />
-        <link rel="icon" type="image/svg+xml" href="/images/iso.svg" />
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href="/images/iso.svg"
+          sizes="any"
+        />
       </head>
       <body>
         <NextIntlClientProvider>

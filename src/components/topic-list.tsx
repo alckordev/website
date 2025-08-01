@@ -20,6 +20,7 @@ export const TopicList = () => {
             key={topic}
             component={Link}
             href={`/topics/${slugify(topic, {
+              remove: /[*+~.()'"!:@]/g,
               lower: true,
               strict: false,
               trim: true,
