@@ -1,6 +1,14 @@
 "use client";
 
-import { ActionIcon, alpha, Divider, Flex, Group, Menu } from "@mantine/core";
+import {
+  ActionIcon,
+  alpha,
+  Divider,
+  Flex,
+  Group,
+  Menu,
+  Text,
+} from "@mantine/core";
 import {
   RiFacebookLine,
   RiLinkedinLine,
@@ -10,15 +18,8 @@ import {
 } from "@remixicon/react";
 import { useTranslations } from "next-intl";
 import React from "react";
-import { ThreadLikeToggle, ThreadResponses } from "./disqus";
 
-export const BlogPostFooter = ({
-  thread,
-  locale,
-}: {
-  thread: string;
-  locale: string;
-}) => {
+export const BlogPostFooter = () => {
   const t = useTranslations();
 
   return (
@@ -34,9 +35,7 @@ export const BlogPostFooter = ({
             backdropFilter: "saturate(100%) blur(10px)",
           })}
         >
-          <ThreadLikeToggle thread={thread} locale={locale} />
-          <Divider orientation="vertical" />
-          <ThreadResponses thread={thread} locale={locale} />
+          <Text>Compartir:</Text>
           <Divider orientation="vertical" />
           <Menu>
             <Menu.Target>

@@ -15,14 +15,14 @@ function toDateLocale(code: string): Locale {
 }
 
 /** yyyy‑MM‑dd | ISO string → “7 March 2025” */
-export function formatDate(dateISO: string, locale: "en") {
+export function formatDate(dateISO: string, locale = "en") {
   return format(new Date(dateISO), "d MMMM, yyyy", {
     locale: toDateLocale(locale),
   });
 }
 
 /** yyyy‑MM‑dd | ISO string → “3 hours ago” */
-export function formatRelativeDate(dateISO: string, locale: "en") {
+export function formatRelativeDate(dateISO: string, locale = "en") {
   return formatDistanceToNow(new Date(dateISO), {
     locale: toDateLocale(locale),
   });
