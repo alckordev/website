@@ -14,7 +14,6 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { LayoutWithParamsProps } from "@/type";
 import { Content, Footer, Header } from "@/components/layouts";
-import { getUser } from "@/lib/server";
 
 export const metadata: Metadata = {
   title: "ADev — Software developer",
@@ -29,19 +28,18 @@ export default async function Layout({
 
   if (!hasLocale(routing.locales, locale)) notFound();
 
-  const user = await getUser();
-
   return (
     <html lang={locale} {...mantineHtmlProps}>
       <head>
         <ColorSchemeScript defaultColorScheme="dark" />
+        <link rel="icon" type="image/svg+xml" href="/images/iso.svg" />
       </head>
       <body>
         <NextIntlClientProvider>
           <Provider>
             <Notifications position="top-center" limit={3} />
             <HighlightProvider>
-              <Header user={user} />
+              <Header />
               <Content>{children}</Content>
               <Footer />
             </HighlightProvider>

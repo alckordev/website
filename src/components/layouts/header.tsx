@@ -1,35 +1,20 @@
 "use client";
 
 import {
-  ActionIcon,
   alpha,
   Anchor,
-  Avatar,
   Box,
+  Button,
   Container,
   Flex,
-  Menu,
-  ThemeIcon,
+  Image,
 } from "@mantine/core";
-import { Link, useRouter } from "@/i18n/navigation";
+import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { RiShutDownLine, RiTerminalFill, RiUserLine } from "@remixicon/react";
-import { User } from "@/type";
-import { signOut } from "firebase/auth";
-import firebase from "@/lib/client/firebase";
-import { destroySession } from "@/app/actions/auth";
-import { LoginButton } from "../login-button";
+// import NextImage from "next/image";
 
-export const Header = ({ user }: { user: User | null }) => {
+export const Header = () => {
   const t = useTranslations();
-
-  const router = useRouter();
-
-  const handleLogout = async () => {
-    await signOut(firebase.auth());
-    await destroySession();
-    router.refresh();
-  };
 
   return (
     <Box
@@ -47,69 +32,26 @@ export const Header = ({ user }: { user: User | null }) => {
       }}
     >
       <Container size="xl">
-        <Flex mih={70} mah={70} justify="space-between">
-          <Flex gap={32} align="center">
-            <Anchor
-              component={Link}
-              href="/"
-              c="white"
-              underline="never"
-              display="inline-flex"
-              ff="family.headings"
-              fw="bold"
-              size="xl"
-              style={{
-                alignItems: "center",
-              }}
-            >
-              <ThemeIcon
-                variant="gradient"
-                radius="md"
-                gradient={{ from: "white", to: "gray.1", deg: 0 }}
-                c="brand-blue"
-                me="xs"
-              >
-                <RiTerminalFill />
-              </ThemeIcon>
-              alckor.dev
+        <Flex mih={70} mah={70} justify="space-between" align="center">
+          <Flex align="center">
+            <Anchor component={Link} href="/" w={{ base: 36, sm: 180 }} h={34}>
+              <Image
+                // component={NextImage}
+                src="/images/logo.svg"
+                alt="Logo"
+                width={180}
+                height={34}
+                style={{
+                  objectPosition: "left",
+                  objectFit: "cover",
+                }}
+              />
             </Anchor>
           </Flex>
-          <Flex gap={32} align="center">
-            <Anchor component={Link} href="/blog" c="white" underline="never">
-              {t("blog")}
-            </Anchor>
-            {!user ? (
-              <LoginButton />
-            ) : (
-              <Menu position="bottom-end" radius="md" withArrow>
-                <Menu.Target>
-                  <ActionIcon variant="transparent" c="white" size="compact-md">
-                    <Avatar
-                      name={user.displayName}
-                      src={user.picture}
-                      alt={user.displayName}
-                    />
-                  </ActionIcon>
-                </Menu.Target>
-                <Menu.Dropdown>
-                  <Menu.Item
-                    component={Link}
-                    href="/account"
-                    leftSection={<RiUserLine size={16} />}
-                  >
-                    {t("my_account")}
-                  </Menu.Item>
-                  <Menu.Divider />
-                  <Menu.Item
-                    leftSection={<RiShutDownLine size={16} />}
-                    onClick={handleLogout}
-                  >
-                    {t("sign_out")}
-                  </Menu.Item>
-                </Menu.Dropdown>
-              </Menu>
-            )}
-          </Flex>
+
+          <Button component={Link} href="/blog">
+            {t("start_reading")}
+          </Button>
         </Flex>
       </Container>
     </Box>

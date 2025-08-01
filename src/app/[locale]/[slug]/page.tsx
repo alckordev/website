@@ -11,7 +11,6 @@ import remarkFlexibleToc from "remark-flexible-toc";
 import { BuyMeACoffee } from "@/components/buy-me-a-coffee";
 import { BlogPostFooter } from "@/components/blog-post-footer";
 import { routing } from "@/i18n/routing";
-import { getThread } from "@/lib/client/threads";
 
 const getPostSourceCached = cache(getPostSource);
 
@@ -63,17 +62,13 @@ export default async function Page({ params }: { params: Params }) {
     components,
   });
 
-  const thread = await getThread({
-    identifier: `${locale}/${slug}`,
-  });
-
   return (
     <Stack gap="lg">
       <BlogPostHeader scope={{ ...frontmatter, ...scope }} locale={locale} />
       <Stack id="mdx" gap="lg" mb={48} maw="calc(100vw - 48px)" w="100%">
         {content}
       </Stack>
-      <BlogPostFooter thread={thread.uid!} locale={locale} />
+      <BlogPostFooter />
       <Divider my="xl" />
       <BuyMeACoffee />
     </Stack>

@@ -17,39 +17,34 @@ export default function Page() {
   const t = useTranslations();
 
   return (
-    <Flex
-      align="center"
-      h="100%"
-      gap="xl"
-      direction={{ base: "row", md: "column" }}
-    >
+    <Flex align="center" justify="center" h="100%" gap="xl" direction="column">
       <AspectRatio
-        ratio={367 / 580}
-        maw={367}
+        ratio={560 / 710}
+        pos="relative"
+        maw={{ base: 278, sm: 455, md: 535 }}
+        w="100%"
+        h={{ base: 352, sm: 576, md: 678 }}
         mx="auto"
-        display={{ base: "none", md: "block" }}
       >
         <Image
           component={NextImage}
-          src="https://placehold.co/367x580"
-          alt=""
-          width={367}
-          height={580}
+          src="/images/me.webp"
+          alt="Francisco Software Developer"
           priority
           style={{
             WebkitMaskImage: "linear-gradient(#000 50%, #0000)",
             objectFit: "cover",
           }}
-          fallbackSrc="https://placehold.co/367x580"
+          fallbackSrc="https://placehold.co/560x710"
+          fill
+          sizes="(max-width: 560px) 100vw, 560px"
         />
       </AspectRatio>
       <Stack
         mx="auto"
         maw={728}
         align="center"
-        pos={{ base: "static", md: "absolute" }}
-        top={{ base: 0, md: "50%" }}
-        mb={32}
+        mb={40}
         style={{ textAlign: "center" }}
       >
         <Title
