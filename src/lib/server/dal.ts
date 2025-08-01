@@ -9,26 +9,30 @@ import { Provider, User } from "@/type";
 export const getUser = async (): Promise<User | null> => {
   try {
     const cookie = (await cookies()).get("__session")?.value;
-
     if (!cookie) return null;
 
-    const decoded = await server.auth().verifySessionCookie(cookie, true);
-    const record = await server.auth().getUser(decoded.uid);
+    const decodedClaims = await server.auth().verifySessionCookie(cookie, true);
+    const uid = decodedClaims.uid;
+
+    if (!uid) return null;
+
+    const record = await server.auth().getUser(uid);
 
     return {
       uid: record.uid,
-      email: decoded.email,
-      emailVerified: decoded.email_verified,
-      displayName: record.displayName,
-      picture: record.photoURL,
+      email: decodedClaims.email ?? record.email ?? "",
+      emailVerified:
+        decodedClaims.email_verified ?? record.emailVerified ?? false,
+      displayName: record.displayName ?? "",
+      picture: record.photoURL ?? "",
       providerData: record.providerData.map((p) => ({
         uid: p.uid,
-        email: p.email,
+        email: p.email ?? "",
         providerId: p.providerId as Provider,
       })),
     };
   } catch (err) {
-    console.error(err);
+    console.error("getUser error:", err);
     return null;
   }
 };

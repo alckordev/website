@@ -1,5 +1,5 @@
 import React, { cache } from "react";
-import { getPostsInfo, getPostSource } from "@/lib/server";
+import { getPostsInfo, getPostSource, getUser } from "@/lib/server";
 import { Frontmatter, Params, Scope } from "@/type";
 import { evaluate, EvaluateOptions } from "next-mdx-remote-client/rsc";
 import { components } from "@/components/mdx";
@@ -11,6 +11,7 @@ import remarkFlexibleToc from "remark-flexible-toc";
 import { BuyMeACoffee } from "@/components/buy-me-a-coffee";
 import { BlogPostFooter } from "@/components/blog-post-footer";
 import { routing } from "@/i18n/routing";
+import { getThread } from "@/lib/client/threads";
 
 const getPostSourceCached = cache(getPostSource);
 
@@ -62,13 +63,18 @@ export default async function Page({ params }: { params: Params }) {
     components,
   });
 
+  const thread = await getThread({
+    title: frontmatter.title,
+    identifier: slug!,
+  });
+
   return (
     <Stack gap="lg">
       <BlogPostHeader scope={{ ...frontmatter, ...scope }} locale={locale} />
       <Stack id="mdx" gap="lg" mb={48} maw="calc(100vw - 48px)" w="100%">
         {content}
       </Stack>
-      <BlogPostFooter />
+      <BlogPostFooter thread={thread.uid!} locale={locale} />
       <Divider my="xl" />
       <BuyMeACoffee />
     </Stack>

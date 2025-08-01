@@ -15,7 +15,6 @@ import { useDisclosure } from "@mantine/hooks";
 import {
   RiChat1Line,
   RiFacebookLine,
-  RiHeartLine,
   RiLinkedinLine,
   RiLinksLine,
   RiShareLine,
@@ -23,14 +22,21 @@ import {
 } from "@remixicon/react";
 import { useTranslations } from "next-intl";
 import React from "react";
+import { ThreadLikeToggle } from "./disqus";
 
-export const BlogPostFooter = () => {
+export const BlogPostFooter = ({
+  thread,
+  locale,
+}: {
+  thread: string;
+  locale: string;
+}) => {
   const t = useTranslations();
 
   const [opened, { open, close }] = useDisclosure(false);
 
   return (
-    <React.Fragment>
+    <React.Suspense fallback={<div>test...</div>}>
       <Flex pos="sticky" bottom={32} my={48} align="center" justify="center">
         <Group
           bg={alpha("var(--mantine-color-dark-9)", 0.8)}
@@ -42,15 +48,7 @@ export const BlogPostFooter = () => {
             backdropFilter: "saturate(100%) blur(10px)",
           })}
         >
-          <Button
-            variant="transparent"
-            c="white"
-            size="compact-md"
-            px={0}
-            leftSection={<RiHeartLine size={20} />}
-          >
-            1
-          </Button>
+          <ThreadLikeToggle thread={thread} locale={locale} />
           <Divider orientation="vertical" />
           <Button
             variant="transparent"
@@ -100,6 +98,6 @@ export const BlogPostFooter = () => {
           <div>Comments</div>
         </Stack>
       </Drawer>
-    </React.Fragment>
+    </React.Suspense>
   );
 };

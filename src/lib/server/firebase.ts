@@ -1,6 +1,7 @@
 import "server-only";
 import { initializeApp, getApps, cert, App } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
+import { getDatabase } from "firebase-admin/database";
 
 class FirebaseServer {
   private client: App;
@@ -14,6 +15,7 @@ class FirebaseServer {
             privateKey: process.env.FIREBASE_PRIVATE_KEY,
             clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
           }),
+          databaseURL: process.env.FIREBASE_DATABASE_URL,
         });
   }
 
@@ -23,6 +25,10 @@ class FirebaseServer {
 
   auth() {
     return getAuth(this.client);
+  }
+
+  database() {
+    return getDatabase(this.client);
   }
 }
 
