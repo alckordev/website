@@ -2,12 +2,14 @@
   "name": "alckordev",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "vercel-build": "next build"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
