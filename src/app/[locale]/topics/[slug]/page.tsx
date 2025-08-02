@@ -74,17 +74,22 @@ export default async function Page({ params }: { params: Params }) {
 
   const data = await getPostsInfoCached(`posts/${locale}`);
 
-  const filtered = data.filter((p) =>
-    p.topics?.some(
-      (t) =>
-        slugify(t, {
-          remove: /[*+~.()'"!:@]/g,
-          lower: true,
-          strict: false,
-          trim: true,
-        }) === slug
+  const filtered = data
+    .filter((p) =>
+      p.topics?.some(
+        (t) =>
+          slugify(t, {
+            remove: /[*+~.()'"!:@]/g,
+            lower: true,
+            strict: false,
+            trim: true,
+          }) === slug
+      )
     )
-  );
+    .toSorted(
+      (a, b) =>
+        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+    );
 
   const topic = topics.find(
     (t) =>
