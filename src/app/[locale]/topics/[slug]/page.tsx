@@ -1,15 +1,15 @@
 import { BlogPostList } from "@/components/blog-post-list";
-import { Aside } from "@/components/layouts";
 import { routing } from "@/i18n/routing";
 import { getOpenGraph, getPostsInfo, getTwitter } from "@/lib/server";
 import { Params } from "@/type";
-import { Box, Flex, Stack, Title } from "@mantine/core";
+import { Title } from "@mantine/core";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import React from "react";
 import { cache } from "react";
 import slugify from "slugify";
 import topics from "@/assets/data/topics.json";
+import { notFound } from "next/navigation";
 
 const getPostsInfoCached = cache(getPostsInfo);
 
@@ -96,31 +96,14 @@ export default async function Page({ params }: { params: Params }) {
       }) === slug
   );
 
+  if (!topic) notFound();
+
   return (
-    <Flex
-      direction={{ base: "column", lg: "row" }}
-      justify="space-evenly"
-      mx="-md"
-      mih="100%"
-    >
-      <Box
-        flex="1 1 auto"
-        maw={{ sm: 728, md: 790 }}
-        mx="auto"
-        py={50}
-        ps="md"
-        pe={{ base: "md", lg: "xl" }}
-      >
-        <Title order={4} pb="xs" mb="md" ms={20}>
-          {topic}
-        </Title>
-        <Stack gap="xl">
-          <React.Suspense fallback={<div>Loading topic posts</div>}>
-            <BlogPostList data={filtered} locale={locale} />
-          </React.Suspense>
-        </Stack>
-      </Box>
-      <Aside />
-    </Flex>
+    <React.Fragment>
+      <Title order={4} pb="xs" mb="md" ms={20}>
+        {topic}
+      </Title>
+      <BlogPostList data={filtered} locale={locale} />
+    </React.Fragment>
   );
 }
