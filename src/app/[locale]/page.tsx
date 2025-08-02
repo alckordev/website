@@ -49,7 +49,7 @@ export default async function Page() {
       >
         <Image
           component={NextImage}
-          src="/images/me.webp"
+          src="/images/me-coffee.png"
           alt="Isco — Software developer"
           priority
           style={{
