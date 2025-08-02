@@ -105,7 +105,7 @@ export default async function Page({ params }: { params: Params }) {
 
   return (
     <React.Fragment>
-      <Title order={4} pb="xs" mb="md" ms={20}>
+      <Title order={4} ms={20}>
         {topic}
       </Title>
       <BlogPostList data={filtered} locale={locale} />
