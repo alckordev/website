@@ -34,12 +34,11 @@ export const Header = () => {
       <Container size="xl">
         <Flex mih={70} mah={70} justify="space-between" align="center">
           <Flex align="center">
-            <Anchor component={Link} href="/" w={{ base: 36, sm: 180 }} h={34}>
+            <Anchor component={Link} href="/" w={{ base: 36, sm: 176 }} h={34}>
               <Image
-                // component={NextImage}
                 src="/images/logo.svg"
                 alt="Logo"
-                width={180}
+                width={176}
                 height={34}
                 style={{
                   objectPosition: "left",

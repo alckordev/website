@@ -6261,6 +6261,11 @@ uuid@^9.0.0, uuid@^9.0.1:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.1.tgz#e188d4c8853cc722220392c424cd637f32293f30"
   integrity sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==
 
+vanilla-sharing@^6.1.2:
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/vanilla-sharing/-/vanilla-sharing-6.1.2.tgz#a206ce8ca740d1ceb9e16d9a5dd003a6b4f3fa87"
+  integrity sha512-Xk9IvU0qQVQNwRkMnGYf+13xcQVYqmgjEs4AsH1y9/v81TCU9q0KPR3d634OzmohXr/yDY6/Qvyi0AioxvQPGQ==
+
 vfile-matter@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/vfile-matter/-/vfile-matter-5.0.1.tgz#3f701840dde13c68d72d5c5ebd9cf233dff84419"

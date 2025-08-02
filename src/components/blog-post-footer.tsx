@@ -1,33 +1,28 @@
 "use client";
 
+import { fb, linkedin, tw } from "@/lib/client";
+import { ActionIcon, alpha, Flex, Group, Text, Tooltip } from "@mantine/core";
+import { useClipboard } from "@mantine/hooks";
 import {
-  ActionIcon,
-  alpha,
-  Divider,
-  Flex,
-  Group,
-  Menu,
-  Text,
-} from "@mantine/core";
-import {
+  RiCheckLine,
   RiFacebookLine,
   RiLinkedinLine,
   RiLinksLine,
-  RiShareLine,
   RiTwitterXLine,
 } from "@remixicon/react";
 import { useTranslations } from "next-intl";
 import React from "react";
 
-export const BlogPostFooter = () => {
+export const BlogPostFooter = ({ url }: { url: string }) => {
   const t = useTranslations();
+  const clipboard = useClipboard({ timeout: 1000 });
 
   return (
     <React.Suspense fallback={<div>test...</div>}>
       <Flex pos="sticky" bottom={32} my={48} align="center" justify="center">
         <Group
           bg={alpha("var(--mantine-color-dark-9)", 0.8)}
-          bdrs="md"
+          bdrs="lg"
           px={28}
           py={12}
           style={(theme) => ({
@@ -35,30 +30,33 @@ export const BlogPostFooter = () => {
             backdropFilter: "saturate(100%) blur(10px)",
           })}
         >
-          <Text>Compartir:</Text>
-          <Divider orientation="vertical" />
-          <Menu>
-            <Menu.Target>
-              <ActionIcon variant="transparent" c="white" size="compact-md">
-                <RiShareLine size={20} />
+          <Text>{t("share_on")}</Text>
+          <Group>
+            <Tooltip label="Twitter X">
+              <ActionIcon variant="light" onClick={() => tw({ url })}>
+                <RiTwitterXLine size={16} />
               </ActionIcon>
-            </Menu.Target>
-            <Menu.Dropdown>
-              <Menu.Item leftSection={<RiLinksLine size={16} />}>
-                {t("copy_link")}
-              </Menu.Item>
-              <Menu.Divider />
-              <Menu.Item leftSection={<RiTwitterXLine size={16} />}>
-                {t("share_on", { social: "X" })}
-              </Menu.Item>
-              <Menu.Item leftSection={<RiFacebookLine size={16} />}>
-                {t("share_on", { social: "Facebook" })}
-              </Menu.Item>
-              <Menu.Item leftSection={<RiLinkedinLine size={16} />}>
-                {t("share_on", { social: "LinkedIn" })}
-              </Menu.Item>
-            </Menu.Dropdown>
-          </Menu>
+            </Tooltip>
+            <Tooltip label="Facebook">
+              <ActionIcon variant="light" onClick={() => fb({ url })}>
+                <RiFacebookLine size={16} />
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label="Linked in">
+              <ActionIcon variant="light" onClick={() => linkedin({ url })}>
+                <RiLinkedinLine size={16} />
+              </ActionIcon>
+            </Tooltip>
+            <Tooltip label={t("copy_link")}>
+              <ActionIcon variant="light" onClick={() => clipboard.copy(url)}>
+                {clipboard.copied ? (
+                  <RiCheckLine size={16} />
+                ) : (
+                  <RiLinksLine size={16} />
+                )}
+              </ActionIcon>
+            </Tooltip>
+          </Group>
         </Group>
       </Flex>
     </React.Suspense>

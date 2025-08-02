@@ -96,13 +96,15 @@ export default async function Page({ params }: { params: Params }) {
     components,
   });
 
+  const url = `${process.env.SITE_URL}/${locale}/${slug}`;
+
   return (
     <Stack gap="lg">
       <BlogPostHeader scope={{ ...frontmatter, ...scope }} locale={locale} />
       <Stack id="mdx" gap="lg" mb={48} maw="calc(100vw - 48px)" w="100%">
         {content}
       </Stack>
-      <BlogPostFooter />
+      <BlogPostFooter url={url} />
       <Divider my="xl" />
       <BuyMeACoffee />
     </Stack>
