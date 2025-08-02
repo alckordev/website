@@ -13,11 +13,8 @@ import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import { LayoutWithParamsProps } from "@/type";
 import { Content, Footer, Header } from "@/components/layouts";
-
-// export const metadata: Metadata = {
-//   title: "Isco — Software developer",
-//   description: "I have followed setup instructions carefully",
-// };
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default async function Layout({
   children,
@@ -37,20 +34,6 @@ export default async function Layout({
           href="/images/iso.svg"
           sizes="any"
         />
-        {/* <meta
-          property="og:image"
-          content={`${process.env.SITE_URL}/images/og-image.png`}
-        />
-        <meta property="og:image:type" content="image/png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta
-          name="twitter:image"
-          content={`${process.env.SITE_URL}/images/og-image.png`}
-        />
-        <meta name="twitter:image:type" content="image/png" />
-        <meta name="twitter:image:width" content="1200" />
-        <meta name="twitter:image:height" content="630" /> */}
       </head>
       <body>
         <NextIntlClientProvider>
@@ -58,7 +41,11 @@ export default async function Layout({
             <Notifications position="top-center" limit={3} />
             <HighlightProvider>
               <Header />
-              <Content>{children}</Content>
+              <Content>
+                {children}
+                <Analytics />
+                <SpeedInsights />
+              </Content>
               <Footer />
             </HighlightProvider>
           </Provider>

@@ -27,6 +27,8 @@
     "@mantine/spotlight": "^8.2.1",
     "@remixicon/react": "^4.6.0",
     "@ridemountainpig/svgl-react": "^1.0.10",
+    "@vercel/analytics": "^1.5.0",
+    "@vercel/speed-insights": "^1.2.0",
     "date-fns": "^4.1.0",
     "embla-carousel": "^8.5.2",
     "embla-carousel-autoplay": "^8.5.2",
