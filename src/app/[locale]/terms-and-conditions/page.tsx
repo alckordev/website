@@ -1,16 +1,36 @@
 import { BlogPostHeader } from "@/components/blog-post-header";
 import { components } from "@/components/mdx";
-import { getPostSource } from "@/lib/server";
+import { getOpenGraph, getPostSource, getTwitter } from "@/lib/server";
 import { Frontmatter, Params, Scope } from "@/type";
 import { Box, Divider, Flex, Stack } from "@mantine/core";
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { evaluate, EvaluateOptions } from "next-mdx-remote-client/rsc";
 import { notFound } from "next/navigation";
 import readingTime from "reading-time";
 
-export async function generateMetadata() {
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
+
+  const title = `${t("terms_and_conditions")} - Isco • ${t(
+    "software_developer"
+  )}`;
+  const description = t("privacy_policy_description");
+
   return {
-    title: "Terms... — Alckor DEV — Software developer",
-    description: "I have followed setup instructions carefully",
+    title,
+    description,
+    category: t("software_developer"),
+    openGraph: {
+      ...getOpenGraph(title, description, locale),
+      url: `${process.env.SITE_URL}/${locale}/terms-and-conditions`,
+    },
+    twitter: getTwitter(),
   };
 }
 

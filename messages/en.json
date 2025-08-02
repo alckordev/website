@@ -37,5 +37,9 @@
   "responses": "Responses",
   "start_reading": "Start reading",
   "latest_projects": "Latest projects",
-  "my_open_source_projects": "My open source projects"
+  "my_open_source_projects": "My open source projects",
+  "software_developer": "Software developer",
+  "blog_description": "Latest articles on development: TypeScript, Next.js, auth, performance and more.",
+  "privacy_policy_description": "How your data is handled on the website.",
+  "articles_about": "Articles about {topic}"
 }

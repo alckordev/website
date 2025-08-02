@@ -1,5 +1,11 @@
 import React, { cache } from "react";
-import { getPostsInfo, getPostSource } from "@/lib/server";
+import {
+  getOpenGraph,
+  getPostInfo,
+  getPostsInfo,
+  getPostSource,
+  getTwitter,
+} from "@/lib/server";
 import { Frontmatter, Params, Scope } from "@/type";
 import { evaluate, EvaluateOptions } from "next-mdx-remote-client/rsc";
 import { components } from "@/components/mdx";
@@ -11,13 +17,41 @@ import remarkFlexibleToc from "remark-flexible-toc";
 import { BuyMeACoffee } from "@/components/buy-me-a-coffee";
 import { BlogPostFooter } from "@/components/blog-post-footer";
 import { routing } from "@/i18n/routing";
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 const getPostSourceCached = cache(getPostSource);
+const getPostInfoCached = cache(getPostInfo);
 
-export async function generateMetadata() {
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const t = await getTranslations({ locale });
+
+  const source = getPostInfoCached(`posts/${locale}/${slug}`);
+
+  const title = `${source?.title} - Isco • ${t("software_developer")}`;
+  const description = source?.summary || "";
+  const publishedAt = source?.publishedAt
+    ? new Date(source.publishedAt)
+    : new Date();
+
   return {
-    title: "Lorem ipsum... — Alckor DEV — Software developer",
-    description: "I have followed setup instructions carefully",
+    title,
+    description,
+    category: t("software_developer"),
+    openGraph: {
+      ...getOpenGraph(title, description, locale),
+      url: `${process.env.SITE_URL}/${locale}/${slug}`,
+      type: "article",
+      authors: "@alckordev",
+      publishedTime: publishedAt.toISOString(),
+      tags: source?.topics,
+    },
+    twitter: getTwitter(),
   };
 }
 

@@ -37,7 +37,7 @@ export default async function Layout({
           href="/images/iso.svg"
           sizes="any"
         />
-        <meta
+        {/* <meta
           property="og:image"
           content={`${process.env.SITE_URL}/images/og-image.png`}
         />
@@ -50,7 +50,7 @@ export default async function Layout({
         />
         <meta name="twitter:image:type" content="image/png" />
         <meta name="twitter:image:width" content="1200" />
-        <meta name="twitter:image:height" content="630" />
+        <meta name="twitter:image:height" content="630" /> */}
       </head>
       <body>
         <NextIntlClientProvider>

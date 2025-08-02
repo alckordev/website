@@ -1,14 +1,50 @@
 import { BlogPostList } from "@/components/blog-post-list";
 import { Aside } from "@/components/layouts";
 import { routing } from "@/i18n/routing";
-import { getPostsInfo } from "@/lib/server";
+import { getOpenGraph, getPostsInfo, getTwitter } from "@/lib/server";
 import { Params } from "@/type";
 import { Box, Flex, Stack, Title } from "@mantine/core";
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import React from "react";
 import { cache } from "react";
 import slugify from "slugify";
+import topics from "@/assets/data/topics.json";
 
 const getPostsInfoCached = cache(getPostsInfo);
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  const { locale, slug } = await params;
+  const t = await getTranslations({ locale });
+
+  const topic = topics.find(
+    (t) =>
+      slugify(t, {
+        remove: /[*+~.()'"!:@]/g,
+        lower: true,
+        strict: false,
+        trim: true,
+      }) === slug
+  );
+
+  const title = `${topic} - Isco • ${t("software_developer")}`;
+  const description = t("articles_about", { topic: topic || "" });
+
+  return {
+    title,
+    description,
+    category: t("software_developer"),
+    openGraph: {
+      ...getOpenGraph(title, description, locale),
+      url: `${process.env.SITE_URL}/${locale}/topics/${slug}`,
+    },
+    twitter: getTwitter(),
+  };
+}
 
 export async function generateStaticParams() {
   const params: { locale: string; slug: string }[] = [];
@@ -20,7 +56,12 @@ export async function generateStaticParams() {
     for (const topic of topics) {
       params.push({
         locale,
-        slug: slugify(topic, { lower: true, strict: true }),
+        slug: slugify(topic, {
+          remove: /[*+~.()'"!:@]/g,
+          lower: true,
+          strict: false,
+          trim: true,
+        }),
       });
     }
   }
@@ -35,17 +76,25 @@ export default async function Page({ params }: { params: Params }) {
 
   const filtered = data.filter((p) =>
     p.topics?.some(
-      (t) => slugify(t, { lower: true, strict: true, trim: true }) === slug
+      (t) =>
+        slugify(t, {
+          remove: /[*+~.()'"!:@]/g,
+          lower: true,
+          strict: false,
+          trim: true,
+        }) === slug
     )
   );
 
-  const hasTopic = (topic: string) =>
-    slugify(topic, { lower: true, strict: true, trim: true }) === slug;
-
-  // Test searching topic slug in data/topics.json
-  const prettyName =
-    filtered.flatMap((p) => p.topics || []).find(hasTopic) ??
-    slug?.replace("-", " ");
+  const topic = topics.find(
+    (t) =>
+      slugify(t, {
+        remove: /[*+~.()'"!:@]/g,
+        lower: true,
+        strict: false,
+        trim: true,
+      }) === slug
+  );
 
   return (
     <Flex
@@ -63,7 +112,7 @@ export default async function Page({ params }: { params: Params }) {
         pe={{ base: "md", lg: "xl" }}
       >
         <Title order={4} pb="xs" mb="md" ms={20}>
-          {prettyName}
+          {topic}
         </Title>
         <Stack gap="xl">
           <React.Suspense fallback={<div>Loading topic posts</div>}>

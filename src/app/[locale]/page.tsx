@@ -1,4 +1,6 @@
 import { Link } from "@/i18n/navigation";
+import { getOpenGraph, getTwitter } from "@/lib/server";
+import { Params } from "@/type";
 import {
   AspectRatio,
   Button,
@@ -8,13 +10,27 @@ import {
   Text,
   Title,
 } from "@mantine/core";
+import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import NextImage from "next/image";
 
-export async function generateMetadata() {
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
+
+  const title = `Isco • ${t("software_developer")}`;
+  const description = t("introduction");
+
   return {
-    title: "Isco — Software developer",
-    description: "I have followed setup instructions carefully",
+    title,
+    description,
+    category: t("software_developer"),
+    openGraph: getOpenGraph(title, description, locale),
+    twitter: getTwitter(),
   };
 }
 

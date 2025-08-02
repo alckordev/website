@@ -21,6 +21,8 @@ import {
 import { LanguageSwitcher } from "../language-switcher";
 
 export const Footer = () => {
+  const year = new Date().getFullYear();
+
   return (
     <Box component="footer" mih={70}>
       <Divider
@@ -92,7 +94,7 @@ export const Footer = () => {
             </Anchor>
           </Group>
           <Group justify="flex-start">
-            <Text>© 2025 - alckor.dev</Text>
+            <Text>© {year} - alckordev</Text>
             <LanguageSwitcher />
           </Group>
         </Flex>

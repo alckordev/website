@@ -1,17 +1,34 @@
 import { Params } from "@/type";
 import { BlogPostList } from "@/components/blog-post-list";
-import { getPostsInfo } from "@/lib/server";
+import { getOpenGraph, getPostsInfo, getTwitter } from "@/lib/server";
 import React, { cache } from "react";
 import { Title } from "@mantine/core";
 import { getTranslations } from "next-intl/server";
+import { Metadata } from "next";
 // import { sleep } from "@/utils/sleep";
 
 const getPostsInfoCached = cache(getPostsInfo);
 
-export async function generateMetadata() {
+export async function generateMetadata({
+  params,
+}: {
+  params: Params;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale });
+
+  const title = `Blog - Isco • ${t("software_developer")}`;
+  const description = t("blog_description");
+
   return {
-    title: "Blog — Alckor DEV — Software developer",
-    description: "I have followed setup instructions carefully",
+    title,
+    description,
+    category: t("software_developer"),
+    openGraph: {
+      ...getOpenGraph(title, description, locale),
+      url: `${process.env.SITE_URL}/${locale}/blog`,
+    },
+    twitter: getTwitter(),
   };
 }
 
