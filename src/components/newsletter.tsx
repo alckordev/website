@@ -11,6 +11,7 @@ import {
   Title,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { notifications } from "@mantine/notifications";
 import { zod4Resolver } from "mantine-form-zod-resolver";
 import { useTranslations } from "next-intl";
 import React from "react";
@@ -32,8 +33,36 @@ export const Newsletter = () => {
     ),
   });
 
-  const handleSubscribe = (values: typeof form.values | null) => {
-    alert(JSON.stringify(values, null, 2));
+  const handleSubscribe = async (values: typeof form.values | null) => {
+    const fetched = await fetch("/api/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...values, status: "subscribed" }),
+    });
+
+    const res = await fetched.json();
+
+    console.log(res.status);
+
+    if ([200, 400].includes(res.status)) {
+      notifications.show({
+        title: t("subscription"),
+        message:
+          res.status === 200
+            ? t("subscribe_success_new")
+            : t("subscribe_already"),
+      });
+
+      form.reset();
+
+      return;
+    }
+
+    notifications.show({
+      title: t("subscription"),
+      message: t("server_error"),
+      color: "red",
+    });
   };
 
   return (
@@ -66,7 +95,12 @@ export const Newsletter = () => {
             key={form.key("terms")}
             {...form.getInputProps("terms", { type: "checkbox" })}
           />
-          <Button type="submit" disabled={!form.isValid()}>
+          <Button
+            type="submit"
+            disabled={!form.isValid()}
+            loading={form.submitting}
+            loaderProps={{ type: "infinity" }}
+          >
             {t("subscribe")}
           </Button>
         </Stack>

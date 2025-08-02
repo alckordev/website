@@ -32,7 +32,7 @@
   "delete_your_account": "Elimina tu cuenta",
   "no_dont_delete_it": "No, no lo elimines",
   "delete_account_notice": "¿Estás seguro de que quieres eliminar tu cuenta? Esta acción es destructiva e irreversible.",
-  "server_error": "Error del servidor",
+  "server_error": "¡Ups! Algo salió mal. 😭",
   "server_error_notice": "Se produjo un error inesperado.",
   "responses": "Respuestas",
   "start_reading": "Empezar a leer",
@@ -41,5 +41,8 @@
   "software_developer": "Desarrollador de software",
   "blog_description": "Últimos artículos sobre desarrollo: TypeScript, Next.js, Auth, Performance y más.",
   "privacy_policy_description": "Cómo se manejan sus datos en el sitio web.",
-  "articles_about": "Artículos sobre {topic}"
+  "articles_about": "Artículos sobre {topic}",
+  "subscribe_success_new": "¡Excelente! Te mantendré informado. 😉",
+  "subscribe_already": "¡Excelente! \nYa estás suscrito con ese correo electrónico. \n😉",
+  "subscription": "Suscripción"
 }
