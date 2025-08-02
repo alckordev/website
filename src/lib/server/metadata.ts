@@ -10,12 +10,11 @@ export const getOpenGraph = (
     title,
     description,
     locale,
-    images: {
-      url: `${process.env.SITE_URL}/images/og-image.png`,
-      type: "image/png",
-      width: 1200,
-      height: 630,
-    },
+    images: [
+      {
+        url: `${process.env.SITE_URL}/images/og-image.png`,
+      },
+    ],
   };
 };
 
@@ -24,11 +23,6 @@ export const getTwitter = (): Metadata["twitter"] => {
     card: "summary_large_image",
     site: "@alckordev",
     creator: "@alckordev",
-    images: {
-      url: `${process.env.SITE_URL}/images/og-image.png`,
-      type: "image/png",
-      width: 1200,
-      height: 630,
-    },
+    images: `${process.env.SITE_URL}/images/og-image.png`,
   };
 };
