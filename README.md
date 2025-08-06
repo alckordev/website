@@ -10,5 +10,6 @@
 
 ## Latest posts
 
+- 🗒️ [How to Fix Hydration Errors with next-themes in Next.js (App Router)](https://www.alckor.dev/fixing-next-themes-hydration-errors-nextjs-app-router)
 - 🗒️ [API Versioning with NestJS](https://www.alckor.dev/versioning-api-with-nestjs)
 - 🗒️ [Integrate Culqi Payments with the Node.js SDK](https://www.alckor.dev/integrate-culqi-payments-nodejs-sdk)
