@@ -49,11 +49,7 @@ export const BlogPostFooter = ({ url }: { url: string }) => {
             </Tooltip>
             <Tooltip label={t("copy_link")}>
               <ActionIcon variant="light" onClick={() => clipboard.copy(url)}>
-                {clipboard.copied ? (
-                  <RiCheckLine size={16} />
-                ) : (
-                  <RiLinksLine size={16} />
-                )}
+                {clipboard.copied ? <RiCheckLine size={16} /> : <RiLinksLine size={16} />}
               </ActionIcon>
             </Tooltip>
           </Group>

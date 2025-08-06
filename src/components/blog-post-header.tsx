@@ -1,15 +1,7 @@
 import { formatDate } from "@/lib/client";
 import { Frontmatter, Scope } from "@/type";
-import {
-  AspectRatio,
-  Group,
-  Image,
-  Stack,
-  Text,
-  ThemeIcon,
-  Title,
-} from "@mantine/core";
-import { RiCalendar2Line, RiTimeLine } from "@remixicon/react";
+import { AspectRatio, Group, Image, Stack, Text, ThemeIcon, Title } from "@mantine/core";
+import { RiCalendar2Line, RiChat1Line, RiTimeLine } from "@remixicon/react";
 import { useTranslations } from "next-intl";
 import NextImage from "next/image";
 
@@ -32,28 +24,22 @@ export const BlogPostHeader = ({
           display="inline-flex"
           style={{ alignItems: "center" }}
         >
-          <ThemeIcon
-            component="span"
-            variant="transparent"
-            c="gray.3"
-            size="sm"
-            me={4}
-          >
+          <ThemeIcon component="span" variant="transparent" c="gray.3" size="sm" me={4}>
             <RiCalendar2Line />
           </ThemeIcon>
           {formatDate(scope.publishedAt, locale)}
         </Text>
         <Text display="inline-flex" style={{ alignItems: "center" }}>
-          <ThemeIcon
-            component="span"
-            variant="transparent"
-            c="gray.3"
-            size="sm"
-            me={4}
-          >
+          <ThemeIcon component="span" variant="transparent" c="gray.3" size="sm" me={4}>
             <RiTimeLine />
           </ThemeIcon>
           {t("reading_time", { count: Math.max(1, Math.round(scope.reading)) })}
+        </Text>
+        <Text display="inline-flex" style={{ alignItems: "center" }}>
+          <ThemeIcon component="span" variant="transparent" c="gray.3" size="sm" me={4}>
+            <RiChat1Line />
+          </ThemeIcon>
+          0
         </Text>
       </Group>
       {scope.cover && (

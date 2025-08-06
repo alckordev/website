@@ -1,11 +1,5 @@
 import React, { cache } from "react";
-import {
-  getOpenGraph,
-  getPostInfo,
-  getPostsInfo,
-  getPostSource,
-  getTwitter,
-} from "@/lib/server";
+import { getOpenGraph, getPostInfo, getPostsInfo, getPostSource, getTwitter } from "@/lib/server";
 import { Frontmatter, Params, Scope } from "@/type";
 import { evaluate, EvaluateOptions } from "next-mdx-remote-client/rsc";
 import { components } from "@/components/mdx";
@@ -14,6 +8,7 @@ import { notFound } from "next/navigation";
 import readingTime from "reading-time";
 import { BlogPostHeader } from "@/components/blog-post-header";
 import remarkFlexibleToc from "remark-flexible-toc";
+import remarkGfm from "remark-gfm";
 import { BuyMeACoffee } from "@/components/buy-me-a-coffee";
 import { BlogPostFooter } from "@/components/blog-post-footer";
 import { routing } from "@/i18n/routing";
@@ -23,11 +18,7 @@ import { getTranslations } from "next-intl/server";
 const getPostSourceCached = cache(getPostSource);
 const getPostInfoCached = cache(getPostInfo);
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Params;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { locale, slug } = await params;
   const t = await getTranslations({ locale });
 
@@ -35,9 +26,7 @@ export async function generateMetadata({
 
   const title = `${source?.title} - Isco • ${t("software_developer")}`;
   const description = source?.summary || "";
-  const publishedAt = source?.publishedAt
-    ? new Date(source.publishedAt)
-    : new Date();
+  const publishedAt = source?.publishedAt ? new Date(source.publishedAt) : new Date();
 
   return {
     title,
@@ -85,7 +74,7 @@ export default async function Page({ params }: { params: Params }) {
       reading: readingTime(source).minutes,
     },
     mdxOptions: {
-      remarkPlugins: [remarkFlexibleToc],
+      remarkPlugins: [remarkFlexibleToc, remarkGfm],
     },
     vfileDataIntoScope: "toc",
   };
